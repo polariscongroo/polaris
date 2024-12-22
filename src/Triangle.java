@@ -12,6 +12,11 @@ public class Triangle
         this.p3 = p3;
     }
 
+    public String toString()
+    {
+        return "Triangle(" + p1 + ", " + p2 + ", " + p3 + ")";
+    }
+
     // Calcule les longueurs des côtés
     double[] getSides()
     {
@@ -37,7 +42,7 @@ public class Triangle
     // Calcule la distance entre deux points
     static double distance(Point p1, Point p2)
     {
-        return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+        return Math.sqrt( Math.pow(p1.point[0] - p2.point[0], 2) + Math.pow(p1.point[1] - p2.point[1], 2));
     }
 
     // Vérifie si deux triangles sont similaires
@@ -67,25 +72,6 @@ public class Triangle
                 return false;
             }
         }
-
         return true;
-    }
-
-    // Génère tous les triangles possibles à partir d'un ensemble de points
-    static List<Triangle> generateTriangles(List<Point> points)
-    {
-        List<Triangle> triangles = new ArrayList<>();
-        int n = points.size();
-        for (int i = 0; i < n - 2; i++)
-        {
-            for (int j = i + 1; j < n - 1; j++)
-            {
-                for (int k = j + 1; k < n; k++)
-                {
-                    triangles.add(new Triangle(points.get(i), points.get(j), points.get(k)));
-                }
-            }
-        }
-        return triangles;
     }
 }
