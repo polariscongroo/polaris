@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Triangle
 {
@@ -48,7 +46,7 @@ public class Triangle
     }
 
     // Vérifie si deux triangles sont similaires
-    static double areTrianglesSimilar(Triangle t1, Triangle t2)
+    static double cout(Triangle t1, Triangle t2)
     {
         double[] sides1 = t1.getSides();
         double[] sides2 = t2.getSides();
