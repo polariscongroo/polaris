@@ -36,7 +36,4 @@ public class List_point
         Triangle[] triangles = generateTriangles();
         return Arrays.toString(triangles);
     }
-
-
-
 }

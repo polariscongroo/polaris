@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Triangle
@@ -24,6 +25,7 @@ public class Triangle
         sides[0] = distance(p1, p2);
         sides[1] = distance(p2, p3);
         sides[2] = distance(p3, p1);
+        Arrays.sort(sides);
         return sides;
     }
 
@@ -46,32 +48,26 @@ public class Triangle
     }
 
     // Vérifie si deux triangles sont similaires
-    static boolean areTrianglesSimilar(Triangle t1, Triangle t2, double tolerance)
+    static double areTrianglesSimilar(Triangle t1, Triangle t2)
     {
         double[] sides1 = t1.getSides();
         double[] sides2 = t2.getSides();
         double[] angles1 = t1.getAngles();
         double[] angles2 = t2.getAngles();
 
-        // Vérifie les rapports des côtés
+        // Rapports des côtés
         double[] ratios1 = {sides1[0] / sides1[1], sides1[1] / sides1[2], sides1[2] / sides1[0]};
         double[] ratios2 = {sides2[0] / sides2[1], sides2[1] / sides2[2], sides2[2] / sides2[0]};
-        for (int i = 0; i < 3; i++)
-        {
-            if (Math.abs(ratios1[i] - ratios2[i]) > tolerance)
-            {
-                return false;
-            }
-        }
 
-        // Vérifie les angles
+        //Pondération des critères (ratio longueur et angle)
+        double alpha = 1;
+        double beta = 1;
+
+        double cout = 0;
         for (int i = 0; i < 3; i++)
         {
-            if (Math.abs(angles1[i] - angles2[i]) > tolerance)
-            {
-                return false;
-            }
+            cout += alpha*Math.abs(ratios1[i] - ratios2[i]) + beta*Math.abs(angles1[i] - angles2[i])/Math.PI; //Normalisation par PI
         }
-        return true;
+        return cout;
     }
 }
