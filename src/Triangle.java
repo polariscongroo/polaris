@@ -36,13 +36,25 @@ public class Triangle
         angles[0] = Math.acos((b * b + c * c - a * a) / (2 * b * c));
         angles[1] = Math.acos((a * a + c * c - b * b) / (2 * a * c));
         angles[2] = Math.acos((a * a + b * b - c * c) / (2 * a * b));
+        for (int angle = 0; angle < 3; angle++)
+        {
+            if (angles[angle] < 0 || angles[angle] > Math.PI)
+            {
+                throw new IllegalArgumentException("L'angle calculé est invalide.");
+            }
+        }
         return angles;
     }
 
     // Calcule la distance entre deux points
     static double distance(Point p1, Point p2)
     {
-        return Math.sqrt( Math.pow(p1.point[0] - p2.point[0], 2) + Math.pow(p1.point[1] - p2.point[1], 2));
+        double distance = Math.sqrt( Math.pow(p1.point[0] - p2.point[0], 2) + Math.pow(p1.point[1] - p2.point[1], 2));
+        if (distance < 0)
+        {
+            throw new IllegalArgumentException("Les côtés d'un triangle doivent être strictement positifs.");
+        }
+        return distance;
     }
 
     // Vérifie si deux triangles sont similaires

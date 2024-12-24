@@ -1,4 +1,7 @@
-package PACKAGE_NAME;
-
-public class TriangleMatchingException {
+public class TriangleMatchingException extends Exception
+{
+    public TriangleMatchingException(String message)
+    {
+        super(message);
+    }
 }
