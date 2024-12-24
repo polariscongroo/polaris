@@ -36,14 +36,11 @@ public class Main
             double cost = Triangle.cout(trig, trig2);
             System.out.println("Coût de similarité : " + cost);/*/
 
-            //Test fonction de couts de tous les triangles et minimisation
+            //Test fonction de couts de tous les triangles et identifications des triangles similaires et calcul du cout total de la constellation
             double[] liste_cout = List_triangle.couts(triangles1, triangles2);
             int[] liste_indice = List_triangle.indice(liste_cout);
             System.out.println("Liste des couts : " + Arrays.toString(liste_cout));
             System.out.println("Indice des triangles similaires : " + Arrays.toString(liste_indice));
-            //System.out.println("couples de triangles semblables : " + );
-            //System.out.println("cout total de la constellation : " + );
-
-
+            System.out.println("cout total de la constellation : " + Constellation.couts(liste_cout));
         }
 }
