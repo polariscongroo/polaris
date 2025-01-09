@@ -1,8 +1,8 @@
-package tsp.polaris.recognition;
+package tsp.polaris.auxiliaries;
 public class Combinatorics {
 
     // Méthode pour calculer C(n, k)
-    static int combination(int n, int k)
+    public static int combination(int n, int k) throws IllegalArgumentException
     {
         if (k > n || n < 0 || k < 0)
         {

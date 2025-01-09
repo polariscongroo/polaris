@@ -3,22 +3,32 @@ import static java.lang.Math.sqrt;
 
 public class List_triangle
 {
-    //La première liste de triangles en argument voit ses couts comparés à tous ceux du deuxième argument avant den passer au suivant
-    static double[] couts(Triangle[] triangles1, Triangle[] triangles2) throws TriangleMatchingException
+	private Triangle[] listeT;
+	
+	public List_triangle(Triangle[] listeT) {
+		this.listeT = listeT;
+	}
+	
+    //La première liste de triangles en argument voit ses couts comparés à tous ceux du deuxième argument avant de passer au suivant
+    public double[][] couts(List_triangle listeTriangle2) throws TriangleMatchingException
     {
-        int taille1 = triangles1.length;
-        int taille2 = triangles2.length;
+        int taille1 = listeT.length;
+        int taille2 = listeTriangle2.listeT.length;
+        
+        // Cas ou les listes n'ont pas la même taille (donc ne peuvent pas représenter la même constellation)
         if (taille1 != taille2)
         {
             throw new TriangleMatchingException("Les tableaux de triangles ont des tailles différentes : " + taille1 + " et " + taille2);
         }
-        double[] tab = new double[taille1*taille2];
+        
+        // On va comparer chaque triangle entre eux et mettre leurs couts dans une matrice
+        double[][] tab = new double[taille1][taille2];
         int index = 0;
         for (int triangle1 = 0; triangle1 < taille1; triangle1++)
         {
             for (int triangle2 = 0; triangle2 < taille1; triangle2++)
             {
-                tab[index] = Triangle.cout(triangles1[triangle1],triangles2[triangle2]);
+                tab[triangle1][triangle2] = listeT[triangle1].cout(listeTriangle2.listeT[triangle2]);
                 index ++;
             }
         }
@@ -28,9 +38,6 @@ public class List_triangle
     // Trouver l'indice de correspondance entre deux triangles
     static int[] indice(double[] couts) {
         int nombre_combinaisons = couts.length;
-        if (Math.sqrt(nombre_combinaisons) % 1 != 0) {
-            throw new IllegalArgumentException("Le tableau 'couts' doit être de taille carrée.");
-        }
 
         int nb_triangles = (int) Math.sqrt(nombre_combinaisons);
         int[] tab_indices = new int[nb_triangles];

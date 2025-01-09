@@ -22,12 +22,12 @@ public class Main
             //Test affichage de tous les triangles possibles avec le set de point set
             Point[] set1 = {A,B,C,D};
             List_point ABCD = new List_point(set1);
-            Triangle[] triangles1 = ABCD.generateTriangles();
+            List_triangle triangles1 = new List_triangle(ABCD.generateTriangles());
             // Utilisation de Arrays.toString pour afficher les triangles
             System.out.println("Triangles formés par les points ABCD : " + Arrays.toString(triangles1));
             Point[] set2 = {E,F,G,H};
             List_point EFGH = new List_point(set2);
-            Triangle[] triangles2 = EFGH.generateTriangles();
+            List_triangle triangles2 = new List_triangle(EFGH.generateTriangles());
             // Utilisation de Arrays.toString pour afficher les triangles
             System.out.println("Triangles formés par les points EFGH : " + Arrays.toString(triangles2));
 
@@ -38,7 +38,7 @@ public class Main
             System.out.println("Coût de similarité : " + cost);/*/
 
             //Test fonction de couts de tous les triangles et identifications des triangles similaires et calcul du cout total de la constellation
-            double[] liste_cout = List_triangle.couts(triangles1, triangles2);
+            double[][] liste_cout = triangles1.couts(triangles2);
             int[] liste_indice = List_triangle.indice(liste_cout);
             System.out.println("Liste des couts : " + Arrays.toString(liste_cout));
             System.out.println("Indice des triangles similaires : " + Arrays.toString(liste_indice));
