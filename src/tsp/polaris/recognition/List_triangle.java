@@ -1,3 +1,4 @@
+package tsp.polaris.recognition;
 import static java.lang.Math.sqrt;
 
 public class List_triangle

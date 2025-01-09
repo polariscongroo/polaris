@@ -1,3 +1,4 @@
+package tsp.polaris.recognition;
 import java.util.Arrays;
 
 public class Main

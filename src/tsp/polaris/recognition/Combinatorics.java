@@ -1,3 +1,4 @@
+package tsp.polaris.recognition;
 public class Combinatorics {
 
     // Méthode pour calculer C(n, k)

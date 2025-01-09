@@ -1,3 +1,4 @@
+package tsp.polaris.recognition;
 public class Constellation
 {
     static double couts(double[] cout_triangle)
