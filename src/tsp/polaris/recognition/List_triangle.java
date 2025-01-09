@@ -35,7 +35,7 @@ public class List_triangle
         return tab;
     }
 
-    // Trouver l'indice de correspondance entre deux triangles
+    // Trouver l'indice de correspondance entre deux triangles (rajouter des commentaires)
     static int[] indice(double[] couts) {
         int nombre_combinaisons = couts.length;
 

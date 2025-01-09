@@ -52,7 +52,7 @@ public class Triangle
         return angles;
     }
     
-    // Renvoie les distances normalisées (par la distance la plus grande du triangle)
+    // Renvoie les distances normalisées (par la distance la plus grande du triangle) (changer cette méthode pour éviter de perdre des données)
     public double[] getRatios() 
     {
     	double[] sides = getSides();
