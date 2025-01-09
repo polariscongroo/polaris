@@ -52,24 +52,12 @@ public class Triangle
         return angles;
     }
     
-    // Fonction auxiliaire qui renvoie le max d'une liste de double
-    private double maxValue(double[] l) 
-    {
-    	double max = l[0];
-    	for(int i = 0; i < l.length; i += 1) {
-    		if(max < l[i]) {
-    			max = l[i];
-    		}
-    	}
-    	return max;
-    }
-    
     // Renvoie les distances normalisées (par la distance la plus grande du triangle)
     public double[] getRatios() 
     {
     	double[] sides = getSides();
     	double[] ratios = new double[3];
-    	double max = maxValue(sides);
+    	double max = sides[2];
     	for(int i = 0; i < 3; i += 1) {
     		ratios[i] = sides[i]/max;
     	}
