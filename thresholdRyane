@@ -6,12 +6,12 @@ from sklearn.preprocessing import MinMaxScaler
 from collections import deque
 
 # Charger l'image
-image = Image.open('cassio.png').convert('L')  # Convertir en niveau de gris
+image = Image.open('Stars.png').convert('L')  # Convertir en niveau de gris
 image_array = np.array(image, dtype=float)  # Convertir en tableau numpy
 image_array /= image_array.max()  # Normaliser entre 0 et 1
 
 # Détection des étoiles avec un seuil
-sigma = mad_std(image_array)*6
+sigma = mad_std(image_array)
 threshold_mask = image_array > (5.0 * sigma)
 plt.imshow(threshold_mask, cmap='gray', origin='lower')
 plt.title('Thresholded Image With Stars (Red Points)')
