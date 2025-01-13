@@ -1,5 +1,4 @@
 package tsp.polaris.recognition;
-import static java.lang.Math.sqrt;
 
 public class List_triangle
 {
@@ -10,7 +9,7 @@ public class List_triangle
 	}
 	
     //La première liste de triangles en argument voit ses couts comparés à tous ceux du deuxième argument avant de passer au suivant
-    public double[][] couts(List_triangle listeTriangle2) throws TriangleMatchingException
+    public double[] couts(List_triangle listeTriangle2) throws TriangleMatchingException
     {
         int taille1 = listeT.length;
         int taille2 = listeTriangle2.listeT.length;
@@ -22,13 +21,13 @@ public class List_triangle
         }
         
         // On va comparer chaque triangle entre eux et mettre leurs couts dans une matrice
-        double[][] tab = new double[taille1][taille2];
+        double[] tab = new double[taille1 * taille2];
         int index = 0;
         for (int triangle1 = 0; triangle1 < taille1; triangle1++)
         {
             for (int triangle2 = 0; triangle2 < taille1; triangle2++)
             {
-                tab[triangle1][triangle2] = listeT[triangle1].cout(listeTriangle2.listeT[triangle2]);
+                tab[index] = listeT[triangle1].cout(listeTriangle2.listeT[triangle2]);
                 index ++;
             }
         }
@@ -36,7 +35,9 @@ public class List_triangle
     }
 
     // Trouver l'indice de correspondance entre deux triangles (rajouter des commentaires)
-    static int[] indice(double[] couts) {
+    public int[] indice(List_triangle listeTriangle2) throws TriangleMatchingException
+    {
+        double[] couts = couts(listeTriangle2);
         int nombre_combinaisons = couts.length;
 
         int nb_triangles = (int) Math.sqrt(nombre_combinaisons);

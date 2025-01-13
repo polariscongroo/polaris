@@ -57,9 +57,8 @@ public class Triangle
     {
     	double[] sides = getSides();
     	double[] ratios = new double[3];
-    	double max = sides[2];
     	for(int i = 0; i < 3; i += 1) {
-    		ratios[i] = sides[i]/max;
+    		ratios[i] = sides[i]/sides[(i+1)%3];
     	}
     	return ratios;
     }
