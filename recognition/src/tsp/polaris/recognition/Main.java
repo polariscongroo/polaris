@@ -78,7 +78,7 @@ public class Main
         System.out.println("");
 
         //Test de la comparaison de plusieurs constellations (points) à une référence (la photo)
-        Constellation winner = ABCD.nahiwouldwin(EFGH, IJKL);
+        Constellation winner = ABCD.selectConstellation(EFGH, IJKL);
         System.out.println("La constellation la plus proche est : " + winner);
     }
 }
