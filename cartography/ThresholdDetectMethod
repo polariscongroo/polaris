@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 from collections import deque
 
 # Charger l'image
-image = Image.open('Stars.png').convert('L')  # Convertir en niveau de gris
+image = Image.open('cassio.png').convert('L')  # Convertir en niveau de gris
 image_array = np.array(image, dtype=float)  # Convertir en tableau numpy
 image_array /= image_array.max()  # Normaliser entre 0 et 1
 
