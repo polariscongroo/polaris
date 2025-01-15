@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import json
 from PIL import Image
 from astropy.stats import mad_std
 from sklearn.preprocessing import MinMaxScaler
 from collections import deque
+
 
 # Charger l'image
 image = Image.open('cassio.png').convert('L')  # Convertir en niveau de gris
@@ -66,7 +68,7 @@ def détermine_coordonnées_étoiles(formes):
     return cor
 
 # Afficher les étoiles détectées
-def affichelesétoiles():
+def affiche_les_étoiles():
     formes = détermine_formes(threshold_mask)
     coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
     plt.imshow(threshold_mask, cmap='gray', origin='lower')
@@ -75,4 +77,11 @@ def affichelesétoiles():
         plt.plot(star[1], star[0], 'ro')  # Inverser les indices pour matplotlib
     plt.show()
 
-affichelesétoiles()
+# Enregistre les coordonnées des étoiles dans un format json
+def enregistre_les_étoiles():
+    formes = détermine_formes(threshold_mask)
+    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
+    with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
+        json.dump(coordonnéesdesétoiles, fichier, ensure_ascii=False, indent=1)
+
+enregistre_les_étoiles()
