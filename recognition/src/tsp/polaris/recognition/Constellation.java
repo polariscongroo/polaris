@@ -46,7 +46,7 @@ public class Constellation
         return cout_constellation;
     }
 
-    public Constellation nahiwouldwin(Constellation... constellations) throws TriangleMatchingException
+    public Constellation selectConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         // Initialiser le "winner" à null
         Constellation winner = null;
@@ -74,6 +74,34 @@ public class Constellation
             }
         }
         return winner;  // Retourner la constellation avec le coût minimal
+    }
+    
+    // Renvoie le coût minimale entre notre ensemble de points et les différentes constellations
+    public double coutConstellation(Constellation... constellations) throws TriangleMatchingException
+    {
+        double minimum_cout = Double.MAX_VALUE; // Utiliser une valeur maximale pour commencer.
+
+        // Parcourir les constellations passées en argument
+        for (Constellation c : constellations)
+        {
+            // Générer les triangles pour la photo et la constellation c
+            Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
+            Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
+
+            List_triangle listPhoto = new List_triangle(triangles_photo);
+            List_triangle listTriangle = new List_triangle(triangles_c);
+
+            // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
+            double[] liste_cout = listPhoto.couts(listTriangle);
+            double total = Constellation.couts(liste_cout);  // Calculez le total des coûts
+
+            // Vérifiez si le total des coûts de cette constellation est le plus bas
+            if (minimum_cout > total)
+            {
+                minimum_cout = total;  // Mettez à jour le coût minimal
+            }
+        }
+        return minimum_cout;  // Retourner la constellation avec le coût minimal
     }
 
 }
