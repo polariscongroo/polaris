@@ -81,6 +81,7 @@ def affiche_les_étoiles():
 def enregistre_les_étoiles():
     formes = détermine_formes(threshold_mask)
     coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
+    print(coordonnéesdesétoiles)
     with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
         json.dump(coordonnéesdesétoiles, fichier, ensure_ascii=False, indent=1)
 
