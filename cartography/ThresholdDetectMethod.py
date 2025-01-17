@@ -81,10 +81,9 @@ def affiche_les_étoiles():
 def enregistre_les_étoiles():
     formes = détermine_formes(threshold_mask)
     coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
-    coordonnées=len(coordonnéesdesétoiles) * [len(coordonnéesdesétoiles[0]) * [0]]
+    coordonnées=[]
     for i in range(len(coordonnéesdesétoiles)):
-        for j in range(len(coordonnéesdesétoiles[0])):
-            coordonnées[i][j] = coordonnéesdesétoiles[i][j]
+        coordonnées.append([float(coordonnéesdesétoiles[i][0]), float(coordonnéesdesétoiles[i][1])])
     with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
         json.dump(coordonnées, fichier, ensure_ascii=False, indent=1)
 
