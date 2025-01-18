@@ -19,8 +19,6 @@ plt.imshow(threshold_mask, cmap='gray', origin='lower')
 plt.title('Thresholded Image With Stars (Red Points)')
 plt.show()
 
-print(sigma)
-
 # Fonction pour trouver les points adjacents
 def détermine_points_adjacents(point, max_i, max_j):
     i, j = point
@@ -77,14 +75,49 @@ def affiche_les_étoiles():
         plt.plot(star[1], star[0], 'ro')  # Inverser les indices pour matplotlib
     plt.show()
 
+
 # Enregistre les coordonnées des étoiles dans un format json
 def enregistre_les_étoiles():
     formes = détermine_formes(threshold_mask)
     coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
     coordonnées=[]
-    for i in range(len(coordonnéesdesétoiles)):
-        coordonnées.append([float(coordonnéesdesétoiles[i][0]), float(coordonnéesdesétoiles[i][1])])
+    for k in range(len(coordonnéesdesétoiles)):
+        i = float(coordonnéesdesétoiles[k][0])
+        j = float(coordonnéesdesétoiles[k][1])
+        coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
     with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
         json.dump(coordonnées, fichier, ensure_ascii=False, indent=1)
+    return coordonnées
+'''
+renvoie une liste de triplets [abscisse, ordonnée, luminosité]
+'''
 
-enregistre_les_étoiles()
+# Fonction test sur la constellation Cassiopée
+def trie_simple(liste):
+    max = liste[0]
+    indice = 0
+    for i in range(len(liste)-1):
+        if liste[i+1][2] > max[2]:
+            max = liste[i+1]
+            indice = i+1
+    return indice
+
+def extraire_étoiles_cassio():
+    formes = détermine_formes(threshold_mask)
+    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
+    coordonnées = []
+    for k in range(len(coordonnéesdesétoiles)):
+        i = float(coordonnéesdesétoiles[k][0])
+        j = float(coordonnéesdesétoiles[k][1])
+        coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
+    luminosité_max = []
+    for i in range(5):
+        indice = trie_simple(coordonnées)
+        luminosité_max.append(coordonnées[indice])
+        coordonnées.pop(indice)
+    with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
+        json.dump(luminosité_max, fichier, ensure_ascii=False, indent=1)
+
+extraire_étoiles_cassio()
+affiche_les_étoiles()
+    
