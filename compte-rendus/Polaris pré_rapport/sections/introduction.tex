@@ -1,16 +1,19 @@
 \section{Introduction}
 \subsection{Objectifs}
-\subsubsection{Préambule}
-Développement d’une application dédiée à la reconnaissance automatique des constellations dans le ciel nocturne, en plaçant cette fonctionnalité au cœur de l’expérience utilisateur.
-\subsubsection{Objectifs du projet}
-\paragraph{Reconnaissance de Constellations} 
-Reconnaissance automatique des constellations à partir des coordonnées des étoiles visibles et d’algorithmes d’analyse spatiale (pattern matching)
-\paragraph{Interface}
-Affichage des constellations identifiées sur une carte simplifiée, enrichie d’informations de base (nom, description, histoire)
+\textbf{Reconnaissance de Constellations}
+
+\noindent Développement d’une application dédiée à la reconnaissance automatique des constellations dans le ciel nocturne, en plaçant cette fonctionnalité au cœur de l’expérience utilisateur.
+
+\noindent Reconnaissance automatique des constellations à partir des coordonnées des étoiles visibles et d’algorithmes d’analyse spatiale (pattern matching).
+
+\noindent \textbf{Interface}
+
+\noindent Affichage des constellations identifiées sur une carte simplifiée, enrichie d’informations de base (nom, description, histoire).
 
 \subsection{Contexte}
-\subsubsection{Astrométrie et Alignement}
-Lors de l'observation astronomique, il est crucial de savoir précisément quelles parties du ciel sont observées. Cela permet de corréler les observations avec des catalogues d'étoiles.
+\textbf{Astrométrie et Alignement}
+
+\noindent Lors de l'observation astronomique, il est crucial de savoir précisément quelles parties du ciel sont observées. Cela permet de corréler les observations avec des catalogues d'étoiles.
 
 \noindent But : Identifier les étoiles dans une image pour déterminer la position et l'orientation d'un télescope ou d'une caméra.
 
@@ -20,8 +23,67 @@ Lors de l'observation astronomique, il est crucial de savoir précisément quell
 
 Nous avons choisi de répartir le travail sur notre projet de la façon suivante :
 
+\subsubsection{Reconnaissance de Constellations}
+
+\begin{itemize}
+    \item \textbf{Organisation}
+\end{itemize}
+
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.9\linewidth]{img/resolution.png}
-    \label{fig:example_1}
+    \includegraphics[width = 0.8\linewidth]{img/resolution.png}
+    \label{fig1}
+    \caption{You can cite the source in the caption \cite{xkcd}.}
 \end{figure}
+
+\begin{itemize}
+    \item \textbf{Diagramme de classes}
+    \begin{itemize}
+        \item Créer
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Interface}
+
+\begin{itemize}
+    \item \textbf{Organisation}
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{img/interface.png}
+    \label{fig2}
+    \caption{You can cite the source in the caption \cite{xkcd}.}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Diagramme de classes}
+    \begin{itemize}
+        \item Créer
+    \end{itemize}
+\end{itemize}
+
+\subsection{Recette}
+
+La recette de notre projet est en trois parties :
+
+\begin{itemize}
+    \item \textbf{Extraction d'étoiles}
+    \begin{itemize}
+        \item Traiter la photo prise
+        \item Fournir les coordonnées précises des étoiles.
+        \item Créer un fichier json pour la partie correspondance
+    \end{itemize}
+
+    \item \textbf{Correspondance avec la base de données}
+    \begin{itemize}
+        \item Créer des traingles avec de plus en plus de points, du plus au moins brillants
+        \item Renvoyer le nom de la constellation la plus similaire présente dans la base de données
+    \end{itemize}
+
+    \item \textbf{Interface}
+    \begin{itemize}
+        \item Affiche l'image correpondante à la photographie dans la base de données
+        \item Texte original décrivant succintement la constellation
+    \end{itemize}
+\end{itemize}

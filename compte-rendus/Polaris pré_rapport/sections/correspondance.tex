@@ -1,0 +1,48 @@
+\section{Correspondance des constellations avec la base de donnée}
+\subsection{Etat de l'art}
+Pour la correspondance avec la base de données :
+\subsection{Solution choisie}
+
+\vspace{0.5cm}
+
+\noindent \textbf{Triangles similaires}
+
+L'algorithme des triangles similaires : (Postulat actuel - La première étape est idéale)
+Comparaison des motifs géométriques formés par des groupes d'étoiles. Exploite l'invariance des proportions des triangles.
+
+1. Triangulation : On forme des triangles à partir des étoiles visibles dans l'image capturée (par exemple, à partir des plus brillantes).
+
+2. Caractérisation : Chaque triangle est défini par des ratios de distances qui sont invariants sous rotation, translation et mise à l'échelle.
+
+3. Base de données : Ces caractéristiques sont comparées à une base de données contenant des triangles pré-calculés à partir de catalogues d'étoiles connues.
+
+4. Correspondence : Si une correspondance est trouvée, fonction de coût.
+
+ABCD : constellation prise en photo; EFGH et IJKL : constellations de la base de donnée
+
+\vspace{1cm}
+
+\noindent \textbf{Exemple}
+
+Triangles formés par les points ABCD : 
+[Triangle((0.0, 0.0), (1.0, 0.0), (0.0, 1.0)), Triangle((0.0, 0.0), (1.0, 0.0), (1.0, 1.0)), Triangle((0.0, 0.0), (0.0, 1.0), (1.0, 1.0)), Triangle((1.0, 0.0), (0.0, 1.0), (1.0, 1.0))]
+
+Triangles formés par les points EFGH : 
+[Triangle((1.0, 1.0), (0.0, 1.0), (1.0, 0.0)), Triangle((1.0, 1.0), (0.0, 1.0), (0.0, 0.0)), Triangle((1.0, 1.0), (1.0, 0.0), (0.0, 0.0)), Triangle((0.0, 1.0), (1.0, 0.0), (0.0, 0.0))]
+
+Triangles formés par les points IJKL : 
+[Triangle((1.0, 1.0), (0.0, 1.0), (1.0, 0.0)), Triangle((1.0, 1.0), (0.0, 1.0), (10.0, 0.0)), Triangle((1.0, 1.0), (1.0, 0.0), (10.0, 0.0)), Triangle((0.0, 1.0), (1.0, 0.0), (10.0, 0.0))]
+
+Liste des couts (ABCD - EFGH): 
+[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Indice des triangles similaires : [0, 1, 2, 3]
+cout total de la constellation : 0
+
+Liste des couts (ABCD - IJKL) : 
+[0.0, 10.648721674943998, 9.246390843185727, 7.223413489141617, 0.0, 10.648721674943998, 9.246390843185727, 7.223413489141617, 0.0, 10.648721674943998, 9.246390843185727, 7.223413489141617, 0.0, 10.648721674943998, 9.246390843185727, 7.223413489141617]
+Indice des triangles similaires : [0, 3, 2, 1]
+cout total de la constellation : 120.0
+
+La constellation la plus proche est : 
+[Triangle((1.0, 1.0), (0.0, 1.0), (1.0, 0.0)), Triangle((1.0, 1.0), (0.0, 1.0), (0.0, 0.0)), Triangle((1.0, 1.0), (1.0, 0.0), (0.0, 0.0)), Triangle((0.0, 1.0), (1.0, 0.0), (0.0, 0.0))] donc EFGH
+
