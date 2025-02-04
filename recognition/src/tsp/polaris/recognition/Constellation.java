@@ -41,7 +41,7 @@ public class Constellation
         double cout_constellation = 0;
         for (int cout = 0; cout < cout_triangle.length; cout++)
         {
-            cout_constellation += cout;
+            cout_constellation += cout_triangle[cout];
         }
         return cout_constellation;
     }
