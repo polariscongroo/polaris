@@ -17,20 +17,57 @@ public class List_point
     }
     
     // Fonction auxiliaire qui permet de créer une liste de toutes les combinaisons d'étoiles d'une taille donnée
-    private Constellation[] combinationConstellation(int taille, Constellation[] listeConstellation) {
-    	// A REMPLIR
-    	return null;                     
+    // Le pseudo-code de cette fonction vient de : http://jm.davalan.org/mots/comb/comb/combalgo.html (Je l'ai quelque peu modifié)
+    private void combinationConstellation(int k,Point[][] resultPoints, Point[] copyPoints,int indice, Point[] tempPointList) {
+    	// Cas ou on demande des combinaisons de K parmi N avec K > N
+    	if(k > copyPoints.length) {
+    		return;
+    	// Cas ou on a terminé de faire une combinaison
+    	} else if(k <= 0) {
+    		resultPoints[indice] = tempPointList;
+    	} else {
+    		for(int i = 0; i < copyPoints.length; i += 1) {
+    			// g est la liste des points se situant après l'indice i
+    			Point[] g = new Point[copyPoints.length - i - 1];
+    			for(int j = i+1; j < copyPoints.length; j += 1) {
+    				g[i] = copyPoints[i];
+    			}
+    			
+    			// l2 est la liste tempPointList auquel on rajoute l'élément en indice i de copyPoints
+    			Point[] l2 = new Point[tempPointList.length + 1];
+    			for(int j = 0; j < tempPointList.length; j += 1) {
+    				l2[j] = tempPointList[j];
+    			}
+    			l2[l2.length - 1] = copyPoints[i];
+    			
+    			combinationConstellation(k-1, resultPoints, g, indice+i, l2);
+    		}
+    	}
     }
     
-    public Constellation findRightConstellation(int taille, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
-    	// On crée une liste composé de tous les ensembles de points à taille éléments
-    	int nbCombination = Combinatorics.combination(points.length, taille);
-    	Constellation[] listeConstellation = new Constellation[nbCombination];
-    	combinationConstellation(taille,listeConstellation);
+    public Constellation findRightConstellation(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
+    	// On crée une liste composée de tous les ensembles de points à k éléments :
     	
-    	// On cherche l'ensemble de points de taille taille qui ressemble le plus à une constellation 
+    	// Nombre de combinaisons
+    	int nbCombination = Combinatorics.combination(points.length, k);
+    	
+    	// Liste de toutes les combinaisons de constellations à k points
+    	Constellation[] listeConstellation = new Constellation[nbCombination];
+    	
+    	// Liste de toutes les combinaisons de k points
+    	Point[][] pointsListConstellation = new Point[nbCombination][k];
+    	
+    	combinationConstellation(k,pointsListConstellation,points,0,new Point[k]);
+    	
+    	// On a la liste des combinaisons de tous les points, il faut maintenant faire de ces listes, des constellations
+    	for(int i = 0; i < nbCombination; i += 1) {
+    		listeConstellation[i] = new Constellation(pointsListConstellation[i]);
+    	}
+    	
+    	// On cherche l'ensemble de points de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
     	double minCoutConstellation = Double.MAX_VALUE;
     	int indConstellation = -1;
+    	
     	for(int i = 0; i < listeConstellation.length; i += 1) {
     		double coutCons = listeConstellation[i].coutConstellation(constellations);
     		if(minCoutConstellation > coutCons) {
@@ -38,7 +75,8 @@ public class List_point
     			minCoutConstellation = coutCons;
     		}
     	}
-    	coutMinParTaille[taille-3] = minCoutConstellation;
+    	
+    	coutMinParTaille[k-3] = minCoutConstellation;
     	return listeConstellation[indConstellation];
     }
     
