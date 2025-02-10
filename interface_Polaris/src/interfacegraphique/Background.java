@@ -1,7 +1,4 @@
 package interfacegraphique;
-
-import com.twelvemonkeys.image.ImageUtil;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,7 +11,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
-import shadow.ShadowRenderer;
 
 
 
@@ -105,13 +101,10 @@ public class Background extends JComponent{
         int y = getBlur().getY();
         int width = getBlur().getWidth();
         int height = getBlur().getHeight();
-        int shadow = 8;
         if (width > 0 && height > 0) {
             BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2 = img.createGraphics();
-            g2.drawImage(ImageUtil.blur(bufferedImage.getSubimage(x, y, width, height), 10f), 0, 0, null);
             g2.dispose();
-            g.drawImage(new ShadowRenderer(shadow, 0.3f, new Color(0, 0, 0)).createShadow(img), (int) (x - shadow * 0.8f), (int) (y - shadow * 0.8f), null);
             g.drawImage(img, x, y, null);
         }
     }
