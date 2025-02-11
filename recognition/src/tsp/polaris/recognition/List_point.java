@@ -1,10 +1,5 @@
 package tsp.polaris.recognition;
-import tsp.polaris.auxiliaries.Combinatorics;
-import java.lang.module.FindException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import tsp.polaris.auxiliaries.Combinatorics;
 
 public class List_point

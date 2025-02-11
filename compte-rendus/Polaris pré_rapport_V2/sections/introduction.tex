@@ -25,43 +25,54 @@ Nous avons choisi de répartir le travail sur notre projet de la façon suivante
 
 \subsubsection{Reconnaissance de Constellations}
 
-\begin{itemize}
-    \item \textbf{Organisation}
-\end{itemize}
-
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8\linewidth]{img/resolution.png}
     \label{fig1}
-    \caption{You can cite the source in the caption \cite{xkcd}.}
+    \caption{Susceptible de changer}
 \end{figure}
-
-\begin{itemize}
-    \item \textbf{Diagramme de classes}
-    \begin{itemize}
-        \item Créer
-    \end{itemize}
-\end{itemize}
 
 \subsubsection{Interface}
 
-\begin{itemize}
-    \item \textbf{Organisation}
-\end{itemize}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.7\linewidth]{img/interface_img.png}
+    \caption{Interface v.0.1}
+\end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.5\linewidth]{img/interface.png}
-    \label{fig2}
-    \caption{You can cite the source in the caption \cite{xkcd}.}
+    \includegraphics[width = 0.7\linewidth]{img/classesInterface.png}
+    \caption{Diagramme v.0.1}
 \end{figure}
 
+\subsection{Outils}
 \begin{itemize}
-    \item \textbf{Diagramme de classes}
-    \begin{itemize}
-        \item Créer
-    \end{itemize}
+    \item\textbf{Repo GitHub} pour notre projet permettant la collaboration et la gestion du code source au sein du groupe.
+
+    \item\textbf{Python} pour la détection d'étoile (traitement d'image). Notamment utilisation de la bibliothèque DAOstarfindfer qui est une bibliothèque adaptée à notre problématique.
+
+    \item\textbf{Java} pour la reconnaissance de constellation et interface : langage rapide et performant.
+
+    \item\textbf{IDE : VScode} pour plus de fléxibilté pour passer d'un langague à un autre  
+
+    \item\textbf{IDE : Apache Netbeans} pour l'interface Java Swing.
 \end{itemize}
+
+\subsection{Gestion de projet}
+\textbf{Diagramme de Gantt}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/Gantt.png}
+    \caption{Tâches}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/Gantt2.png}
+    \caption{Diagramme de Gantt}
+\end{figure}
 
 \subsection{Recette}
 
@@ -70,14 +81,14 @@ La recette de notre projet est en trois parties :
 \begin{itemize}
     \item \textbf{Extraction d'étoiles}
     \begin{itemize}
-        \item Traiter la photo prise
-        \item Fournir les coordonnées précises des étoiles.
-        \item Créer un fichier json pour la partie correspondance
+        \item Traiter la photo prise : établir un seuil suffisant qui puisse extraire les étoiles l'ont souhaite étudiées
+        \item Fournir les coordonnées précises des étoiles :renvoyer un tableau de coordonnées de chauqe étoiles avec sa luminosité associée 
+        \item Renvoyer le résulat dans un format exploitable pour l'étape de correspondance des données 
     \end{itemize}
 
     \item \textbf{Correspondance avec la base de données}
     \begin{itemize}
-        \item Créer des traingles avec de plus en plus de points, du plus au moins brillants
+        \item Créer des triangles à partir de points
         \item Renvoyer le nom de la constellation la plus similaire présente dans la base de données
     \end{itemize}
 
