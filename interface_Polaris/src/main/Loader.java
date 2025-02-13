@@ -1,5 +1,13 @@
 package main;
+/*import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO; */
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class Loader extends javax.swing.JFrame {
@@ -8,7 +16,21 @@ public class Loader extends javax.swing.JFrame {
     public Loader() {
         initComponents();
     }
-
+    
+    public static void transition(String path) {
+        try {
+            FileWriter writer = new FileWriter("output.txt");
+            writer.write(path);
+            writer.close();
+            File file = new File("output.txt");
+            System.out.println("Chemin absolu du fichier : " + file.getAbsolutePath());
+            System.out.println("Successfully wrote text to file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+        
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -77,19 +99,41 @@ public class Loader extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    public String image; // Variable to store the selected image path
+    public String path; // Variable to store the selected image path
     private void boutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonActionPerformed
         if (evt.getSource() == bouton) {
             JFileChooser fileChooser = new JFileChooser();
-
+              
             fileChooser.setCurrentDirectory(new File(".")); // Sets current directory
 
             int response = fileChooser.showOpenDialog(null); // Select file to open
 
             if (response == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
-                image = file.getAbsolutePath(); // Store the file path in the variable
-                System.out.println("Selected image path: " + image);
+                path = file.getAbsolutePath(); // Store the file path in the variable
+                System.out.println("Selected image path: " + path);
+                transition(path);
+                
+            
+            //tentative d'affichage de la photo, encore en travaux
+            /*try {
+                final BufferedImage img = ImageIO.read(file); // lit l'image
+                JPanel lab = new JPanel(){
+                    protected void paintComponent(Graphics g) {
+                    //On dessine l'image dans la taille du panel ( c'est la même variable que juste au-dessus,
+                    //la final BuferredImage
+                    g.drawImage(img, getWidth(), getHeight(), null);
+                    }
+                };
+                pan.removeAll(); // pour éviter des problèmes de conflits, on supprime les composants déjà présents dans le panel
+                pan.setLayout(new BorderLayout());
+                pan.add(lab, BorderLayout.CENTER); 
+                pan.revalidate(); // on avertit Swing qu'on a changé quelque chose susceptible d'affecter le layout
+                pan.repaint(); // on demande à Swing de redessiner
+            } catch (IOException e) {
+                e.printStackTrace();
+            } */
+            
             }
         }
     }//GEN-LAST:event_boutonActionPerformed
@@ -102,7 +146,7 @@ public class Loader extends javax.swing.JFrame {
             }
         });
     }
-
+    //private final JPanel pan = new JPanel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private interfacegraphique.Background background1;
     private main.Button bouton;
