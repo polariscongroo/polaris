@@ -2,6 +2,7 @@ package tsp.polaris.recognition;
 import java.util.Arrays;
 
 /**
+ * Classe de triangles
  * @author Emma M., Chadi A.
  */
 
@@ -10,7 +11,7 @@ public class Triangle
     private Point p1, p2, p3;
 
     /**
-     * 
+     * Constructeur qui initialise les coordonnées des points du triangle
      * @param p1 1er point du triangle
      * @param p2 2e point du triangle
      * @param p3 3e point du triangle
@@ -23,7 +24,7 @@ public class Triangle
     }
     
     /**
-     * 
+     * Getteur du 1er point
      * @return Point : 1er point du triangle
      */
     public Point getPoint1() {
@@ -31,7 +32,7 @@ public class Triangle
     }
     
     /**
-     * 
+     * Getteur du 2e point
      * @return Point : 2e point du triangle
      */
     public Point getPoint2() {
@@ -39,7 +40,7 @@ public class Triangle
     }
     
     /**
-     * 
+     * Getteur du 3e point
      * @return Point : 3e point du triangle
      */
     public Point getPoint3() {
@@ -47,6 +48,7 @@ public class Triangle
     }
 
     /**
+     * Méthode d'affichage
      * @return String : Affiche les points du triangle
      */
     public String toString()
@@ -55,7 +57,7 @@ public class Triangle
     }
 
     /**
-     * 
+     * Méthode qui calcule les longueurs des cotés du triangle
      * @return double[] : Liste des longueurs des côtés du triangle, rangés dans l'ordre croissant 
      */
     private double[] getSides()
@@ -69,7 +71,7 @@ public class Triangle
     }
 
     /**
-     * 
+     * Méthode qui calcule les angles du triangle
      * @return double[] : Liste des angles du triangle
      */
     public double[] getAngles()
@@ -84,7 +86,7 @@ public class Triangle
     }
     
     /**
-     * 
+     * Méthode qui calcule les longueurs des côtés normalisés du triangle
      * @return double[] : Distances normalisées (par la distance la plus grande du triangle) 
      */
     public double[] getRatios() 
@@ -98,7 +100,7 @@ public class Triangle
     }
 
     /**
-     * 
+     * Méthode qui compare 2 triangles
      * @param t2 Triangle à comparer
      * @return double : Coût entre 2 triangles
      */

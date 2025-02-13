@@ -2,6 +2,7 @@ package tsp.polaris.recognition;
 import java.util.Arrays;
 
 /**
+ * Classe principale qui va lancer notre programme
  * @author Emma M., Chadi A.
  */
 

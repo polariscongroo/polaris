@@ -1,6 +1,7 @@
 package tsp.polaris.recognition;
 
 /**
+ * Classe de point
  * @author Emma M., Chadi A.
  */
 
@@ -9,7 +10,7 @@ public class Point
     private double[] point;
 
     /**
-     * 
+     * Constructeur qui initialise les coordonnées du point
      * @param x 1ère coordonnée du point
      * @param y 2e coordonnée du point
      */
@@ -19,7 +20,7 @@ public class Point
     }
     
     /**
-     * 
+     * Getteur des coordonnées
      * @return double[] : Les coordonnées du points
      */
     public double[] getPoint() {
@@ -27,6 +28,7 @@ public class Point
     }
     
     /**
+     * Méthode d'affichage 
      * @return String : Affiche le point
      */
     public String toString()
@@ -35,7 +37,7 @@ public class Point
     }
     
     /**
-     * 
+     * Méthode qui renvoie la distance entre 2 points
      * @param p2 Point avec lequel on veut calculer la distance
      * @return double : Calcule la distance entre deux points
      */

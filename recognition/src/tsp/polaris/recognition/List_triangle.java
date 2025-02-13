@@ -1,6 +1,7 @@
 package tsp.polaris.recognition;
 
 /**
+ * Classe qui va contenir des listes de triangles
  * @author Emma M., Chadi A.
  */
 
@@ -9,7 +10,7 @@ public class List_triangle
 	private Triangle[] listeT;
 	
 	/**
-	 * 
+	 * Constructeur qui initialise le tableau des triangles
 	 * @param listeT Liste des triangles
 	 */
 	public List_triangle(Triangle[] listeT) {
@@ -17,7 +18,7 @@ public class List_triangle
 	}
 	
 	/**
-	 * 
+	 * Méthode d'affichage
 	 * @return String : Coordonnées des points des triangles
 	 */
 	public String toString() {
@@ -29,7 +30,7 @@ public class List_triangle
 	}
 	
 	/**
-	 * 
+	 * Méthodes qui calcule le coût entre des listes de triangles 
 	 * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
 	 * @return double[] : Liste des couts entre les triangles des 2 listes
 	 * @throws TriangleMatchingException Problème d'appariement de liste de triangle
@@ -60,9 +61,9 @@ public class List_triangle
     }
     
     /**
-     * 
+     * Méthode qui calcule l'indice de correspondance entre 2 listes de triangles
      * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
-     * @return int[] : L'indice de correspondance entre deux triangles
+     * @return int[] : L'indice de correspondance entre deux listes de triangles
      * @throws TriangleMatchingException Problème d'appariement de liste de triangles
      */
     public int[] indice(List_triangle listeTriangle2) throws TriangleMatchingException
