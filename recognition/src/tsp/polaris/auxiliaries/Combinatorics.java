@@ -6,6 +6,14 @@ package tsp.polaris.auxiliaries;
  * * @author Chadi A., Emma M.
 */
 public class Combinatorics {
+	
+	/**
+	 * Constructeur vide
+	 */
+	public Combinatorics() {
+		
+	}
+	
     /**
      * Calcule la combinaison C(n, k), c'est-à-dire le nombre de façons de choisir k éléments parmi n éléments.
      * La formule utilisée est : C(n, k) = n! / (k! * (n - k)!)
