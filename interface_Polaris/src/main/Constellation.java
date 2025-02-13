@@ -1,8 +1,11 @@
 package main;
+
+import javax.swing.JPanel;
+
 /**
  * Classe représentant une zone graphique pour afficher une constellation dans une interface graphique.
  * Elle étend {@link JPanel} et configure la disposition de l'élément graphique.
- * @author Chadi A.
+ * @author RAVEN, Chadi A.
  */
 public class Constellation extends javax.swing.JPanel {
     /**

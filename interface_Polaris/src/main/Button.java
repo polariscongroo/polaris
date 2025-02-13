@@ -4,7 +4,7 @@ import javax.swing.JButton;
 /**
  * Classe personnalisée étendant {@link JButton} pour créer un bouton sans fond, sans bordure et transparent.
  * Utilisée pour personnaliser l'apparence d'un bouton dans une interface graphique.
- * @author Chadi A.
+ * @author RAVEN, Chadi A.
  */
 public class Button extends JButton {
     /**

@@ -14,7 +14,7 @@ import javax.swing.*;
  * Classe représentant une fenêtre permettant de charger un fichier d'image.
  * Cette classe étend {@link JFrame} et permet à l'utilisateur de choisir un fichier d'image,
  * puis enregistre le chemin de ce fichier dans un fichier texte.
- * @author Chadi A.
+ * @author RAVEN, Chadi A.
  */
 public class Loader extends javax.swing.JFrame {
     /**

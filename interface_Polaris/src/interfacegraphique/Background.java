@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
  * Cette classe représente un fond d'écran personnalisé pour une interface graphique.
  * Elle permet d'afficher une image en fond d'écran et d'ajouter un effet de flou sur un composant spécifié.
  * Elle étend la classe {@link JComponent} pour être utilisée comme un composant visuel dans une interface graphique.
- * @author Chadi A.
+ * @author RAVEN, Chadi A.
  */
 //On crée le fond de notre interface
 public class Background extends JComponent{
