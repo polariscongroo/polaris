@@ -10,13 +10,25 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+/**
+ * Classe représentant une fenêtre permettant de charger un fichier d'image.
+ * Cette classe étend {@link JFrame} et permet à l'utilisateur de choisir un fichier d'image,
+ * puis enregistre le chemin de ce fichier dans un fichier texte.
+ * @author Chadi A.
+ */
 public class Loader extends javax.swing.JFrame {
-
+    /**
+     * Constructeur de la classe {@code Loader}.
+     * Initialise les composants graphiques de l'interface.
+     */
     // Créer un panel pour load une image
     public Loader() {
         initComponents();
     }
-    
+    /**
+     * Effectue une transition en enregistrant le chemin du fichier d'image dans un fichier texte.
+     * @param path Le chemin du fichier d'image sélectionné.
+     */
     public static void transition(String path) {
         try {
             FileWriter writer = new FileWriter("output.txt");
@@ -100,6 +112,13 @@ public class Loader extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public String path; // Variable to store the selected image path
+    /**
+     * Action déclenchée lorsqu'un utilisateur clique sur le bouton de chargement.
+     * Permet de sélectionner un fichier image à partir d'une boîte de dialogue.
+     * Enregistre ensuite le chemin du fichier dans un fichier texte.
+     * 
+     * @param evt L'événement lié au clic sur le bouton.
+     */
     private void boutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonActionPerformed
         if (evt.getSource() == bouton) {
             JFileChooser fileChooser = new JFileChooser();
@@ -116,7 +135,12 @@ public class Loader extends javax.swing.JFrame {
             }
         }    
     }//GEN-LAST:event_boutonActionPerformed
-
+    /**
+     * Point d'entrée principal de l'application.
+     * Crée et affiche la fenêtre de l'application.
+     * 
+     * @param args Les arguments de la ligne de commande.
+     */
     public static void main(String args[]) {
         // Crée et affiche l'interface
         java.awt.EventQueue.invokeLater(new Runnable() {
