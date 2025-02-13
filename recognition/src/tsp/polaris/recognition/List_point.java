@@ -1,18 +1,37 @@
 package tsp.polaris.recognition;
 import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
-
+/**
+ * Classe représentant une liste de points dans l'espace.
+ * Cette classe permet notamment de générer des combinaisons de points
+ * et d'identifier l'ensemble de points correspondant le mieux à une constellation.
+ *
+ * @author Chadi A., Emma M.
+ */
 public class List_point
 {
     private Point[] points;
-    
+    /**
+     * Constructeur de la classe List_point.
+     *
+     * @param points Liste des points constituant l'objet.
+     */
     public List_point(Point[] points)
     {
         this.points = points;
     }
-    
+    /**
+     * Génère toutes les combinaisons possibles de k points parmi les points disponibles.
+     * Cette fonction utilise un algorithme combinatoire basé sur un pseudo-code disponible en ligne.
+     *
+     * @param k Nombre de points à sélectionner.
+     * @param resultPoints Tableau contenant toutes les combinaisons générées.
+     * @param copyPoints Copie des points disponibles.
+     * @param indice Indice de la combinaison en cours.
+     * @param tempPointList Liste temporaire pour stocker les points en cours de combinaison.
+     * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilisé (modifié)</a>
+     */
     // Fonction auxiliaire qui permet de créer une liste de toutes les combinaisons d'étoiles d'une taille donnée
-    // Le pseudo-code de cette fonction vient de : http://jm.davalan.org/mots/comb/comb/combalgo.html (Je l'ai quelque peu modifié)
     private void combinationPoint(int k,Point[][] resultPoints, Point[] copyPoints,int indice, Point[] tempPointList) {
     	// Cas ou on demande des combinaisons de K parmi N avec K > N
     	if(k > copyPoints.length) {
@@ -40,6 +59,15 @@ public class List_point
     	}
     }
     
+    /**
+     * Recherche la meilleure liste de points correspondant à une constellation.
+     *
+     * @param k Nombre de points à sélectionner.
+     * @param coutMinParTaille Tableau stockant les coûts minimaux par taille de constellation.
+     * @param constellations Liste des constellations de référence.
+     * @return La liste de points ayant le coût minimal.
+     * @throws TriangleMatchingException Si une erreur survient lors de l'appariement des constellations.
+     */
     public List_point findRightListPoint(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
     	// On crée une liste composée de tous les ensembles de points à k éléments :
     	
@@ -74,7 +102,13 @@ public class List_point
     	coutMinParTaille[k-3] = minCoutConstellation;
     	return listeConstellation[indConstellation];
     }
-    
+    /**
+     * Recherche la constellation la plus proche parmi un ensemble de constellations données.
+     *
+     * @param constellations Les constellations à comparer, venant de la base de données.
+     * @return La liste de points correspondant à la constellation la plus proche.
+     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
+     */
     public List_point searchConstellation(Constellation... constellations) throws TriangleMatchingException {
     	// On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
     	// LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
@@ -97,14 +131,22 @@ public class List_point
     	
     }
 
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères des points.
+     *
+     * @return La chaîne de caractères représentant la liste des points.
+     */
     public String toString()
     {
         return Arrays.toString(points);
     }
 
-	// Ancien constellation
-
-	public Triangle[] generateTriangles()
+    /**
+     * Génère les triangles possibles à partir des points d'une constellation.
+     *
+     * @return Un tableau de triangles générés à partir des points de la constellation.
+     */
+    public Triangle[] generateTriangles()
     {
         int size = points.length;
         int nb_triangles = Combinatorics.combination(size, 3);
@@ -124,6 +166,12 @@ public class List_point
         return triangles;
     }
 
+    /**
+     * Calcule le coût total d'une constellation à partir des coûts des triangles.
+     *
+     * @param cout_triangle Tableau des coûts des triangles.
+     * @return Le coût total de la constellation.
+     */
     static double couts(double[] cout_triangle)
     {
         double cout_constellation = 0;
@@ -134,6 +182,13 @@ public class List_point
         return cout_constellation;
     }
 
+    /**
+     * Sélectionne la constellation avec le coût minimal parmi un ensemble de constellations données.
+     *
+     * @param constellations Les constellations à comparer.
+     * @return La constellation avec le coût minimal.
+     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
+     */
     public Constellation selectConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         // Initialiser le "winner" à null
@@ -164,6 +219,13 @@ public class List_point
         return winner;  // Retourner la constellation avec le coût minimal
     }
     
+    /**
+     * Calcule le coût minimal entre l'ensemble de points de la photo et un ensemble de constellations données.
+     *
+     * @param constellations Les constellations à comparer.
+     * @return Le coût minimal entre la photo et les constellations.
+     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
+     */
     // Renvoie le coût minimale entre notre ensemble de points et les différentes constellations
     public double coutConstellation(Constellation... constellations) throws TriangleMatchingException
     {
