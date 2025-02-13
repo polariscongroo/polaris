@@ -1,14 +1,39 @@
 package tsp.polaris.recognition;
 
+/**
+ * @author Emma M., Chadi A.
+ */
+
 public class List_triangle
 {
 	private Triangle[] listeT;
 	
+	/**
+	 * 
+	 * @param listeT Liste des triangles
+	 */
 	public List_triangle(Triangle[] listeT) {
 		this.listeT = listeT;
 	}
 	
-    //La première liste de triangles en argument voit ses couts comparés à tous ceux du deuxième argument avant de passer au suivant
+	/**
+	 * 
+	 * @return String : Coordonnées des points des triangles
+	 */
+	public String toString() {
+		String str = "";
+		for(Triangle triangle : listeT) {
+			str += " " + triangle.toString();
+		}
+		return str;
+	}
+	
+	/**
+	 * 
+	 * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
+	 * @return double[] : Liste des couts entre les triangles des 2 listes
+	 * @throws TriangleMatchingException Problème d'appariement de liste de triangle
+	 */
     public double[] couts(List_triangle listeTriangle2) throws TriangleMatchingException
     {
         int taille1 = listeT.length;
@@ -33,8 +58,13 @@ public class List_triangle
         }
         return tab;
     }
-
-    // Trouver l'indice de correspondance entre deux triangles (rajouter des commentaires)
+    
+    /**
+     * 
+     * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
+     * @return int[] : L'indice de correspondance entre deux triangles
+     * @throws TriangleMatchingException Problème d'appariement de liste de triangles
+     */
     public int[] indice(List_triangle listeTriangle2) throws TriangleMatchingException
     {
         double[] couts = couts(listeTriangle2);

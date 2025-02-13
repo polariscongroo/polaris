@@ -1,6 +1,10 @@
 package tsp.polaris.recognition;
 import java.util.Arrays;
 
+/**
+ * @author Emma M., Chadi A.
+ */
+
 public class Main
 {
     public static void main(String[] args) throws TriangleMatchingException {

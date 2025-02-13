@@ -1,10 +1,20 @@
 package tsp.polaris.recognition;
 import java.util.Arrays;
 
+/**
+ * @author Emma M., Chadi A.
+ */
+
 public class Triangle
 {
     private Point p1, p2, p3;
 
+    /**
+     * 
+     * @param p1 1er point du triangle
+     * @param p2 2e point du triangle
+     * @param p3 3e point du triangle
+     */
     public Triangle(Point p1, Point p2, Point p3)
     {
         this.p1 = p1;
@@ -12,24 +22,42 @@ public class Triangle
         this.p3 = p3;
     }
     
+    /**
+     * 
+     * @return Point : 1er point du triangle
+     */
     public Point getPoint1() {
     	return p1;
     }
     
+    /**
+     * 
+     * @return Point : 2e point du triangle
+     */
     public Point getPoint2() {
     	return p2;
     }
     
+    /**
+     * 
+     * @return Point : 3e point du triangle
+     */
     public Point getPoint3() {
     	return p3;
     }
 
+    /**
+     * @return String : Affiche les points du triangle
+     */
     public String toString()
     {
         return "Triangle(" + p1 + ", " + p2 + ", " + p3 + ")";
     }
 
-    // Calcule les longueurs des côtés
+    /**
+     * 
+     * @return double[] : Liste des longueurs des côtés du triangle, rangés dans l'ordre croissant 
+     */
     private double[] getSides()
     {
         double[] sides = new double[3];
@@ -40,7 +68,10 @@ public class Triangle
         return sides;
     }
 
-    // Calcule les angles internes
+    /**
+     * 
+     * @return double[] : Liste des angles du triangle
+     */
     public double[] getAngles()
     {
         double[] sides = getSides();
@@ -52,7 +83,10 @@ public class Triangle
         return angles;
     }
     
-    // Renvoie les distances normalisées (par la distance la plus grande du triangle) (changer cette méthode pour éviter de perdre des données)
+    /**
+     * 
+     * @return double[] : Distances normalisées (par la distance la plus grande du triangle) 
+     */
     public double[] getRatios() 
     {
     	double[] sides = getSides();
@@ -63,7 +97,11 @@ public class Triangle
     	return ratios;
     }
 
-    // Vérifie si deux triangles sont similaires
+    /**
+     * 
+     * @param t2 Triangle à comparer
+     * @return double : Coût entre 2 triangles
+     */
     public double cout(Triangle t2)
     {
     	// Tableau d'angles
