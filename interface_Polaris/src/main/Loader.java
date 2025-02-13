@@ -113,29 +113,8 @@ public class Loader extends javax.swing.JFrame {
                 path = file.getAbsolutePath(); // Store the file path in the variable
                 System.out.println("Selected image path: " + path);
                 transition(path);
-                
-            
-            //tentative d'affichage de la photo, encore en travaux
-            /*try {
-                final BufferedImage img = ImageIO.read(file); // lit l'image
-                JPanel lab = new JPanel(){
-                    protected void paintComponent(Graphics g) {
-                    //On dessine l'image dans la taille du panel ( c'est la même variable que juste au-dessus,
-                    //la final BuferredImage
-                    g.drawImage(img, getWidth(), getHeight(), null);
-                    }
-                };
-                pan.removeAll(); // pour éviter des problèmes de conflits, on supprime les composants déjà présents dans le panel
-                pan.setLayout(new BorderLayout());
-                pan.add(lab, BorderLayout.CENTER); 
-                pan.revalidate(); // on avertit Swing qu'on a changé quelque chose susceptible d'affecter le layout
-                pan.repaint(); // on demande à Swing de redessiner
-            } catch (IOException e) {
-                e.printStackTrace();
-            } */
-            
             }
-        }
+        }    
     }//GEN-LAST:event_boutonActionPerformed
 
     public static void main(String args[]) {
