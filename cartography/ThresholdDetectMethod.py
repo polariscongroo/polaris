@@ -27,7 +27,7 @@ while True:
 
                     # Détection des étoiles avec un seuil
                     sigma = mad_std(image_array)
-                    threshold_mask = image_array > (5.0 * sigma)
+                    threshold_mask = image_array > (23.0 * sigma)
                     plt.imshow(threshold_mask, cmap='gray', origin='lower')
                     plt.title('Thresholded Image With Stars (Red Points)')
                     plt.show()
@@ -138,7 +138,6 @@ while True:
                     print(f"Erreur : L'image {image_path} n'existe pas.")
                 except Exception as e:
                     print(f"Erreur lors du traitement de l'image : {e}")
-
     except FileNotFoundError:
         print("Le fichier contenant le chemin de l'image n'existe pas encore...")
 

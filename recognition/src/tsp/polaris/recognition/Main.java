@@ -1,5 +1,7 @@
 package tsp.polaris.recognition;
 import java.util.Arrays;
+//import ;
+
 
 /**
  * Classe principale qui va lancer notre programme
@@ -13,7 +15,7 @@ public class Main
         - Les triangles formés par les List_points sont tous différents sinon distance nulle et on divise par 0.
         i.e la donnée des coordonnées est assez précise pour qu'il n'y est pas de confusion dans le calcul du coût
         - La photo et le traitement de l'image ne traitent que les étoiles de la List_point et pas d'autres.
-            */
+        */
 
         Point A = new Point(0, 0);
         Point B = new Point(1, 0);
@@ -85,5 +87,18 @@ public class Main
         //Test de la comparaison de plusieurs List_points (points) à une référence (la photo)
         Constellation winner = ABCD.selectConstellation(EFGH, IJKL);
         System.out.println("La List_point la plus proche est : " + winner);
+
+
+
+        /*
+        String path = "/Users/chadiaitekioui/Coding/Polaris/polaris/liste_étoiles.json";
+        List_point list_of_stars = new List_point();
+        Triangle[] triangles_formed = list_of_stars.generateTriangles();
+        List_triangle triangles = new List_triangle(triangles_formed);
+        // Utilisation de Arrays.toString pour afficher les triangles
+        System.out.println("Triangles formés par les points de list_of_stars : " + Arrays.toString(triangles));
+        double cout_total = ;
+        */
+
     }
 }

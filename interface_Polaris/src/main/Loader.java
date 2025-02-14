@@ -7,6 +7,8 @@ import javax.imageio.ImageIO; */
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -140,15 +142,35 @@ public class Loader extends javax.swing.JFrame {
      * Crée et affiche la fenêtre de l'application.
      * 
      * @param args Les arguments de la ligne de commande.
-     */
-    public static void main(String args[]) {
-        // Crée et affiche l'interface
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Loader().setVisible(true);
-            }
-        });
+     * @throws IOException 
+     * @throws InterruptedException 
+     */             
+public static void main(String args[]) throws IOException, InterruptedException {
+    // Crée et affiche l'interface
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new Loader().setVisible(true);
+        }
+    });
+    //Build command 
+    List<String> commands = new ArrayList<String>();
+    commands.add("python");
+    //Add arguments
+    commands.add("/Users/chadiaitekioui/Coding/Polaris/polaris/cartography/ThresholdDetectMethod.py");
+    System.out.println(commands);
+    //Run macro on target
+    ProcessBuilder pb = new ProcessBuilder(commands);
+    pb.directory(new File("/Users/chadiaitekioui/Coding/Polaris/polaris"));
+    pb.redirectErrorStream(true);
+    Process process = pb.start();
+
+    if (process.waitFor() == 0) {
+        System.out.println("Success!!!!!!!");
     }
+    else {
+        System.out.println("error!!!!!!!");
+    }
+}
     //private final JPanel pan = new JPanel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private interfacegraphique.Background background1;
