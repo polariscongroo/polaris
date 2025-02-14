@@ -1,7 +1,10 @@
 package tsp.polaris.recognition;
-import java.util.Arrays;
-//import ;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe principale qui va lancer notre programme
@@ -10,13 +13,30 @@ import java.util.Arrays;
 
 public class Main
 {
-    public static void main(String[] args) throws TriangleMatchingException {
+    public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
+
+        // Lis le fichier csv créé par le csv
+        List<List<Integer>> data = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader("data.csv"));
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(",");
+            List<Integer> row = new ArrayList<>();
+            for (String val : values) {
+                row.add(Integer.parseInt(val.trim()));
+            }
+            data.add(row);
+        }
+        br.close();
+        System.out.println(data);
+
+
         /* Hypothèses :
         - Les triangles formés par les List_points sont tous différents sinon distance nulle et on divise par 0.
         i.e la donnée des coordonnées est assez précise pour qu'il n'y est pas de confusion dans le calcul du coût
         - La photo et le traitement de l'image ne traitent que les étoiles de la List_point et pas d'autres.
         */
-
+        /*
         Point A = new Point(0, 0);
         Point B = new Point(1, 0);
         Point C = new Point(0, 1);
@@ -28,10 +48,10 @@ public class Main
         Point I = new Point(1, 1);
         Point J = new Point(0, 1);
         Point K = new Point(1, 0);
-        Point L = new Point(10, 0);
+        Point L = new Point(10, 0);*/
 
         //Test affichage de tous les triangles possibles avec le set de point set
-        Point[] set1 = {A,B,C,D};
+        /* Point[] set1 = {A,B,C,D};
         List_point ABCD = new List_point(set1);
         Triangle[] triangles1 = ABCD.generateTriangles();
         List_triangle list1 = new List_triangle(triangles1);
@@ -54,7 +74,7 @@ public class Main
         System.out.println("");
 
 
-        /*/Test fonction de cout sur deux triangles
+        /*Test fonction de cout sur deux triangles
         Triangle trig = new Triangle(A, B, C);
         Triangle trig2 = new Triangle(A, B, C);
         double cost = Triangle.cout(trig, trig2);
@@ -67,7 +87,7 @@ public class Main
         System.out.println("Indice des triangles similaires : " + Arrays.toString(liste_indice));
         System.out.println("cout total de la List_point : " + List_point.couts(liste_cout)); /*/
 
-        //Test fonction de couts de tous les triangles et identifications des triangles similaires et calcul du cout total de la List_point
+        /*Test fonction de couts de tous les triangles et identifications des triangles similaires et calcul du cout total de la List_point
         double[] liste_cout = list1.couts(list2);
         int[] liste_indice = list1.indice(list2);
         System.out.println("Liste des couts : " + Arrays.toString(liste_cout));
@@ -86,7 +106,7 @@ public class Main
 
         //Test de la comparaison de plusieurs List_points (points) à une référence (la photo)
         Constellation winner = ABCD.selectConstellation(EFGH, IJKL);
-        System.out.println("La List_point la plus proche est : " + winner);
+        System.out.println("La List_point la plus proche est : " + winner); */
 
 
 
