@@ -1,9 +1,4 @@
 package main;
-/*import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO; */
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
