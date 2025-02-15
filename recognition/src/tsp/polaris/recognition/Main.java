@@ -1,6 +1,7 @@
 package tsp.polaris.recognition;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,22 +16,25 @@ public class Main
 {
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
 
+        try{
         // Lis le fichier csv créé par le csv
-        List<List<Integer>> data = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader("data.csv"));
+        List<List<Float>> data = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader("recognition/src/tsp/polaris/cor_Points/Test.csv"));
         String line;
         while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
-            List<Integer> row = new ArrayList<>();
+            List<Float> row = new ArrayList<>();
             for (String val : values) {
-                row.add(Integer.parseInt(val.trim()));
+                row.add(Float.parseFloat(val.trim()));
             }
             data.add(row);
         }
         br.close();
         System.out.println(data);
+        }
 
-
+        catch (FileNotFoundException f) {System.out.println("Impossible de trouver le fichier");}
+        catch (IOException e) {System.out.println("Impossible de modifier le fichier");}
         /* Hypothèses :
         - Les triangles formés par les List_points sont tous différents sinon distance nulle et on divise par 0.
         i.e la donnée des coordonnées est assez précise pour qu'il n'y est pas de confusion dans le calcul du coût
