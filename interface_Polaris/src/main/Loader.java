@@ -28,7 +28,7 @@ public class Loader extends javax.swing.JFrame {
      */
     public static void transition(String path) {
         try {
-            FileWriter writer = new FileWriter("output.txt");
+            FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
             writer.write(path);
             writer.close();
             File file = new File("output.txt");

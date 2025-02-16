@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from collections import deque
 import time  # Importation du module time pour gérer la temporisation
 
-file_path = "cartography/polaris/output.txt"  # Fichier contenant le chemin de l'image
+file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
 f = open(file_path, "r")
 image_path = f.read().strip()
 # Supprime les espaces et sauts de ligne inutiles
@@ -98,19 +98,18 @@ while True:
                         i = float(coordonnéesdesétoiles[k][0])
                         j = float(coordonnéesdesétoiles[k][1])
                         coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
-                    with open("liste_étoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+                    # On enregistre les coordonnées des étoiles dans un fichier csv
+                    with open("recognition/src/tsp/polaris/cor_Points/liste_étoiles.csv", "w", newline="", encoding="utf-8") as fichier:
                              writer = csv.writer(fichier)
-                             writer.writerow(["Abscisse", "Ordonnée", "Luminosité"])  # En-tête CSV
                              writer.writerows(coordonnées)
-
                     print("Fichier liste_étoiles.csv créé avec succès!")
-                    
                     return coordonnées
                 '''
                 renvoie une liste de triplets [abscisse, ordonnée, luminosité]
                 '''
 
                 # Fonction test sur la constellation Cassiopée
+                '''
                 def trie_simple(liste):
                     max = liste[0]
                     indice = 0
@@ -139,14 +138,14 @@ while True:
                             writer.writerows(luminosité_max)
 
                     print("Fichier liste_étoiles.csv créé avec succès!")
-                    
+                '''    
 
                 def erase_txt():
                     f = open(file_path,"w")
                     f.close()
                     print("Fichier output.txt réécris")
 
-                extraire_étoiles_cassio()
+                enregistre_les_étoiles()
                 affiche_les_étoiles()
                 erase_txt()
                 break  # Quitte la boucle après avoir traité l’image
