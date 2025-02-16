@@ -1,13 +1,13 @@
+import csv
 import matplotlib.pyplot as plt
 import numpy as np
-import json
 from PIL import Image
 from astropy.stats import mad_std
 from sklearn.preprocessing import MinMaxScaler
 from collections import deque
 import time  # Importation du module time pour gérer la temporisation
 
-file_path = "/Users/chadiaitekioui/Coding/Polaris/polaris/output.txt"  # Fichier contenant le chemin de l'image
+file_path = "cartography/polaris/output.txt"  # Fichier contenant le chemin de l'image
 f = open(file_path, "r")
 image_path = f.read().strip()
 # Supprime les espaces et sauts de ligne inutiles
@@ -89,7 +89,7 @@ while True:
                     plt.show()
 
 
-                # Enregistre les coordonnées des étoiles dans un format json
+                
                 def enregistre_les_étoiles():
                     formes = détermine_formes(threshold_mask)
                     coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
@@ -98,8 +98,13 @@ while True:
                         i = float(coordonnéesdesétoiles[k][0])
                         j = float(coordonnéesdesétoiles[k][1])
                         coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
-                    with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
-                        json.dump(coordonnées, fichier, ensure_ascii=False, indent=1)
+                    with open("liste_étoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+                             writer = csv.writer(fichier)
+                             writer.writerow(["Abscisse", "Ordonnée", "Luminosité"])  # En-tête CSV
+                             writer.writerows(coordonnées)
+
+                    print("Fichier liste_étoiles.csv créé avec succès!")
+                    
                     return coordonnées
                 '''
                 renvoie une liste de triplets [abscisse, ordonnée, luminosité]
@@ -128,8 +133,13 @@ while True:
                         indice = trie_simple(coordonnées)
                         luminosité_max.append(coordonnées[indice])
                         coordonnées.pop(indice)
-                    with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
-                        json.dump(luminosité_max, fichier, ensure_ascii=False, indent=1)
+                    with open("liste_étoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+                            writer = csv.writer(fichier)
+                            writer.writerow(["Abscisse", "Ordonnée", "Luminosité"])  # En-tête CSV
+                            writer.writerows(luminosité_max)
+
+                    print("Fichier liste_étoiles.csv créé avec succès!")
+                    
 
                 def erase_txt():
                     f = open(file_path,"w")
