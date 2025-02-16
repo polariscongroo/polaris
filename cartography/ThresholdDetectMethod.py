@@ -25,9 +25,21 @@ while True:
                 image_array = np.array(image, dtype=float)  # Convertir en tableau numpy
                 image_array /= image_array.max()  # Normaliser entre 0 et 1
 
+                # L'image étant inversée, on "inverse" la matrice des coordonnées
+                def inverse_cor(coordonnées):
+                    for i in range(len(coordonnées) // 2):  # Parcourt la moitié des lignes
+                        for j in range(len(coordonnées[0])):  # Parcourt les colonnes
+                        # Échange des éléments
+                           nv_coordonnée = coordonnées[i][j]
+                           coordonnées[i][j] = coordonnées[len(coordonnées) - 1 - i][j]
+                           coordonnées[len(coordonnées) - 1 - i][j] = nv_coordonnée
+                    return coordonnées
+
                 # Détection des étoiles avec un seuil
                 sigma = mad_std(image_array)
-                threshold_mask = image_array > (23.0 * sigma)
+                image_final = inverse_cor(image_array)
+                threshold_mask = image_final > (5.0 * sigma)
+                
                 plt.imshow(threshold_mask, cmap='gray', origin='lower')
                 plt.title('Thresholded Image With Stars (Red Points)')
                 plt.show()
@@ -77,7 +89,7 @@ while True:
                         barycentre = points.mean(axis=0)
                         cor.append(barycentre)
                     return cor
-
+                
                 # Afficher les étoiles détectées
                 def affiche_les_étoiles():
                     formes = détermine_formes(threshold_mask)
@@ -87,8 +99,6 @@ while True:
                     for star in coordonnéesdesétoiles:
                         plt.plot(star[1], star[0], 'ro')  # Inverser les indices pour matplotlib
                     plt.show()
-
-
                 
                 def enregistre_les_étoiles():
                     formes = détermine_formes(threshold_mask)
@@ -99,7 +109,7 @@ while True:
                         j = float(coordonnéesdesétoiles[k][1])
                         coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
                     # On enregistre les coordonnées des étoiles dans un fichier csv
-                    with open("recognition/src/tsp/polaris/cor_Points/liste_étoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+                    with open("baseDDonnées_csv/lacerta.csv", "w", newline="", encoding="utf-8") as fichier:
                              writer = csv.writer(fichier)
                              writer.writerows(coordonnées)
                     print("Fichier liste_étoiles.csv créé avec succès!")
