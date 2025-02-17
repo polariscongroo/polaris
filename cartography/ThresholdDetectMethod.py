@@ -38,7 +38,7 @@ while True:
                 # Detection des etoiles avec un seuil
                 sigma = mad_std(image_array)
                 image_final = inverse_cor(image_array)
-                threshold_mask = image_final > (5.0 * sigma)
+                threshold_mask = image_final > (13.0 * sigma)
                 
                 plt.imshow(threshold_mask, cmap='gray', origin='lower')
                 plt.title('Thresholded Image With Stars (Red Points)')
@@ -109,7 +109,7 @@ while True:
                         j = float(coordonneesdesetoiles[k][1])
                         coordonnees.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
                     # On enregistre les coordonnees des etoiles dans un fichier csv
-                    with open("baseDDonnees_csv/lacerta.csv", "w", newline="", encoding="utf-8") as fichier:
+                    with open("baseDDonnees_csv/ara.csv", "w", newline="", encoding="utf-8") as fichier:
                              writer = csv.writer(fichier)
                              writer.writerows(coordonnees)
                     print("Fichier liste_etoiles.csv cree avec succès!")
