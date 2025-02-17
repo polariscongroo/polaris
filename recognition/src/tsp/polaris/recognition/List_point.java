@@ -2,8 +2,8 @@ package tsp.polaris.recognition;
 import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
 /**
- * Classe représentant une liste de points dans l'espace.
- * Cette classe permet notamment de générer des combinaisons de points
+ * Classe representant une liste de points dans l'espace.
+ * Cette classe permet notamment de generer des combinaisons de points
  * et d'identifier l'ensemble de points correspondant le mieux à une constellation.
  *
  * @author Chadi A., Emma M.
@@ -21,22 +21,22 @@ public class List_point
         this.points = points;
     }
     /**
-     * Génère toutes les combinaisons possibles de k points parmi les points disponibles.
-     * Cette fonction utilise un algorithme combinatoire basé sur un pseudo-code disponible en ligne.
+     * Genère toutes les combinaisons possibles de k points parmi les points disponibles.
+     * Cette fonction utilise un algorithme combinatoire base sur un pseudo-code disponible en ligne.
      *
-     * @param k Nombre de points à sélectionner.
-     * @param resultPoints Tableau contenant toutes les combinaisons générées.
+     * @param k Nombre de points à selectionner.
+     * @param resultPoints Tableau contenant toutes les combinaisons generees.
      * @param copyPoints Copie des points disponibles.
      * @param indice Indice de la combinaison en cours.
      * @param tempPointList Liste temporaire pour stocker les points en cours de combinaison.
-     * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilisé (modifié)</a>
+     * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
-    // Fonction auxiliaire qui permet de créer une liste de toutes les combinaisons d'étoiles d'une taille donnée
+    // Fonction auxiliaire qui permet de creer une liste de toutes les combinaisons d'etoiles d'une taille donnee
     private void combinationPoint(int k,Point[][] resultPoints, Point[] copyPoints,int indice, Point[] tempPointList) {
     	// Cas ou on demande des combinaisons de K parmi N avec K > N
     	if(k > copyPoints.length) {
     		return;
-    	// Cas ou on a terminé de faire une combinaison
+    	// Cas ou on a termine de faire une combinaison
     	} else if(k <= 0) {
     		resultPoints[indice] = tempPointList;
     	} else {
@@ -47,7 +47,7 @@ public class List_point
     				g[i] = copyPoints[i];
     			}
     			
-    			// l2 est la liste tempPointList auquel on rajoute l'élément en indice i de copyPoints
+    			// l2 est la liste tempPointList auquel on rajoute l'element en indice i de copyPoints
     			Point[] l2 = new Point[tempPointList.length + 1];
     			for(int j = 0; j < tempPointList.length; j += 1) {
     				l2[j] = tempPointList[j];
@@ -62,14 +62,14 @@ public class List_point
     /**
      * Recherche la meilleure liste de points correspondant à une constellation.
      *
-     * @param k Nombre de points à sélectionner.
+     * @param k Nombre de points à selectionner.
      * @param coutMinParTaille Tableau stockant les coûts minimaux par taille de constellation.
-     * @param constellations Liste des constellations de référence.
+     * @param constellations Liste des constellations de reference.
      * @return La liste de points ayant le coût minimal.
      * @throws TriangleMatchingException Si une erreur survient lors de l'appariement des constellations.
      */
     public List_point findRightListPoint(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
-    	// On crée une liste composée de tous les ensembles de points à k éléments :
+    	// On cree une liste composee de tous les ensembles de points à k elements :
     	
     	// Nombre de combinaisons
     	int nbCombination = Combinatorics.combination(points.length, k);
@@ -103,9 +103,9 @@ public class List_point
     	return listeConstellation[indConstellation];
     }
     /**
-     * Recherche la constellation la plus proche parmi un ensemble de constellations données.
+     * Recherche la constellation la plus proche parmi un ensemble de constellations donnees.
      *
-     * @param constellations Les constellations à comparer, venant de la base de données.
+     * @param constellations Les constellations à comparer, venant de la base de donnees.
      * @return La liste de points correspondant à la constellation la plus proche.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
@@ -132,9 +132,9 @@ public class List_point
     }
 
     /**
-     * Retourne une représentation sous forme de chaîne de caractères des points.
+     * Retourne une representation sous forme de chaîne de caractères des points.
      *
-     * @return La chaîne de caractères représentant la liste des points.
+     * @return La chaîne de caractères representant la liste des points.
      */
     public String toString()
     {
@@ -142,9 +142,9 @@ public class List_point
     }
 
     /**
-     * Génère les triangles possibles à partir des points d'une constellation.
+     * Genère les triangles possibles à partir des points d'une constellation.
      *
-     * @return Un tableau de triangles générés à partir des points de la constellation.
+     * @return Un tableau de triangles generes à partir des points de la constellation.
      */
     public Triangle[] generateTriangles()
     {
@@ -183,7 +183,7 @@ public class List_point
     }
 
     /**
-     * Sélectionne la constellation avec le coût minimal parmi un ensemble de constellations données.
+     * Selectionne la constellation avec le coût minimal parmi un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer.
      * @return La constellation avec le coût minimal.
@@ -195,10 +195,10 @@ public class List_point
         Constellation winner = null;
         double minimum_cout = Double.MAX_VALUE; // Utiliser une valeur maximale pour commencer.
 
-        // Parcourir les constellations passées en argument
+        // Parcourir les constellations passees en argument
         for (Constellation c : constellations)
         {
-            // Générer les triangles pour la photo et la constellation c
+            // Generer les triangles pour la photo et la constellation c
             Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
             Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
 
@@ -209,7 +209,7 @@ public class List_point
             double[] liste_cout = listPhoto.couts(listTriangle);
             double total = couts(liste_cout);  // Calculez le total des coûts
 
-            // Vérifiez si le total des coûts de cette constellation est le plus bas
+            // Verifiez si le total des coûts de cette constellation est le plus bas
             if (minimum_cout > total)
             {
                 minimum_cout = total;  // Mettez à jour le coût minimal
@@ -220,21 +220,21 @@ public class List_point
     }
     
     /**
-     * Calcule le coût minimal entre l'ensemble de points de la photo et un ensemble de constellations données.
+     * Calcule le coût minimal entre l'ensemble de points de la photo et un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer.
      * @return Le coût minimal entre la photo et les constellations.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    // Renvoie le coût minimale entre notre ensemble de points et les différentes constellations
+    // Renvoie le coût minimale entre notre ensemble de points et les differentes constellations
     public double coutConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         double minimum_cout = Double.MAX_VALUE; // Utiliser une valeur maximale pour commencer.
 
-        // Parcourir les constellations passées en argument
+        // Parcourir les constellations passees en argument
         for (Constellation c : constellations)
         {
-            // Générer les triangles pour la photo et la constellation c
+            // Generer les triangles pour la photo et la constellation c
             Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
             Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
 
@@ -245,7 +245,7 @@ public class List_point
             double[] liste_cout = listPhoto.couts(listTriangle);
             double total = couts(liste_cout);  // Calculez le total des coûts
 
-            // Vérifiez si le total des coûts de cette constellation est le plus bas
+            // Verifiez si le total des coûts de cette constellation est le plus bas
             if (minimum_cout > total)
             {
                 minimum_cout = total;  // Mettez à jour le coût minimal

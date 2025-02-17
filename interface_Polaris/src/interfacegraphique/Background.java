@@ -14,12 +14,12 @@ import javax.swing.SwingUtilities;
 
 
 /**
- * Cette classe représente un fond d'écran personnalisé pour une interface graphique.
- * Elle permet d'afficher une image en fond d'écran et d'ajouter un effet de flou sur un composant spécifié.
- * Elle étend la classe {@link JComponent} pour être utilisée comme un composant visuel dans une interface graphique.
+ * Cette classe represente un fond d'ecran personnalise pour une interface graphique.
+ * Elle permet d'afficher une image en fond d'ecran et d'ajouter un effet de flou sur un composant specifie.
+ * Elle etend la classe {@link JComponent} pour être utilisee comme un composant visuel dans une interface graphique.
  * @author RAVEN, Chadi A.
  */
-//On crée le fond de notre interface
+//On cree le fond de notre interface
 public class Background extends JComponent{
     
     private Icon image;
@@ -27,17 +27,17 @@ public class Background extends JComponent{
     private Component blur;
     /**
      * Constructeur de la classe {@code Background}.
-     * Charge une image de fond par défaut.
+     * Charge une image de fond par defaut.
      */
-    //Sélectionne l'image de fond
+    //Selectionne l'image de fond
     public Background() {
         image = new ImageIcon(getClass().getResource("mim.jpg"));
     }
     /**
-     * Crée l'image de fond redimensionnée pour s'ajuster à la taille du composant.
-     * L'image est redessinée chaque fois que le composant est redimensionné.
+     * Cree l'image de fond redimensionnee pour s'ajuster à la taille du composant.
+     * L'image est redessinee chaque fois que le composant est redimensionne.
      */
-    //Place l'image sélectionnée au centre de l'interface
+    //Place l'image selectionnee au centre de l'interface
     private void createImage() {
         if (image != null) {
             int width = getWidth();
@@ -56,17 +56,17 @@ public class Background extends JComponent{
         }
     }
     /**
-     * Méthode de dessin du fond d'écran sur le composant.
-     * Elle appelle la méthode {@link #createImage()} pour redessiner l'image de fond.
+     * Methode de dessin du fond d'ecran sur le composant.
+     * Elle appelle la methode {@link #createImage()} pour redessiner l'image de fond.
      * 
-     * @param grphcs L'objet {@link Graphics} utilisé pour dessiner l'image sur le composant.
+     * @param grphcs L'objet {@link Graphics} utilise pour dessiner l'image sur le composant.
      */
     protected void paintComponent(Graphics grphcs) {
         grphcs.drawImage(bufferedImage, 0, 0, null);
         super.paintComponent(grphcs);
     }
     /**
-     * Récupère le composant qui sera flouté en arrière-plan.
+     * Recupère le composant qui sera floute en arrière-plan.
      * 
      * @return Le composant à flouter.
      */
@@ -74,8 +74,8 @@ public class Background extends JComponent{
         return blur;
     }
     /**
-     * Définit un composant à flouter en arrière-plan.
-     * Après la définition du composant, l'image est redessinée avec l'effet de flou.
+     * Definit un composant à flouter en arrière-plan.
+     * Après la definition du composant, l'image est redessinee avec l'effet de flou.
      * 
      * @param blur Le composant à flouter.
      */
@@ -89,8 +89,8 @@ public class Background extends JComponent{
         });
     }
     /**
-     * Redéfinit les dimensions du composant et met à jour l'image de fond.
-     * Cette méthode est utilisée pour ajuster la taille de l'image en fonction du redimensionnement du composant.
+     * Redefinit les dimensions du composant et met à jour l'image de fond.
+     * Cette methode est utilisee pour ajuster la taille de l'image en fonction du redimensionnement du composant.
      * 
      * @param i La position en X du composant.
      * @param i1 La position en Y du composant.
@@ -108,11 +108,11 @@ public class Background extends JComponent{
         });
     }
     /**
-     * Calcule les dimensions et la position de l'image redimensionnée pour s'adapter au composant.
-     * L'image est redimensionnée proportionnellement pour occuper tout l'espace du composant.
+     * Calcule les dimensions et la position de l'image redimensionnee pour s'adapter au composant.
+     * L'image est redimensionnee proportionnellement pour occuper tout l'espace du composant.
      * 
      * @param image L'image à redimensionner.
-     * @return Un rectangle représentant les nouvelles dimensions et la position de l'image.
+     * @return Un rectangle representant les nouvelles dimensions et la position de l'image.
      */
     private Rectangle getAutoSize(Icon image) {
         int w = getWidth();
@@ -135,10 +135,10 @@ public class Background extends JComponent{
         return new Rectangle(new Point(x, y), new Dimension(width, height));
     }
     /**
-     * Crée l'image floutée du composant passé en paramètre.
-     * Cette méthode génère une image floutée du composant et l'ajoute au fond d'écran.
+     * Cree l'image floutee du composant passe en paramètre.
+     * Cette methode genère une image floutee du composant et l'ajoute au fond d'ecran.
      * 
-     * @param g L'objet {@link Graphics2D} utilisé pour dessiner l'image floutée.
+     * @param g L'objet {@link Graphics2D} utilise pour dessiner l'image floutee.
      */
     private void createBlurImage(Graphics2D g) {
         int x = getBlur().getX();

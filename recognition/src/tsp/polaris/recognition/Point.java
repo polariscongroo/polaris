@@ -10,9 +10,9 @@ public class Point
     private double[] point;
 
     /**
-     * Constructeur qui initialise les coordonnées du point
-     * @param x 1ère coordonnée du point
-     * @param y 2e coordonnée du point
+     * Constructeur qui initialise les coordonnees du point
+     * @param x 1ère coordonnee du point
+     * @param y 2e coordonnee du point
      */
     public Point(double x, double y)
     {
@@ -20,15 +20,15 @@ public class Point
     }
     
     /**
-     * Getteur des coordonnées
-     * @return double[] : Les coordonnées du points
+     * Getteur des coordonnees
+     * @return double[] : Les coordonnees du points
      */
     public double[] getPoint() {
     	return point;
     }
     
     /**
-     * Méthode d'affichage 
+     * Methode d'affichage 
      * @return String : Affiche le point
      */
     public String toString()
@@ -37,7 +37,7 @@ public class Point
     }
     
     /**
-     * Méthode qui renvoie la distance entre 2 points
+     * Methode qui renvoie la distance entre 2 points
      * @param p2 Point avec lequel on veut calculer la distance
      * @return double : Calcule la distance entre deux points
      */

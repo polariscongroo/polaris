@@ -8,8 +8,8 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- * Classe représentant une fenêtre permettant de charger un fichier d'image.
- * Cette classe étend {@link JFrame} et permet à l'utilisateur de choisir un fichier d'image,
+ * Classe representant une fenêtre permettant de charger un fichier d'image.
+ * Cette classe etend {@link JFrame} et permet à l'utilisateur de choisir un fichier d'image,
  * puis enregistre le chemin de ce fichier dans un fichier texte.
  * @author RAVEN, Chadi A.
  */
@@ -18,13 +18,13 @@ public class Loader extends javax.swing.JFrame {
      * Constructeur de la classe {@code Loader}.
      * Initialise les composants graphiques de l'interface.
      */
-    // Créer un panel pour load une image
+    // Creer un panel pour load une image
     public Loader() {
         initComponents();
     }
     /**
      * Effectue une transition en enregistrant le chemin du fichier d'image dans un fichier texte.
-     * @param path Le chemin du fichier d'image sélectionné.
+     * @param path Le chemin du fichier d'image selectionne.
      */
     public static void transition(String path) {
         try {
@@ -110,11 +110,11 @@ public class Loader extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public String path; // Variable to store the selected image path
     /**
-     * Action déclenchée lorsqu'un utilisateur clique sur le bouton de chargement.
-     * Permet de sélectionner un fichier image à partir d'une boîte de dialogue.
+     * Action declenchee lorsqu'un utilisateur clique sur le bouton de chargement.
+     * Permet de selectionner un fichier image à partir d'une boîte de dialogue.
      * Enregistre ensuite le chemin du fichier dans un fichier texte.
      * 
-     * @param evt L'événement lié au clic sur le bouton.
+     * @param evt L'evenement lie au clic sur le bouton.
      */
     private void boutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonActionPerformed
         if (evt.getSource() == bouton) {
@@ -133,15 +133,15 @@ public class Loader extends javax.swing.JFrame {
         }    
     }//GEN-LAST:event_boutonActionPerformed
     /**
-     * Point d'entrée principal de l'application.
-     * Crée et affiche la fenêtre de l'application.
+     * Point d'entree principal de l'application.
+     * Cree et affiche la fenêtre de l'application.
      * 
      * @param args Les arguments de la ligne de commande.
      * @throws IOException 
      * @throws InterruptedException 
      */             
 public static void main(String args[]) throws IOException, InterruptedException {
-    // Crée et affiche l'interface
+    // Cree et affiche l'interface
     java.awt.EventQueue.invokeLater(new Runnable() {
         public void run() {
             new Loader().setVisible(true);

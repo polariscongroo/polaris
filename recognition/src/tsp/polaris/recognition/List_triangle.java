@@ -18,8 +18,8 @@ public class List_triangle
 	}
 	
 	/**
-	 * Méthode d'affichage
-	 * @return String : Coordonnées des points des triangles
+	 * Methode d'affichage
+	 * @return String : Coordonnees des points des triangles
 	 */
 	public String toString() {
 		String str = "";
@@ -30,7 +30,7 @@ public class List_triangle
 	}
 	
 	/**
-	 * Méthodes qui calcule le coût entre des listes de triangles 
+	 * Methodes qui calcule le coût entre des listes de triangles 
 	 * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
 	 * @return double[] : Liste des couts entre les triangles des 2 listes
 	 * @throws TriangleMatchingException Problème d'appariement de liste de triangle
@@ -40,10 +40,10 @@ public class List_triangle
         int taille1 = listeT.length;
         int taille2 = listeTriangle2.listeT.length;
         
-        // Cas ou les listes n'ont pas la même taille (donc ne peuvent pas représenter la même constellation)
+        // Cas ou les listes n'ont pas la même taille (donc ne peuvent pas representer la même constellation)
         if (taille1 != taille2)
         {
-            throw new TriangleMatchingException("Les tableaux de triangles ont des tailles différentes : " + taille1 + " et " + taille2);
+            throw new TriangleMatchingException("Les tableaux de triangles ont des tailles differentes : " + taille1 + " et " + taille2);
         }
         
         // On va comparer chaque triangle entre eux et mettre leurs couts dans une matrice
@@ -61,7 +61,7 @@ public class List_triangle
     }
     
     /**
-     * Méthode qui calcule l'indice de correspondance entre 2 listes de triangles
+     * Methode qui calcule l'indice de correspondance entre 2 listes de triangles
      * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
      * @return int[] : L'indice de correspondance entre deux listes de triangles
      * @throws TriangleMatchingException Problème d'appariement de liste de triangles
@@ -82,7 +82,7 @@ public class List_triangle
             double minValue = Double.MAX_VALUE;
             int minIndex = -1;
 
-            // Parcourir les coûts pour trouver le minimum non utilisé
+            // Parcourir les coûts pour trouver le minimum non utilise
             for (int i = start; i < end; i++) {
                 int secondSetIndex = i % nb_triangles;
                 if (!usedTrianglesSecondSet[secondSetIndex] && couts[i] < minValue) {
@@ -92,12 +92,12 @@ public class List_triangle
             }
 
             if (minIndex == -1) {
-                throw new IllegalStateException("Aucun minimum trouvé. Vérifiez les données.");
+                throw new IllegalStateException("Aucun minimum trouve. Verifiez les donnees.");
             }
 
-            // Marquer le triangle du second set comme utilisé
+            // Marquer le triangle du second set comme utilise
             usedTrianglesSecondSet[minIndex] = true;
-            tab_indices[indice_triangle] = minIndex; // Associer l'indice trouvé
+            tab_indices[indice_triangle] = minIndex; // Associer l'indice trouve
         }
 
         return tab_indices;

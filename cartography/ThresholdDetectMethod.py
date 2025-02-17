@@ -5,7 +5,7 @@ from PIL import Image
 from astropy.stats import mad_std
 from sklearn.preprocessing import MinMaxScaler
 from collections import deque
-import time  # Importation du module time pour gérer la temporisation
+import time  # Importation du module time pour gerer la temporisation
 
 file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
 f = open(file_path, "r")
@@ -16,7 +16,7 @@ print("on lit bien le path" + image_path)
 while True:
     try:
         # Lire le chemin de l'image depuis le fichier
-        if image_path:  # Vérifie que le fichier contient bien un chemin valide
+        if image_path:  # Verifie que le fichier contient bien un chemin valide
             print(f"Traitement de l'image : {image_path}")
 
             try:
@@ -25,17 +25,17 @@ while True:
                 image_array = np.array(image, dtype=float)  # Convertir en tableau numpy
                 image_array /= image_array.max()  # Normaliser entre 0 et 1
 
-                # L'image étant inversée, on "inverse" la matrice des coordonnées
-                def inverse_cor(coordonnées):
-                    for i in range(len(coordonnées) // 2):  # Parcourt la moitié des lignes
-                        for j in range(len(coordonnées[0])):  # Parcourt les colonnes
-                        # Échange des éléments
-                           nv_coordonnée = coordonnées[i][j]
-                           coordonnées[i][j] = coordonnées[len(coordonnées) - 1 - i][j]
-                           coordonnées[len(coordonnées) - 1 - i][j] = nv_coordonnée
-                    return coordonnées
+                # L'image etant inversee, on "inverse" la matrice des coordonnees
+                def inverse_cor(coordonnees):
+                    for i in range(len(coordonnees) // 2):  # Parcourt la moitie des lignes
+                        for j in range(len(coordonnees[0])):  # Parcourt les colonnes
+                        # echange des elements
+                           nv_coordonnee = coordonnees[i][j]
+                           coordonnees[i][j] = coordonnees[len(coordonnees) - 1 - i][j]
+                           coordonnees[len(coordonnees) - 1 - i][j] = nv_coordonnee
+                    return coordonnees
 
-                # Détection des étoiles avec un seuil
+                # Detection des etoiles avec un seuil
                 sigma = mad_std(image_array)
                 image_final = inverse_cor(image_array)
                 threshold_mask = image_final > (5.0 * sigma)
@@ -45,7 +45,7 @@ while True:
                 plt.show()
                 
                 # Fonction pour trouver les points adjacents
-                def détermine_points_adjacents(point, max_i, max_j):
+                def determine_points_adjacents(point, max_i, max_j):
                     i, j = point
                     adjacents = []
                     for di, dj in [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]:
@@ -54,8 +54,8 @@ while True:
                             adjacents.append((ni, nj))
                     return adjacents
 
-                # Fonction pour créer une forme
-                def crée_une_forme(start, threshold_mask, explored):
+                # Fonction pour creer une forme
+                def cree_une_forme(start, threshold_mask, explored):
                     max_i, max_j = threshold_mask.shape
                     queue = deque([start])
                     forme = []
@@ -65,24 +65,24 @@ while True:
                             continue
                         explored[point] = True
                         forme.append(point)
-                        for adj in détermine_points_adjacents(point, max_i, max_j):
+                        for adj in determine_points_adjacents(point, max_i, max_j):
                             if not explored[adj] and threshold_mask[adj]:
                                 queue.append(adj)
                     return forme
 
                 # Fonction pour trouver toutes les formes
-                def détermine_formes(threshold_mask):
+                def determine_formes(threshold_mask):
                     explored = np.zeros_like(threshold_mask, dtype=bool)
                     formes = []
                     max_i, max_j = threshold_mask.shape
                     for i in range(max_i):
                         for j in range(max_j):
                             if threshold_mask[i, j] and not explored[i, j]:
-                                formes.append(crée_une_forme((i, j), threshold_mask, explored))
+                                formes.append(cree_une_forme((i, j), threshold_mask, explored))
                     return formes
 
-                # Calculer les coordonnées des étoiles
-                def détermine_coordonnées_étoiles(formes):
+                # Calculer les coordonnees des etoiles
+                def determine_coordonnees_etoiles(formes):
                     cor = []
                     for forme in formes:
                         points = np.array(forme)
@@ -90,35 +90,35 @@ while True:
                         cor.append(barycentre)
                     return cor
                 
-                # Afficher les étoiles détectées
-                def affiche_les_étoiles():
-                    formes = détermine_formes(threshold_mask)
-                    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
+                # Afficher les etoiles detectees
+                def affiche_les_etoiles():
+                    formes = determine_formes(threshold_mask)
+                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
                     plt.imshow(threshold_mask, cmap='gray', origin='lower')
                     plt.title('Thresholded Image With Stars (Red Points)')
-                    for star in coordonnéesdesétoiles:
+                    for star in coordonneesdesetoiles:
                         plt.plot(star[1], star[0], 'ro')  # Inverser les indices pour matplotlib
                     plt.show()
                 
-                def enregistre_les_étoiles():
-                    formes = détermine_formes(threshold_mask)
-                    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
-                    coordonnées=[]
-                    for k in range(len(coordonnéesdesétoiles)):
-                        i = float(coordonnéesdesétoiles[k][0])
-                        j = float(coordonnéesdesétoiles[k][1])
-                        coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
-                    # On enregistre les coordonnées des étoiles dans un fichier csv
-                    with open("baseDDonnées_csv/lacerta.csv", "w", newline="", encoding="utf-8") as fichier:
+                def enregistre_les_etoiles():
+                    formes = determine_formes(threshold_mask)
+                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
+                    coordonnees=[]
+                    for k in range(len(coordonneesdesetoiles)):
+                        i = float(coordonneesdesetoiles[k][0])
+                        j = float(coordonneesdesetoiles[k][1])
+                        coordonnees.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
+                    # On enregistre les coordonnees des etoiles dans un fichier csv
+                    with open("baseDDonnees_csv/lacerta.csv", "w", newline="", encoding="utf-8") as fichier:
                              writer = csv.writer(fichier)
-                             writer.writerows(coordonnées)
-                    print("Fichier liste_étoiles.csv créé avec succès!")
-                    return coordonnées
+                             writer.writerows(coordonnees)
+                    print("Fichier liste_etoiles.csv cree avec succès!")
+                    return coordonnees
                 '''
-                renvoie une liste de triplets [abscisse, ordonnée, luminosité]
+                renvoie une liste de triplets [abscisse, ordonnee, luminosite]
                 '''
 
-                # Fonction test sur la constellation Cassiopée
+                # Fonction test sur la constellation Cassiopee
                 '''
                 def trie_simple(liste):
                     max = liste[0]
@@ -129,40 +129,40 @@ while True:
                             indice = i+1
                     return indice
 
-                def extraire_étoiles_cassio():
-                    formes = détermine_formes(threshold_mask)
-                    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
-                    coordonnées = []
-                    for k in range(len(coordonnéesdesétoiles)):
-                        i = float(coordonnéesdesétoiles[k][0])
-                        j = float(coordonnéesdesétoiles[k][1])
-                        coordonnées.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
-                    luminosité_max = []
+                def extraire_etoiles_cassio():
+                    formes = determine_formes(threshold_mask)
+                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
+                    coordonnees = []
+                    for k in range(len(coordonneesdesetoiles)):
+                        i = float(coordonneesdesetoiles[k][0])
+                        j = float(coordonneesdesetoiles[k][1])
+                        coordonnees.append([j, i, image_array[int(i)][int(j)]]) # On inverse les indices
+                    luminosite_max = []
                     for i in range(5):
-                        indice = trie_simple(coordonnées)
-                        luminosité_max.append(coordonnées[indice])
-                        coordonnées.pop(indice)
-                    with open("liste_étoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+                        indice = trie_simple(coordonnees)
+                        luminosite_max.append(coordonnees[indice])
+                        coordonnees.pop(indice)
+                    with open("liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
                             writer = csv.writer(fichier)
-                            writer.writerow(["Abscisse", "Ordonnée", "Luminosité"])  # En-tête CSV
-                            writer.writerows(luminosité_max)
+                            writer.writerow(["Abscisse", "Ordonnee", "Luminosite"])  # En-tête CSV
+                            writer.writerows(luminosite_max)
 
-                    print("Fichier liste_étoiles.csv créé avec succès!")
+                    print("Fichier liste_etoiles.csv cree avec succès!")
                 '''    
 
                 def erase_txt():
                     f = open(file_path,"w")
                     f.close()
-                    print("Fichier output.txt réécris")
+                    print("Fichier output.txt reecris")
 
-                enregistre_les_étoiles()
-                affiche_les_étoiles()
+                enregistre_les_etoiles()
+                affiche_les_etoiles()
                 erase_txt()
-                break  # Quitte la boucle après avoir traité l’image
+                break  # Quitte la boucle après avoir traite l’image
             except FileNotFoundError:
                 print(f"Erreur : L'image {image_path} n'existe pas.")
             except Exception as e:
                 print(f"Erreur lors du traitement de l'image : {e}")
     except FileNotFoundError:
         print("Le fichier contenant le chemin de l'image n'existe pas encore...")
-    time.sleep(1)  # Attendre 1 seconde avant de réessayer pour éviter de surcharger le CPU
+    time.sleep(1)  # Attendre 1 seconde avant de reessayer pour eviter de surcharger le CPU

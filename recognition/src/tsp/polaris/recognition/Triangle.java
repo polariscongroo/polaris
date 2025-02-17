@@ -11,7 +11,7 @@ public class Triangle
     private Point p1, p2, p3;
 
     /**
-     * Constructeur qui initialise les coordonnées des points du triangle
+     * Constructeur qui initialise les coordonnees des points du triangle
      * @param p1 1er point du triangle
      * @param p2 2e point du triangle
      * @param p3 3e point du triangle
@@ -48,7 +48,7 @@ public class Triangle
     }
 
     /**
-     * Méthode d'affichage
+     * Methode d'affichage
      * @return String : Affiche les points du triangle
      */
     public String toString()
@@ -57,8 +57,8 @@ public class Triangle
     }
 
     /**
-     * Méthode qui calcule les longueurs des cotés du triangle
-     * @return double[] : Liste des longueurs des côtés du triangle, rangés dans l'ordre croissant 
+     * Methode qui calcule les longueurs des cotes du triangle
+     * @return double[] : Liste des longueurs des côtes du triangle, ranges dans l'ordre croissant 
      */
     private double[] getSides()
     {
@@ -71,7 +71,7 @@ public class Triangle
     }
 
     /**
-     * Méthode qui calcule les angles du triangle
+     * Methode qui calcule les angles du triangle
      * @return double[] : Liste des angles du triangle
      */
     public double[] getAngles()
@@ -86,8 +86,8 @@ public class Triangle
     }
     
     /**
-     * Méthode qui calcule les longueurs des côtés normalisés du triangle
-     * @return double[] : Distances normalisées (par la distance la plus grande du triangle) 
+     * Methode qui calcule les longueurs des côtes normalises du triangle
+     * @return double[] : Distances normalisees (par la distance la plus grande du triangle) 
      */
     public double[] getRatios() 
     {
@@ -100,7 +100,7 @@ public class Triangle
     }
 
     /**
-     * Méthode qui compare 2 triangles
+     * Methode qui compare 2 triangles
      * @param t2 Triangle à comparer
      * @return double : Coût entre 2 triangles
      */
@@ -110,11 +110,11 @@ public class Triangle
         double[] angles1 = getAngles();
         double[] angles2 = t2.getAngles();
 
-        // Rapports des côtés
+        // Rapports des côtes
         double[] ratios1 = getRatios();
         double[] ratios2 = t2.getRatios();
 
-        // Pondération des critères (ratio longueur et angle) (alpha et beta à définir)
+        // Ponderation des critères (ratio longueur et angle) (alpha et beta à definir)
         double alpha = 1;
         double beta = 1;
 

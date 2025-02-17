@@ -1,43 +1,43 @@
 Projet POLARIS – Compte-rendu n°01
 
 
-Type de réunion : Réunion de lancement
-Lieu : Département Info (D312) Télécom SudParis
+Type de reunion : Reunion de lancement
+Lieu : Departement Info (D312) Telecom SudParis
 Date : Lundi 13/01/2025 10h30-11h30
-Membres présents :
+Membres presents :
 - Emma MELL
 - Ryane SERI
 - Beryl SPERELAKIS-BEEDHAM
 - Chadi AIT EKIOUI
-- Professeur encadrant : Éric Lallet
+- Professeur encadrant : eric Lallet
 
 
 Ordre du jour :
-- Présentation des attendus du projet (dates clés, structure des livrables,…)
-- Point sur l’avancée du projet (recherches et travaux préliminaires)
+- Presentation des attendus du projet (dates cles, structure des livrables,…)
+- Point sur l’avancee du projet (recherches et travaux preliminaires)
 
 
-Échanges :
-• Présentation approfondie des attendus du pré-rapport (pour le 14/02/0225) :
-Il est destiné au professeur encadrant du projet (Éric Lallet). Il doit comprendre
+echanges :
+• Presentation approfondie des attendus du pre-rapport (pour le 14/02/0225) :
+Il est destine au professeur encadrant du projet (eric Lallet). Il doit comprendre
 - Un premier plan
 - Une table des matières
 - Le sujet ainsi que sa recette
-- Les points principaux à réaliser et comment les vérifier
+- Les points principaux à realiser et comment les verifier
 - Un planning (diagramme de Gantt)
 - Un plan de charge
-- Des spécifications (diagramme de classes par exemple)
+- Des specifications (diagramme de classes par exemple)
 
-• Présentation du sujet et du point d’avancement :
+• Presentation du sujet et du point d’avancement :
 Organisation en deux groupes :
-- Groupe A (Beryl SPERELAKIS-BEEDHAM, Ryane SERI) chargé de la détection d’étoiles.
-- Groupe B (Emma MELL, Chadi AIT EKIOUI) chargé de la reconnaissance des constellations.
+- Groupe A (Beryl SPERELAKIS-BEEDHAM, Ryane SERI) charge de la detection d’etoiles.
+- Groupe B (Emma MELL, Chadi AIT EKIOUI) charge de la reconnaissance des constellations.
 
 
 
 Todo List :
-- Réorganiser le GITHUB du projet.
-- Commencer à rédiger le pré-rapport (via Overleaf éditeur LaTeX).
+- Reorganiser le GITHUB du projet.
+- Commencer à rediger le pre-rapport (via Overleaf editeur LaTeX).
 
 
-Prochaine réunion : Vendredi 07/02/2025 13h15
+Prochaine reunion : Vendredi 07/02/2025 13h15

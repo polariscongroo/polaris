@@ -12,7 +12,7 @@ image = Image.open('cassio.png').convert('L')  # Convertir en niveau de gris
 image_array = np.array(image, dtype=float)  # Convertir en tableau numpy
 image_array /= image_array.max()  # Normaliser entre 0 et 1
 
-# Détection des étoiles avec un seuil
+# Detection des etoiles avec un seuil
 sigma = mad_std(image_array)
 threshold_mask = image_array > (5.0 * sigma)
 plt.imshow(threshold_mask, cmap='gray', origin='lower')
@@ -22,7 +22,7 @@ plt.show()
 print(sigma)
 
 # Fonction pour trouver les points adjacents
-def détermine_points_adjacents(point, max_i, max_j):
+def determine_points_adjacents(point, max_i, max_j):
     i, j = point
     adjacents = []
     for di, dj in [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]:
@@ -31,8 +31,8 @@ def détermine_points_adjacents(point, max_i, max_j):
             adjacents.append((ni, nj))
     return adjacents
 
-# Fonction pour créer une forme
-def crée_une_forme(start, threshold_mask, explored):
+# Fonction pour creer une forme
+def cree_une_forme(start, threshold_mask, explored):
     max_i, max_j = threshold_mask.shape
     queue = deque([start])
     forme = []
@@ -42,24 +42,24 @@ def crée_une_forme(start, threshold_mask, explored):
             continue
         explored[point] = True
         forme.append(point)
-        for adj in détermine_points_adjacents(point, max_i, max_j):
+        for adj in determine_points_adjacents(point, max_i, max_j):
             if not explored[adj] and threshold_mask[adj]:
                 queue.append(adj)
     return forme
 
 # Fonction pour trouver toutes les formes
-def détermine_formes(threshold_mask):
+def determine_formes(threshold_mask):
     explored = np.zeros_like(threshold_mask, dtype=bool)
     formes = []
     max_i, max_j = threshold_mask.shape
     for i in range(max_i):
         for j in range(max_j):
             if threshold_mask[i, j] and not explored[i, j]:
-                formes.append(crée_une_forme((i, j), threshold_mask, explored))
+                formes.append(cree_une_forme((i, j), threshold_mask, explored))
     return formes
 
-# Calculer les coordonnées des étoiles
-def détermine_coordonnées_étoiles(formes):
+# Calculer les coordonnees des etoiles
+def determine_coordonnees_etoiles(formes):
     cor = []
     for forme in formes:
         points = np.array(forme)
@@ -67,22 +67,22 @@ def détermine_coordonnées_étoiles(formes):
         cor.append(barycentre)
     return cor
 
-# Afficher les étoiles détectées
-def affiche_les_étoiles():
-    formes = détermine_formes(threshold_mask)
-    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
+# Afficher les etoiles detectees
+def affiche_les_etoiles():
+    formes = determine_formes(threshold_mask)
+    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
     plt.imshow(threshold_mask, cmap='gray', origin='lower')
     plt.title('Thresholded Image With Stars (Red Points)')
-    for star in coordonnéesdesétoiles:
+    for star in coordonneesdesetoiles:
         plt.plot(star[1], star[0], 'ro')  # Inverser les indices pour matplotlib
     plt.show()
 
-# Enregistre les coordonnées des étoiles dans un format json
-def enregistre_les_étoiles():
-    formes = détermine_formes(threshold_mask)
-    coordonnéesdesétoiles = détermine_coordonnées_étoiles(formes)
-    print(coordonnéesdesétoiles)
-    with open("liste_étoiles.json", "w", encoding="utf-8") as fichier:
-        json.dump(coordonnéesdesétoiles, fichier, ensure_ascii=False, indent=1)
+# Enregistre les coordonnees des etoiles dans un format json
+def enregistre_les_etoiles():
+    formes = determine_formes(threshold_mask)
+    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
+    print(coordonneesdesetoiles)
+    with open("liste_etoiles.json", "w", encoding="utf-8") as fichier:
+        json.dump(coordonneesdesetoiles, fichier, ensure_ascii=False, indent=1)
 
-enregistre_les_étoiles()
+enregistre_les_etoiles()

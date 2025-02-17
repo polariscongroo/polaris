@@ -2,26 +2,26 @@
 \subsection{Objectifs}
 \textbf{Reconnaissance de Constellations}
 
-\noindent Développement d’une application dédiée à la reconnaissance automatique des constellations dans le ciel nocturne, en plaçant cette fonctionnalité au cœur de l’expérience utilisateur.
+\noindent Developpement d’une application dediee à la reconnaissance automatique des constellations dans le ciel nocturne, en plaçant cette fonctionnalite au cœur de l’experience utilisateur.
 
-\noindent Reconnaissance automatique des constellations à partir des coordonnées des étoiles visibles et d’algorithmes d’analyse spatiale (pattern matching).
+\noindent Reconnaissance automatique des constellations à partir des coordonnees des etoiles visibles et d’algorithmes d’analyse spatiale (pattern matching).
 
 \noindent \textbf{Interface}
 
-\noindent Affichage des constellations identifiées sur une carte simplifiée, enrichie d’informations de base (nom, description, histoire).
+\noindent Affichage des constellations identifiees sur une carte simplifiee, enrichie d’informations de base (nom, description, histoire).
 
 \subsection{Contexte}
-\textbf{Astrométrie et Alignement}
+\textbf{Astrometrie et Alignement}
 
-\noindent Lors de l'observation astronomique, il est crucial de savoir précisément quelles parties du ciel sont observées. Cela permet de corréler les observations avec des catalogues d'étoiles.
+\noindent Lors de l'observation astronomique, il est crucial de savoir precisement quelles parties du ciel sont observees. Cela permet de correler les observations avec des catalogues d'etoiles.
 
-\noindent But : Identifier les étoiles dans une image pour déterminer la position et l'orientation d'un télescope ou d'une caméra.
+\noindent But : Identifier les etoiles dans une image pour determiner la position et l'orientation d'un telescope ou d'une camera.
 
-\noindent Application : Alignement automatique de télescopes amateurs ou professionnels, calibration des instruments, et création de cartes précises du ciel.
+\noindent Application : Alignement automatique de telescopes amateurs ou professionnels, calibration des instruments, et creation de cartes precises du ciel.
 
 \subsection{Plan}  
 
-Nous avons choisi de répartir le travail sur notre projet de la façon suivante :
+Nous avons choisi de repartir le travail sur notre projet de la façon suivante :
 
 \subsubsection{Reconnaissance de Constellations}
 
@@ -56,11 +56,11 @@ Nous avons choisi de répartir le travail sur notre projet de la façon suivante
 \begin{itemize}
     \item\textbf{Repo GitHub} pour notre projet permettant la collaboration et la gestion du code source au sein du groupe.
 
-    \item\textbf{Python} pour la détection d'étoile (traitement d'image). Notamment utilisation de la bibliothèque DAOstarfindfer qui est une bibliothèque adaptée à notre problématique.
+    \item\textbf{Python} pour la detection d'etoile (traitement d'image). Notamment utilisation de la bibliothèque DAOstarfindfer qui est une bibliothèque adaptee à notre problematique.
 
     \item\textbf{Java} pour la reconnaissance de constellation et interface : langage rapide et performant.
 
-    \item\textbf{IDE : VScode} pour plus de fléxibilté pour passer d'un langague à un autre  
+    \item\textbf{IDE : VScode} pour plus de flexibilte pour passer d'un langague à un autre  
 
     \item\textbf{IDE : Apache Netbeans} pour l'interface Java Swing.
 \end{itemize}
@@ -70,23 +70,23 @@ Nous avons choisi de répartir le travail sur notre projet de la façon suivante
 La recette de notre projet est en trois parties :
 
 \begin{itemize}
-    \item \textbf{Extraction d'étoiles}
+    \item \textbf{Extraction d'etoiles}
     \begin{itemize}
-        \item Traiter la photo prise : établir un seuil suffisant qui puisse extraire les étoiles l'ont souhaite étudiées
-        \item Fournir les coordonnées précises des étoiles :renvoyer un tableau de coordonnées de chauqe étoiles avec sa luminosité associée 
-        \item Renvoyer le résulat dans un format exploitable pour l'étape de correspondance des données 
+        \item Traiter la photo prise : etablir un seuil suffisant qui puisse extraire les etoiles l'ont souhaite etudiees
+        \item Fournir les coordonnees precises des etoiles :renvoyer un tableau de coordonnees de chauqe etoiles avec sa luminosite associee 
+        \item Renvoyer le resulat dans un format exploitable pour l'etape de correspondance des donnees 
     \end{itemize}
 
-    \item \textbf{Correspondance avec la base de données}
+    \item \textbf{Correspondance avec la base de donnees}
     \begin{itemize}
-        \item Créer des triangles à partir de points
-        \item Renvoyer le nom de la constellation la plus similaire présente dans la base de données
+        \item Creer des triangles à partir de points
+        \item Renvoyer le nom de la constellation la plus similaire presente dans la base de donnees
     \end{itemize}
 
     \item \textbf{Interface}
     \begin{itemize}
-        \item Affiche l'image correpondante à la photographie dans la base de données
-        \item Texte original décrivant succintement la constellation
+        \item Affiche l'image correpondante à la photographie dans la base de donnees
+        \item Texte original decrivant succintement la constellation
     \end{itemize}
 \end{itemize}
 \subsection{Gestion de projet}
