@@ -1,12 +1,12 @@
 # changer avec le nom de fichier que tu dois lire (si jamais c'est pas le même)
-with open("message.txt", "r") as f:
+with open("baseDDonnees_csv/auriga.csv", "r") as f:
     message = f.read()
 
 message = message.split("\n")
 message = [line.strip() for line in message if line]
 
 # Change ce dico avec les coordonnées correctes que tu veux retrouver (x,y)
-correct_dist = [(459,751), (264, 439), (534, 183), (1071, 173), (1069, 544), (723, 716)]
+correct_dist = [(388,586), (126.67, 877.08), (427.6, 1000), (478.6, 433.68), (1056, 277), (532, 58.65)]
 
 distances = [ [] for _ in range(len(correct_dist)) ]
 
