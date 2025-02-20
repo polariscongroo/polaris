@@ -11,9 +11,12 @@ file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chem
 f = open(file_path, "r")
 image_path = f.read().strip()
 # Supprime les espaces et sauts de ligne inutiles
-print("on lit bien le path" + image_path)
-
-while True:
+print("test 1 succès" + image_path)
+while image_path == "":
+    f = open(file_path, "r")
+    image_path = f.read().strip()
+    # Supprime les espaces et sauts de ligne inutiles
+    print("output.txt est vide" + image_path)
     try:
         # Lire le chemin de l'image depuis le fichier
         if image_path:  # Verifie que le fichier contient bien un chemin valide
