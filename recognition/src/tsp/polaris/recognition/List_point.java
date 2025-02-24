@@ -189,7 +189,7 @@ public class List_point
      * @return La constellation avec le coût minimal.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    public Constellation selectConstellation(Constellation... constellations) throws TriangleMatchingException
+    public String selectConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         // Initialiser le "winner" à null
         Constellation winner = null;
@@ -216,7 +216,7 @@ public class List_point
                 winner = c;             // Mettez à jour la constellation gagnante
             }
         }
-        return winner;  // Retourner la constellation avec le coût minimal
+        return winner.getnom();  // Retourner la constellation avec le coût minimal
     }
     
     /**

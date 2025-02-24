@@ -1,6 +1,5 @@
 package tsp.polaris.recognition;
 
-import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
 
 /**
@@ -11,14 +10,16 @@ import tsp.polaris.auxiliaries.Combinatorics;
  */
 public class Constellation {
     private Point[] points;
+    private String nom;
 
     /**
      * Constructeur de la classe Constellation.
      * 
      * @param points Liste des points constituant la constellation.
      */
-    public Constellation(Point[] points) {
+    public Constellation(Point[] points, String nom) {
         this.points = points;
+        this.nom = nom;
     }
 
     /**
@@ -26,9 +27,8 @@ public class Constellation {
      * 
      * @return Une chaîne de caractères representant la liste des points.
      */
-    @Override
-    public String toString() {
-        return Arrays.toString(points);
+    public String getnom() {
+        return nom;
     }
 
     /**
