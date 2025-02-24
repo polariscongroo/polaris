@@ -1,5 +1,7 @@
 package main;
 import java.io.File;
+import java.nio.file.*;
+import static java.nio.file.StandardWatchEventKinds.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -147,23 +149,61 @@ public static void main(String args[]) throws IOException, InterruptedException 
             new Loader().setVisible(true);
         }
     });
-    //Build command 
-    List<String> commands = new ArrayList<String>();
-    commands.add("python");
-    //Add arguments
-    commands.add("/Users/chadiaitekioui/Coding/Polaris/polaris/cartography/ThresholdDetectMethod.py");
-    System.out.println(commands);
-    //Run macro on target
-    ProcessBuilder pb = new ProcessBuilder(commands);
-    pb.directory(new File("/Users/chadiaitekioui/Coding/Polaris/polaris"));
-    pb.redirectErrorStream(true);
-    Process process = pb.start();
+    String pathString;
+    pathString = "cartography/image_aTraiter";
+    // Chemin vers le dossier contenant output.txt
+    Path dir = Paths.get(pathString);
+    // Création du WatchService
+    WatchService watchService = FileSystems.getDefault().newWatchService();
+    // Enregistrement du dossier pour surveiller les modifications de fichiers
+    dir.register(watchService, ENTRY_MODIFY);
 
-    if (process.waitFor() == 0) {
-        System.out.println("Success!!!!!!!");
-    }
-    else {
-        System.out.println("error!!!!!!!");
+    System.out.println("Surveillance de output.txt...");
+
+    while (true) {
+        // Récupérer les événements du watch service
+        WatchKey key = watchService.take();
+
+        for (WatchEvent<?> event : key.pollEvents()) {
+            WatchEvent.Kind<?> kind = event.kind();
+
+            // Récupère le nom du fichier modifié
+            Path fileName = (Path) event.context();
+
+            // Si c'est output.txt qui a été modifié
+            if (kind == ENTRY_MODIFY && fileName.toString().equals("output.txt")) {
+                System.out.println("output.txt a été modifié. Lancement du script Python...");
+
+                // Lancement du script Python
+                try {
+                                //Build command 
+                    List<String> commands = new ArrayList<String>();
+                    commands.add("python");
+                    //Add arguments
+                    commands.add("/Users/chadiaitekioui/Coding/Polaris/polaris/cartography/ThresholdDetectMethod.py");
+                    System.out.println(commands);
+                    //Run macro on target
+                    ProcessBuilder pb = new ProcessBuilder(commands);
+                    pb.directory(new File("/Users/chadiaitekioui/Coding/Polaris/polaris"));
+                    pb.redirectErrorStream(true);
+                    Process process = pb.start();
+
+                    if (process.waitFor() == 0) {
+                        System.out.println("Success!!!!!!!");
+                    }
+                    else {
+                        System.out.println("error!!!!!!!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        // Réinitialise la clé pour continuer à écouter
+        boolean valid = key.reset();
+        if (!valid) {
+            break;
+        }
     }
 }
     //private final JPanel pan = new JPanel();
