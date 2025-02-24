@@ -176,6 +176,7 @@ public class Loader extends javax.swing.JFrame {
     
                     // Lancement du script Python
                     try {
+                        Thread.sleep(500);  
                         //Build command 
                         //Récupère le chemin absolu du projet courant
                         String projectPath = new File("").getAbsolutePath();
