@@ -142,70 +142,85 @@ public class Loader extends javax.swing.JFrame {
      * @throws IOException 
      * @throws InterruptedException 
      */             
-public static void main(String args[]) throws IOException, InterruptedException {
-    // Cree et affiche l'interface
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new Loader().setVisible(true);
-        }
-    });
-    String pathString;
-    pathString = "cartography/image_aTraiter";
-    // Chemin vers le dossier contenant output.txt
-    Path dir = Paths.get(pathString);
-    // Création du WatchService
-    WatchService watchService = FileSystems.getDefault().newWatchService();
-    // Enregistrement du dossier pour surveiller les modifications de fichiers
-    dir.register(watchService, ENTRY_MODIFY);
-
-    System.out.println("Surveillance de output.txt...");
-
-    while (true) {
-        // Récupérer les événements du watch service
-        WatchKey key = watchService.take();
-
-        for (WatchEvent<?> event : key.pollEvents()) {
-            WatchEvent.Kind<?> kind = event.kind();
-
-            // Récupère le nom du fichier modifié
-            Path fileName = (Path) event.context();
-
-            // Si c'est output.txt qui a été modifié
-            if (kind == ENTRY_MODIFY && fileName.toString().equals("output.txt")) {
-                System.out.println("output.txt a été modifié. Lancement du script Python...");
-
-                // Lancement du script Python
-                try {
-                                //Build command 
-                    List<String> commands = new ArrayList<String>();
-                    commands.add("python");
-                    //Add arguments
-                    commands.add("/Users/chadiaitekioui/Coding/Polaris/polaris/cartography/ThresholdDetectMethod.py");
-                    System.out.println(commands);
-                    //Run macro on target
-                    ProcessBuilder pb = new ProcessBuilder(commands);
-                    pb.directory(new File("/Users/chadiaitekioui/Coding/Polaris/polaris"));
-                    pb.redirectErrorStream(true);
-                    Process process = pb.start();
-
-                    if (process.waitFor() == 0) {
-                        System.out.println("Success!!!!!!!");
+    public static void main(String args[]) throws IOException, InterruptedException {
+        // Cree et affiche l'interface
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Loader().setVisible(true);
+            }
+        });
+        String pathString;
+        pathString = "cartography/image_aTraiter";
+        // Chemin vers le dossier contenant output.txt
+        Path dir = Paths.get(pathString);
+        // Création du WatchService
+        WatchService watchService = FileSystems.getDefault().newWatchService();
+        // Enregistrement du dossier pour surveiller les modifications de fichiers
+        dir.register(watchService, ENTRY_MODIFY);
+    
+        System.out.println("Surveillance de output.txt...");
+    
+        while (true) {
+            // Récupérer les événements du watch service
+            WatchKey key = watchService.take();
+    
+            for (WatchEvent<?> event : key.pollEvents()) {
+                WatchEvent.Kind<?> kind = event.kind();
+    
+                // Récupère le nom du fichier modifié
+                Path fileName = (Path) event.context();
+    
+                // Si c'est output.txt qui a été modifié
+                if (kind == ENTRY_MODIFY && fileName.toString().equals("output.txt")) {
+                    System.out.println("output.txt a été modifié. Lancement du script Python...");
+    
+                    // Lancement du script Python
+                    try {
+                        //Build command 
+                        //Récupère le chemin absolu du projet courant
+                        String projectPath = new File("").getAbsolutePath();
+    
+                        // Chemin relatif vers le script Python
+                        String scriptRelativePath = "cartography/ThresholdDetectMethod.py";
+    
+                        // Construit le chemin complet vers le script
+                        String scriptFullPath = projectPath + File.separator + scriptRelativePath;
+    
+                        // Définir la commande pour lancer le script Python
+                        List<String> commands = new ArrayList<>();
+                        // "python3" pour macOS/Linux, "python" pour Windows.
+                        commands.add("python3"); 
+                        commands.add(scriptFullPath);
+    
+                        // Vérifie la commande construite
+                        System.out.println("Commande exécutée : " + commands);
+    
+                        // Crée le ProcessBuilder avec le dossier du projet comme répertoire de travail
+                        ProcessBuilder pb = new ProcessBuilder(commands);
+                        pb.directory(new File(projectPath));
+                        pb.redirectErrorStream(true); // Fusionne la sortie d'erreur avec la sortie standard
+    
+                        // Lance le processus
+                        Process process = pb.start();
+    
+                        // Vérifie si l'exécution est réussie
+                        if (process.waitFor() == 0) {
+                            System.out.println("Script exécuté avec succès !");
+                        } else {
+                            System.out.println("Une erreur est survenue lors de l'exécution du script.");
+                        }
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    else {
-                        System.out.println("error!!!!!!!");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-        }
-        // Réinitialise la clé pour continuer à écouter
-        boolean valid = key.reset();
-        if (!valid) {
-            break;
+            // Réinitialise la clé pour continuer à écouter
+            boolean valid = key.reset();
+            if (!valid) {
+                break;
+            }
         }
     }
-}
     //private final JPanel pan = new JPanel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private interfacegraphique.Background background1;
