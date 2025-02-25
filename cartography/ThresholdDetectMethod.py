@@ -6,6 +6,7 @@ from astropy.stats import mad_std
 from sklearn.preprocessing import MinMaxScaler
 from collections import deque
 import time  # Importation du module time pour gérer la temporisation
+import sys
 
 file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
 
@@ -112,7 +113,11 @@ while True:
                 for star in coordonneesdesetoiles:
                     plt.plot(star[1], star[0], 'ro')  # Marque les étoiles en rouge
                 plt.title('Thresholded Image With Stars')
-                plt.show()
+                plt.show(block=True)  # ✅ Attend la fermeture de la fenêtre
+
+                plt.close()  # Ferme la figure
+
+                sys.exit()  # ✅ Termine le script Python
 
                 #  Sauvegarde des coordonnées des étoiles et réinitialisation du fichier
                 enregistre_les_etoiles(coordonneesdesetoiles, image_array)
