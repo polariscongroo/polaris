@@ -3,6 +3,7 @@ package tsp.polaris.recognition;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,9 @@ public class Main
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
 
         try{
-        // Lis le fichier csv cree par le csv
+        // Lis le fichier csv cree par le script python
         List<List<Float>> data = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader("recognition/src/tsp/polaris/cor_Points/Test.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv"));
         String line;
         while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
@@ -31,8 +32,11 @@ public class Main
         }
         br.close();
         System.out.println(data);
-        }
 
+        // Efface le contenu du fichier csv
+        new FileWriter("recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv").close();
+
+        }
         catch (FileNotFoundException f) {System.out.println("Impossible de trouver le fichier");}
         catch (IOException e) {System.out.println("Impossible de modifier le fichier");}
         /* Hypothèses :
