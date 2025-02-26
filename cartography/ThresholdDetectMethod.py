@@ -1,5 +1,4 @@
 import csv
-import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from astropy.stats import mad_std
@@ -116,21 +115,25 @@ try:
             print("8. Affichage lancé")
             sys.stdout.flush()
 
+            '''
             # Affichage de l'image seuillée avec les étoiles détectées
             plt.imshow(threshold_mask, cmap='gray', origin='lower')
             for star in coordonneesdesetoiles:
                 plt.plot(star[1], star[0], 'ro')  # Marque les étoiles en rouge
             plt.title('Thresholded Image With Stars')
             plt.show(block=False)  # Ne bloque pas l'exécution du script
+            '''
 
             # Sauvegarde des coordonnées des étoiles et réinitialisation des fichiers
             enregistre_les_etoiles(coordonneesdesetoiles, image_array)
             print("9. fichier csv créé et rempli")
             sys.stdout.flush()
 
+            '''
             # Boucle pour maintenir la fenêtre ouverte
             while plt.get_fignums():
                 plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
+            '''
 
             erase_txt()  # Vide le fichier txt après traitement
             print("9. fichier txt vidé")
@@ -139,8 +142,11 @@ try:
             erase_csv()  # Vide le fichier csv après traitement
             print("9. fichier csv vidé")
             sys.stdout.flush()
-
+            
+            '''
             plt.close()  # Ferme la figure
+            '''
+
             sys.exit()  # Termine le script Python
 
         except FileNotFoundError:
