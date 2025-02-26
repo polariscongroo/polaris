@@ -83,17 +83,24 @@ def erase_txt():
         f.write("")  # Vide le fichier
     print("Fichier output.txt réécrit")
 
+#  Vide le fichier output.txt après traitement pour éviter les relectures inutiles
+def erase_csv():
+    with open("recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv", "w") as f:
+        f.write("")  # Vide le fichier
+    print("Contenu du fichier csv effacé")
+
 #  Boucle principale qui surveille les changements du fichier output.txt
 while True:
     try:
         # Lit le chemin de l'image à traiter depuis output.txt
         with open(file_path, "r") as f:
             image_path = f.read().strip()  # Relit le fichier à chaque itération
-
+        print("7. Dans la boucle du python. Lecture de output.txt réalisée")
         # Si un chemin est trouvé, traite l'image
         if image_path != "":
             print(f"Traitement de l'image : {image_path}")
             try:
+                print("8. Image bien reçu par python, traitement en cours")
                 #  Chargement et normalisation de l'image
                 image = Image.open(image_path).convert('L')  # Conversion en niveaux de gris
                 image_array = np.array(image, dtype=float)
@@ -102,26 +109,32 @@ while True:
                 #  Détection des étoiles avec un seuil basé sur l'écart-type robuste (MAD)
                 sigma = mad_std(image_array)  # Calcul du bruit de fond
                 image_final = inverse_cor(image_array)  # Correction d'orientation
-                threshold_mask = image_final > (5.0 * sigma)  # Seuil pour isoler les étoiles
+                threshold_mask = image_final > (21.0 * sigma)  # Seuil pour isoler les étoiles
 
                 #  Extraction des formes et calcul des coordonnées des étoiles
                 formes = determine_formes(threshold_mask)
                 coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
-
+                print("9. Affichage lancé")
                 #  Affichage de l'image seuillée avec les étoiles détectées
                 plt.imshow(threshold_mask, cmap='gray', origin='lower')
                 for star in coordonneesdesetoiles:
                     plt.plot(star[1], star[0], 'ro')  # Marque les étoiles en rouge
                 plt.title('Thresholded Image With Stars')
-                plt.show(block=True)  # ✅ Attend la fermeture de la fenêtre
+                plt.show(block=True)  # Attend la fermeture de la fenêtre
+
+                erase_txt()  # Vide le fichier txt après traitement
+                print("fichier txt vidé")
+                erase_csv() # Vide le fichier csv après traitement
+                print("fichier csv vidé")
+                #  Sauvegarde des coordonnées des étoiles et réinitialisation du fichier
+                enregistre_les_etoiles(coordonneesdesetoiles, image_array)
+                print("fichier csv rempli")
 
                 plt.close()  # Ferme la figure
 
-                sys.exit()  # ✅ Termine le script Python
+                sys.exit()  # Termine le script Python
 
-                #  Sauvegarde des coordonnées des étoiles et réinitialisation du fichier
-                enregistre_les_etoiles(coordonneesdesetoiles, image_array)
-                erase_txt()  # Vide le fichier après traitement
+
 
             except FileNotFoundError:
                 print(f"Erreur : L'image {image_path} n'existe pas.")

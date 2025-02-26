@@ -34,8 +34,8 @@ public class Loader extends javax.swing.JFrame {
             writer.write(path);
             writer.close();
             File file = new File("cartography/image_aTraiter/output.txt");
-            System.out.println("Chemin absolu du fichier : " + file.getAbsolutePath());
-            System.out.println("Successfully wrote text to file.");
+            System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
+            System.out.println("3. Output.txt a été correctement modifié");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -129,7 +129,7 @@ public class Loader extends javax.swing.JFrame {
             if (response == JFileChooser.APPROVE_OPTION) {
                 File file = fileChooser.getSelectedFile();
                 path = file.getAbsolutePath(); // Store the file path in the variable
-                System.out.println("Selected image path: " + path);
+                System.out.println("1. Bouton bien actionné : Path de l'image écrit dans output.txt: " + path);
                 transition(path);
             }
         }    
@@ -158,7 +158,7 @@ public class Loader extends javax.swing.JFrame {
         // Enregistrement du dossier pour surveiller les modifications de fichiers
         dir.register(watchService, ENTRY_MODIFY);
     
-        System.out.println("Surveillance de output.txt...");
+        System.out.println("0. Surveillance de modifications de output.txt pour relancer le python");
     
         while (true) {
             // Récupérer les événements du watch service
@@ -172,7 +172,7 @@ public class Loader extends javax.swing.JFrame {
     
                 // Si c'est output.txt qui a été modifié
                 if (kind == ENTRY_MODIFY && fileName.toString().equals("output.txt")) {
-                    System.out.println("output.txt a été modifié. Lancement du script Python...");
+                    System.out.println("4. Dans la boucle infinie de l'interface. Lancement du script Python imminent");
     
                     // Lancement du script Python
                     try {
@@ -194,7 +194,7 @@ public class Loader extends javax.swing.JFrame {
                         commands.add(scriptFullPath);
     
                         // Vérifie la commande construite
-                        System.out.println("Commande exécutée : " + commands);
+                        System.out.println("5. Commande exécutée : " + commands);
     
                         // Crée le ProcessBuilder avec le dossier du projet comme répertoire de travail
                         ProcessBuilder pb = new ProcessBuilder(commands);
@@ -206,9 +206,9 @@ public class Loader extends javax.swing.JFrame {
     
                         // Vérifie si l'exécution est réussie
                         if (process.waitFor() == 0) {
-                            System.out.println("Script exécuté avec succès !");
+                            System.out.println("6. Script python exécuté avec succès !");
                         } else {
-                            System.out.println("Une erreur est survenue lors de l'exécution du script.");
+                            System.out.println("6. Une erreur est survenue lors de l'exécution du script.");
                         }
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
