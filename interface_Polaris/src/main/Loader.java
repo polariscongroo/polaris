@@ -1,9 +1,11 @@
 package main;
+import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.*;
 import static java.nio.file.StandardWatchEventKinds.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,7 +145,7 @@ public class Loader extends javax.swing.JFrame {
      * @throws InterruptedException 
      */             
     public static void main(String args[]) throws IOException, InterruptedException {
-        // Cree et affiche l'interface
+        // Crée et affiche l'interface
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Loader().setVisible(true);
@@ -157,61 +159,72 @@ public class Loader extends javax.swing.JFrame {
         WatchService watchService = FileSystems.getDefault().newWatchService();
         // Enregistrement du dossier pour surveiller les modifications de fichiers
         dir.register(watchService, ENTRY_MODIFY);
-    
+
         System.out.println("0. Surveillance de modifications de output.txt pour relancer le python");
-    
+
+        long lastModifiedTime = 0;
         while (true) {
             // Récupérer les événements du watch service
             WatchKey key = watchService.take();
-    
+
             for (WatchEvent<?> event : key.pollEvents()) {
                 WatchEvent.Kind<?> kind = event.kind();
-    
+
                 // Récupère le nom du fichier modifié
                 Path fileName = (Path) event.context();
-    
+
                 // Si c'est output.txt qui a été modifié
                 if (kind == ENTRY_MODIFY && fileName.toString().equals("output.txt")) {
-                    System.out.println("4. Dans la boucle infinie de l'interface. Lancement du script Python imminent");
-    
-                    // Lancement du script Python
-                    try {
-                        Thread.sleep(500);  
-                        //Build command 
-                        //Récupère le chemin absolu du projet courant
-                        String projectPath = new File("").getAbsolutePath();
-    
-                        // Chemin relatif vers le script Python
-                        String scriptRelativePath = "cartography/ThresholdDetectMethod.py";
-    
-                        // Construit le chemin complet vers le script
-                        String scriptFullPath = projectPath + File.separator + scriptRelativePath;
-    
-                        // Définir la commande pour lancer le script Python
-                        List<String> commands = new ArrayList<>();
-                        // "python3" pour macOS/Linux, "python" pour Windows.
-                        commands.add("python3"); 
-                        commands.add(scriptFullPath);
-    
-                        // Vérifie la commande construite
-                        System.out.println("5. Commande exécutée : " + commands);
-    
-                        // Crée le ProcessBuilder avec le dossier du projet comme répertoire de travail
-                        ProcessBuilder pb = new ProcessBuilder(commands);
-                        pb.directory(new File(projectPath));
-                        pb.redirectErrorStream(true); // Fusionne la sortie d'erreur avec la sortie standard
-    
-                        // Lance le processus
-                        Process process = pb.start();
-    
-                        // Vérifie si l'exécution est réussie
-                        if (process.waitFor() == 0) {
-                            System.out.println("6. Script python exécuté avec succès !");
-                        } else {
-                            System.out.println("6. Une erreur est survenue lors de l'exécution du script.");
+                    long currentModifiedTime = Files.getLastModifiedTime(dir.resolve(fileName)).toMillis();
+                    if (currentModifiedTime - lastModifiedTime > 1000) { // 1 seconde de délai
+                        lastModifiedTime = currentModifiedTime;
+                        System.out.println("4. Dans la boucle infinie de l'interface. Lancement du script Python imminent");
+
+                        // Lancement du script Python
+                        try {
+                            Thread.sleep(500);
+                            // Récupère le chemin absolu du projet courant
+                            String projectPath = new File("").getAbsolutePath();
+
+                            // Chemin relatif vers le script Python
+                            String scriptRelativePath = "cartography/ThresholdDetectMethod.py";
+
+                            // Construit le chemin complet vers le script
+                            String scriptFullPath = projectPath + File.separator + scriptRelativePath;
+
+                            // Définir la commande pour lancer le script Python
+                            List<String> commands = new ArrayList<>();
+                            // "python3" pour macOS/Linux, "python" pour Windows.
+                            commands.add("python3");
+                            commands.add(scriptFullPath);
+
+                            // Vérifie la commande construite
+                            System.out.println("5. Commande exécutée : " + commands);
+
+                            // Crée le ProcessBuilder avec le dossier du projet comme répertoire de travail
+                            ProcessBuilder pb = new ProcessBuilder(commands);
+                            pb.directory(new File(projectPath));
+                            pb.redirectErrorStream(true); // Fusionne la sortie d'erreur avec la sortie standard
+
+                            // Lance le processus
+                            Process process = pb.start();
+
+                            // Capturer la sortie du processus
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                System.out.println(line);
+                            }
+
+                            // Vérifie si l'exécution est réussie
+                            if (process.waitFor() == 0) {
+                                System.out.println("10. Script python exécuté avec succès !");
+                            } else {
+                                System.out.println("6. Une erreur est survenue lors de l'exécution du script.");
+                            }
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
                     }
                 }
             }
