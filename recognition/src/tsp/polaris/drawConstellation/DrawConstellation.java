@@ -18,7 +18,7 @@ import tsp.polaris.recognition.Point;
  */
 
 public class DrawConstellation {
-
+	
     /**
      * Effectue une copie d'un fichier
      *
@@ -27,7 +27,7 @@ public class DrawConstellation {
      * @throws IOException erreur lancée lors de la copie de l'image
      */
     public static void copyImage(File imgFile, String name) throws IOException {
-        Path imgCopyPath = Paths.get("/home/spokez/ProjetDev/Polaris/recognition/src/tsp/polaris/drawConstellation/" + name + ".png"); // Chemin de la nouvelle image
+        Path imgCopyPath = Paths.get("tsp/polaris/drawConstellation/" + name + ".png"); // Chemin de la nouvelle image
         Path imgPath = imgFile.toPath(); // Chemin de l'ancienne image
         Files.copy(imgPath, imgCopyPath, StandardCopyOption.REPLACE_EXISTING); // Duplication de l'image (et remplacement si l'image existe déjà)
     }
@@ -148,9 +148,9 @@ public class DrawConstellation {
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("/home/spokez/ProjetDev/Polaris/recognition/src/tsp/polaris/drawConstellation/1_cancer.png");
+        File file = new File("tsp/polaris/drawConstellation/1_cancer.png");
         copyImage(file, "output");
-        File outputFile = new File("/home/spokez/ProjetDev/Polaris/recognition/src/tsp/polaris/drawConstellation/output.png");
+        File outputFile = new File("tsp/polaris/drawConstellation/output.png");
         Color col = new Color(79, 177, 205, 200);
         drawLine(outputFile, new Point(213, 238), new Point(476, 531), col);
     }
