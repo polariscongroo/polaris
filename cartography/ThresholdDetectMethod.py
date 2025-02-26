@@ -77,13 +77,7 @@ def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
 def erase_txt():
     with open(file_path, "w") as f:
         f.write("")  # Vide le fichier
-
-# Vide le fichier CSV après traitement
-def erase_csv():
-    with open("recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv", "w") as f:
-        f.write("")  # Vide le fichier
-        f.flush()  # Force l'écriture immédiate
-
+        
 # Lecture du chemin de l'image à traiter depuis output.txt
 try:
     with open(file_path, "r") as f:
@@ -137,10 +131,6 @@ try:
 
             erase_txt()  # Vide le fichier txt après traitement
             print("9. fichier txt vidé")
-            sys.stdout.flush()
-
-            erase_csv()  # Vide le fichier csv après traitement
-            print("9. fichier csv vidé")
             sys.stdout.flush()
             
             '''
