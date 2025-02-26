@@ -92,7 +92,7 @@ public class DrawConstellation {
     private static void drawLineX(BufferedImage img, Point p1, Point p2, Color color) {
     	double[] coeff = coefficients(p1, p2); // Calcul des coefficients de la droite passant par les 2 points
     	
-        for (int x = (int) p1.getPoint()[0]; x < p2.getPoint()[0]; x += 1) {
+        for (int x = (int) p1.getPoint()[0] + 10; x < p2.getPoint()[0] - 10; x += 1) {
             int y = (int) (coeff[0] * x + coeff[1]); // Calcul de la position du prochain point sur la droite
             drawPoint(img, x, y, color);
         }
@@ -109,7 +109,7 @@ public class DrawConstellation {
     private static void drawLineY(BufferedImage img, Point p1, Point p2, Color color) {
     	double[] coeff = coefficients(p1, p2); // Calcul des coefficients de la droite passant par les 2 points
     	
-        for (int y = (int) p1.getPoint()[1]; y < p2.getPoint()[1]; y += 1) {
+        for (int y = (int) p1.getPoint()[1] + 10; y < p2.getPoint()[1] - 10; y += 1) {
             int x = (int) ((y - coeff[1])/coeff[0]); // Calcul de la position du prochain point sur la droite
             drawPoint(img, x, y, color);
         }
