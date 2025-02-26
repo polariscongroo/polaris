@@ -187,7 +187,7 @@ public class Loader extends javax.swing.JFrame {
                             String projectPath = new File("").getAbsolutePath();
 
                             // Chemin relatif vers le script Python
-                            String scriptRelativePath = "cartography/ThresholdDetectMethod.py";
+                            String scriptRelativePath = "cartography/unix/dist/ThresholdDetectMethod";
 
                             // Construit le chemin complet vers le script
                             String scriptFullPath = projectPath + File.separator + scriptRelativePath;
@@ -195,7 +195,7 @@ public class Loader extends javax.swing.JFrame {
                             // Définir la commande pour lancer le script Python
                             List<String> commands = new ArrayList<>();
                             // "python3" pour macOS/Linux, "python" pour Windows.
-                            commands.add("python3");
+                            //commands.add("python3");
                             commands.add(scriptFullPath);
 
                             // Vérifie la commande construite
