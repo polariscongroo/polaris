@@ -18,7 +18,7 @@ import tsp.polaris.recognition.Point;
  */
 
 public class DrawConstellation {
-
+	
     /**
      * Effectue une copie d'un fichier
      *
@@ -27,7 +27,7 @@ public class DrawConstellation {
      * @throws IOException erreur lancée lors de la copie de l'image
      */
     public static void copyImage(File imgFile, String name) throws IOException {
-        Path imgCopyPath = Paths.get("recognition/tsp/polaris/drawConstellation/" + name + ".png"); // Chemin de la nouvelle image
+        Path imgCopyPath = Paths.get("tsp/polaris/drawConstellation/" + name + ".png"); // Chemin de la nouvelle image
         Path imgPath = imgFile.toPath(); // Chemin de l'ancienne image
         Files.copy(imgPath, imgCopyPath, StandardCopyOption.REPLACE_EXISTING); // Duplication de l'image (et remplacement si l'image existe déjà)
     }
@@ -80,7 +80,41 @@ public class DrawConstellation {
             }
         }
     }
-
+    
+    /**
+     * Dessine une ligne entre 2 points en divisant l'espace selon x
+     * 
+     * @param img image qui va être modifiée
+     * @param p1 1er point
+     * @param p2 2e point
+     * @param color couleur à appliquer
+     */
+    private static void drawLineX(BufferedImage img, Point p1, Point p2, Color color) {
+    	double[] coeff = coefficients(p1, p2); // Calcul des coefficients de la droite passant par les 2 points
+    	
+        for (int x = (int) p1.getPoint()[0] + 10; x < p2.getPoint()[0] - 10; x += 1) {
+            int y = (int) (coeff[0] * x + coeff[1]); // Calcul de la position du prochain point sur la droite
+            drawPoint(img, x, y, color);
+        }
+    }
+    
+    /**
+     * Dessine une ligne entre 2 points en divisant l'espace selon y
+     * 
+     * @param img image qui va être modifiée
+     * @param p1 1er point
+     * @param p2 2e point
+     * @param color couleur à appliquer
+     */
+    private static void drawLineY(BufferedImage img, Point p1, Point p2, Color color) {
+    	double[] coeff = coefficients(p1, p2); // Calcul des coefficients de la droite passant par les 2 points
+    	
+        for (int y = (int) p1.getPoint()[1] + 10; y < p2.getPoint()[1] - 10; y += 1) {
+            int x = (int) ((y - coeff[1])/coeff[0]); // Calcul de la position du prochain point sur la droite
+            drawPoint(img, x, y, color);
+        }
+    }
+    
     /**
      * Dessine une ligne passant entre 2 points sur l'image
      *
@@ -92,22 +126,33 @@ public class DrawConstellation {
      */
     public static void drawLine(File imgFile, Point p1, Point p2, Color color) throws IOException {
         BufferedImage img = ImageIO.read(imgFile); // Lecture de l'image
-        double[] coeff = coefficients(p1, p2); // Calcul des coefficients de la droite passant par les 2 points
 
-        for (int x = (int) p1.getPoint()[0] + 10; x < p2.getPoint()[0] - 10; x += 1) {
-            int y = (int) (coeff[0] * x + coeff[1]); // Calcul de la position du prochain point sur la droite
-            drawPoint(img, x, y, color);
-        }
+    	double dx = p2.getPoint()[0] - p1.getPoint()[0]; // Distance entre les points en x et en y
+    	double dy = p2.getPoint()[1] - p1.getPoint()[1];
+        
+    	if(Math.abs(dx) > Math.abs(dy)) { // Cas ou on divise l'espace selon x
+    		if(dx > 0) { // Cas ou p2 se trouve après p1 en x
+    			drawLineX(img,p1,p2,color);
+    		} else {
+    			drawLineX(img,p2,p1,color);
+    		}
+    	} else { // Cas ou on divise l'espace selon y
+    		if(dy > 0) { // Cas ou p2 se trouve après p1 en y
+    			drawLineY(img,p1,p2,color);
+    		} else {
+    			drawLineY(img,p2,p1,color);
+    		}
+    	}
 
         ImageIO.write(img, "PNG", imgFile); // Enregistrement de l'image
     }
 
     public static void main(String[] args) throws IOException {
-        File file = new File("recognition/tsp/polaris/drawConstellation/1_cancer.png");
+        File file = new File("tsp/polaris/drawConstellation/1_cancer.png");
         copyImage(file, "output");
         File outputFile = new File("tsp/polaris/drawConstellation/output.png");
         Color col = new Color(79, 177, 205, 200);
-        drawLine(outputFile, new Point(214, 240), new Point(476, 531), col);
+        drawLine(outputFile, new Point(213, 238), new Point(476, 531), col);
     }
 
 }
