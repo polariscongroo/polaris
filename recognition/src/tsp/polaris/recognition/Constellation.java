@@ -23,6 +23,14 @@ public class Constellation {
     }
 
     /**
+     * Getteur de points
+     *
+     */
+    public Point[] getPoints() {
+        return points;
+    }
+
+    /**
      * Retourne une representation sous forme de chaîne de caractères de la constellation.
      * 
      * @return Une chaîne de caractères représentant la liste des points.

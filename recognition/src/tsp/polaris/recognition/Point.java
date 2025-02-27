@@ -26,7 +26,16 @@ public class Point
     public double[] getPoint() {
     	return point;
     }
-    
+
+    /**
+     * Méthode qui regarde si 2 points sont égaux
+     * @param p2 Point avec lequel on veut comparer
+     * @return boolean : Renvoie vrai si les points sont égaux, faux sinon
+     */
+    public boolean equals(Point p2) {
+        return this.point[0] == p2.getPoint()[0] && this.point[1] == p2.getPoint()[1];
+    }
+
     /**
      * Methode d'affichage 
      * @return String : Affiche le point

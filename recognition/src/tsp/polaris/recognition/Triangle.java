@@ -50,6 +50,15 @@ public class Triangle
     }
 
     /**
+     * Méthode qui regarde si 2 triangles sont égaux
+     * @param t2 Triangle avec lequel on veut comparer
+     * @return boolean : Renvoie vrai si les triangles sont égaux, faux sinon
+     */
+    public boolean equals(Triangle t2) {
+        return p1.equals(t2.p1) && p2.equals(t2.p2) && p3.equals(t2.p3);
+    }
+
+    /**
      * Methode qui calcule les longueurs des cotes du triangle
      * @return double[] : Liste des longueurs des côtes du triangle, ranges dans l'ordre croissant 
      */
