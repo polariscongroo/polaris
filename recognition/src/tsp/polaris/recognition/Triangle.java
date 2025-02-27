@@ -24,27 +24,20 @@ public class Triangle
     }
     
     /**
-     * Getteur du 1er point
-     * @return Point : 1er point du triangle
+     * Getteur du point i
+     * @return Point : Le ième point du triangle
      */
-    public Point getPoint1() {
-    	return p1;
-    }
-    
-    /**
-     * Getteur du 2e point
-     * @return Point : 2e point du triangle
-     */
-    public Point getPoint2() {
-    	return p2;
-    }
-    
-    /**
-     * Getteur du 3e point
-     * @return Point : 3e point du triangle
-     */
-    public Point getPoint3() {
-    	return p3;
+    public Point getPoint(int i) throws IllegalArgumentException {
+        switch (i) {
+            case 0:
+                return p1;
+            case 1:
+                return p2;
+            case 2:
+                return p3;
+            default:
+                throw new IllegalArgumentException("Le point " + i + " n'existe pas.");
+        }
     }
 
     /**

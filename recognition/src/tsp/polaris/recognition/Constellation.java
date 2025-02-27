@@ -3,8 +3,8 @@ package tsp.polaris.recognition;
 import tsp.polaris.auxiliaries.Combinatorics;
 
 /**
- * Represente une constellation composee de plusieurs points.
- * Permet de generer des triangles à partir des points.
+ * Représente une constellation composée de plusieurs points.
+ * Permet de générer des triangles à partir des points.
  * 
  * @author Chadi A., Emma M.
  */
@@ -25,14 +25,14 @@ public class Constellation {
     /**
      * Retourne une representation sous forme de chaîne de caractères de la constellation.
      * 
-     * @return Une chaîne de caractères representant la liste des points.
+     * @return Une chaîne de caractères représentant la liste des points.
      */
-    public String getnom() {
+    public String getNom() {
         return nom;
     }
 
     /**
-     * Genère tous les triangles possibles formes par trois points distincts de la constellation.
+     * Génère tous les triangles possibles formes par trois points distincts de la constellation.
      * 
      * @return Un tableau de triangles construits à partir des points de la constellation.
      */

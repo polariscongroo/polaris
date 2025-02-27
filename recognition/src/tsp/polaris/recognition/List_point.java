@@ -216,7 +216,7 @@ public class List_point
                 winner = c;             // Mettez à jour la constellation gagnante
             }
         }
-        return winner.getnom();  // Retourner la constellation avec le coût minimal
+        return winner.getNom();  // Retourner la constellation avec le coût minimal
     }
     
     /**
