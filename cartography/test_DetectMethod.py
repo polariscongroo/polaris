@@ -1,31 +1,10 @@
 import unittest
-from cartography.DetectMethod import DetectMethod
+from ThresholdDetectMethod import cree_une_forme, inverse_cor
 
-class TestDetectMethod(unittest.TestCase):
-    def test_detect_method(self):
-        self.assertEqual(DetectMethod.detect_method("
-        def test():
-            pass
-        "), "def")
-        self.assertEqual(DetectMethod.detect_method("
-        class Test:
-            pass
-        "), "class")
-        self.assertEqual(DetectMethod.detect_method("
-        import test
-        "), "import")
-        self.assertEqual(DetectMethod.detect_method("
-        from test import test
-        "), "from")
-        self.assertEqual(DetectMethod.detect_method("
-        test = 1
-        "), "variable")
-        self.assertEqual(DetectMethod.detect_method("
-        test = test
-        "), "variable")
-        self.assertEqual(DetectMethod.detect_method("
-        test = test()
-        "), "variable")
-        self.assertEqual(DetectMethod.detect_method("
-        test = test.test()
-        "), "variable")     
+class Test_Inverse_cor(unittest.TestCase):
+    def test_inverse_matrix(self):
+            self.assertEqual(inverse_cor([[0,2],[1,2]]), [[1,2],[0,2]] )   
+            
+class Test_Cree_une_forme(unittest.TestCase):
+    def test_cree_une_forme(self):
+        self.assertEqual(cree_une_forme((0,0),[[0,1],[1,1]],[[False,False],[False,False]]), [(0,0)] )
