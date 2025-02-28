@@ -54,4 +54,21 @@ public class Point
     {
         return Math.sqrt( Math.pow(getPoint()[0] - p2.getPoint()[0], 2) + Math.pow(getPoint()[1] - p2.getPoint()[1], 2));
     }
+
+    /**
+     * Calcule le coefficient directeur et l'ordonnée à l'origine de la droite passant par ces 2 points
+     *
+     * @param p2 2e point
+     * @return le coefficient directeur et l'ordonnée à l'origine de la droite passant par ces 2 points
+     */
+    public double[] coefficients(Point p2) {
+        double[] p1Coo = getPoint();
+        double[] p2Coo = p2.getPoint();
+        double[] coeff = new double[2];
+        coeff[0] = (p2Coo[1] - p1Coo[1]) / (p2Coo[0] - p1Coo[0]);
+        coeff[1] = p1Coo[1] - coeff[0] * p1Coo[0];
+        return coeff;
+    }
+
+
 }
