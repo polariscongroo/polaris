@@ -20,8 +20,7 @@ public class Main
         - Les triangles formes par les List_points sont tous differents sinon distance nulle et on divise par 0.
         i.e la donnee des coordonnees est assez precise pour qu'il n'y est pas de confusion dans le calcul du coût
         - La photo et le traitement de l'image ne traitent que les etoiles de la List_point et pas d'autres.
-        */
-        /*
+
         Point A = new Point(0, 0);
         Point B = new Point(1, 0);
         Point C = new Point(0, 1);
@@ -33,7 +32,8 @@ public class Main
         Point I = new Point(1, 1);
         Point J = new Point(0, 1);
         Point K = new Point(1, 0);
-        Point L = new Point(10, 0);*/
+        Point L = new Point(10, 0);
+        */
 
         //Test affichage de tous les triangles possibles avec le set de point set
         /* Point[] set1 = {A,B,C,D};

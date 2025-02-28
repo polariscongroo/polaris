@@ -12,7 +12,7 @@ public class Main
 {
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
 
-        Data data = new Data("src/tsp/polaris/cor_Points/liste_etoiles.csv");
+        Data data = new Data("coorPoints/liste_etoiles.csv");
 
         System.out.println(data);
 
