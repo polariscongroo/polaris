@@ -5,7 +5,7 @@ from astropy.stats import mad_std
 from collections import deque
 import sys
 
-file_path = "../cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
+file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
 
 # Inverse les coordonnées verticalement pour corriger l'orientation
 def inverse_cor(coordonnees):
@@ -69,7 +69,7 @@ def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
         i = float(coordonneesdesetoiles[k][0])
         j = float(coordonneesdesetoiles[k][1])
         coordonnees.append([j, i, image_array[int(i)][int(j)]])  # Inverse les indices pour le format CSV
-    with open("../recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+    with open("recognition/coorPoints/liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
         writer = csv.writer(fichier)
         writer.writerows(coordonnees)
 
