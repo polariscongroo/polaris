@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import tsp.polaris.recognition.Point;
+import tsp.polaris.recognition.Star;
 
 /**
  * Crée une nouvelle image avec la constellation tracée à partir de l'image donnée et des coordonnées des points formant la constellation
@@ -12,9 +12,9 @@ import tsp.polaris.recognition.Point;
  * @author Mell E.
  */
 
-public class DrawLine extends Draw {
+public class DrawConstellation extends Draw {
 
-    public DrawLine(File file) throws IOException{
+    public DrawConstellation(File file) throws IOException{
         super(file);
     }
 
@@ -54,7 +54,7 @@ public class DrawLine extends Draw {
      * @param p2 2e point
      * @param color couleur à appliquer
      */
-    private void drawLineX(Point p1, Point p2, Color color) {
+    private void drawLineX(Star p1, Star p2, Color color) {
     	double[] coeff = p1.coefficients(p2); // Calcul des coefficients de la droite passant par les 2 points
     	
         for (int x = (int) p1.getPoint()[0] + 10; x < p2.getPoint()[0] - 10; x += 1) {
@@ -70,7 +70,7 @@ public class DrawLine extends Draw {
      * @param p2 2e point
      * @param color couleur à appliquer
      */
-    private void drawLineY(Point p1, Point p2, Color color) {
+    private void drawLineY(Star p1, Star p2, Color color) {
     	double[] coeff = p1.coefficients(p2); // Calcul des coefficients de la droite passant par les 2 points
     	
         for (int y = (int) p1.getPoint()[1] + 10; y < p2.getPoint()[1] - 10; y += 1) {
@@ -87,7 +87,7 @@ public class DrawLine extends Draw {
      * @param color   couleur à appliquer
      * @throws IOException erreur lancée lors de la copie de l'image
      */
-    public void drawLine(Point p1, Point p2, Color color) throws IOException {
+    public void drawLine(Star p1, Star p2, Color color) throws IOException {
     	double dx = p2.getPoint()[0] - p1.getPoint()[0]; // Distance entre les points en x et en y
     	double dy = p2.getPoint()[1] - p1.getPoint()[1];
         

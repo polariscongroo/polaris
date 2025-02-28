@@ -10,51 +10,52 @@ import tsp.polaris.auxiliaries.Combinatorics;
  */
 public class List_point
 {
-    private Point[] points;
+    private Star[] stars;
+
     /**
      * Constructeur de la classe List_point.
      *
-     * @param points Liste des points constituant l'objet.
+     * @param stars Liste des points constituant l'objet.
      */
-    public List_point(Point[] points)
+    public List_point(Star[] stars)
     {
-        this.points = points;
+        this.stars = stars;
     }
+
     /**
      * Genère toutes les combinaisons possibles de k points parmi les points disponibles.
      * Cette fonction utilise un algorithme combinatoire base sur un pseudo-code disponible en ligne.
      *
      * @param k Nombre de points à selectionner.
-     * @param resultPoints Tableau contenant toutes les combinaisons generees.
-     * @param copyPoints Copie des points disponibles.
+     * @param resultStars Tableau contenant toutes les combinaisons generees.
+     * @param copyStars Copie des points disponibles.
      * @param indice Indice de la combinaison en cours.
-     * @param tempPointList Liste temporaire pour stocker les points en cours de combinaison.
+     * @param tempStarList Liste temporaire pour stocker les points en cours de combinaison.
      * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
-    // Fonction auxiliaire qui permet de creer une liste de toutes les combinaisons d'etoiles d'une taille donnee
-    private void combinationPoint(int k,Point[][] resultPoints, Point[] copyPoints,int indice, Point[] tempPointList) {
+    private void combinationPoint(int k, Star[][] resultStars, Star[] copyStars, int indice, Star[] tempStarList) {
     	// Cas ou on demande des combinaisons de K parmi N avec K > N
-    	if(k > copyPoints.length) {
+    	if(k > copyStars.length) {
     		return;
     	// Cas ou on a termine de faire une combinaison
     	} else if(k <= 0) {
-    		resultPoints[indice] = tempPointList;
+    		resultStars[indice] = tempStarList;
     	} else {
-    		for(int i = 0; i < copyPoints.length; i += 1) {
+    		for(int i = 0; i < copyStars.length; i += 1) {
     			// g est la liste des points se situant après l'indice i
-    			Point[] g = new Point[copyPoints.length - i - 1];
-    			for(int j = i+1; j < copyPoints.length; j += 1) {
-    				g[i] = copyPoints[i];
+    			Star[] g = new Star[copyStars.length - i - 1];
+    			for(int j = i+1; j < copyStars.length; j += 1) {
+    				g[i] = copyStars[i];
     			}
     			
     			// l2 est la liste tempPointList auquel on rajoute l'element en indice i de copyPoints
-    			Point[] l2 = new Point[tempPointList.length + 1];
-    			for(int j = 0; j < tempPointList.length; j += 1) {
-    				l2[j] = tempPointList[j];
+    			Star[] l2 = new Star[tempStarList.length + 1];
+    			for(int j = 0; j < tempStarList.length; j += 1) {
+    				l2[j] = tempStarList[j];
     			}
-    			l2[l2.length - 1] = copyPoints[i];
+    			l2[l2.length - 1] = copyStars[i];
     			
-    			combinationPoint(k-1, resultPoints, g, indice+i, l2);
+    			combinationPoint(k-1, resultStars, g, indice+i, l2);
     		}
     	}
     }
@@ -72,15 +73,15 @@ public class List_point
     	// On cree une liste composee de tous les ensembles de points à k elements :
     	
     	// Nombre de combinaisons
-    	int nbCombination = Combinatorics.combination(points.length, k);
+    	int nbCombination = Combinatorics.combination(stars.length, k);
     	
     	// Liste de toutes les combinaisons de constellations à k points
     	List_point[] listeConstellation = new List_point[nbCombination];
     	
     	// Liste de toutes les combinaisons de k points
-    	Point[][] pointsListConstellation = new Point[nbCombination][k];
+    	Star[][] pointsListConstellation = new Star[nbCombination][k];
     	
-    	combinationPoint(k,pointsListConstellation,points,0,new Point[k]);
+    	combinationPoint(k,pointsListConstellation, stars,0,new Star[k]);
     	
     	// On a la liste des combinaisons de tous les points, il faut maintenant faire de ces listes, des constellations
     	for(int i = 0; i < nbCombination; i += 1) {
@@ -138,7 +139,7 @@ public class List_point
      */
     public String toString()
     {
-        return Arrays.toString(points);
+        return Arrays.toString(stars);
     }
 
     /**
@@ -148,7 +149,7 @@ public class List_point
      */
     public Triangle[] generateTriangles()
     {
-        int size = points.length;
+        int size = stars.length;
         int nb_triangles = Combinatorics.combination(size, 3);
         Triangle[] triangles = new Triangle[nb_triangles];
         int index = 0;
@@ -158,7 +159,7 @@ public class List_point
             {
                 for (int k = j + 1; k < size; k++)
                 {
-                    triangles[index] = new Triangle(points[i], points[j], points[k]);
+                    triangles[index] = new Triangle(stars[i], stars[j], stars[k]);
                     index++;
                 }
             }
@@ -226,7 +227,6 @@ public class List_point
      * @return Le coût minimal entre la photo et les constellations.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    // Renvoie le coût minimale entre notre ensemble de points et les differentes constellations
     public double coutConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         double minimum_cout = Double.MAX_VALUE; // Utiliser une valeur maximale pour commencer.

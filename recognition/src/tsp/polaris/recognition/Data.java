@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class Data {
-    private List<Point> data;
+    private List<Star> data;
 
     /**
      * Constructeur de la classe Data qui lit le fichier csv et le vide
@@ -26,7 +26,7 @@ public class Data {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                Point newPoint = new Point(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim()));
+                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim()));
                 data.add(newPoint);
             }
 
@@ -53,9 +53,9 @@ public class Data {
     /**
      * Getteur de data
      *
-     * @return List<List<Float>> : Donne le contenu du fichier csv du script python
+     * @return List<Star> : Donne le contenu du fichier csv du script python
      */
-    public List<Point> getData() {
+    public List<Star> getData() {
         return data;
     }
 

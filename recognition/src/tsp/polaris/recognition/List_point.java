@@ -81,7 +81,7 @@ public class List_point
     	// Liste de toutes les combinaisons de k points
     	Point[][] pointsListConstellation = new Point[nbCombination][k];
     	
-    	combinationPoint(k,pointsListConstellation,points,0,new Point[k]);
+    	combinationPoint(k,pointsListConstellation, points,0,new Point[k]);
     	
     	// On a la liste des combinaisons de tous les points, il faut maintenant faire de ces listes, des constellations
     	for(int i = 0; i < nbCombination; i += 1) {

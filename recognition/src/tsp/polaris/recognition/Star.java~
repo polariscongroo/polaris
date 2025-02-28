@@ -1,0 +1,21 @@
+package tsp.polaris.recognition;
+
+public class Star extends Point{
+    private final double brightness; // Luminosité de l'étoile
+
+    /**
+     * Constructeur de la classe Star
+     *
+     * @param x Coordonnée en x de l'étoile
+     * @param y Coordonnée en y de l'étoile
+     * @param brightness Luminosité de l'étoile
+     */
+    public Star(double x, double y, double brightness) {
+        super(x, y);
+        this.brightness = brightness;
+    }
+
+    public String toString() {
+        return "(" + point[0] + ", " + point[1] + ") : " + brightness;
+    }
+}

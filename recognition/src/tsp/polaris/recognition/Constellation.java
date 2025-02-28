@@ -46,7 +46,7 @@ public class Constellation {
      */
     public Triangle[] generateTriangles() {
         int size = points.length;
-        int nb_triangles = Combinatorics.combination(size, 3);
+        int nb_triangles = Combinatorics.combination(size, 3); // Nombre de triangles à générer
         Triangle[] triangles = new Triangle[nb_triangles];
         int index = 0;
 

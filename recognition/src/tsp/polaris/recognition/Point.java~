@@ -7,7 +7,7 @@ package tsp.polaris.recognition;
 
 public class Point
 {
-    protected final double[] point;
+    private final double[] point;
 
     /**
      * Constructeur qui initialise les coordonnees du point
