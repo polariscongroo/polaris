@@ -18,7 +18,7 @@ public class Main
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
 
         Data data = new Data("coorPoints/liste_etoiles.csv");
-        Data dataBDD = new Data("../baseDDonnees_csv/cancer.csv");
+        Data data = new Data("../baseDDonnees_csv/");
 
         Constellation constellation = Constellation.createConstellationWithData(data,"test");
         System.out.println(constellation);

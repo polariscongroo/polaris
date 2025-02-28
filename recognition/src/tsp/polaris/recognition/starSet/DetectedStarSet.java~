@@ -47,13 +47,16 @@ public class DetectedStarSet extends StarSet
      * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
     private void combinationStar(int k, Star[][] resultStars, Star[] copyStars, int indice, Star[] tempStarList) {
-    	if(k > copyStars.length) { // Cas ou on demande des combinaisons de K parmi N avec K > N
+    	// Cas ou on demande des combinaisons de K parmi N avec K > N
+    	if(k > copyStars.length) {
     		return;
-    	} else if(k <= 0) { // Cas ou on a termine de faire une combinaison
+    	// Cas ou on a termine de faire une combinaison
+    	} else if(k <= 0) {
     		resultStars[indice] = tempStarList;
     	} else {
     		for(int i = 0; i < copyStars.length; i += 1) {
-    			Star[] g = new Star[copyStars.length - i - 1]; // g est la liste des étoiles se situant après l'indice i
+    			// g est la liste des étoiles se situant après l'indice i
+    			Star[] g = new Star[copyStars.length - i - 1];
     			for(int j = i+1; j < copyStars.length; j += 1) {
     				g[i] = copyStars[i];
     			}

@@ -40,7 +40,7 @@ public class Constellation extends StarSet {
      */
     public String toString()
     {
-        return name + " -> " + Arrays.toString(stars);
+        return Arrays.toString(stars);
     }
 
 

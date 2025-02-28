@@ -4,8 +4,6 @@ import tsp.polaris.auxiliaries.Combinatorics;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.other.Triangle;
 
-import java.util.Arrays;
-
 /**
  * Classe représentant une constellation composée de plusieurs étoiles.
  * Permet de générer des triangles à partir des points.
@@ -31,16 +29,6 @@ public class StarSet {
      */
     public Star[] getStars() {
         return stars;
-    }
-
-    /**
-     * Retourne une representation sous forme de chaîne de caractères des étoiles.
-     *
-     * @return La chaîne de caractères representant la liste d'étoiles.
-     */
-    public String toString()
-    {
-        return Arrays.toString(stars);
     }
 
     /**

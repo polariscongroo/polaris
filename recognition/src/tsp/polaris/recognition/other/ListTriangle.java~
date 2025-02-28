@@ -56,7 +56,7 @@ public class ListTriangle
         {
             for (int triangle2 = 0; triangle2 < taille1; triangle2++)
             {
-                tab[index] = listeT[triangle1].cout(listeTriangle2.listeT[triangle2]); // Cout entre les 2 triangles
+                tab[index] = listeT[triangle1].cout(listeTriangle2.listeT[triangle2]); // Cout entre le triangle1 et le triangle2
                 index ++;
             }
         }
