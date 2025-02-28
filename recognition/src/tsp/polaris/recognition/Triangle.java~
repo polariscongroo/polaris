@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Triangle
 {
-    private final Point[] points;
+    private Point[] points;
 
     /**
      * Constructeur qui initialise les coordonnées des points du triangle
