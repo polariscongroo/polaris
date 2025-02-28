@@ -17,7 +17,7 @@ public class Triangle
     public Triangle(Star... stars)
     {
         if(stars.length != 3) {
-            throw new IllegalArgumentException("Le triangle doit avoir 3 étoiles.");
+            throw new IllegalArgumentException("Le triangle doit avoir 3 points.");
         } else {
             this.stars = stars;
         }
@@ -37,7 +37,7 @@ public class Triangle
 
     /**
      * Methode d'affichage
-     * @return String : Affiche les étoiles du triangle
+     * @return String : Affiche les points du triangle
      */
     public String toString()
     {
@@ -50,19 +50,19 @@ public class Triangle
      * @return boolean : Renvoie vrai si les triangles sont égaux, faux sinon
      */
     public boolean equals(Triangle t2) {
-        return stars[0].equals(t2.stars[0]) && stars[1].equals(t2.stars[1]) && stars[2].equals(t2.stars[2]);
+        return points[0].equals(t2.points[0]) && points[1].equals(t2.points[1]) && points[2].equals(t2.points[2]);
     }
 
     /**
-     * Methode qui calcule les longueurs des côtés du triangle
+     * Methode qui calcule les longueurs des cotes du triangle
      * @return double[] : Liste des longueurs des côtes du triangle, ranges dans l'ordre croissant 
      */
     private double[] getSides()
     {
         double[] sides = new double[3];
-        sides[0] = stars[0].distance(stars[1]);
-        sides[1] = stars[1].distance(stars[2]);
-        sides[2] = stars[2].distance(stars[0]);
+        sides[0] = points[0].distance(points[1]);
+        sides[1] = points[1].distance(points[2]);
+        sides[2] = points[2].distance(points[0]);
         Arrays.sort(sides);
         return sides;
     }

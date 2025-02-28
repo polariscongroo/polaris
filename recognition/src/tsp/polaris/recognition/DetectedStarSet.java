@@ -1,8 +1,9 @@
 package tsp.polaris.recognition;
 import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
+
 /**
- * Classe representant une liste d'étoile dans l'image à analyser
+ * Classe représentant une liste d'étoile dans l'image à analyser
  * Cette classe permet notamment de générer des combinaisons d'étoiles
  * et d'identifier l'ensemble d'étoiles correspondant le mieux à une constellation.
  *
@@ -138,31 +139,6 @@ public class DetectedStarSet extends StarSet
     public String toString()
     {
         return Arrays.toString(stars);
-    }
-
-    /**
-     * Genère les triangles possibles à partir des étoiles d'une constellation.
-     *
-     * @return Un tableau de triangles generes à partir des étoiles de la constellation.
-     */
-    public Triangle[] generateTriangles()
-    {
-        int size = stars.length;
-        int nb_triangles = Combinatorics.combination(size, 3);
-        Triangle[] triangles = new Triangle[nb_triangles];
-        int index = 0;
-        for (int i = 0; i < size - 2; i++)
-        {
-            for (int j = i + 1; j < size- 1; j++)
-            {
-                for (int k = j + 1; k < size; k++)
-                {
-                    triangles[index] = new Triangle(stars[i], stars[j], stars[k]);
-                    index++;
-                }
-            }
-        }
-        return triangles;
     }
 
     /**

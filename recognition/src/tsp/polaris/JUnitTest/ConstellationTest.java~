@@ -27,7 +27,7 @@ public class ConstellationTest {
     public void setUp() {
         workingConstellation = new Constellation(new Star[6], "test");
         for(int i = 0; i < 6; i++){
-            workingConstellation.getStars()[i] = new Star(i, i, 0);
+            workingConstellation.getPoints()[i] = new Star(i, i, 0);
         }
     }
 

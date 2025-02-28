@@ -10,7 +10,7 @@ public class StarSet {
     }
 
     /**
-     * Génère tous les triangles possibles formes par trois points distincts de la constellation.
+     * Génère tous les triangles possibles formes par trois étoiles distinctes de la constellation.
      *
      * @return Un tableau de triangles construits à partir des points de la constellation.
      */

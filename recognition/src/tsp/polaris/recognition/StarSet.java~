@@ -3,7 +3,7 @@ package tsp.polaris.recognition;
 import tsp.polaris.auxiliaries.Combinatorics;
 
 public class StarSet {
-    private Star[] stars;
+    protected Star[] stars;
 
     public StarSet(Star[] stars) {
         this.stars = stars;

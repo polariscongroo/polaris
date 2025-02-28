@@ -25,7 +25,7 @@ public class Constellation extends StarSet {
      * Getteur de points
      *
      */
-    public Star[] getStars() {
+    public Point[] getStars() {
         return stars;
     }
 

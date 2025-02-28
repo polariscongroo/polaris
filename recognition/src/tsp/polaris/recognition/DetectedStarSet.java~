@@ -1,8 +1,9 @@
 package tsp.polaris.recognition;
 import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
+
 /**
- * Classe representant une liste d'étoile dans l'image à analyser
+ * Classe représentant une liste d'étoile dans l'image à analyser
  * Cette classe permet notamment de générer des combinaisons d'étoiles
  * et d'identifier l'ensemble d'étoiles correspondant le mieux à une constellation.
  *
@@ -21,7 +22,7 @@ public class DetectedStarSet extends StarSet
     }
 
     /**
-     * Genère toutes les combinaisons possibles de k étoiles parmi les étoiles disponibles.
+     * Génère toutes les combinaisons possibles de k étoiles parmi les étoiles disponibles.
      * Cette fonction utilise un algorithme combinatoire base sur un pseudo-code disponible en ligne.
      *
      * @param k Nombre d'étoiles à selectionner.
