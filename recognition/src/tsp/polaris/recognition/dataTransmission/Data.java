@@ -1,4 +1,6 @@
-package tsp.polaris.recognition;
+package tsp.polaris.recognition.dataTransmission;
+
+import tsp.polaris.recognition.other.Star;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.Constellation;
-import tsp.polaris.recognition.Point;
+import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.Star;
 import tsp.polaris.recognition.Triangle;
 
@@ -27,7 +26,7 @@ public class ConstellationTest {
     public void setUp() {
         workingConstellation = new Constellation(new Star[6], "test");
         for(int i = 0; i < 6; i++){
-            workingConstellation.getPoints()[i] = new Star(i, i, 0);
+            workingConstellation.getStars()[i] = new Star(i, i, 0);
         }
     }
 

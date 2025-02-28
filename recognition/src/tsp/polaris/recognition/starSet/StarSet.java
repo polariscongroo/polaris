@@ -1,10 +1,23 @@
-package tsp.polaris.recognition;
+package tsp.polaris.recognition.starSet;
 
 import tsp.polaris.auxiliaries.Combinatorics;
+import tsp.polaris.recognition.other.Star;
+import tsp.polaris.recognition.other.Triangle;
+
+/**
+ * Classe représentant une constellation composée de plusieurs étoiles.
+ * Permet de générer des triangles à partir des points.
+ *
+ * @author Chadi A., Emma M.
+ */
 
 public class StarSet {
     protected Star[] stars;
 
+    /**
+     * Constructeur de StarSet
+     * @param stars Tableau d'étoiles de la constellation
+     */
     public StarSet(Star[] stars) {
         this.stars = stars;
     }
@@ -18,7 +31,7 @@ public class StarSet {
         int size = stars.length;
         int nb_triangles = Combinatorics.combination(size, 3); // Nombre de triangles à générer
         Triangle[] triangles = new Triangle[nb_triangles];
-        int index = 0;
+        int index = 0; // Indice du triangle courant
 
         for (int i = 0; i < size - 2; i++) {
             for (int j = i + 1; j < size - 1; j++) {

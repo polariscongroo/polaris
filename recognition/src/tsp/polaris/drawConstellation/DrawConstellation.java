@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import tsp.polaris.recognition.Point;
+import tsp.polaris.recognition.other.Point;
 
 /**
  * Crée une nouvelle image avec la constellation tracée à partir de l'image donnée et des coordonnées des points formant la constellation

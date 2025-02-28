@@ -1,7 +1,9 @@
 package tsp.polaris.recognition;
 
+import tsp.polaris.recognition.dataTransmission.Data;
+import tsp.polaris.recognition.exceptions.TriangleMatchingException;
+
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Classe principale qui va lancer notre programme

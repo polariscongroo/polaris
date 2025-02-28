@@ -1,11 +1,13 @@
-package tsp.polaris.recognition;
+package tsp.polaris.recognition.other;
+
+import tsp.polaris.recognition.exceptions.TriangleMatchingException;
 
 /**
  * Classe qui va contenir des listes de triangles
  * @author Emma M., Chadi A.
  */
 
-public class List_triangle
+public class ListTriangle
 {
 	private Triangle[] listeT;
 	
@@ -13,7 +15,7 @@ public class List_triangle
 	 * Constructeur qui initialise le tableau des triangles
 	 * @param listeT Liste des triangles
 	 */
-	public List_triangle(Triangle[] listeT) {
+	public ListTriangle(Triangle[] listeT) {
 		this.listeT = listeT;
 	}
 	
@@ -35,7 +37,7 @@ public class List_triangle
 	 * @return double[] : Liste des couts entre les triangles des 2 listes
 	 * @throws TriangleMatchingException Problème d'appariement de liste de triangle
 	 */
-    public double[] couts(List_triangle listeTriangle2) throws TriangleMatchingException
+    public double[] couts(ListTriangle listeTriangle2) throws TriangleMatchingException
     {
         int taille1 = listeT.length;
         int taille2 = listeTriangle2.listeT.length;
@@ -66,7 +68,7 @@ public class List_triangle
      * @return int[] : L'indice de correspondance entre deux listes de triangles
      * @throws TriangleMatchingException Problème d'appariement de liste de triangles
      */
-    public int[] indice(List_triangle listeTriangle2) throws TriangleMatchingException
+    public int[] indice(ListTriangle listeTriangle2) throws TriangleMatchingException
     {
         double[] couts = couts(listeTriangle2);
         int nombre_combinaisons = couts.length;

@@ -1,8 +1,8 @@
-/Constellation.class
+/starSet/Constellation.class
 /List_point.class
 /List_triangle.class
 /Main.class
-/Point.class
-/Triangle.class
-/TriangleMatchingException.class
+/other/Point.class
+/other/Triangle.class
+/exceptions/TriangleMatchingException.class
 /Test.class

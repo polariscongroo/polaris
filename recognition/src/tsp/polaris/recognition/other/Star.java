@@ -1,4 +1,4 @@
-package tsp.polaris.recognition;
+package tsp.polaris.recognition.other;
 
 /**
  * Classe représentant une étoile dans l'espace

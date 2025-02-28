@@ -1,6 +1,6 @@
 package tsp.polaris.drawConstellation;
 
-import tsp.polaris.recognition.Point;
+import tsp.polaris.recognition.other.Point;
 
 import java.awt.*;
 import java.io.File;

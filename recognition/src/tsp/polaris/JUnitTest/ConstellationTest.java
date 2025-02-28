@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.Constellation;
-import tsp.polaris.recognition.Point;
-import tsp.polaris.recognition.Star;
-import tsp.polaris.recognition.Triangle;
+import tsp.polaris.recognition.starSet.Constellation;
+import tsp.polaris.recognition.other.Star;
+import tsp.polaris.recognition.other.Triangle;
 
 /**
  * Tests unitaires de la classe Constellation

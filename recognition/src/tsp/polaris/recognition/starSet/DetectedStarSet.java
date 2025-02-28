@@ -1,6 +1,11 @@
-package tsp.polaris.recognition;
+package tsp.polaris.recognition.starSet;
 import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
+import tsp.polaris.auxiliaries.Functions;
+import tsp.polaris.recognition.other.ListTriangle;
+import tsp.polaris.recognition.other.Star;
+import tsp.polaris.recognition.other.Triangle;
+import tsp.polaris.recognition.exceptions.TriangleMatchingException;
 
 /**
  * Classe représentant une liste d'étoile dans l'image à analyser
@@ -120,14 +125,9 @@ public class DetectedStarSet extends StarSet
     		selectedConstellations[i] = findRightListStar(i+3,coutMinParTaille,constellations);
     	}
     	// On recherche la taille d'étoiles qui a le cout le plus faible
-    	// A METTRE DANS UNE FONCTION AUXILIAIRE
-    	int min = 0;
-    	for(int i = 0; i < 10; i += 1) {
-    		if(coutMinParTaille[i] < coutMinParTaille[min]) {
-    			min = i;
-    		}
-    	}
-    	return selectedConstellations[min];
+    	int minIndex = Functions.minIndex(coutMinParTaille);
+
+    	return selectedConstellations[minIndex];
     	
     }
 
@@ -147,7 +147,7 @@ public class DetectedStarSet extends StarSet
      * @param cout_triangle Tableau des coûts des triangles.
      * @return Le coût total de la constellation.
      */
-    static double couts(double[] cout_triangle)
+    public static double couts(double[] cout_triangle)
     {
         double cout_constellation = 0;
         for (int cout = 0; cout < cout_triangle.length; cout++)
@@ -177,8 +177,8 @@ public class DetectedStarSet extends StarSet
             Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
             Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
 
-            List_triangle listPhoto = new List_triangle(triangles_photo);
-            List_triangle listTriangle = new List_triangle(triangles_c);
+            ListTriangle listPhoto = new ListTriangle(triangles_photo);
+            ListTriangle listTriangle = new ListTriangle(triangles_c);
 
             // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
             double[] liste_cout = listPhoto.couts(listTriangle);
@@ -212,8 +212,8 @@ public class DetectedStarSet extends StarSet
             Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
             Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
 
-            List_triangle listPhoto = new List_triangle(triangles_photo);
-            List_triangle listTriangle = new List_triangle(triangles_c);
+            ListTriangle listPhoto = new ListTriangle(triangles_photo);
+            ListTriangle listTriangle = new ListTriangle(triangles_c);
 
             // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
             double[] liste_cout = listPhoto.couts(listTriangle);

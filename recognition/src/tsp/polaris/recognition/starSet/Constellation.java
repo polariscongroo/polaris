@@ -1,6 +1,6 @@
-package tsp.polaris.recognition;
+package tsp.polaris.recognition.starSet;
 
-import tsp.polaris.auxiliaries.Combinatorics;
+import tsp.polaris.recognition.other.Star;
 
 /**
  * Représente une constellation composée de plusieurs points.
