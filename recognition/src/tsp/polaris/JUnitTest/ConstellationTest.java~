@@ -9,8 +9,6 @@ import tsp.polaris.recognition.Point;
 import tsp.polaris.recognition.Triangle;
 
 /**
- * Tests unitaires de la classe Constellation
- *
  * @author Emma M.
  */
 

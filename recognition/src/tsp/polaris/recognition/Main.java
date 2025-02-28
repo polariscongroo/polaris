@@ -1,50 +1,26 @@
 package tsp.polaris.recognition;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Classe principale qui va lancer notre programme
- * @author Emma M., Chadi A.
+ * @author Emma M., Chadi A., Ryane S.
  */
 
 public class Main
 {
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
 
-        try{
-        // Lis le fichier csv cree par le script python
-        List<List<Float>> data = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader("recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv"));
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] values = line.split(",");
-            List<Float> row = new ArrayList<>();
-            for (String val : values) {
-                row.add(Float.parseFloat(val.trim()));
-            }
-            data.add(row);
-        }
-        br.close();
+        Data data = new Data("src/tsp/polaris/cor_Points/liste_etoiles.csv");
+
         System.out.println(data);
 
-        // Efface le contenu du fichier csv
-        new FileWriter("recognition/src/tsp/polaris/cor_Points/liste_etoiles.csv").close();
-
-        }
-        catch (FileNotFoundException f) {System.out.println("Impossible de trouver le fichier");}
-        catch (IOException e) {System.out.println("Impossible de modifier le fichier");}
         /* Hypothèses :
         - Les triangles formes par les List_points sont tous differents sinon distance nulle et on divise par 0.
         i.e la donnee des coordonnees est assez precise pour qu'il n'y est pas de confusion dans le calcul du coût
         - La photo et le traitement de l'image ne traitent que les etoiles de la List_point et pas d'autres.
-        */
-        /*
+
         Point A = new Point(0, 0);
         Point B = new Point(1, 0);
         Point C = new Point(0, 1);
@@ -56,7 +32,8 @@ public class Main
         Point I = new Point(1, 1);
         Point J = new Point(0, 1);
         Point K = new Point(1, 0);
-        Point L = new Point(10, 0);*/
+        Point L = new Point(10, 0);
+        */
 
         //Test affichage de tous les triangles possibles avec le set de point set
         /* Point[] set1 = {A,B,C,D};
