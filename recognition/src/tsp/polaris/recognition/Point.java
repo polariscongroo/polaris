@@ -8,15 +8,17 @@ package tsp.polaris.recognition;
 public class Point
 {
     private final double[] point;
+    private final double brightness;
 
     /**
      * Constructeur qui initialise les coordonnees du point
      * @param x 1ère coordonnee du point
      * @param y 2e coordonnee du point
      */
-    public Point(double x, double y)
+    public Point(double x, double y, double brightness)
     {
-        this.point = new double[]{x,y};
+        point = new double[]{x,y};
+        this.brightness = brightness;
     }
     
     /**
@@ -42,7 +44,7 @@ public class Point
      */
     public String toString()
     {
-        return "(" + this.point[0] + ", " + this.point[1] + ")";
+        return "(" + this.point[0] + ", " + this.point[1] + ")" + " : " + this.brightness;
     }
     
     /**
