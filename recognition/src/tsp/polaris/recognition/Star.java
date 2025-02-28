@@ -1,5 +1,11 @@
 package tsp.polaris.recognition;
 
+/**
+ * Classe représentant une étoile dans l'espace
+ *
+ * @author Emma M.
+ */
+
 public class Star extends Point{
     private final double brightness; // Luminosité de l'étoile
 

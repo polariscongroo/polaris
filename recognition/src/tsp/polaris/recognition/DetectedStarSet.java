@@ -2,93 +2,91 @@ package tsp.polaris.recognition;
 import java.util.Arrays;
 import tsp.polaris.auxiliaries.Combinatorics;
 /**
- * Classe representant une liste de points dans l'espace.
- * Cette classe permet notamment de generer des combinaisons de points
- * et d'identifier l'ensemble de points correspondant le mieux à une constellation.
+ * Classe representant une liste d'étoile dans l'image à analyser
+ * Cette classe permet notamment de générer des combinaisons d'étoiles
+ * et d'identifier l'ensemble d'étoiles correspondant le mieux à une constellation.
  *
  * @author Chadi A., Emma M.
  */
-public class List_point
+public class DetectedStarSet extends StarSet
 {
-    private Point[] points;
-
     /**
-     * Constructeur de la classe List_point.
+     * Constructeur de la classe StarSet.
      *
-     * @param points Liste des points constituant l'objet.
+     * @param stars Liste d'étoiles constituant l'objet.
      */
-    public List_point(Point[] points)
+    public DetectedStarSet(Star[] stars)
     {
-        this.points = points;
+        super(stars);
     }
 
     /**
-     * Genère toutes les combinaisons possibles de k points parmi les points disponibles.
+     * Génère toutes les combinaisons possibles de k étoiles parmi les étoiles disponibles.
      * Cette fonction utilise un algorithme combinatoire base sur un pseudo-code disponible en ligne.
      *
-     * @param k Nombre de points à selectionner.
-     * @param resultPoints Tableau contenant toutes les combinaisons generees.
-     * @param copyPoints Copie des points disponibles.
+     * @param k Nombre d'étoiles à selectionner.
+     * @param resultStars Tableau contenant toutes les combinaisons générées.
+     * @param copyStars Copie des étoiles disponibles.
      * @param indice Indice de la combinaison en cours.
-     * @param tempPointList Liste temporaire pour stocker les points en cours de combinaison.
+     * @param tempStarList Liste temporaire pour stocker les étoiles en cours de combinaison.
      * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
-    private void combinationPoint(int k, Point[][] resultPoints, Point[] copyPoints, int indice, Point[] tempPointList) {
+    private void combinationStar(int k, Star[][] resultStars, Star[] copyStars, int indice, Star[] tempStarList) {
     	// Cas ou on demande des combinaisons de K parmi N avec K > N
-    	if(k > copyPoints.length) {
+    	if(k > copyStars.length) {
     		return;
     	// Cas ou on a termine de faire une combinaison
     	} else if(k <= 0) {
-    		resultPoints[indice] = tempPointList;
+    		resultStars[indice] = tempStarList;
     	} else {
-    		for(int i = 0; i < copyPoints.length; i += 1) {
-    			// g est la liste des points se situant après l'indice i
-    			Point[] g = new Point[copyPoints.length - i - 1];
-    			for(int j = i+1; j < copyPoints.length; j += 1) {
-    				g[i] = copyPoints[i];
+    		for(int i = 0; i < copyStars.length; i += 1) {
+    			// g est la liste des étoiles se situant après l'indice i
+    			Star[] g = new Star[copyStars.length - i - 1];
+    			for(int j = i+1; j < copyStars.length; j += 1) {
+    				g[i] = copyStars[i];
     			}
     			
-    			// l2 est la liste tempPointList auquel on rajoute l'element en indice i de copyPoints
-    			Point[] l2 = new Point[tempPointList.length + 1];
-    			for(int j = 0; j < tempPointList.length; j += 1) {
-    				l2[j] = tempPointList[j];
+    			// l2 est la liste tempStarList auquel on rajoute l'élément en indice i de copyStars
+    			Star[] l2 = new Star[tempStarList.length + 1];
+    			for(int j = 0; j < tempStarList.length; j += 1) {
+    				l2[j] = tempStarList[j];
     			}
-    			l2[l2.length - 1] = copyPoints[i];
+    			l2[l2.length - 1] = copyStars[i];
     			
-    			combinationPoint(k-1, resultPoints, g, indice+i, l2);
+    			combinationStar(k-1, resultStars, g, indice+i, l2);
     		}
     	}
     }
     
     /**
-     * Recherche la meilleure liste de points correspondant à une constellation.
+     * Recherche la meilleure liste d'étoiles correspondant à une constellation.
      *
-     * @param k Nombre de points à selectionner.
+     * @param k Nombre d'étoiles à selectionner.
      * @param coutMinParTaille Tableau stockant les coûts minimaux par taille de constellation.
      * @param constellations Liste des constellations de reference.
-     * @return La liste de points ayant le coût minimal.
+     * @return La liste d'étoiles ayant le coût minimal.
      * @throws TriangleMatchingException Si une erreur survient lors de l'appariement des constellations.
      */
-    public List_point findRightListPoint(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
-    	// On cree une liste composee de tous les ensembles de points à k elements :
+    public DetectedStarSet findRightListStar(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
+    	// On cree une liste composee de tous les ensembles d'étoiles à k elements :
     	
     	// Nombre de combinaisons
-    	int nbCombination = Combinatorics.combination(points.length, k);
+    	int nbCombination = Combinatorics.combination(stars.length, k);
     	
-    	// Liste de toutes les combinaisons de constellations à k points
-    	List_point[] listeConstellation = new List_point[nbCombination];
+    	// Liste de toutes les combinaisons de constellations à k étoiles
+    	DetectedStarSet[] listeConstellation = new DetectedStarSet[nbCombination];
     	
-    	// Liste de toutes les combinaisons de k points
-    	Point[][] pointsListConstellation = new Point[nbCombination][k];
+    	// Liste de toutes les combinaisons de k étoiles
+    	Star[][] starsListConstellation = new Star[nbCombination][k];
     	
-    	combinationPoint(k,pointsListConstellation, points,0,new Point[k]);
+    	combinationStar(k,starsListConstellation, stars,0,new Star[k]);
     	
-    	// On a la liste des combinaisons de tous les points, il faut maintenant faire de ces listes, des constellations
+    	// On a la liste des combinaisons de toutes les étoiles, il faut maintenant faire de ces listes, des constellations
     	for(int i = 0; i < nbCombination; i += 1) {
-    		listeConstellation[i] = new List_point(pointsListConstellation[i]);
+    		listeConstellation[i] = new DetectedStarSet(starsListConstellation[i]);
     	}
     	
-    	// On cherche l'ensemble de points de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
+    	// On cherche l'ensemble d'étoiles de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
     	double minCoutConstellation = Double.MAX_VALUE;
     	int indConstellation = -1;
     	
@@ -107,20 +105,20 @@ public class List_point
      * Recherche la constellation la plus proche parmi un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer, venant de la base de donnees.
-     * @return La liste de points correspondant à la constellation la plus proche.
+     * @return La liste d'étoiles correspondant à la constellation la plus proche.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    public List_point searchConstellation(Constellation... constellations) throws TriangleMatchingException {
+    public DetectedStarSet searchConstellation(Constellation... constellations) throws TriangleMatchingException {
     	// On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
     	// LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
     	double[] coutMinParTaille = new double[10];
-    	// Liste des points choisis pour chaque constellation 
-    	List_point[] selectedConstellations = new List_point[10];
-    	// Pour chaque taille d'ensemble de points, on va chercher l'ensemble de points qui ressemble le point à une constellation
+    	// Liste d'étoiles choisies pour chaque constellation
+    	DetectedStarSet[] selectedConstellations = new DetectedStarSet[10];
+    	// Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
     	for(int i = 0; i < 10; i += 1) {
-    		selectedConstellations[i] = findRightListPoint(i+3,coutMinParTaille,constellations);
+    		selectedConstellations[i] = findRightListStar(i+3,coutMinParTaille,constellations);
     	}
-    	// On recherche la taille de points qui a le cout le plus faible
+    	// On recherche la taille d'étoiles qui a le cout le plus faible
     	// A METTRE DANS UNE FONCTION AUXILIAIRE
     	int min = 0;
     	for(int i = 0; i < 10; i += 1) {
@@ -133,23 +131,23 @@ public class List_point
     }
 
     /**
-     * Retourne une representation sous forme de chaîne de caractères des points.
+     * Retourne une representation sous forme de chaîne de caractères des étoiles.
      *
-     * @return La chaîne de caractères representant la liste des points.
+     * @return La chaîne de caractères representant la liste d'étoiles.
      */
     public String toString()
     {
-        return Arrays.toString(points);
+        return Arrays.toString(stars);
     }
 
     /**
-     * Genère les triangles possibles à partir des points d'une constellation.
+     * Genère les triangles possibles à partir des étoiles d'une constellation.
      *
-     * @return Un tableau de triangles generes à partir des points de la constellation.
+     * @return Un tableau de triangles generes à partir des étoiles de la constellation.
      */
     public Triangle[] generateTriangles()
     {
-        int size = points.length;
+        int size = stars.length;
         int nb_triangles = Combinatorics.combination(size, 3);
         Triangle[] triangles = new Triangle[nb_triangles];
         int index = 0;
@@ -159,7 +157,7 @@ public class List_point
             {
                 for (int k = j + 1; k < size; k++)
                 {
-                    triangles[index] = new Triangle(points[i], points[j], points[k]);
+                    triangles[index] = new Triangle(stars[i], stars[j], stars[k]);
                     index++;
                 }
             }
@@ -221,7 +219,7 @@ public class List_point
     }
     
     /**
-     * Calcule le coût minimal entre l'ensemble de points de la photo et un ensemble de constellations donnees.
+     * Calcule le coût minimal entre l'ensemble d'étoiles de la photo et un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer.
      * @return Le coût minimal entre la photo et les constellations.
