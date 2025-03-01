@@ -1,6 +1,8 @@
 import unittest
 from ThresholdDetectMethod import cree_une_forme, determine_formes, determine_points_adjacents, enregistre_les_etoiles, erase_txt, inverse_cor
 import numpy as np
+import os
+import csv
 
 class test_Inverse_cor(unittest.TestCase): ##verif ok
     def test_inverse_matrix(self):
@@ -45,9 +47,32 @@ class test_Cree_une_forme(unittest.TestCase):#verif ok
             threshold_mask = np.array([[0, 1], [1, 1]])
             self.assertEqual(determine_formes(threshold_mask), [[(0, 1)], [(1, 0), (1, 1)]])
 
-    #class test_enregistre_les_etoiles(unittest.TestCase):##verification pas ok :(
-     #   def test_enregistre_les_etoiles(self):
-      #      self.assertEqual(enregistre_les_etoiles([[0,1],[1,1]],[[0,1],[1,1]]), [[0,1],[1,1]])
+    class test_enregistre_les_etoiles(unittest.TestCase):
+        def test_enregistre_les_etoiles_creates_non_empty_csv(self):
+        # Call the function that generates the CSV
+            enregistre_les_etoiles([[0,1],[1,1]],[[0,1],[1,1]])
 
+        # Define the path to the generated CSV file
+            csv_file_path = "recognition/coorPoints/liste_etoiles.csv"
+
+        # Check if the file exists
+            self.assertTrue(os.path.exists(csv_file_path), "CSV file does not exist")
+
+        # Check if the file is not empty
+            self.assertGreater(os.path.getsize(csv_file_path), 0, "CSV file is empty")
+
+        # Read the CSV file and check its contents
+            with open(csv_file_path, newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                csv_content = list(reader)
+
+        # Define the expected coordinates
+            expected_coordinates = [["0", "1"], ["1", "1"]]
+
+        # Check if the contents of the CSV file match the expected coordinates
+            self.assertEqual(csv_content, expected_coordinates, "CSV file contents are incorrect")
+
+        
+        
     if __name__ == '__main__':
         unittest.main()
