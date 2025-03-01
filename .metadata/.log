@@ -1,0 +1,13 @@
+!SESSION 2025-02-26 14:16:56.591 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=21.0.6
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product -data /home/spokez/ProjetDev/Polaris
+
+!ENTRY ch.qos.logback.classic 1 0 2025-02-26 14:17:09.031
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-02-26 14:17:12.604
+!MESSAGE Logback config file: /home/spokez/ProjetDev/Polaris/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml

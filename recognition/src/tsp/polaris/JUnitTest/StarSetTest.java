@@ -5,18 +5,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tsp.polaris.recognition.starSet.Constellation;
+import tsp.polaris.recognition.starSet.StarSet;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.other.Triangle;
 
 /**
- * Tests unitaires de la classe Constellation
+ * Tests unitaires de la classe StarSet
  *
  * @author Emma M.
  */
 
-public class ConstellationTest {
+public class StarSetTest {
 
-    private Constellation workingConstellation;
+    private StarSet workingStarSet;
 
     /**
      * Partie exécuté avant chaque test :
@@ -24,9 +25,9 @@ public class ConstellationTest {
      */
     @BeforeEach
     public void setUp() {
-        workingConstellation = new Constellation(new Star[6], "test");
+        workingStarSet = new StarSet(new Star[6]);
         for(int i = 0; i < 6; i++){
-            workingConstellation.getStars()[i] = new Star(i, i, 0);
+            workingStarSet.getStars()[i] = new Star(i, i, 0);
         }
     }
 
@@ -36,7 +37,7 @@ public class ConstellationTest {
     @Test
     @DisplayName("Test 1 : Check de la taille de la liste renvoyé par generateTriangles()")
     public void lengthCheckGenerateTriangles(){
-        Assertions.assertEquals(20, workingConstellation.generateTriangles().length);
+        Assertions.assertEquals(20, workingStarSet.generateTriangles().length);
     }
 
     /**
@@ -45,7 +46,7 @@ public class ConstellationTest {
     @Test
     @DisplayName("Test 2 : Les triangles sont tous différents")
     public void differentTrianglesCheckGenerateTriangles(){
-        Triangle[] triangles = workingConstellation.generateTriangles();
+        Triangle[] triangles = workingStarSet.generateTriangles();
         for (int i = 0; i < triangles.length - 1; i++) {
             for (int j = i + 1; j < triangles.length; j++) {
                 Assertions.assertFalse(triangles[i].equals(triangles[j]));

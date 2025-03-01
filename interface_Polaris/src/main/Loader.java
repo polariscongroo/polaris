@@ -32,10 +32,10 @@ public class Loader extends javax.swing.JFrame {
      */
     public static void transition(String path) {
         try {
-            FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
+            FileWriter writer = new FileWriter("../cartography/image_aTraiter/output.txt");
             writer.write(path);
             writer.close();
-            File file = new File("cartography/image_aTraiter/output.txt");
+            File file = new File("../cartography/image_aTraiter/output.txt");
             System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
             System.out.println("3. Output.txt a été correctement modifié");
         } catch (IOException e) {
@@ -152,7 +152,7 @@ public class Loader extends javax.swing.JFrame {
             }
         });
         String pathString;
-        pathString = "cartography/image_aTraiter";
+        pathString = "../cartography/image_aTraiter";
         // Chemin vers le dossier contenant output.txt
         Path dir = Paths.get(pathString);
         // Création du WatchService
@@ -187,7 +187,7 @@ public class Loader extends javax.swing.JFrame {
                             String projectPath = new File("").getAbsolutePath();
 
                             // Chemin relatif vers le script Python
-                            String scriptRelativePath = "cartography/unix/dist/ThresholdDetectMethod";
+                            String scriptRelativePath = "../cartography/unix/dist/ThresholdDetectMethod";
 
                             // Construit le chemin complet vers le script
                             String scriptFullPath = projectPath + File.separator + scriptRelativePath;

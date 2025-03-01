@@ -4,13 +4,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests unitaires de la classe List_triangle
+ * Tests unitaires de la classe DetectedStarSet
  *
  * @author Emma M.
  */
 
-public class List_triangleTest {
-
+public class DetectedStarSetTest {
+    
     @Test
     @DisplayName("Test 1 : TODO")
     public void test() {
