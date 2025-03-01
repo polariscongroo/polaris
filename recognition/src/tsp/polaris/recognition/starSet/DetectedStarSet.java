@@ -34,7 +34,38 @@ public class DetectedStarSet extends StarSet
     public static DetectedStarSet createDetectedStarSetWithData(Data data) {
         return new DetectedStarSet(data.getData().toArray(new Star[0]));
     }
-
+    
+    /**
+     * Liste auquelle on rajoute un élément 
+     * 
+     * @param list La liste d'étoile
+     * @param star L'étoile qu'on va rajouter
+     * @return Une liste avec les éléments de list auquelle on rajoute star
+     */
+    private Star[] listAddElement(Star[] list, Star star) {
+    	Star[] newList = new Star[list.length + 1];
+    	for(int i = 0; i < list.length; i += 1) {
+    		newList[i] = list[i];
+    	}
+    	newList[list.length] = star;
+    	return newList;
+    }
+    
+    /**
+     * Renvoie la liste des étoiles situées après l'index i dans list
+     * 
+     * @param i Index à partir duquel on veut copier la liste
+     * @param list Liste à copier
+     * @return La liste des étoiles situées après l'index i dans list 
+     */
+    private Star[] listAfterIndex(int i, Star[] list) {
+    	Star[] listAfterIndex = new Star[list.length - i - 1];
+    	for(int j = 0 ; j < list.length-i - 1; j += 1) {
+    		listAfterIndex[j] = list[j + i + 1];
+    	}
+    	return listAfterIndex;
+    }
+    
     /**
      * Génère toutes les combinaisons possibles de k étoiles parmi les étoiles disponibles.
      * Cette fonction utilise un algorithme combinatoire base sur un pseudo-code disponible en ligne.
@@ -46,26 +77,18 @@ public class DetectedStarSet extends StarSet
      * @param tempStarList Liste temporaire pour stocker les étoiles en cours de combinaison.
      * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
-    private void combinationStar(int k, Star[][] resultStars, Star[] copyStars, int indice, Star[] tempStarList) {
+    public void combinationStar(int k, Star[][] resultStars, Star[] copyStars, Star[] tempStarList, int indice) {
     	if(k > copyStars.length) { // Cas ou on demande des combinaisons de K parmi N avec K > N
     		return;
     	} else if(k <= 0) { // Cas ou on a termine de faire une combinaison
     		resultStars[indice] = tempStarList;
     	} else {
     		for(int i = 0; i < copyStars.length; i += 1) {
-    			Star[] g = new Star[copyStars.length - i - 1]; // g est la liste des étoiles se situant après l'indice i
-    			for(int j = i+1; j < copyStars.length; j += 1) {
-    				g[i] = copyStars[i];
-    			}
+    			Star[] g = listAfterIndex(i, copyStars); // g est la liste des étoiles de copyStars se situant après l'indice i
     			
-    			// l2 est la liste tempStarList auquel on rajoute l'élément en indice i de copyStars
-    			Star[] l2 = new Star[tempStarList.length + 1];
-    			for(int j = 0; j < tempStarList.length; j += 1) {
-    				l2[j] = tempStarList[j];
-    			}
-    			l2[l2.length - 1] = copyStars[i];
+    			Star[] l2 = listAddElement(tempStarList,copyStars[i]); // l2 est la liste tempStarList auquel on rajoute l'élément en indice i de copyStars
     			
-    			combinationStar(k-1, resultStars, g, indice+i, l2);
+    			combinationStar(k-1, resultStars, g, l2, indice+i);
     		}
     	}
     }
@@ -91,7 +114,7 @@ public class DetectedStarSet extends StarSet
     	// Liste de toutes les combinaisons de k étoiles
     	Star[][] starsListConstellation = new Star[nbCombination][k];
     	
-    	combinationStar(k,starsListConstellation, stars,0,new Star[k]);
+    	combinationStar(k,starsListConstellation, stars,new Star[k], 0);
     	
     	// On a la liste des combinaisons de toutes les étoiles, il faut maintenant faire de ces listes, des constellations
     	for(int i = 0; i < nbCombination; i += 1) {

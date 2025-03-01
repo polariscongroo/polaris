@@ -71,12 +71,12 @@ public class ListTriangle
      */
     public int[] indice(ListTriangle listeTriangle2) throws TriangleMatchingException
     {
-        double[] couts = couts(listeTriangle2);
+        double[] couts = couts(listeTriangle2); // Couts entre les 2 triangles
         int nombre_combinaisons = couts.length;
 
         int nb_triangles = (int) Math.sqrt(nombre_combinaisons);
         int[] tab_indices = new int[nb_triangles];
-        boolean[] usedTrianglesSecondSet = new boolean[nb_triangles];
+        boolean[] usedTrianglesSecondSet = new boolean[nb_triangles]; // Tableau de booléen qui représente les triangles déjà associés
 
         for (int indice_triangle = 0; indice_triangle < nb_triangles; indice_triangle++) {
             int start = indice_triangle * nb_triangles;

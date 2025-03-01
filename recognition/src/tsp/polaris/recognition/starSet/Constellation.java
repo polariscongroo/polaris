@@ -17,7 +17,7 @@ public class Constellation extends StarSet {
     /**
      * Constructeur de la classe Constellation.
      * 
-     * @param stars Liste des points constituant la constellation.
+     * @param stars Liste d'étoiles constituant la constellation.
      */
     public Constellation(Star[] stars, String name) {
         super(stars);

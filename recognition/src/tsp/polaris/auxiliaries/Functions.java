@@ -1,11 +1,14 @@
 package tsp.polaris.auxiliaries;
 
+import tsp.polaris.recognition.other.Star;
+
 /**
  * Classe utilitaire pour les fonctions.
  *
  * @author Emma M.
  */
 public class Functions {
+	
     /**
      * Renvoie l'index du minimum d'un tableau
      * @param tab tableau
@@ -20,4 +23,5 @@ public class Functions {
         }
         return min;
     }
+    
 }
