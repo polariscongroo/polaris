@@ -10,8 +10,17 @@ class test_Inverse_cor(unittest.TestCase): ##verif ok
 
 class test_erase_txt(unittest.TestCase): ##verif ok
     def test_erase_txt(self):
-        self.assertEqual(erase_txt("cartography/image_aTraiter/output.txt"), None )
+        # Call the function without any arguments
+        result = erase_txt()
         
+        # Check if the function returns None
+        self.assertEqual(result, None)
+        
+        # Define the path to the file that should be erased
+        file_path = "cartography/image_aTraiter/output.txt"
+        
+        # Check if the file does not exist after calling the function
+        self.assertFalse(os.path.exists(file_path), "File was not erased")
             
 class test_Cree_une_forme(unittest.TestCase):#verif ok
     class test_Inverse_cor(unittest.TestCase):
