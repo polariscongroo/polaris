@@ -1,10 +1,9 @@
 package tsp.polaris.drawConstellation;
 
-import tsp.polaris.recognition.other.Point;
-
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import tsp.polaris.recognition.other.Point;
 
 public class MainDrawTest {
     public static void main(String[] args) throws IOException {

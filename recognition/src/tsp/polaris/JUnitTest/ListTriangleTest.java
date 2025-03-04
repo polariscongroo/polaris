@@ -16,4 +16,5 @@ public class ListTriangleTest {
     public void test() {
         // TODO
     }
+
 }

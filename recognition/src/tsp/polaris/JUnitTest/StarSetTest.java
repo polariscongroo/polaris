@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.StarSet;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.other.Triangle;
