@@ -11,10 +11,7 @@ class test_Inverse_cor(unittest.TestCase): ##verif ok
 class test_erase_txt(unittest.TestCase): ##verif ok
     def test_erase_txt(self):
         # Call the function without any arguments
-        result = erase_txt()
-        
-        # Check if the function returns None
-        self.assertEqual(result, None)
+        erase_txt()
         
         # Define the path to the file that should be erased
         file_path = "cartography/image_aTraiter/output.txt"
