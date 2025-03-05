@@ -31,7 +31,7 @@ public class Background extends JComponent{
      */
     //Selectionne l'image de fond
     public Background() {
-        image = new ImageIcon(getClass().getResource("mim.jpg"));
+        image = new ImageIcon(getClass().getResource("polarisbg.jpg"));
     }
     /**
      * Cree l'image de fond redimensionnee pour s'ajuster à la taille du composant.

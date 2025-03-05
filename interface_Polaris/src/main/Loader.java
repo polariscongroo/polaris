@@ -1,4 +1,6 @@
 package main;
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.nio.file.*;
@@ -8,8 +10,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import static java.lang.Math.PI;
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
+import static javax.swing.GroupLayout.Alignment.CENTER;
 
 /**
  * Classe representant une fenêtre permettant de charger un fichier d'image.
@@ -17,7 +26,7 @@ import javax.swing.*;
  * puis enregistre le chemin de ce fichier dans un fichier texte.
  * @author RAVEN, Chadi A.
  */
-public class Loader extends javax.swing.JFrame {
+public class Loader extends javax.swing.JFrame{
     /**
      * Constructeur de la classe {@code Loader}.
      * Initialise les composants graphiques de l'interface.
@@ -47,80 +56,131 @@ public class Loader extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        constellationshow1 = new javax.swing.JButton();
         background1 = new interfacegraphique.Background();
         bouton = new main.Button();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        constellationshow = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        constellationshow2 = new javax.swing.JButton();
+
+        constellationshow1.setBackground(new java.awt.Color(0, 0, 0));
+        constellationshow1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        constellationshow1.setForeground(new java.awt.Color(255, 255, 255));
+        constellationshow1.setText("Constellation");
+        constellationshow1.setBorder(null);
+        constellationshow1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                constellationshow1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bouton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.gray));
+        bouton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         bouton.setForeground(new java.awt.Color(255, 255, 255));
-        bouton.setText("Load ...");
+        bouton.setText("Polaris");
         bouton.setToolTipText("");
         bouton.setBorderPainted(true);
-        bouton.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        bouton.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        bouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonActionPerformed(evt);
             }
         });
 
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setRequestFocusEnabled(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), java.awt.Color.gray, java.awt.Color.gray));
         jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(560, 550));
+        jPanel1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jPanel1ComponentAdded(evt);
+            }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jPanel1ComponentRemoved(evt);
+            }
+        });
+
+        constellationshow.setBackground(new java.awt.Color(0, 0, 0));
+        constellationshow.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        constellationshow.setForeground(new java.awt.Color(255, 255, 255));
+        constellationshow.setText("Constellation");
+        constellationshow.setBorder(null);
+        constellationshow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                constellationshowActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addComponent(constellationshow, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addComponent(constellationshow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jTabbedPane1.addTab("Constellation", jPanel1);
+        jTabbedPane1.addTab("", jPanel1);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.gray));
         jPanel2.setOpaque(false);
         jPanel2.setRequestFocusEnabled(false);
 
+        constellationshow2.setBackground(new java.awt.Color(0, 0, 0));
+        constellationshow2.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        constellationshow2.setForeground(new java.awt.Color(255, 255, 255));
+        constellationshow2.setText("Histoire");
+        constellationshow2.setBorder(null);
+        constellationshow2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                constellationshow2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 286, Short.MAX_VALUE)
+            .addComponent(constellationshow2, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addComponent(constellationshow2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Histoire", jPanel2);
+        jTabbedPane1.addTab("", jPanel2);
 
         javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
         background1.setLayout(background1Layout);
         background1Layout.setHorizontalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bouton, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(background1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jTabbedPane1)
+                .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(background1Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(bouton, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         background1Layout.setVerticalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(background1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bouton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(bouton, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,6 +221,66 @@ public class Loader extends javax.swing.JFrame {
             }
         }    
     }//GEN-LAST:event_boutonActionPerformed
+
+    public void jPanel1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel1ComponentAdded
+
+    }//GEN-LAST:event_jPanel1ComponentAdded
+    private int longueur = 1000;
+    private int largeur = 550;
+    private void constellationshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshowActionPerformed
+        try {
+            BufferedImage img = ImageIO.read(new File("/Users/chadiaitekioui/Coding/Polaris/polaris/interface_Polaris/src/interfacegraphique/cassio.png"));
+
+            if (img == null) {
+                System.err.println("Image not found or could not be loaded!");
+                return;
+            }
+
+            // Rotate if the image is vertical
+            if (img.getHeight() > img.getWidth()) {
+                AffineTransform tx = new AffineTransform();
+                tx.translate(img.getHeight() / 2.0, img.getWidth() / 2.0);
+                tx.rotate(Math.PI / 2); // Rotate 90 degrees
+                tx.translate(-img.getWidth() / 2.0, -img.getHeight() / 2.0);
+
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                img = op.filter(img, null);
+            }
+
+            // Resize image to fit panel
+            Image scaledImage = img.getScaledInstance(longueur, largeur, Image.SCALE_SMOOTH);
+            ImageIcon icon = new ImageIcon(scaledImage);
+
+            // Remove previous components to avoid the button resizing
+            jPanel1.removeAll();
+            jPanel1.setLayout(new BorderLayout());
+
+            JLabel imageLabel = new JLabel(icon);
+            jPanel1.add(imageLabel, BorderLayout.CENTER);
+
+            jPanel1.revalidate();
+            jPanel1.repaint();
+
+            System.out.println("Image displayed successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+    }//GEN-LAST:event_constellationshowActionPerformed
+
+    private void jPanel1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel1ComponentRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1ComponentRemoved
+
+    private void constellationshow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshow1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_constellationshow1ActionPerformed
+
+    private void constellationshow2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshow2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_constellationshow2ActionPerformed
+    public Button getMonBouton() {
+        return bouton;  // Remplace "monBouton" par le vrai nom de ton bouton
+    }
     /**
      * Point d'entree principal de l'application.
      * Cree et affiche la fenêtre de l'application.
@@ -173,7 +293,14 @@ public class Loader extends javax.swing.JFrame {
         // Crée et affiche l'interface
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loader().setVisible(true);
+                Loader loader = new Loader();  // Création de la fenêtre
+                loader.setVisible(true);
+ 
+                // 🔹 Attendre que l'interface soit bien affichée avant d'appliquer le flou
+                /*SwingUtilities.invokeLater(() -> {
+                    Button myButton = loader.getMonBouton();  // Récupérer le bouton
+                    myButton.setBlur(loader.getContentPane());  // Appliquer le flou sur l'arrière-plan du bouton
+                });*/
             }
         });
         String pathString;
@@ -260,10 +387,12 @@ public class Loader extends javax.swing.JFrame {
             }
         }
     }
-    //private final JPanel pan = new JPanel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private interfacegraphique.Background background1;
     private main.Button bouton;
+    private javax.swing.JButton constellationshow;
+    private javax.swing.JButton constellationshow1;
+    private javax.swing.JButton constellationshow2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
