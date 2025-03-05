@@ -10,15 +10,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
-import static java.lang.Math.PI;
 import javax.imageio.ImageIO;
 
 import javax.swing.*;
-import static javax.swing.GroupLayout.Alignment.CENTER;
 
 /**
  * Classe representant une fenêtre permettant de charger un fichier d'image.
