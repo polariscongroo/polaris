@@ -225,46 +225,51 @@ public class Loader extends javax.swing.JFrame{
     public void jPanel1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel1ComponentAdded
 
     }//GEN-LAST:event_jPanel1ComponentAdded
-    private int longueur = 1000;
-    private int largeur = 550;
+    private int largeur = 651; // Largeur fixe
+    private int hauteur = 330; // Hauteur fixe 
     private void constellationshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshowActionPerformed
+                                             
+        BufferedImage img = null;
         try {
-            BufferedImage img = ImageIO.read(new File("/Users/chadiaitekioui/Coding/Polaris/polaris/interface_Polaris/src/interfacegraphique/cassio.png"));
-
-            if (img == null) {
-                System.err.println("Image not found or could not be loaded!");
-                return;
-            }
-
-            // Rotate if the image is vertical
-            if (img.getHeight() > img.getWidth()) {
-                AffineTransform tx = new AffineTransform();
-                tx.translate(img.getHeight() / 2.0, img.getWidth() / 2.0);
-                tx.rotate(Math.PI / 2); // Rotate 90 degrees
-                tx.translate(-img.getWidth() / 2.0, -img.getHeight() / 2.0);
-
-                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-                img = op.filter(img, null);
-            }
-
-            // Resize image to fit panel
-            Image scaledImage = img.getScaledInstance(longueur, largeur, Image.SCALE_SMOOTH);
-            ImageIcon icon = new ImageIcon(scaledImage);
-
-            // Remove previous components to avoid the button resizing
-            jPanel1.removeAll();
-            jPanel1.setLayout(new BorderLayout());
-
-            JLabel imageLabel = new JLabel(icon);
-            jPanel1.add(imageLabel, BorderLayout.CENTER);
-
-            jPanel1.revalidate();
-            jPanel1.repaint();
-
-            System.out.println("Image displayed successfully.");
+            img = ImageIO.read(new File("/Users/chadiaitekioui/Coding/Polaris/polaris/interface_Polaris/src/interfacegraphique/orsaminor.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
-    }
+            return; // Stop si l'image n'est pas trouvée
+        }
+
+        if (img == null) {
+            System.err.println("Image non chargée !");
+            return;
+        }
+
+        // Vérifier si l'image est verticale, si oui, la tourner
+        if (img.getHeight() > img.getWidth()) {
+            AffineTransform tx = AffineTransform.getRotateInstance(Math.PI / 2, img.getWidth() / 2, img.getHeight() / 2);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            img = op.filter(img, null);
+        }
+
+        // Redimensionner l'image pour qu'elle tienne dans le cadre (sans déformation)
+        Image scaledImage = img.getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(scaledImage);
+
+        // Supprimer les anciens composants pour éviter que ça s'empile
+        jPanel1.removeAll();
+
+        // Créer le JLabel avec l'image
+        JLabel imageLabel = new JLabel(icon);
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        imageLabel.setVerticalAlignment(JLabel.CENTER);
+
+        // Utiliser BorderLayout pour centrer l'image dans le cadre
+        jPanel1.setLayout(new BorderLayout());
+        jPanel1.add(imageLabel, BorderLayout.CENTER);
+
+        // Mettre à jour l'affichage
+        jPanel1.revalidate();
+        jPanel1.repaint();
+
+        System.out.println("L'image a bien été affichée !");
     }//GEN-LAST:event_constellationshowActionPerformed
 
     private void jPanel1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel1ComponentRemoved
