@@ -36,14 +36,14 @@ public class DetectedStarSetTest {
     @DisplayName("Test 1 : CombinationStar renvoie une liste à k parmi n liste de k éléments")
     public void lengthCombinationStar() {
     	int lengthSet = Combinatorics.combination(workingDetectedStarSet.getStars().length, 3); // Nombre de combinaison à 3 éléments
-    	Star[][] resultCombination = new Star[lengthSet][3];
+		DetectedStarSet[] resultCombination = new DetectedStarSet[lengthSet];
     	// On met dans resultCombination, toutes les combinaisons à k élément d'éléments de workingDetectedStarSet
     	workingDetectedStarSet.combinationStar(3,resultCombination,workingDetectedStarSet.getStars(),new Star[0]);
     	// Il y a bien le bon nombre de combinaison
         Assertions.assertEquals(lengthSet,resultCombination.length);
         for(int i = 0; i < lengthSet; i += 1) {
         	// Les combinaisons sont toutes de tailles 3
-        	Assertions.assertEquals(3, resultCombination[i].length);
+        	Assertions.assertEquals(3, resultCombination[i].getStars().length);
         }
     }
 
@@ -54,13 +54,13 @@ public class DetectedStarSetTest {
 	@DisplayName("Test 2 : CombinationStar renvoie une liste de combinaison toutes non vides")
 	public void notEmptyCombinationStar() {
 		int lengthSet = Combinatorics.combination(workingDetectedStarSet.getStars().length, 3); // Nombre de combinaison à 3 éléments
-		Star[][] resultCombination = new Star[lengthSet][3];
+		DetectedStarSet[] resultCombination = new DetectedStarSet[lengthSet];
 		// On met dans resultCombination, toutes les combinaisons à k élément d'éléments de workingDetectedStarSet
 		workingDetectedStarSet.combinationStar(3,resultCombination,workingDetectedStarSet.getStars(),new Star[0]);
 		for(int i = 0; i < lengthSet; i += 1){
 			for(int j = 0; j < 3; j += 1){
 				// Les éléments sont tous non nuls
-				Assertions.assertNotNull(resultCombination[i][j]);
+				Assertions.assertNotNull(resultCombination[i].getStars()[j]);
 			}
 		}
 	}
@@ -72,12 +72,14 @@ public class DetectedStarSetTest {
     @DisplayName("Test 3 : CombinationStar renvoie une liste de combinaison toutes différentes")
     public void differentCombinationStar() {
     	int lengthSet = Combinatorics.combination(workingDetectedStarSet.getStars().length, 3); // Nombre de combinaison à 3 éléments
-    	Star[][] resultCombination = new Star[lengthSet][3];
+    	DetectedStarSet[] resultCombination = new DetectedStarSet[lengthSet];
     	// On met dans resultCombination, toutes les combinaisons à k élément d'éléments de workingDetectedStarSet
     	workingDetectedStarSet.combinationStar(3, resultCombination, workingDetectedStarSet.getStars(), new Star[0]);
     	for(int i = 0; i < lengthSet; i += 1) {
     		for(int j = i + 1; j < lengthSet; j += 1) {
-    			Assertions.assertNotEquals(resultCombination[i], resultCombination[j]); // Vérifie que les combinaisons sont toutes différentes
+				for(int k = 0; k < 3; k += 1) {
+					Assertions.assertNotEquals(resultCombination[i].getStars(), resultCombination[j].getStars()); // Vérifie que les combinaisons sont toutes différentes
+				}
     		}
     	}
     }

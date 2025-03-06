@@ -74,9 +74,9 @@ public class DetectedStarSet extends StarSet
      * @param resultStars Tableau contenant toutes les combinaisons à générer.
      * @return L'index de la première combinaison d'étoiles null de resultStars
      */
-    private int firstNull(Star[][] resultStars){
+    private int firstNull(DetectedStarSet[] resultStars){
         for(int i = 0; i < resultStars.length; i += 1){
-            if(resultStars[i][0] == null){
+            if(resultStars[i] == null){
                 return i;
             }
         }
@@ -93,13 +93,13 @@ public class DetectedStarSet extends StarSet
      * @param tempStarList Liste temporaire pour stocker les étoiles en cours de combinaison.
      * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
-    public void combinationStar(int k, Star[][] resultStars, Star[] copyStars, Star[] tempStarList) {
+    public void combinationStar(int k, DetectedStarSet[] resultStars, Star[] copyStars, Star[] tempStarList) {
     	if(k > copyStars.length) { // Cas ou on demande des combinaisons de K parmi N avec K > N
     		return;
     	} else if(k <= 0) { // Cas ou on a termine de faire une combinaison
             // On ajoute cette combinaison dans resultStars en recherchant d'abord le premier indice qui ne pointe pas vers une liste nulle
             int indice = firstNull(resultStars);
-    		resultStars[indice] = tempStarList;
+    		resultStars[indice] = new DetectedStarSet(tempStarList);
     	} else {
     		for(int i = 0; i < copyStars.length; i += 1) {
     			Star[] g = listAfterIndex(i, copyStars); // g est la liste des étoiles de copyStars se situant après l'indice i
@@ -112,7 +112,7 @@ public class DetectedStarSet extends StarSet
     }
     
     /**
-     * Recherche la meilleure liste d'étoiles correspondant à une constellation.
+     * Recherche la meilleure liste d'étoiles qui minimise le cout entre elle et les constellations.
      *
      * @param k Nombre d'étoiles à selectionner.
      * @param coutMinParTaille Tableau stockant les coûts minimaux par taille de constellation.
@@ -120,31 +120,24 @@ public class DetectedStarSet extends StarSet
      * @return La liste d'étoiles ayant le coût minimal.
      * @throws TriangleMatchingException Si une erreur survient lors de l'appariement des constellations.
      */
-    public DetectedStarSet findRightListStar(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
-    	// On cree une liste composee de tous les ensembles d'étoiles à k elements :
+    public DetectedStarSet findRightStarSet(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
+    	// On cree une liste composee de toutes les combinaisons d'étoiles à k elements :
     	
     	// Nombre de combinaisons
     	int nbCombination = Combinatorics.combination(stars.length, k);
     	
-    	// Liste de toutes les combinaisons de constellations à k étoiles
-    	DetectedStarSet[] listeConstellation = new DetectedStarSet[nbCombination];
-    	
     	// Liste de toutes les combinaisons de k étoiles
-    	Star[][] starsListConstellation = new Star[nbCombination][k];
-    	
-    	combinationStar(k,starsListConstellation, stars,new Star[k]);
-    	
-    	// On a la liste des combinaisons de toutes les étoiles, il faut maintenant faire de ces listes, des constellations
-    	for(int i = 0; i < nbCombination; i += 1) {
-    		listeConstellation[i] = new DetectedStarSet(starsListConstellation[i]);
-    	}
+    	DetectedStarSet[] starsSetCombinations = new DetectedStarSet[nbCombination];
+
+        // On remplit la liste
+    	combinationStar(k,starsSetCombinations, stars,new Star[k]);
     	
     	// On cherche l'ensemble d'étoiles de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
     	double minCoutConstellation = Double.MAX_VALUE;
     	int indConstellation = -1;
     	
-    	for(int i = 0; i < listeConstellation.length; i += 1) {
-    		double coutCons = listeConstellation[i].coutConstellation(constellations);
+    	for(int i = 0; i < starsSetCombinations.length; i += 1) {
+    		double coutCons = starsSetCombinations[i].coutConstellation(constellations);
     		if(minCoutConstellation > coutCons) {
     			indConstellation = i;
     			minCoutConstellation = coutCons;
@@ -152,29 +145,32 @@ public class DetectedStarSet extends StarSet
     	}
     	
     	coutMinParTaille[k-3] = minCoutConstellation;
-    	return listeConstellation[indConstellation];
+    	return starsSetCombinations[indConstellation];
     }
     /**
-     * Recherche la constellation la plus proche parmi un ensemble de constellations donnees.
+     * Recherche la constellation la plus proche de notre ensemble d'étoiles parmi un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer, venant de la base de donnees.
      * @return La liste d'étoiles correspondant à la constellation la plus proche.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    public DetectedStarSet searchConstellation(Constellation... constellations) throws TriangleMatchingException {
+    public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
     	// On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
-    	// LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
-    	double[] coutMinParTaille = new double[10];
+
     	// Liste d'étoiles choisies pour chaque constellation
-    	DetectedStarSet[] selectedConstellations = new DetectedStarSet[10];
+    	DetectedStarSet[] selectedStarSet = new DetectedStarSet[10]; // LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
+        // Cout minimal entre la liste d'étoile selectionne et les constellations
+        double[] minCostPerLength = new double[10];
+
     	// Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
     	for(int i = 0; i < 10; i += 1) {
-    		selectedConstellations[i] = findRightListStar(i+3,coutMinParTaille,constellations);
+    		selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
     	}
-    	// On recherche la taille d'étoiles qui a le cout le plus faible
-    	int minIndex = Functions.minIndex(coutMinParTaille);
 
-    	return selectedConstellations[minIndex];
+    	// On recherche la taille d'étoiles qui a le cout le plus faible
+    	int minIndex = Functions.minIndex(minCostPerLength);
+
+    	return selectedStarSet[minIndex];
     	
     }
 
@@ -216,7 +212,7 @@ public class DetectedStarSet extends StarSet
     }
     
     /**
-     * Calcule le coût minimal entre l'ensemble d'étoiles de la photo et un ensemble de constellations donnees.
+     * Calcule le coût minimal entre l'ensemble d'étoiles de la combinaison et un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer.
      * @return Le coût minimal entre la photo et les constellations.
