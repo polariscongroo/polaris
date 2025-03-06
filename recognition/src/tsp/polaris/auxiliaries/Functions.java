@@ -23,5 +23,18 @@ public class Functions {
         }
         return min;
     }
+
+    /**
+     * Renvoie la somme d'un tableau
+     * @param tab tableau
+     * @return double : somme d'un tableau
+     */
+    public static double sum(double[] tab) {
+        double sum = 0;
+        for(int i = 0; i < tab.length; i += 1) {
+            sum += tab[i];
+        }
+        return sum;
+    }
     
 }

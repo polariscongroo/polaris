@@ -7,6 +7,8 @@ import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.other.Triangle;
 import tsp.polaris.recognition.exceptions.TriangleMatchingException;
 
+import static tsp.polaris.auxiliaries.Functions.sum;
+
 /**
  * Classe représentant une liste d'étoile dans l'image à analyser
  * Cette classe permet notamment de générer des combinaisons d'étoiles
@@ -177,22 +179,6 @@ public class DetectedStarSet extends StarSet
     }
 
     /**
-     * Calcule le coût total d'une constellation à partir des coûts des triangles.
-     *
-     * @param cout_triangle Tableau des coûts des triangles.
-     * @return Le coût total de la constellation.
-     */
-    public static double couts(double[] cout_triangle)
-    {
-        double cout_constellation = 0;
-        for (int cout = 0; cout < cout_triangle.length; cout++)
-        {
-            cout_constellation += cout_triangle[cout];
-        }
-        return cout_constellation;
-    }
-
-    /**
      * Selectionne la constellation avec le coût minimal parmi un ensemble de constellations donnees.
      *
      * @param constellations Les constellations à comparer.
@@ -217,7 +203,7 @@ public class DetectedStarSet extends StarSet
 
             // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
             double[] liste_cout = listPhoto.couts(listTriangle);
-            double total = couts(liste_cout);  // Calculez le total des coûts
+            double total = sum(liste_cout);  // Calculez le total des coûts
 
             // Verifiez si le total des coûts de cette constellation est le plus bas
             if (minimum_cout > total)
@@ -252,7 +238,7 @@ public class DetectedStarSet extends StarSet
 
             // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
             double[] liste_cout = listPhoto.couts(listTriangle);
-            double total = couts(liste_cout);  // Calculez le total des coûts
+            double total = sum(liste_cout);  // Calculez le total des coûts
 
             // Verifiez si le total des coûts de cette constellation est le plus bas
             if (minimum_cout > total)
