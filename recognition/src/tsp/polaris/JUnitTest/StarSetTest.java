@@ -1,12 +1,13 @@
 package tsp.polaris.JUnitTest;
 
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.starSet.StarSet;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.other.Triangle;
+import tsp.polaris.recognition.starSet.StarSet;
 
 /**
  * Tests unitaires de la classe StarSet
@@ -40,11 +41,23 @@ public class StarSetTest {
     }
 
     /**
-     * Test 2 : Les triangles sont tous différents
+     * Test 2 : Aucun triangle n'est un pointeur null
      */
     @Test
-    @DisplayName("Test 2 : Les triangles sont tous différents")
-    public void differentTrianglesCheckGenerateTriangles(){
+    @DisplayName("Test 2 : Aucun triangle n'est un pointeur null")
+    public void nullTriangleCheckGenerateTriangles(){
+        Triangle[] triangles = workingStarSet.generateTriangles();
+        for (Triangle triangle : triangles) {
+            Assertions.assertNotNull(triangle);
+        }
+    }
+
+    /**
+     * Test 3 : Les triangles sont tous différents
+     */
+    @Test
+    @DisplayName("Test 3 : Les triangles sont tous différents")
+    public void differentTrianglesCheckGenerateTriangles() {
         Triangle[] triangles = workingStarSet.generateTriangles();
         for (int i = 0; i < triangles.length - 1; i++) {
             for (int j = i + 1; j < triangles.length; j++) {
@@ -52,5 +65,4 @@ public class StarSetTest {
             }
         }
     }
-
 }

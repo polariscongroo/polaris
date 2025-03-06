@@ -65,7 +65,22 @@ public class DetectedStarSet extends StarSet
     	}
     	return listAfterIndex;
     }
-    
+
+    /**
+     * Renvoie l'index de la première liste d'étoiles null de resultStars
+     *
+     * @param resultStars Tableau contenant toutes les combinaisons à générer.
+     * @return L'index de la première combinaison d'étoiles null de resultStars
+     */
+    private int firstNull(Star[][] resultStars){
+        for(int i = 0; i < resultStars.length; i += 1){
+            if(resultStars[i][0] == null){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     /**
      * Génère toutes les combinaisons possibles de k étoiles parmi les étoiles disponibles.
      * Cette fonction utilise un algorithme combinatoire base sur un pseudo-code disponible en ligne.
@@ -73,14 +88,15 @@ public class DetectedStarSet extends StarSet
      * @param k Nombre d'étoiles à selectionner.
      * @param resultStars Tableau contenant toutes les combinaisons générées.
      * @param copyStars Copie des étoiles disponibles.
-     * @param indice Indice de la combinaison en cours.
      * @param tempStarList Liste temporaire pour stocker les étoiles en cours de combinaison.
      * @see <a href="http://jm.davalan.org/mots/comb/comb/combalgo.html">Pseudo-code utilise (modifie)</a>
      */
-    public void combinationStar(int k, Star[][] resultStars, Star[] copyStars, Star[] tempStarList, int indice) {
+    public void combinationStar(int k, Star[][] resultStars, Star[] copyStars, Star[] tempStarList) {
     	if(k > copyStars.length) { // Cas ou on demande des combinaisons de K parmi N avec K > N
     		return;
     	} else if(k <= 0) { // Cas ou on a termine de faire une combinaison
+            // On ajoute cette combinaison dans resultStars en recherchant d'abord le premier indice qui ne pointe pas vers une liste nulle
+            int indice = firstNull(resultStars);
     		resultStars[indice] = tempStarList;
     	} else {
     		for(int i = 0; i < copyStars.length; i += 1) {
@@ -88,7 +104,7 @@ public class DetectedStarSet extends StarSet
     			
     			Star[] l2 = listAddElement(tempStarList,copyStars[i]); // l2 est la liste tempStarList auquel on rajoute l'élément en indice i de copyStars
     			
-    			combinationStar(k-1, resultStars, g, l2, indice+i);
+    			combinationStar(k-1, resultStars, g, l2);
     		}
     	}
     }
@@ -114,7 +130,7 @@ public class DetectedStarSet extends StarSet
     	// Liste de toutes les combinaisons de k étoiles
     	Star[][] starsListConstellation = new Star[nbCombination][k];
     	
-    	combinationStar(k,starsListConstellation, stars,new Star[k], 0);
+    	combinationStar(k,starsListConstellation, stars,new Star[k]);
     	
     	// On a la liste des combinaisons de toutes les étoiles, il faut maintenant faire de ces listes, des constellations
     	for(int i = 0; i < nbCombination; i += 1) {
