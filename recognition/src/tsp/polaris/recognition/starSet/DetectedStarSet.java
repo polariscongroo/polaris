@@ -150,32 +150,6 @@ public class DetectedStarSet extends StarSet
     	coutMinParTaille[k-3] = minCoutConstellation;
     	return starsSetCombinations[indConstellation];
     }
-    /**
-     * Recherche la constellation la plus proche de notre ensemble d'étoiles parmi un ensemble de constellations donnees.
-     *
-     * @param constellations Les constellations à comparer, venant de la base de donnees.
-     * @return La liste d'étoiles correspondant à la constellation la plus proche.
-     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
-     */
-    public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
-    	// On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
-
-    	// Liste d'étoiles choisies pour chaque constellation
-    	DetectedStarSet[] selectedStarSet = new DetectedStarSet[10]; // LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
-        // Cout minimal entre la liste d'étoile selectionne et les constellations
-        double[] minCostPerLength = new double[10];
-
-    	// Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
-    	for(int i = 0; i < 10; i += 1) {
-    		selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
-    	}
-
-    	// On recherche la taille d'étoiles qui a le cout le plus faible
-    	int minIndex = Functions.minIndex(minCostPerLength);
-
-    	return selectedStarSet[minIndex];
-    	
-    }
     
     /**
      * Calcule le coût minimal entre l'ensemble d'étoiles de la combinaison et un ensemble de constellations donnees.
@@ -192,26 +166,55 @@ public class DetectedStarSet extends StarSet
         // Parcour les constellations passees en argument
         for (Constellation c : constellations)
         {
-            // Genere les triangles du set d'étoiles et la constellation c
-            Triangle[] trianglesStarSet = generateTriangles(); // Triangles du set d'étoiles
-            Triangle[] trianglesConstellation = c.generateTriangles(); // Triangles de la constellation c
+            // On ne regarde que les constellations qui ont le meme nombre d'étoiles
+            if(c.getStars().length == getStars().length) {
+                // Genere les triangles du set d'étoiles et la constellation c
+                Triangle[] trianglesStarSet = generateTriangles(); // Triangles du set d'étoiles
+                Triangle[] trianglesConstellation = c.generateTriangles(); // Triangles de la constellation c
 
-            ListTriangle listTriangleStarSet = new ListTriangle(trianglesStarSet);
-            ListTriangle listTriangleConstellation = new ListTriangle(trianglesConstellation);
+                ListTriangle listTriangleStarSet = new ListTriangle(trianglesStarSet);
+                ListTriangle listTriangleConstellation = new ListTriangle(trianglesConstellation);
 
-            // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
-            double[] liste_cout = listTriangleStarSet.couts(listTriangleConstellation);
+                // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
+                double[] liste_cout = listTriangleStarSet.couts(listTriangleConstellation);
 
-            double total = sum(liste_cout);  // Calcul le total des coûts
+                double total = sum(liste_cout);  // Calcul le total des coûts
 
-            // Verifiez si le total des coûts de cette constellation est le plus bas
-            if (minimum_cout > total)
-            {
-                minimum_cout = total;  // Mettez à jour le coût minimal
-                winningConstellation = c;
+                // Verifiez si le total des coûts de cette constellation est le plus bas
+                if (minimum_cout > total) {
+                    minimum_cout = total;  // Mettez à jour le coût minimal
+                    winningConstellation = c;
+                }
             }
         }
         nearConstellation = winningConstellation;
         return minimum_cout;  // Retourner le cout minimal de la constellation
+    }
+
+    /**
+     * Recherche la liste d'étoile qui ressemble le plus à une constellation.
+     *
+     * @param constellations Les constellations à comparer, venant de la base de donnees.
+     * @return La liste d'étoile qui ressemble le plus à une constellation.
+     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
+     */
+    public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
+        // On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
+
+        // Liste d'étoiles choisies pour chaque constellation
+        DetectedStarSet[] selectedStarSet = new DetectedStarSet[10]; // LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
+        // Cout minimal entre la liste d'étoile selectionne et les constellations
+        double[] minCostPerLength = new double[10];
+
+        // Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
+        for(int i = 0; i < 10; i += 1) {
+            selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
+        }
+
+        // On recherche la taille d'étoiles qui a le cout le plus faible
+        int minIndex = Functions.minIndex(minCostPerLength);
+
+        return selectedStarSet[minIndex];
+
     }
 }

@@ -9,14 +9,14 @@ import tsp.polaris.recognition.exceptions.TriangleMatchingException;
 
 public class ListTriangle
 {
-	private Triangle[] listeT;
+	private Triangle[] listTriangle;
 	
 	/**
 	 * Constructeur qui initialise le tableau des triangles
-	 * @param listeT Liste des triangles
+	 * @param listTriangle Liste des triangles
 	 */
-	public ListTriangle(Triangle[] listeT) {
-		this.listeT = listeT;
+	public ListTriangle(Triangle[] listTriangle) {
+		this.listTriangle = listTriangle;
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class ListTriangle
 	 */
 	public String toString() {
 		String str = "";
-		for(Triangle triangle : listeT) {
+		for(Triangle triangle : listTriangle) {
 			str += " " + triangle.toString();
 		}
 		return str;
@@ -40,8 +40,8 @@ public class ListTriangle
     public double[] couts(ListTriangle listeTriangle2) throws TriangleMatchingException
     {
         // Taille des triangles
-        int taille1 = listeT.length;
-        int taille2 = listeTriangle2.listeT.length;
+        int taille1 = listTriangle.length;
+        int taille2 = listeTriangle2.listTriangle.length;
         
         // Cas ou les listes n'ont pas la même taille (donc ne peuvent pas representer la même constellation)
         if (taille1 != taille2)
@@ -56,7 +56,7 @@ public class ListTriangle
         {
             for (int triangle2 = 0; triangle2 < taille1; triangle2++)
             {
-                tab[index] = listeT[triangle1].cout(listeTriangle2.listeT[triangle2]); // Cout entre les 2 triangles
+                tab[index] = listTriangle[triangle1].cout(listeTriangle2.listTriangle[triangle2]); // Cout entre les 2 triangles
                 index ++;
             }
         }

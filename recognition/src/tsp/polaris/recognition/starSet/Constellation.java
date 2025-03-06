@@ -26,6 +26,7 @@ public class Constellation extends StarSet {
 
     /**
      * Création d'une Constellation depuis des données d'étoiles.
+     *
      * @param data Données des étoiles
      * @return Constellation : Ensemble d'étoiles correspondant aux données d'étoiles.
      */
