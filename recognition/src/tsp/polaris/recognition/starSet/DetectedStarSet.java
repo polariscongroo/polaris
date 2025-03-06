@@ -18,6 +18,8 @@ import static tsp.polaris.auxiliaries.Functions.sum;
  */
 public class DetectedStarSet extends StarSet
 {
+    Constellation nearConstellation;
+
     /**
      * Constructeur de la classe StarSet.
      *
@@ -26,6 +28,7 @@ public class DetectedStarSet extends StarSet
     public DetectedStarSet(Star[] stars)
     {
         super(stars);
+        nearConstellation = null; // Constellation la plus proche de la liste d'étoiles
     }
 
     /**
@@ -173,43 +176,6 @@ public class DetectedStarSet extends StarSet
     	return selectedStarSet[minIndex];
     	
     }
-
-    /**
-     * Selectionne la constellation avec le coût minimal parmi un ensemble de constellations donnees.
-     *
-     * @param constellations Les constellations à comparer.
-     * @return La constellation avec le coût minimal.
-     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
-     */
-    public String selectConstellation(Constellation... constellations) throws TriangleMatchingException
-    {
-        // Initialiser le "winner" à null
-        Constellation winner = null;
-        double minimum_cout = Double.MAX_VALUE; // Utiliser une valeur maximale pour commencer.
-
-        // Parcourir les constellations passees en argument
-        for (Constellation c : constellations)
-        {
-            // Generer les triangles pour la photo et la constellation c
-            Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
-            Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
-
-            ListTriangle listPhoto = new ListTriangle(triangles_photo);
-            ListTriangle listTriangle = new ListTriangle(triangles_c);
-
-            // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
-            double[] liste_cout = listPhoto.couts(listTriangle);
-            double total = sum(liste_cout);  // Calculez le total des coûts
-
-            // Verifiez si le total des coûts de cette constellation est le plus bas
-            if (minimum_cout > total)
-            {
-                minimum_cout = total;  // Mettez à jour le coût minimal
-                winner = c;             // Mettez à jour la constellation gagnante
-            }
-        }
-        return winner.getNom();  // Retourner la constellation avec le coût minimal
-    }
     
     /**
      * Calcule le coût minimal entre l'ensemble d'étoiles de la combinaison et un ensemble de constellations donnees.
@@ -220,28 +186,32 @@ public class DetectedStarSet extends StarSet
      */
     public double coutConstellation(Constellation... constellations) throws TriangleMatchingException
     {
-        double minimum_cout = Double.MAX_VALUE; // Utiliser une valeur maximale pour commencer.
+        Constellation winningConstellation = null; // Garde en mémoire la constellation la plus proche
+        double minimum_cout = Double.MAX_VALUE; // Utilise une valeur maximale pour commencer.
 
-        // Parcourir les constellations passees en argument
+        // Parcour les constellations passees en argument
         for (Constellation c : constellations)
         {
-            // Generer les triangles pour la photo et la constellation c
-            Triangle[] triangles_photo = generateTriangles(); // Triangles de la photo
-            Triangle[] triangles_c = c.generateTriangles();         // Triangles de la constellation c
+            // Genere les triangles du set d'étoiles et la constellation c
+            Triangle[] trianglesStarSet = generateTriangles(); // Triangles du set d'étoiles
+            Triangle[] trianglesConstellation = c.generateTriangles(); // Triangles de la constellation c
 
-            ListTriangle listPhoto = new ListTriangle(triangles_photo);
-            ListTriangle listTriangle = new ListTriangle(triangles_c);
+            ListTriangle listTriangleStarSet = new ListTriangle(trianglesStarSet);
+            ListTriangle listTriangleConstellation = new ListTriangle(trianglesConstellation);
 
-            // Calculer les coûts entre les triangles de la photo et ceux de la constellation c
-            double[] liste_cout = listPhoto.couts(listTriangle);
-            double total = sum(liste_cout);  // Calculez le total des coûts
+            // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
+            double[] liste_cout = listTriangleStarSet.couts(listTriangleConstellation);
+
+            double total = sum(liste_cout);  // Calcul le total des coûts
 
             // Verifiez si le total des coûts de cette constellation est le plus bas
             if (minimum_cout > total)
             {
                 minimum_cout = total;  // Mettez à jour le coût minimal
+                winningConstellation = c;
             }
         }
-        return minimum_cout;  // Retourner la constellation avec le coût minimal
+        nearConstellation = winningConstellation;
+        return minimum_cout;  // Retourner le cout minimal de la constellation
     }
 }
