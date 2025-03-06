@@ -4,6 +4,7 @@ from PIL import Image
 from astropy.stats import mad_std
 from collections import deque
 import sys
+import os
 
 file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
 
@@ -78,71 +79,102 @@ def erase_txt():
     with open(file_path, "w") as f:
         f.write("")  # Vide le fichier
         
+# Exception à lever si output.txt n'existe pas
+class OutputNotFound(FileNotFoundError):
+    pass
+
+# Exception à lever si output.txt est vide
+class EmptyFile(Exception):
+    pass
+
+# Exception à lever si le chemin de l'image n'existe pas
+class ImageNotFound(FileNotFoundError):
+    pass
+
 # Lecture du chemin de l'image à traiter depuis output.txt
-try:
-    with open(file_path, "r") as f:
-        image_path = f.read().strip()  # Relit le fichier à chaque itération
-    print("6. Dans la boucle du python. Lecture de output.txt réalisée")
-    sys.stdout.flush()
-
-    # Si un chemin est trouvé, traite l'image
-    if image_path != "":
-        print(f"Traitement de l'image : {image_path}")
-        try:
-            print("7. Image bien reçu par python, traitement en cours")
+def main():
+    try:
+        # Vérifie l'existence de output.txt
+        if not os.path.exists(file_path):
+            raise(OutputNotFound("Le fichier output.txt n'existe pas encore..."))
+        
+        # Lecture de output.txt
+        else:
+            with open(file_path, "r") as f:
+                image_path = f.read().strip()  # Relit le fichier à chaque itération
+            print("6. Dans la boucle du python. Lecture de output.txt réalisée")
             sys.stdout.flush()
 
-            # Chargement et normalisation de l'image
-            image = Image.open(image_path).convert('L')  # Conversion en niveaux de gris
-            image_array = np.array(image, dtype=float)
-            image_array /= image_array.max()  # Normalisation des valeurs
+            # Vérifie que output.txt contient le chemin de l'image
+            if image_path == "":
+                raise(EmptyFile("Le fichier output.txt est vide"))
 
-            # Détection des étoiles avec un seuil basé sur l'écart-type robuste (MAD)
-            sigma = mad_std(image_array)  # Calcul du bruit de fond
-            image_final = inverse_cor(image_array)  # Correction d'orientation
-            threshold_mask = image_final > (21.0 * sigma)  # Seuil pour isoler les étoiles
+            # Vérifie l'existence du chemin de l'image
+            elif not os.path.exists(image_path):
+                raise(ImageNotFound(f"L'image {image_path} n'existe pas."))
 
-            # Extraction des formes et calcul des coordonnées des étoiles
-            formes = determine_formes(threshold_mask)
-            coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
+            # Traitement de l'image
+            else:
+                print(f"Traitement de l'image : {image_path}")
+                try:
+                    print("7. Image bien reçu par python, traitement en cours")
+                    sys.stdout.flush()
 
-            print("8. Affichage lancé")
-            sys.stdout.flush()
+                    # Chargement et normalisation de l'image
+                    image = Image.open(image_path).convert('L')  # Conversion en niveaux de gris
+                    image_array = np.array(image, dtype=float)
+                    image_array /= image_array.max()  # Normalisation des valeurs
 
-            '''
-            # Affichage de l'image seuillée avec les étoiles détectées
-            plt.imshow(threshold_mask, cmap='gray', origin='lower')
-            for star in coordonneesdesetoiles:
-                plt.plot(star[1], star[0], 'ro')  # Marque les étoiles en rouge
-            plt.title('Thresholded Image With Stars')
-            plt.show(block=False)  # Ne bloque pas l'exécution du script
-            '''
+                    # Détection des étoiles avec un seuil basé sur l'écart-type robuste (MAD)
+                    sigma = mad_std(image_array)  # Calcul du bruit de fond
+                    image_final = inverse_cor(image_array)  # Correction d'orientation
+                    threshold_mask = image_final > (21.0 * sigma)  # Seuil pour isoler les étoiles
 
-            # Sauvegarde des coordonnées des étoiles et réinitialisation des fichiers
-            enregistre_les_etoiles(coordonneesdesetoiles, image_array)
-            print("9. fichier csv créé et rempli")
-            sys.stdout.flush()
+                    # Extraction des formes et calcul des coordonnées des étoiles
+                    formes = determine_formes(threshold_mask)
+                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
 
-            '''
-            # Boucle pour maintenir la fenêtre ouverte
-            while plt.get_fignums():
-                plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
-            '''
+                    print("8. Affichage lancé")
+                    sys.stdout.flush()
 
-            erase_txt()  # Vide le fichier txt après traitement
-            print("9. fichier txt vidé")
-            sys.stdout.flush()
-            
-            '''
-            plt.close()  # Ferme la figure
-            '''
+                    '''
+                    # Affichage de l'image seuillée avec les étoiles détectées
+                    plt.imshow(threshold_mask, cmap='gray', origin='lower')
+                    for star in coordonneesdesetoiles:
+                        plt.plot(star[1], star[0], 'ro')  # Marque les étoiles en rouge
+                    plt.title('Thresholded Image With Stars')
+                    plt.show(block=False)  # Ne bloque pas l'exécution du script
+                    '''
 
-            sys.exit()  # Termine le script Python
+                    # Sauvegarde des coordonnées des étoiles et réinitialisation des fichiers
+                    enregistre_les_etoiles(coordonneesdesetoiles, image_array)
+                    print("9. fichier csv créé et rempli")
+                    sys.stdout.flush()
 
-        except FileNotFoundError:
-            print(f"Erreur : L'image {image_path} n'existe pas.")
-        except Exception as e:
-            print(f"Erreur lors du traitement de l'image : {e}")
+                    '''
+                    # Boucle pour maintenir la fenêtre ouverte
+                    while plt.get_fignums():
+                        plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
+                    '''
 
-except FileNotFoundError:
-    print("Le fichier output.txt n'existe pas encore...")
+                    erase_txt()  # Vide le fichier txt après traitement
+                    print("9. fichier txt vidé")
+                    sys.stdout.flush()
+                    
+                    '''
+                    plt.close()  # Ferme la figure
+                    '''
+
+                    sys.exit()  # Termine le script Python
+
+                except EmptyFile as e:
+                    print(str(e))
+                except ImageNotFound as i:
+                    print(str(i))
+                except Exception as e:
+                    print(f"Erreur lors du traitement de l'image {image_path}")
+    except OutputNotFound as o:
+        print(str(o))
+
+if __name__ == '__main__':
+    main()

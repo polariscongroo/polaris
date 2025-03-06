@@ -1,5 +1,6 @@
 import unittest
-from ThresholdDetectMethod import cree_une_forme, determine_formes, determine_points_adjacents, enregistre_les_etoiles, erase_txt, inverse_cor
+from ThresholdDetectMethod import *
+import ThresholdDetectMethod as TDM
 import numpy as np
 import os
 import csv
@@ -20,6 +21,14 @@ class test_erase_txt(unittest.TestCase): ##verif ok
         self.assertFalse(os.path.exists(file_path), "File was not erased")
             
 class test_Cree_une_forme(unittest.TestCase):#verif ok
+    # S'exécute avant chaque test
+    def setUp(self):
+        pass
+
+    # S'exécute après chaque test
+    def tearDown(self):
+        pass
+    
     class test_Inverse_cor(unittest.TestCase):
         def test_inverse_matrix(self):##verif ok
             self.assertEqual(inverse_cor([[0,2],[1,2]]), [[1,2],[0,2]])
@@ -78,7 +87,41 @@ class test_Cree_une_forme(unittest.TestCase):#verif ok
         # Check if the contents of the CSV file match the expected coordinates
             self.assertEqual(csv_content, expected_coordinates, "CSV file contents are incorrect")
 
+class test_exceptions(unittest.TestCase):
+    # S'exécute avant chaque test
+    def setUp(self):
+        pass
+
+    # S'exécute après chaque test
+    def tearDown(self):
+        pass
+
+    def test_FileNotFound_outputtxt(self):
+        file_path="cartography/image_aTraiter/output.txt"
+        os.remove(file_path)
+        with self.assertRaises(OutputNotFound) as context:
+            TDM.main()
+        # Vérification du message de l'exception
+        self.assertEqual(str(context.exception), "Le fichier output.txt n'existe pas encore...")
+
+    def test_EmptyFile_outputtxt(self):
+        file_path="cartography/image_aTraiter/output.txt"
+        with open(file_path, "w") as f:
+            f.write("")
+        with self.assertRaises(EmptyFile) as context:
+            TDM.main()
+        # Vérification du message de l'exception
+        self.assertEqual(str(context.exception), "Le fichier output.txt est vide")
         
-        
-    if __name__ == '__main__':
-        unittest.main()
+    def test_FileNotFound_image(self):
+        image_path="random_txt.png"
+        with open(file_path, "w") as f:
+            f.write(image_path)
+        with self.assertRaises(ImageNotFound) as context:
+            TDM.main()
+        # Vérification du message de l'exception
+        self.assertEqual(str(context.exception), f"l'image {image_path} n'existe pas.")
+
+
+if __name__ == '__main__':
+    unittest.main()
