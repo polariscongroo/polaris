@@ -29,4 +29,28 @@ public class Star extends Point{
     public String toString() {
         return "(" + point[0] + ", " + point[1] + ") : " + brightness;
     }
+
+    /**
+     * Getter de la luminosité de l'étoile
+     *
+     * @return La luminosité de l'étoile
+     */
+    public double getBrightness() {
+        return brightness;
+    }
+
+    /**
+     * Compare deux étoiles en fonction de leur luminosité
+     * @param secondStar Etoile dont on veut comparer la luminosité
+     * @return Un entier signé en fonction de si la luminosité de l'étoile est plus grande, plus petite ou identique que la 2e
+     */
+    public int compareTo(Star secondStar) {
+        if(brightness == secondStar.brightness){
+            return 0;
+        } else if(brightness > secondStar.brightness){
+            return 1;
+        } else{
+            return -1;
+        }
+    }
 }

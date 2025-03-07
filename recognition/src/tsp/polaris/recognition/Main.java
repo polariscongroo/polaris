@@ -36,7 +36,6 @@ public class Main
             constellations[i] = Constellation.createConstellationWithData(dataBDD[i], nomConstellation[i]);
         }
 
-
         System.out.println(detectedStarSet.searchBestStarSet());
 
     }

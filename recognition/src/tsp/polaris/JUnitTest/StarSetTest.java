@@ -65,4 +65,8 @@ public class StarSetTest {
             }
         }
     }
+
+    /**
+     * Test 4 : Le tri des étoiles par luminsoté est bien décroissant
+     */
 }

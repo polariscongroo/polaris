@@ -30,7 +30,6 @@ public class ListTriangle
 		}
 		return str;
 	}
-	
 	/**
 	 * Méthodes qui calcule le coût entre des listes de triangles
 	 * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
