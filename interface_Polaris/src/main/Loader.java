@@ -38,10 +38,10 @@ public class Loader extends javax.swing.JFrame{
      */
     public static void transition(String path) {
         try {
-            FileWriter writer = new FileWriter("../cartography/image_aTraiter/output.txt");
+            FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
             writer.write(path);
             writer.close();
-            File file = new File("../cartography/image_aTraiter/output.txt");
+            File file = new File("/cartography/image_aTraiter/output.txt");
             System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
             System.out.println("3. Output.txt a été correctement modifié");
         } catch (IOException e) {
@@ -60,7 +60,8 @@ public class Loader extends javax.swing.JFrame{
         jPanel1 = new javax.swing.JPanel();
         constellationshow = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        constellationshow2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textarea = new javax.swing.JTextArea();
 
         constellationshow1.setBackground(new java.awt.Color(0, 0, 0));
         constellationshow1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
@@ -133,26 +134,23 @@ public class Loader extends javax.swing.JFrame{
         jPanel2.setOpaque(false);
         jPanel2.setRequestFocusEnabled(false);
 
-        constellationshow2.setBackground(new java.awt.Color(0, 0, 0));
-        constellationshow2.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        constellationshow2.setForeground(new java.awt.Color(255, 255, 255));
-        constellationshow2.setText("Histoire");
-        constellationshow2.setBorder(null);
-        constellationshow2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                constellationshow2ActionPerformed(evt);
-            }
-        });
+        textarea.setBackground(new java.awt.Color(0, 0, 0));
+        textarea.setColumns(20);
+        textarea.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        textarea.setLineWrap(true);
+        textarea.setRows(5);
+        textarea.setOpaque(false);
+        jScrollPane1.setViewportView(textarea);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(constellationshow2, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(constellationshow2, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("", jPanel2);
@@ -228,7 +226,15 @@ public class Loader extends javax.swing.JFrame{
                                              
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("/Users/chadiaitekioui/Coding/Polaris/polaris/interface_Polaris/src/interfacegraphique/orsaminor.jpg"));
+            // Récupère le chemin absolu du projet courant
+            String imgPath = new File("").getAbsolutePath();
+
+            // Chemin relatif vers le script Python
+            String imgRelativePath = "interface_Polaris/src/interfacegraphique/orsaminor.jpg";
+
+            // Construit le chemin complet vers le script
+            String imgFullPath0 = imgPath + File.separator + imgRelativePath;
+            img = ImageIO.read(new File(imgFullPath0));
         } catch (IOException e) {
             e.printStackTrace();
             return; // Stop si l'image n'est pas trouvée
@@ -261,6 +267,28 @@ public class Loader extends javax.swing.JFrame{
         // Utiliser BorderLayout pour centrer l'image dans le cadre
         jPanel1.setLayout(new BorderLayout());
         jPanel1.add(imageLabel, BorderLayout.CENTER);
+        try {
+        // Récupère le chemin absolu du projet courant
+        String textPath = new File("").getAbsolutePath();
+
+        // Chemin relatif vers le script Python
+        String textRelativePath = "baseDDonnees_txt/apus.txt";
+
+        // Construit le chemin complet vers le script
+        String textFullPath0 = textPath + File.separator + textRelativePath;
+        // Spécifier le chemin du fichier
+        Path textFullPath1 = Path.of(textFullPath0);
+
+            // Lire le contenu du fichier dans une variable
+            String contenu = Files.readString(textFullPath1);
+            textarea.setText(contenu);
+
+            // Afficher le contenu
+            System.out.println(contenu);
+            System.out.println("10. Le texte est écrit correctement dans le panel");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Mettre à jour l'affichage
         jPanel1.revalidate();
@@ -276,10 +304,6 @@ public class Loader extends javax.swing.JFrame{
     private void constellationshow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshow1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_constellationshow1ActionPerformed
-
-    private void constellationshow2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshow2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_constellationshow2ActionPerformed
     public Button getMonBouton() {
         return bouton;  // Remplace "monBouton" par le vrai nom de ton bouton
     }
@@ -306,7 +330,7 @@ public class Loader extends javax.swing.JFrame{
             }
         });
         String pathString;
-        pathString = "../cartography/image_aTraiter";
+        pathString = "cartography/image_aTraiter";
         // Chemin vers le dossier contenant output.txt
         Path dir = Paths.get(pathString);
         // Création du WatchService
@@ -341,7 +365,7 @@ public class Loader extends javax.swing.JFrame{
                             String projectPath = new File("").getAbsolutePath();
 
                             // Chemin relatif vers le script Python
-                            String scriptRelativePath = "../cartography/unix/dist/ThresholdDetectMethod";
+                            String scriptRelativePath = "cartography/ThresholdDetectMethod.py";
 
                             // Construit le chemin complet vers le script
                             String scriptFullPath = projectPath + File.separator + scriptRelativePath;
@@ -349,7 +373,7 @@ public class Loader extends javax.swing.JFrame{
                             // Définir la commande pour lancer le script Python
                             List<String> commands = new ArrayList<>();
                             // "python3" pour macOS/Linux, "python" pour Windows.
-                            //commands.add("python3");
+                            commands.add("python3");
                             commands.add(scriptFullPath);
 
                             // Vérifie la commande construite
@@ -394,9 +418,10 @@ public class Loader extends javax.swing.JFrame{
     private main.Button bouton;
     private javax.swing.JButton constellationshow;
     private javax.swing.JButton constellationshow1;
-    private javax.swing.JButton constellationshow2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea textarea;
     // End of variables declaration//GEN-END:variables
 }
