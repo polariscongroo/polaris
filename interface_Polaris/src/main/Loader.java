@@ -41,7 +41,7 @@ public class Loader extends javax.swing.JFrame{
             FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
             writer.write(path);
             writer.close();
-            File file = new File("/cartography/image_aTraiter/output.txt");
+            File file = new File("cartography/image_aTraiter/output.txt");
             System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
             System.out.println("3. Output.txt a été correctement modifié");
         } catch (IOException e) {
