@@ -1,0 +1,104 @@
+\section{Introduction}
+\subsection{Objectifs}
+\textbf{Reconnaissance de Constellations}
+
+\noindent Développement d’une application dédiée à la reconnaissance automatique des constellations dans le ciel nocturne, en plaçant cette fonctionnalité au cœur de l’expérience utilisateur.
+
+\noindent Reconnaissance automatique des constellations à partir des coordonnées des étoiles visibles et d’algorithmes d’analyse spatiale (pattern matching).
+
+\noindent \textbf{Interface}
+
+\noindent Affichage des constellations identifiées sur une carte simplifiée, enrichie d’informations de base (nom, description, histoire).
+
+\subsection{Contexte}
+\textbf{Astrométrie et Alignement}
+
+\noindent Lors de l'observation astronomique, il est crucial de savoir précisément quelles parties du ciel sont observées. Cela permet de corréler les observations avec des catalogues d'étoiles.
+
+\noindent But : Identifier les étoiles dans une image pour déterminer la position et l'orientation d'un télescope ou d'une caméra.
+
+\noindent Application : Alignement automatique de télescopes amateurs ou professionnels, calibration des instruments, et création de cartes précises du ciel.
+
+\subsection{Plan}  
+
+Nous avons choisi de répartir le travail sur notre projet de la façon suivante :
+
+\subsubsection{Reconnaissance de Constellations}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{img/resolution.png}
+    \label{fig1}
+    \caption{Susceptible de changer}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8\linewidth]{img/classreco.jpeg}
+    \caption{Diagramme Reconnaissance}
+\end{figure}
+
+\subsubsection{Interface}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{img/interface_img.png}
+    \caption{Interface v.0.1}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6\linewidth]{img/classesInterface.png}
+    \caption{Diagramme Interface}
+\end{figure}
+
+\subsection{Outils}
+\begin{itemize}
+    \item\textbf{Repo GitHub} pour notre projet permettant la collaboration et la gestion du code source au sein du groupe.
+
+    \item\textbf{Python} pour la détection d'étoile (traitement d'image). Notamment utilisation de la bibliothèque DAOstarfindfer qui est une bibliothèque adaptée à notre problématique.
+
+    \item\textbf{Java} pour la reconnaissance de constellation et interface : langage rapide et performant.
+
+    \item\textbf{IDE : VScode} pour plus de fléxibilté pour passer d'un langague à un autre  
+
+    \item\textbf{IDE : Apache Netbeans} pour l'interface Java Swing.
+\end{itemize}
+
+\subsection{Recette}
+
+La recette de notre projet est en trois parties :
+
+\begin{itemize}
+    \item \textbf{Extraction d'étoiles}
+    \begin{itemize}
+        \item Traiter la photo prise : établir un seuil suffisant qui puisse extraire les étoiles l'ont souhaite étudiées
+        \item Fournir les coordonnées précises des étoiles :renvoyer un tableau de coordonnées de chauqe étoiles avec sa luminosité associée 
+        \item Renvoyer le résulat dans un format exploitable pour l'étape de correspondance des données 
+    \end{itemize}
+
+    \item \textbf{Correspondance avec la base de données}
+    \begin{itemize}
+        \item Créer des triangles à partir de points
+        \item Renvoyer le nom de la constellation la plus similaire présente dans la base de données
+    \end{itemize}
+
+    \item \textbf{Interface}
+    \begin{itemize}
+        \item Affiche l'image correpondante à la photographie dans la base de données
+        \item Texte original décrivant succintement la constellation
+    \end{itemize}
+\end{itemize}
+\subsection{Gestion de projet}
+\textbf{Diagramme de Gantt}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{img/Gantt.png}
+    \caption{Tâches}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{img/Gantt2.png}
+    \caption{Diagramme de Gantt}
+\end{figure}
