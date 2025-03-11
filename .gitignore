@@ -1,1 +1,43 @@
+# ignorer les fichiers de configuration et les fichiers générés pour un projet JAVA
+**/*.class
+**/bin/
+**/target/
+**/tmp/*
+**/.project
+**/.classpath
+**/workspace
+**/.metadata
+**/.settings
+**/.checkstyle
+**/*.iml
+**/*.idea
+
+# ignorer les fichiers Mac
 **/.DS_Store
+
+# ignorer les fichiers générés par LaTeX et quelques éditeurs LaTeX
+**/*~
+**/*.aux
+**/*.log
+**/*.thm
+**/*.toc
+**/*.eps
+**/*.bbl
+**/*.blg
+**/*.nav
+**/*.snm
+**/*.isty
+**/*.dvi
+**/*.date
+**/*.out
+**/*.idx
+**/*.ilg
+**/*.ind
+**/*.vrb
+**/*.tmp
+**/*.glg
+**/*.glo
+**/*.gls
+**/*.ist
+**/*.bak
+**/#*#
