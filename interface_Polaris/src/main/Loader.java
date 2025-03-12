@@ -1,7 +1,5 @@
 package main;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,6 +9,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
@@ -29,18 +28,18 @@ public class Loader {
      */             
     public static void main(String args[]) throws IOException, InterruptedException {
         // Crée et affiche l'interface
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LoaderUI loader = new LoaderUI();  // Création de la fenêtre
-                loader.setVisible(true);
-    
-                // 🔹 Attendre que l'interface soit bien affichée avant d'appliquer le flou
-                /*SwingUtilities.invokeLater(() -> {
-                    Button myButton = loader.getMonBouton();  // Récupérer le bouton
-                    myButton.setBlur(loader.getContentPane());  // Appliquer le flou sur l'arrière-plan du bouton
-                });*/
-            }
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            LoaderUI ui = new LoaderUI();  // Création de la fenêtre
+            ui.setVisible(true);
+
+            // 🔹 Attendre que l'interface soit bien affichée avant d'appliquer le flou
+            /*SwingUtilities.invokeLater(() -> {
+                Button myButton = loader.getMonBouton();  // Récupérer le bouton
+                myButton.setBlur(loader.getContentPane());  // Appliquer le flou sur l'arrière-plan du bouton
+            });*/
+            
         });
+    
         String pathString;
         pathString = "cartography/image_aTraiter";
         // Chemin vers le dossier contenant output.txt
@@ -144,4 +143,5 @@ public class Loader {
 	        e.printStackTrace();
 	    }
 	}
+
 }

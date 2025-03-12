@@ -38,6 +38,13 @@ public class LoaderUI extends javax.swing.JFrame{
     // Creer un panel pour load une image
     public LoaderUI() {initComponents();}
 
+    /**
+     * Initialise les composants graphiques de l'application.
+     * Cette méthode est responsable de la création et de la configuration de tous les composants
+     * visuels (boutons, panneaux, champs de texte, etc.) utilisés dans l'interface graphique.
+     * Elle configure les propriétés des composants, telles que la couleur, la taille, les actions des boutons,
+     * et l'ajout de ces composants à la fenêtre principale.
+     */
     private void initComponents() {
 
         constellationshow1 = new javax.swing.JButton();
@@ -191,6 +198,13 @@ public class LoaderUI extends javax.swing.JFrame{
         }    
     }
     
+    /**
+     * Action déclenchée lorsqu'un utilisateur clique sur le bouton de la constellation.
+     * Cette méthode permet de charger une image à partir d'un fichier et de l'afficher dans un panel.
+     * Elle met également à jour le contenu d'une zone de texte avec un message descriptif.
+     * 
+     * @param evt L'événement lié au clic sur le bouton.
+     */
     private void boutonconstellation(java.awt.event.ActionEvent evt) {
                                              
         BufferedImage img = null;
@@ -263,7 +277,5 @@ public class LoaderUI extends javax.swing.JFrame{
 
         System.out.println("L'image a bien été affichée !");
     }
-
-    
 
 }
