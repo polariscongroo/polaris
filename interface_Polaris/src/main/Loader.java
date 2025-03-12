@@ -2,9 +2,9 @@ package main;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 
-import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.FileSystems;
@@ -12,13 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
-import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Loader {
+    
     /**
      * Point d'entree principal de l'application.
      * Cree et affiche la fenêtre de l'application.
@@ -126,4 +126,22 @@ public class Loader {
             }
         }
     }
+
+	/**
+	 * Effectue une transition en enregistrant le chemin du fichier d'image dans un fichier texte.
+	 * @param path Le chemin du fichier d'image selectionne.
+	 */
+	public static void write_in_output(String path) {
+	    try {
+	        FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
+	        writer.write(path);
+	        writer.close();
+	        File file = new File("cartography/image_aTraiter/output.txt");
+	        System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
+	        System.out.println("3. Output.txt a été correctement modifié");
+	    } catch (IOException e) {
+	        System.out.println("An error occurred.");
+	        e.printStackTrace();
+	    }
+	}
 }

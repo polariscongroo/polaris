@@ -1,16 +1,13 @@
 package main;
 import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.nio.file.*;
-import static java.nio.file.StandardWatchEventKinds.*;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
 import javax.imageio.ImageIO;
-
 import javax.swing.*;
 
 /**
@@ -39,28 +36,8 @@ public class LoaderUI extends javax.swing.JFrame{
      * Initialise les composants graphiques de l'interface.
      */
     // Creer un panel pour load une image
-    public LoaderUI() {
-        initComponents();
-    }
+    public LoaderUI() {initComponents();}
 
-    /**
-     * Effectue une transition en enregistrant le chemin du fichier d'image dans un fichier texte.
-     * @param path Le chemin du fichier d'image selectionne.
-     */
-    public static void write_in_output(String path) {
-        try {
-            FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
-            writer.write(path);
-            writer.close();
-            File file = new File("cartography/image_aTraiter/output.txt");
-            System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
-            System.out.println("3. Output.txt a été correctement modifié");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-        
     private void initComponents() {
 
         constellationshow1 = new javax.swing.JButton();
@@ -78,11 +55,6 @@ public class LoaderUI extends javax.swing.JFrame{
         constellationshow1.setForeground(new java.awt.Color(255, 255, 255));
         constellationshow1.setText("Constellation");
         constellationshow1.setBorder(null);
-        constellationshow1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                constellationshow1ActionPerformed(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,11 +79,6 @@ public class LoaderUI extends javax.swing.JFrame{
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), java.awt.Color.gray, java.awt.Color.gray));
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(560, 550));
-        jPanel1.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jPanel1ComponentAdded(evt);
-            }
-        });
 
         constellationshow.setBackground(new java.awt.Color(0, 0, 0));
         constellationshow.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
@@ -120,7 +87,7 @@ public class LoaderUI extends javax.swing.JFrame{
         constellationshow.setBorder(null);
         constellationshow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                constellationshowActionPerformed(evt);
+                boutonconstellation(evt);
             }
         });
 
@@ -198,7 +165,7 @@ public class LoaderUI extends javax.swing.JFrame{
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     /**
      * Action declenchee lorsqu'un utilisateur clique sur le bouton de chargement.
@@ -219,15 +186,12 @@ public class LoaderUI extends javax.swing.JFrame{
                 File file = fileChooser.getSelectedFile();
                 path = file.getAbsolutePath(); // Store the file path in the variable
                 System.out.println("1. Bouton bien actionné : Path de l'image écrit dans output.txt: " + path);
-                write_in_output(path);
+                Loader.write_in_output(path);
             }
         }    
     }
-
-    public void jPanel1ComponentAdded(java.awt.event.ContainerEvent evt) {
-
-    }
-    private void constellationshowActionPerformed(java.awt.event.ActionEvent evt) {
+    
+    private void boutonconstellation(java.awt.event.ActionEvent evt) {
                                              
         BufferedImage img = null;
         try {
@@ -241,7 +205,6 @@ public class LoaderUI extends javax.swing.JFrame{
             String imgFullPath0 = imgPath + File.separator + imgRelativePath;
             img = ImageIO.read(new File(imgFullPath0));
         } catch (IOException e) {
-            e.printStackTrace();
             return; // Stop si l'image n'est pas trouvée
         }
 
@@ -292,7 +255,6 @@ public class LoaderUI extends javax.swing.JFrame{
             System.out.println(contenu);
             System.out.println("10. Le texte est écrit correctement dans le panel");
         } catch (IOException e) {
-            e.printStackTrace();
         }
 
         // Mettre à jour l'affichage
@@ -302,12 +264,6 @@ public class LoaderUI extends javax.swing.JFrame{
         System.out.println("L'image a bien été affichée !");
     }
 
-    private void jPanel1ComponentRemoved(java.awt.event.ContainerEvent evt) {}
-
-    private void constellationshow1ActionPerformed(java.awt.event.ActionEvent evt) {}
-
-    public Button getMonBouton() {
-        return bouton;  // Remplace "monBouton" par le vrai nom de ton bouton
-    }
+    
 
 }
