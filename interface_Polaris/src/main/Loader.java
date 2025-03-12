@@ -24,6 +24,17 @@ import javax.swing.*;
  * @author RAVEN, Chadi A.
  */
 public class Loader extends javax.swing.JFrame{
+
+    private interfacegraphique.Background background1;
+    private main.Button bouton;
+    private javax.swing.JButton constellationshow;
+    private javax.swing.JButton constellationshow1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea textarea;
+
     /**
      * Constructeur de la classe {@code Loader}.
      * Initialise les composants graphiques de l'interface.
@@ -32,6 +43,7 @@ public class Loader extends javax.swing.JFrame{
     public Loader() {
         initComponents();
     }
+
     /**
      * Effectue une transition en enregistrant le chemin du fichier d'image dans un fichier texte.
      * @param path Le chemin du fichier d'image selectionne.
@@ -50,7 +62,6 @@ public class Loader extends javax.swing.JFrame{
         }
     }
         
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         constellationshow1 = new javax.swing.JButton();
@@ -192,7 +203,9 @@ public class Loader extends javax.swing.JFrame{
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    
     public String path; // Variable to store the selected image path
+    
     /**
      * Action declenchee lorsqu'un utilisateur clique sur le bouton de chargement.
      * Permet de selectionner un fichier image à partir d'une boîte de dialogue.
@@ -200,7 +213,7 @@ public class Loader extends javax.swing.JFrame{
      * 
      * @param evt L'evenement lie au clic sur le bouton.
      */
-    private void boutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonActionPerformed
+    private void boutonActionPerformed(java.awt.event.ActionEvent evt) {
         if (evt.getSource() == bouton) {
             JFileChooser fileChooser = new JFileChooser();
               
@@ -215,14 +228,14 @@ public class Loader extends javax.swing.JFrame{
                 transition(path);
             }
         }    
-    }//GEN-LAST:event_boutonActionPerformed
+    }
 
-    public void jPanel1ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel1ComponentAdded
+    public void jPanel1ComponentAdded(java.awt.event.ContainerEvent evt) {
 
-    }//GEN-LAST:event_jPanel1ComponentAdded
+    }
     private int largeur = 651; // Largeur fixe
     private int hauteur = 330; // Hauteur fixe 
-    private void constellationshowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshowActionPerformed
+    private void constellationshowActionPerformed(java.awt.event.ActionEvent evt) {
                                              
         BufferedImage img = null;
         try {
@@ -295,18 +308,16 @@ public class Loader extends javax.swing.JFrame{
         jPanel1.repaint();
 
         System.out.println("L'image a bien été affichée !");
-    }//GEN-LAST:event_constellationshowActionPerformed
+    }
 
-    private void jPanel1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jPanel1ComponentRemoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel1ComponentRemoved
+    private void jPanel1ComponentRemoved(java.awt.event.ContainerEvent evt) {}
 
-    private void constellationshow1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_constellationshow1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_constellationshow1ActionPerformed
+    private void constellationshow1ActionPerformed(java.awt.event.ActionEvent evt) {}
+
     public Button getMonBouton() {
         return bouton;  // Remplace "monBouton" par le vrai nom de ton bouton
     }
+
     /**
      * Point d'entree principal de l'application.
      * Cree et affiche la fenêtre de l'application.
@@ -413,15 +424,5 @@ public class Loader extends javax.swing.JFrame{
             }
         }
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private interfacegraphique.Background background1;
-    private main.Button bouton;
-    private javax.swing.JButton constellationshow;
-    private javax.swing.JButton constellationshow1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea textarea;
-    // End of variables declaration//GEN-END:variables
+    
 }
