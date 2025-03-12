@@ -6,10 +6,21 @@ from collections import deque
 import sys
 import os
 
-file_path = "cartography/image_aTraiter/output.txt"  # Fichier contenant le chemin de l'image
 
-# Inverse les coordonnées verticalement pour corriger l'orientation
+"""
+\var file_path
+\brief Fichier contenant le chemin de l'image.
+"""
+file_path = "cartography/image_aTraiter/output.txt"
+
+
 def inverse_cor(coordonnees):
+    """
+    \brief Inverse les coordonnées de l'image verticalement pour corriger l'orientation.
+    
+    \param coordonnees Les coordonnées de l'image.
+    \return Les coordonnées corrigées de l'image. 
+    """
     for i in range(len(coordonnees) // 2):
         for j in range(len(coordonnees[0])):
             nv_coordonnee = coordonnees[i][j]
@@ -79,20 +90,41 @@ def erase_txt():
     with open(file_path, "w") as f:
         f.write("")  # Vide le fichier
         
-# Exception à lever si output.txt n'existe pas
+
 class OutputNotFound(FileNotFoundError):
+    """
+    \class OutputNotFound
+    \brief Exception à lever si output.txt n'existe pas.
+    """
     pass
 
-# Exception à lever si output.txt est vide
+
 class EmptyFile(Exception):
+    """
+    \class EmptyFile
+    \brief Exception à lever si output.txt est vide.
+    """
     pass
 
-# Exception à lever si le chemin de l'image n'existe pas
+
 class ImageNotFound(FileNotFoundError):
+    """
+    \class ImageNotFound
+    \brief Exception à lever si le chemin de l'image n'existe pas.
+    """
     pass
 
-# Lecture du chemin de l'image à traiter depuis output.txt
+
 def main():
+    """
+    \brief Fonction principale du scipt.
+    Lecture du chemin de l'image à traiter depuis output.txt.
+
+    \exception OutputNotFound levée si output.txt n'existe pas.
+    \exception EmptyFile levée si output.txt est vide.
+    \exception ImageNotFound levée si l'image n'existe pas.
+    \exception Exception levée si le fichier selectionné par l'utilisateur n'est pas une image.
+    """
     try:
         # Vérifie l'existence de output.txt
         if not os.path.exists(file_path):
