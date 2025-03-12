@@ -29,7 +29,7 @@ public class Loader {
     public static void main(String args[]) throws IOException, InterruptedException {
         // Crée et affiche l'interface
         javax.swing.SwingUtilities.invokeLater(() -> {
-            LoaderUI ui = new LoaderUI();  // Création de la fenêtre
+            UI ui = new UI();  // Création de la fenêtre
             ui.setVisible(true);
 
             // 🔹 Attendre que l'interface soit bien affichée avant d'appliquer le flou
@@ -143,9 +143,5 @@ public class Loader {
 	        e.printStackTrace();
 	    }
 	}
-
-    public void display_text_image() {
-        
-    }
 
 }

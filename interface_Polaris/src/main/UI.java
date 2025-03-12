@@ -16,7 +16,7 @@ import javax.swing.*;
  * puis enregistre le chemin de ce fichier dans un fichier texte.
  * @author RAVEN, Chadi A.
  */
-public class LoaderUI extends javax.swing.JFrame{
+public class UI extends javax.swing.JFrame{
 
     private interfacegraphique.Background background;
     private main.Button Polaris_bouton;
@@ -36,7 +36,7 @@ public class LoaderUI extends javax.swing.JFrame{
      * Initialise les composants graphiques de l'interface.
      */
     // Creer un panel pour load une image
-    public LoaderUI() {initComponents();}
+    public UI() {initComponents();}
 
     /**
      * Initialise les composants graphiques de l'application.
