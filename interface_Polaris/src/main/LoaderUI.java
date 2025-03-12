@@ -18,14 +18,14 @@ import javax.swing.*;
  */
 public class LoaderUI extends javax.swing.JFrame{
 
-    private interfacegraphique.Background background1;
-    private main.Button bouton;
-    private javax.swing.JButton constellationshow;
-    private javax.swing.JButton constellationshow1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private interfacegraphique.Background background;
+    private main.Button Polaris_bouton;
+    private javax.swing.JButton constellation_bouton_1;
+    private javax.swing.JButton constellation_bouton_2;
+    private javax.swing.JPanel Panneau_principal;
+    private javax.swing.JPanel Panneau_secondaire;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTextArea textarea;
     public String path; // Variable to store the selected image path
     private final int largeur = 651; // Largeur fixe
@@ -47,73 +47,73 @@ public class LoaderUI extends javax.swing.JFrame{
      */
     private void initComponents() {
 
-        constellationshow1 = new javax.swing.JButton();
-        background1 = new interfacegraphique.Background();
-        bouton = new main.Button();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        constellationshow = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        constellation_bouton_2 = new javax.swing.JButton();
+        background = new interfacegraphique.Background();
+        Polaris_bouton = new main.Button();
+        jTabbedPane = new javax.swing.JTabbedPane();
+        Panneau_principal = new javax.swing.JPanel();
+        constellation_bouton_1 = new javax.swing.JButton();
+        Panneau_secondaire = new javax.swing.JPanel();
+        jScrollPane = new javax.swing.JScrollPane();
         textarea = new javax.swing.JTextArea();
 
-        constellationshow1.setBackground(new java.awt.Color(0, 0, 0));
-        constellationshow1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        constellationshow1.setForeground(new java.awt.Color(255, 255, 255));
-        constellationshow1.setText("Constellation");
-        constellationshow1.setBorder(null);
+        constellation_bouton_2.setBackground(new java.awt.Color(0, 0, 0));
+        constellation_bouton_2.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        constellation_bouton_2.setForeground(new java.awt.Color(255, 255, 255));
+        constellation_bouton_2.setText("Constellation");
+        constellation_bouton_2.setBorder(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bouton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        bouton.setForeground(new java.awt.Color(255, 255, 255));
-        bouton.setText("Polaris");
-        bouton.setToolTipText("");
-        bouton.setBorderPainted(true);
-        bouton.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        bouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        bouton.addActionListener(new java.awt.event.ActionListener() {
+        Polaris_bouton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Polaris_bouton.setForeground(new java.awt.Color(255, 255, 255));
+        Polaris_bouton.setText("Polaris");
+        Polaris_bouton.setToolTipText("");
+        Polaris_bouton.setBorderPainted(true);
+        Polaris_bouton.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        Polaris_bouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Polaris_bouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonPolaris(evt);
             }
         });
 
-        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTabbedPane1.setRequestFocusEnabled(false);
+        jTabbedPane.setForeground(new java.awt.Color(255, 255, 255));
+        jTabbedPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTabbedPane.setRequestFocusEnabled(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), java.awt.Color.gray, java.awt.Color.gray));
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(560, 550));
+        Panneau_principal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), java.awt.Color.gray, java.awt.Color.gray));
+        Panneau_principal.setOpaque(false);
+        Panneau_principal.setPreferredSize(new java.awt.Dimension(560, 550));
 
-        constellationshow.setBackground(new java.awt.Color(0, 0, 0));
-        constellationshow.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
-        constellationshow.setForeground(new java.awt.Color(255, 255, 255));
-        constellationshow.setText("Constellation");
-        constellationshow.setBorder(null);
-        constellationshow.addActionListener(new java.awt.event.ActionListener() {
+        constellation_bouton_1.setBackground(new java.awt.Color(0, 0, 0));
+        constellation_bouton_1.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
+        constellation_bouton_1.setForeground(new java.awt.Color(255, 255, 255));
+        constellation_bouton_1.setText("Constellation");
+        constellation_bouton_1.setBorder(null);
+        constellation_bouton_1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonconstellation(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(Panneau_principal);
+        Panneau_principal.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(constellationshow, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(constellation_bouton_1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(constellationshow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(constellation_bouton_1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jTabbedPane1.addTab("", jPanel1);
+        jTabbedPane.addTab("", Panneau_principal);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.gray));
-        jPanel2.setOpaque(false);
-        jPanel2.setRequestFocusEnabled(false);
+        Panneau_secondaire.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.white, java.awt.Color.gray, java.awt.Color.gray));
+        Panneau_secondaire.setOpaque(false);
+        Panneau_secondaire.setRequestFocusEnabled(false);
 
         textarea.setBackground(new java.awt.Color(0, 0, 0));
         textarea.setColumns(20);
@@ -121,41 +121,41 @@ public class LoaderUI extends javax.swing.JFrame{
         textarea.setLineWrap(true);
         textarea.setRows(5);
         textarea.setOpaque(false);
-        jScrollPane1.setViewportView(textarea);
+        jScrollPane.setViewportView(textarea);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(Panneau_secondaire);
+        Panneau_secondaire.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+            .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("", jPanel2);
+        jTabbedPane.addTab("", Panneau_secondaire);
 
-        javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background1);
-        background1.setLayout(background1Layout);
+        javax.swing.GroupLayout background1Layout = new javax.swing.GroupLayout(background);
+        background.setLayout(background1Layout);
         background1Layout.setHorizontalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane)
                 .addContainerGap(32, Short.MAX_VALUE))
             .addGroup(background1Layout.createSequentialGroup()
                 .addGap(183, 183, 183)
-                .addComponent(bouton, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Polaris_bouton, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         background1Layout.setVerticalGroup(
             background1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background1Layout.createSequentialGroup()
                 .addGap(121, 121, 121)
-                .addComponent(bouton, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(Polaris_bouton, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
         );
 
@@ -163,11 +163,11 @@ public class LoaderUI extends javax.swing.JFrame{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(background1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -182,7 +182,7 @@ public class LoaderUI extends javax.swing.JFrame{
      * @param evt L'evenement lie au clic sur le bouton.
      */
     private void boutonPolaris(java.awt.event.ActionEvent evt) {
-        if (evt.getSource() == bouton) {
+        if (evt.getSource() == Polaris_bouton) {
             JFileChooser fileChooser = new JFileChooser();
               
             fileChooser.setCurrentDirectory(new File(".")); // Sets current directory
@@ -206,76 +206,94 @@ public class LoaderUI extends javax.swing.JFrame{
      * @param evt L'événement lié au clic sur le bouton.
      */
     private void boutonconstellation(java.awt.event.ActionEvent evt) {
-                                             
-        BufferedImage img = null;
+        // Charger l'image
+        BufferedImage img = chargerImage("interface_Polaris/src/interfacegraphique/orsaminor.jpg");
+        if (img == null) return;
+    
+        // Appliquer rotation si nécessaire
+        img = ajusterRotationImage(img);
+    
+        // Redimensionner l'image
+        Image scaledImage = redimensionnerImage(img, largeur, hauteur);
+    
+        // Afficher l'image dans le panel
+        afficherImage(scaledImage);
+    
+        // Charger et afficher le texte
+        chargerTexte("baseDDonnees_txt/apus.txt");
+    
+        System.out.println("L'image et le texte ont été affichés !");
+    }
+    
+    /**
+     * Charge une image à partir du chemin donné.
+     * @param cheminImage Chemin relatif de l'image
+     * @return L'image chargée ou null si échec
+     */
+    private BufferedImage chargerImage(String cheminImage) {
         try {
-            // Récupère le chemin absolu du projet courant
-            String imgPath = new File("").getAbsolutePath();
-
-            // Chemin relatif vers le script Python
-            String imgRelativePath = "interface_Polaris/src/interfacegraphique/orsaminor.jpg";
-
-            // Construit le chemin complet vers le script
-            String imgFullPath0 = imgPath + File.separator + imgRelativePath;
-            img = ImageIO.read(new File(imgFullPath0));
+            String imgFullPath = new File("").getAbsolutePath() + File.separator + cheminImage;
+            return ImageIO.read(new File(imgFullPath));
         } catch (IOException e) {
-            return; // Stop si l'image n'est pas trouvée
+            System.err.println("Erreur lors du chargement de l'image : " + e.getMessage());
+            return null;
         }
-
-        if (img == null) {
-            System.err.println("Image non chargée !");
-            return;
-        }
-
-        // Vérifier si l'image est verticale, si oui, la tourner
+    }
+    
+    /**
+     * Vérifie si l'image est verticale et la fait pivoter si nécessaire.
+     * @param img Image d'origine
+     * @return Image ajustée
+     */
+    private BufferedImage ajusterRotationImage(BufferedImage img) {
         if (img.getHeight() > img.getWidth()) {
             AffineTransform tx = AffineTransform.getRotateInstance(Math.PI / 2, img.getWidth() / 2, img.getHeight() / 2);
             AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-            img = op.filter(img, null);
+            return op.filter(img, null);
         }
-
-        // Redimensionner l'image pour qu'elle tienne dans le cadre (sans déformation)
-        Image scaledImage = img.getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(scaledImage);
-
-        // Supprimer les anciens composants pour éviter que ça s'empile
-        jPanel1.removeAll();
-
-        // Créer le JLabel avec l'image
-        JLabel imageLabel = new JLabel(icon);
+        return img;
+    }
+    
+    /**
+     * Redimensionne une image aux dimensions spécifiées sans la déformer.
+     * @param img Image d'origine
+     * @param largeur Largeur cible
+     * @param hauteur Hauteur cible
+     * @return Image redimensionnée
+     */
+    private Image redimensionnerImage(BufferedImage img, int largeur, int hauteur) {
+        return img.getScaledInstance(largeur, hauteur, Image.SCALE_SMOOTH);
+    }
+    
+    /**
+     * Affiche une image dans le panneau principal.
+     * @param image Image à afficher
+     */
+    private void afficherImage(Image image) {
+        Panneau_principal.removeAll();
+        JLabel imageLabel = new JLabel(new ImageIcon(image));
         imageLabel.setHorizontalAlignment(JLabel.CENTER);
         imageLabel.setVerticalAlignment(JLabel.CENTER);
-
-        // Utiliser BorderLayout pour centrer l'image dans le cadre
-        jPanel1.setLayout(new BorderLayout());
-        jPanel1.add(imageLabel, BorderLayout.CENTER);
-        try {
-        // Récupère le chemin absolu du projet courant
-        String textPath = new File("").getAbsolutePath();
-
-        // Chemin relatif vers le script Python
-        String textRelativePath = "baseDDonnees_txt/apus.txt";
-
-        // Construit le chemin complet vers le script
-        String textFullPath0 = textPath + File.separator + textRelativePath;
-        // Spécifier le chemin du fichier
-        Path textFullPath1 = Path.of(textFullPath0);
-
-            // Lire le contenu du fichier dans une variable
-            String contenu = Files.readString(textFullPath1);
-            textarea.setText(contenu);
-
-            // Afficher le contenu
-            System.out.println(contenu);
-            System.out.println("10. Le texte est écrit correctement dans le panel");
-        } catch (IOException e) {
-        }
-
-        // Mettre à jour l'affichage
-        jPanel1.revalidate();
-        jPanel1.repaint();
-
-        System.out.println("L'image a bien été affichée !");
+        Panneau_principal.setLayout(new BorderLayout());
+        Panneau_principal.add(imageLabel, BorderLayout.CENTER);
+        Panneau_principal.revalidate();
+        Panneau_principal.repaint();
     }
+    
+    /**
+     * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
+     * @param cheminTexte Chemin relatif du fichier texte
+     */
+    private void chargerTexte(String cheminTexte) {
+        try {
+            String textFullPath = new File("").getAbsolutePath() + File.separator + cheminTexte;
+            String contenu = Files.readString(Path.of(textFullPath));
+            textarea.setText(contenu);
+            System.out.println("Texte affiché : \n" + contenu);
+        } catch (IOException e) {
+            System.err.println("Erreur lors du chargement du texte : " + e.getMessage());
+        }
+    }
+    
 
 }

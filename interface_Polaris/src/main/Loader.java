@@ -144,4 +144,8 @@ public class Loader {
 	    }
 	}
 
+    public void display_text_image() {
+        
+    }
+
 }
