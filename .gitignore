@@ -12,6 +12,14 @@
 **/*.iml
 **/*.idea
 
+# ignorer les .class de l'interface
+interface_Polaris/build/classes/main/Loader.class
+interface_Polaris/build/classes/main/Loader$1.class
+interface_Polaris/build/classes/main/Loader$2.class
+interface_Polaris/build/classes/main/Loader$3.class
+interface_Polaris/build/classes/main/Loader$4.class
+interface_Polaris/build/classes/main/Loader$5.class
+
 # ignorer les fichiers Mac
 **/.DS_Store
 

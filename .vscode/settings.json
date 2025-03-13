@@ -2,6 +2,9 @@
     "java.project.sourcePaths": [
         "interface_Polaris/src"
     ],
+    "java.project.referencedLibraries": [
+        "recognition/src/lib/*.jar"
+    ],
     "python.testing.unittestArgs": [
         "-v",
         "-s",
