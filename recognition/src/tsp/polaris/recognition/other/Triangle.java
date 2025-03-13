@@ -27,12 +27,8 @@ public class Triangle
      * Getteur de l'étoile i
      * @return Point : La ième étoile du triangle
      */
-    public Star getStars(int i) throws IllegalArgumentException {
-        if(i < 0 || i > 2) {
-            throw new IllegalArgumentException("L'index doit etre compris entre 0 et 2.");
-        } else {
-            return stars[i];
-        }
+    public Star[] getStars() {
+        return stars;
     }
 
     /**

@@ -3,7 +3,6 @@ package tsp.polaris.recognition.starSet;
 import tsp.polaris.auxiliaries.Combinatorics;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.other.Triangle;
-
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -25,7 +24,7 @@ public class StarSet {
         this.stars = stars;
 
         // Trie la liste d'étoiles par luminosité
-        //sortStarSet();
+        sortByBrightness();
     }
 
     /**
@@ -72,7 +71,7 @@ public class StarSet {
     /**
      * Trie la liste d'étoile en attribut par luminosité décroissante
      */
-    public void sortStarSet(){
+    public void sortByBrightness(){
         Arrays.sort(stars, new Comparator<Star>() {
             public int compare(Star firstStar, Star secondStar) {
                 return firstStar.compareTo(secondStar);

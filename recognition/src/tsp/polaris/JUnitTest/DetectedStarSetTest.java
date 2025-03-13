@@ -24,10 +24,11 @@ public class DetectedStarSetTest {
      */
 	@BeforeEach
 	public void setUp() {
-		workingDetectedStarSet = new DetectedStarSet(new Star[6]);
+		Star[] stars = new Star[6];
 		for(int i = 0; i < 6; i += 1) {
-			workingDetectedStarSet.getStars()[i] = new Star(i,i,0);
+			stars[i] = new Star(i,i,0);
 		}
+		workingDetectedStarSet = new DetectedStarSet(stars);
 	}
 	
 	/**

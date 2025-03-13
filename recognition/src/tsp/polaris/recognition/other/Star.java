@@ -47,7 +47,7 @@ public class Star extends Point{
     public int compareTo(Star secondStar) {
         if(brightness == secondStar.brightness){
             return 0;
-        } else if(brightness > secondStar.brightness){
+        } else if(brightness < secondStar.brightness){
             return 1;
         } else{
             return -1;

@@ -30,13 +30,52 @@ public class ListTriangle
 		}
 		return str;
 	}
+
+    //TODO
+    private Triangle findTriangle(Triangle triangle, Star[] detectedStars, Star[] dataStars) {
+        for (Triangle t : listTriangle) {
+            /*if (t.equals(new Triangle(triangle.getStars()[triangle.getStars().getIndex()], triangle.getStars()[], triangle.getStars[]))) {
+                return t;
+            }*/
+        }
+        return null;
+    }
+
+    /**
+     * Méthodes qui calcule le coût entre des listes de triangles
+     * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
+     * @return double[] : Liste des couts entre les triangles des 2 listes
+     * @throws TriangleMatchingException Problème d'appariement de liste de triangle
+     */
+    public double[] couts(ListTriangle listeTriangle2, Star[] detectedStars, Star[] dataStars) throws TriangleMatchingException
+    {
+        // Taille des triangles
+        int taille1 = listTriangle.length;
+        int taille2 = listeTriangle2.listTriangle.length;
+
+        // Cas ou les listes n'ont pas la même taille (donc ne peuvent pas representer la même constellation)
+        if (taille1 != taille2)
+        {
+            throw new TriangleMatchingException("Les tableaux de triangles ont des tailles differentes : " + taille1 + " et " + taille2);
+        }
+
+        // On va comparer chaque triangle entre eux et mettre leurs couts dans une liste
+        double[] couts = new double[taille1];
+        for (int i = 0; i < taille1; i++)
+        {
+            // On retrouve le triangle associé au triangle courant (listTriangle[i])
+            couts[i] = listTriangle[i].cout(listeTriangle2.findTriangle(listTriangle[i], detectedStars, dataStars));
+        }
+        return couts;
+    }
+
 	/**
-	 * Méthodes qui calcule le coût entre des listes de triangles
+	 * Méthodes qui calcule le coût entre des listes de triangles TEMPORAIRE
 	 * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
 	 * @return double[] : Liste des couts entre les triangles des 2 listes
 	 * @throws TriangleMatchingException Problème d'appariement de liste de triangle
 	 */
-    public double[] couts(ListTriangle listeTriangle2) throws TriangleMatchingException
+    public double[] coutsTEMP(ListTriangle listeTriangle2) throws TriangleMatchingException
     {
         // Taille des triangles
         int taille1 = listTriangle.length;
@@ -68,9 +107,9 @@ public class ListTriangle
      * @return int[] : L'indice de correspondance entre deux listes de triangles
      * @throws TriangleMatchingException Problème d'appariement de liste de triangles
      */
-    public int[] indice(ListTriangle listeTriangle2) throws TriangleMatchingException
+    public int[] indiceTEMP(ListTriangle listeTriangle2) throws TriangleMatchingException
     {
-        double[] couts = couts(listeTriangle2); // Couts entre les 2 triangles
+        double[] couts = couts(listeTriangle2, null, null); // Couts entre les 2 triangles
         int nombre_combinaisons = couts.length;
 
         int nb_triangles = (int) Math.sqrt(nombre_combinaisons);

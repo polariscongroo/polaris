@@ -25,10 +25,11 @@ public class StarSetTest {
      */
     @BeforeEach
     public void setUp() {
-        workingStarSet = new StarSet(new Star[6]);
+        Star[] stars = new Star[6];
         for(int i = 0; i < 6; i++){
-            workingStarSet.getStars()[i] = new Star(i, i, 0);
+            stars[i] = new Star(i, i, i);
         }
+        workingStarSet = new StarSet(stars);
     }
 
     /**
@@ -69,4 +70,13 @@ public class StarSetTest {
     /**
      * Test 4 : Le tri des étoiles par luminsoté est bien décroissant
      */
+    @Test
+    @DisplayName("Test 4 : Le tri des étoiles par luminsoté est bien décroissant")
+    public void luminosityOrderCheckStarSet() {
+        for (int i = 0; i < workingStarSet.getStars().length - 1; i++) {
+            System.out.println(workingStarSet.getStars()[i].getBrightness());
+            Assertions.assertTrue(workingStarSet.getStars()[i].getBrightness() >= workingStarSet.getStars()[i + 1].getBrightness());
+        }
+
+    }
 }
