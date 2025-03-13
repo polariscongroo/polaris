@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="login-ui">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/login-ui.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
