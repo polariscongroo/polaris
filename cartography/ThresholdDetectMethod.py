@@ -19,7 +19,8 @@ def inverse_cor(coordonnees):
     \brief Inverse les coordonnées de l'image verticalement pour corriger l'orientation.
     
     \param coordonnees Les coordonnées de l'image.
-    \return Les coordonnées corrigées de l'image. 
+    
+    \return coordonnees Les coordonnées corrigées de l'image. 
     """
     for i in range(len(coordonnees) // 2):
         for j in range(len(coordonnees[0])):
@@ -28,8 +29,17 @@ def inverse_cor(coordonnees):
             coordonnees[len(coordonnees) - 1 - i][j] = nv_coordonnee
     return coordonnees
 
-# Détermine les points adjacents (voisinage 8) pour l'exploration
+
 def determine_points_adjacents(point, max_i, max_j):
+    """
+    \brief Détermine les points adjacents (voisinage 8) pour l'exploration.
+
+    \param point Le point dont on veut déterminer les voisins.   
+    \param max_i La hauteur de l'image.
+    \param max_j La largeur de l'image.
+
+    \return adjacents Liste des points adjacents au point donné en argument.
+    """
     i, j = point
     adjacents = []
     for di, dj in [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]:
@@ -38,8 +48,17 @@ def determine_points_adjacents(point, max_i, max_j):
             adjacents.append((ni, nj))
     return adjacents
 
-# Explore les pixels connectés à partir d'un point de départ pour former une "forme"
+
 def cree_une_forme(start, threshold_mask, explored):
+    """
+    \brief Explore les pixels connectés à partir d'un point de départ pour former une "forme".
+    
+    \param start Le point de départ de la forme.  
+    \param threshold_mask L'image obtenue après seuillage et boolean indexing.
+    \param explored La matrice de pointage des points explorés.
+    
+    \return forme L'ensemble des points adjacents constitutifs d'une forme (étoile).
+    """
     max_i, max_j = threshold_mask.shape
     queue = deque([start])  # File pour l'exploration en largeur (BFS)
     forme = []
@@ -54,8 +73,15 @@ def cree_une_forme(start, threshold_mask, explored):
                 queue.append(adj)
     return forme
 
-# Identifie toutes les formes (groupes de pixels connectés) dans l'image seuillée
+
 def determine_formes(threshold_mask):
+    """
+    \brief Identifie toutes les formes (groupes de pixels connectés) dans l'image seuillée.
+
+    \param threshold_mask L'image obtenue après seuillage et boolean indexing.
+
+    \return formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
+    """
     explored = np.zeros_like(threshold_mask, dtype=bool)  # Matrice pour marquer les pixels explorés
     formes = []
     max_i, max_j = threshold_mask.shape
@@ -65,8 +91,15 @@ def determine_formes(threshold_mask):
                 formes.append(cree_une_forme((i, j), threshold_mask, explored))
     return formes
 
-# Calcule les barycentres des formes détectées pour déterminer les coordonnées des étoiles
+
 def determine_coordonnees_etoiles(formes):
+    """
+    \brief Calcule les barycentres des formes détectées pour déterminer les coordonnées des étoiles.
+
+    \param formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
+
+    \return cor L'ensemble des coordonnées exactes des étoiles détectées).
+    """
     cor = []
     for forme in formes:
         points = np.array(forme)
@@ -74,8 +107,14 @@ def determine_coordonnees_etoiles(formes):
         cor.append(barycentre)
     return cor
 
-# Enregistre les coordonnées des étoiles dans un fichier CSV
+
 def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
+    """
+    \brief Enregistre les coordonnées des étoiles dans un fichier CSV.
+
+    \param coordonnesdesetoiles L'ensemble des coordonnées exactes des étoiles détectées.
+    \param image_array La matrice des intensités lumineuses générées avec Pillow (Notre Image).
+    """
     coordonnees = []
     for k in range(len(coordonneesdesetoiles)):
         i = float(coordonneesdesetoiles[k][0])
@@ -85,8 +124,11 @@ def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
         writer = csv.writer(fichier)
         writer.writerows(coordonnees)
 
-# Vide le fichier output.txt après traitement pour éviter les relectures inutiles
+
 def erase_txt():
+    """
+    \brief Vide le fichier output.txt après traitement pour éviter les relectures inutiles.
+    """
     with open(file_path, "w") as f:
         f.write("")  # Vide le fichier
         
