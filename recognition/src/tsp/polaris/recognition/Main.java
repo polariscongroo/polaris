@@ -16,7 +16,11 @@ import java.io.IOException;
 public class Main
 {
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
-        String nomConstellation[] = new String[88];
+        Data data = new Data("recognition/coorPoints/liste_etoiles.csv");
+        DetectedStarSet detectedStarSet = DetectedStarSet.createDetectedStarSetWithData(data);
+        System.out.println(detectedStarSet);
+
+        /*String nomConstellation[] = new String[88];
         // Ajouter ailleurs qui remplit nomConstellation avec le nom de toutes les constellations (potentiellement en lisant un fichier texte ou autre)
 
         // Ensembles d'étoiles détectées
@@ -36,7 +40,7 @@ public class Main
             constellations[i] = Constellation.createConstellationWithData(dataBDD[i], nomConstellation[i]);
         }
 
-        System.out.println(detectedStarSet.searchBestStarSet());
+        System.out.println(detectedStarSet.searchBestStarSet());*/
 
     }
 }
