@@ -16,7 +16,7 @@ public class Functions {
      */
     public static int minIndex(double[] tab) {
         int min = 0;
-        for(int i = 0; i < 10; i += 1) {
+        for(int i = 0; i < tab.length; i += 1) {
             if(tab[i] < tab[min]) {
                 min = i;
             }
