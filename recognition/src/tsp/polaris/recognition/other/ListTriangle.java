@@ -1,6 +1,8 @@
 package tsp.polaris.recognition.other;
 
 import tsp.polaris.recognition.exceptions.TriangleMatchingException;
+import tsp.polaris.recognition.starSet.Constellation;
+import tsp.polaris.recognition.starSet.DetectedStarSet;
 
 /**
  * Classe qui va contenir des listes de triangles
@@ -31,23 +33,13 @@ public class ListTriangle
 		return str;
 	}
 
-    //TODO
-    private Triangle findTriangle(Triangle triangle, Star[] detectedStars, Star[] dataStars) {
-        for (Triangle t : listTriangle) {
-            /*if (t.equals(new Triangle(triangle.getStars()[triangle.getStars().getIndex()], triangle.getStars()[], triangle.getStars[]))) {
-                return t;
-            }*/
-        }
-        return null;
-    }
-
     /**
      * Méthodes qui calcule le coût entre des listes de triangles
      * @param listeTriangle2 Liste de triangles avec laquelle on veut calculer le cout
      * @return double[] : Liste des couts entre les triangles des 2 listes
      * @throws TriangleMatchingException Problème d'appariement de liste de triangle
      */
-    public double[] couts(ListTriangle listeTriangle2, Star[] detectedStars, Star[] dataStars) throws TriangleMatchingException
+    public double[] couts(ListTriangle listeTriangle2, DetectedStarSet detectedStars, Constellation dataStars) throws TriangleMatchingException
     {
         // Taille des triangles
         int taille1 = listTriangle.length;
@@ -64,7 +56,7 @@ public class ListTriangle
         for (int i = 0; i < taille1; i++)
         {
             // On retrouve le triangle associé au triangle courant (listTriangle[i])
-            couts[i] = listTriangle[i].cout(listeTriangle2.findTriangle(listTriangle[i], detectedStars, dataStars));
+            couts[i] = listTriangle[i].cout(detectedStars.findTriangle(listTriangle[i], dataStars));
         }
         return couts;
     }
