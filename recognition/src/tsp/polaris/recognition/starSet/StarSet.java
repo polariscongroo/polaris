@@ -84,7 +84,7 @@ public class StarSet {
      * @param star Etoile dont on veut connaitre l'index
      * @return Index de l'etoile
      */
-    private int getIndex(Star star){
+    public int getIndex(Star star){
         return Arrays.asList(stars).indexOf(star);
     }
 
