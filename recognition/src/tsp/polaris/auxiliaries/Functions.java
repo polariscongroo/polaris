@@ -3,7 +3,7 @@ package tsp.polaris.auxiliaries;
 /**
  * Classe utilitaire pour les fonctions.
  *
- * @author Emma M.
+ * @author Chadi A., Emma M.
  */
 public class Functions {
 
