@@ -15,10 +15,14 @@
 
 **/recognition/out
 
+# ignorer le .html
+**/*.html
+
 # ignorer les .class de l'interface
 
-# env
+# Environnement
 **/cartography/mon_env
+**/.venv/*
 
 # pycache
 **/cartography/__pycache__
