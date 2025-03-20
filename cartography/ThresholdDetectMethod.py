@@ -6,21 +6,27 @@ from collections import deque
 import sys
 import os
 
+"""
+@file ThresholdDetectMethod.py
+@brief Script python qui traite l'image et écrit les coordonnées des étoiles dans un csv pour la partie reconnaissance
+@author Beryl S., Ryane S., Chadi A.
+"""
 
 """
-\var file_path
-\brief Fichier contenant le chemin de l'image.
+@var file_path
+@brief Variable contenant le chemin du fichier où est stocké le path de l'image.
 """
 file_path = "cartography/image_aTraiter/output.txt"
 
 
+
 def inverse_cor(coordonnees):
     """
-    \brief Inverse les coordonnées de l'image verticalement pour corriger l'orientation.
+    @brief Inverse les coordonnées de l'image verticalement pour corriger l'orientation.
     
-    \param coordonnees Les coordonnées de l'image.
+    @param coordonnees Les coordonnées de l'image.
     
-    \return coordonnees Les coordonnées corrigées de l'image. 
+    @return coordonnees Les coordonnées corrigées de l'image. 
     """
     for i in range(len(coordonnees) // 2):
         for j in range(len(coordonnees[0])):
@@ -32,13 +38,13 @@ def inverse_cor(coordonnees):
 
 def determine_points_adjacents(point, max_i, max_j):
     """
-    \brief Détermine les points adjacents (voisinage 8) pour l'exploration.
+    @brief Détermine les points adjacents (voisinage 8) pour l'exploration.
 
-    \param point Le point dont on veut déterminer les voisins.   
-    \param max_i La hauteur de l'image.
-    \param max_j La largeur de l'image.
+    @param point Le point dont on veut déterminer les voisins.   
+    @param max_i La hauteur de l'image.
+    @param max_j La largeur de l'image.
 
-    \return adjacents Liste des points adjacents au point donné en argument.
+    @return adjacents Liste des points adjacents au point donné en argument.
     """
     i, j = point
     adjacents = []
@@ -51,13 +57,13 @@ def determine_points_adjacents(point, max_i, max_j):
 
 def cree_une_forme(start, threshold_mask, explored):
     """
-    \brief Explore les pixels connectés à partir d'un point de départ pour former une "forme".
+    @brief Explore les pixels connectés à partir d'un point de départ pour former une "forme".
     
-    \param start Le point de départ de la forme.  
-    \param threshold_mask L'image obtenue après seuillage et boolean indexing.
-    \param explored La matrice de pointage des points explorés.
+    @param start Le point de départ de la forme.  
+    @param threshold_mask L'image obtenue après seuillage et boolean indexing.
+    @param explored La matrice de pointage des points explorés.
     
-    \return forme L'ensemble des points adjacents constitutifs d'une forme (étoile).
+    @return forme L'ensemble des points adjacents constitutifs d'une forme (étoile).
     """
     max_i, max_j = threshold_mask.shape
     queue = deque([start])  # File pour l'exploration en largeur (BFS)
@@ -76,11 +82,11 @@ def cree_une_forme(start, threshold_mask, explored):
 
 def determine_formes(threshold_mask):
     """
-    \brief Identifie toutes les formes (groupes de pixels connectés) dans l'image seuillée.
+    @brief Identifie toutes les formes (groupes de pixels connectés) dans l'image seuillée.
 
-    \param threshold_mask L'image obtenue après seuillage et boolean indexing.
+    @param threshold_mask L'image obtenue après seuillage et boolean indexing.
 
-    \return formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
+    @return formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
     """
     explored = np.zeros_like(threshold_mask, dtype=bool)  # Matrice pour marquer les pixels explorés
     formes = []
@@ -94,11 +100,11 @@ def determine_formes(threshold_mask):
 
 def determine_coordonnees_etoiles(formes):
     """
-    \brief Calcule les barycentres des formes détectées pour déterminer les coordonnées des étoiles.
+    @brief Calcule les barycentres des formes détectées pour déterminer les coordonnées des étoiles.
 
-    \param formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
+    @param formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
 
-    \return cor L'ensemble des coordonnées exactes des étoiles détectées).
+    @return cor L'ensemble des coordonnées exactes des étoiles détectées).
     """
     cor = []
     for forme in formes:
@@ -110,10 +116,10 @@ def determine_coordonnees_etoiles(formes):
 
 def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
     """
-    \brief Enregistre les coordonnées des étoiles dans un fichier CSV.
+    @brief Enregistre les coordonnées des étoiles dans un fichier CSV.
 
-    \param coordonnesdesetoiles L'ensemble des coordonnées exactes des étoiles détectées.
-    \param image_array La matrice des intensités lumineuses générées avec Pillow (Notre Image).
+    @param coordonnesdesetoiles L'ensemble des coordonnées exactes des étoiles détectées.
+    @param image_array La matrice des intensités lumineuses générées avec Pillow (Notre Image).
     """
     coordonnees = []
     for k in range(len(coordonneesdesetoiles)):
@@ -127,7 +133,7 @@ def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
 
 def erase_txt():
     """
-    \brief Vide le fichier output.txt après traitement pour éviter les relectures inutiles.
+    @brief Vide le fichier output.txt après traitement pour éviter les relectures inutiles.
     """
     with open(file_path, "w") as f:
         f.write("")  # Vide le fichier
@@ -135,37 +141,37 @@ def erase_txt():
 
 class OutputNotFound(FileNotFoundError):
     """
-    \class OutputNotFound
-    \brief Exception à lever si output.txt n'existe pas.
+    @class OutputNotFound
+    @brief Exception à lever si output.txt n'existe pas.
     """
     pass
 
 
 class EmptyFile(Exception):
     """
-    \class EmptyFile
-    \brief Exception à lever si output.txt est vide.
+    @class EmptyFile
+    @brief Exception à lever si output.txt est vide.
     """
     pass
 
 
 class ImageNotFound(FileNotFoundError):
     """
-    \class ImageNotFound
-    \brief Exception à lever si le chemin de l'image n'existe pas.
+    @class ImageNotFound
+    @brief Exception à lever si le chemin de l'image n'existe pas.
     """
     pass
 
 
 def main():
     """
-    \brief Fonction principale du scipt.
+    @brief Fonction principale du scipt.
     Lecture du chemin de l'image à traiter depuis output.txt.
 
-    \exception OutputNotFound levée si output.txt n'existe pas.
-    \exception EmptyFile levée si output.txt est vide.
-    \exception ImageNotFound levée si l'image n'existe pas.
-    \exception Exception levée si le fichier selectionné par l'utilisateur n'est pas une image.
+    @exception OutputNotFound levée si output.txt n'existe pas.
+    @exception EmptyFile levée si output.txt est vide.
+    @exception ImageNotFound levée si l'image n'existe pas.
+    @exception Exception levée si le fichier selectionné par l'utilisateur n'est pas une image.
     """
     try:
         # Vérifie l'existence de output.txt
