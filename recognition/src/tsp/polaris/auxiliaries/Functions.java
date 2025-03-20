@@ -1,40 +1,47 @@
 package tsp.polaris.auxiliaries;
 
-import tsp.polaris.recognition.other.Star;
-
 /**
  * Classe utilitaire pour les fonctions.
  *
  * @author Emma M.
  */
 public class Functions {
-	
+
     /**
-     * Renvoie l'index du minimum d'un tableau
-     * @param tab tableau
-     * @return int : index du minimum d'un tableau
+     * Renvoie l'indice du plus petit élément d'un tableau
+     * @param tab tableau de nombres
+     * @return l'indice du plus petit élément
+     * @throws IllegalArgumentException si le tableau est vide ou null
      */
     public static int minIndex(double[] tab) {
-        int min = 0;
-        for(int i = 0; i < tab.length; i += 1) {
-            if(tab[i] < tab[min]) {
-                min = i;
+        if (tab == null || tab.length == 0) {
+            throw new IllegalArgumentException("Le tableau ne peut pas être vide ou null.");
+        }
+        int minIndex = 0;
+        for (int i = 1; i < tab.length; i++) {
+            if (tab[i] < tab[minIndex]) {
+                minIndex = i;
             }
         }
-        return min;
+        return minIndex;
     }
 
     /**
      * Renvoie la somme d'un tableau
      * @param tab tableau
      * @return double : somme d'un tableau
+     * @throws IllegalArgumentException si le tableau est null
      */
     public static double sum(double[] tab) {
+        if (tab == null) {
+            throw new IllegalArgumentException("Le tableau ne peut pas être null.");
+        }
         double sum = 0;
-        for(int i = 0; i < tab.length; i += 1) {
-            sum += tab[i];
+        for (double value : tab) {
+            sum += value;
         }
         return sum;
     }
+
     
 }
