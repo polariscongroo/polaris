@@ -44,7 +44,16 @@ public class Point
     {
         return "(" + this.point[0] + ", " + this.point[1] + ")";
     }
-    
+
+    /**
+     * Vérifie si les vecteurs formé par 3 points ne sont pas colinéaires
+     */
+    public boolean isCollinear(Point p2, Point p3){
+        double[] vector1 = {p2.point[0] - point[0], p2.point[1] - point[1]};
+        double[] vector2 = {p3.point[0] - p2.point[0], p3.point[1] - p2.point[1]};
+        return vector1[0]*vector2[1] == vector1[1]*vector2[0];
+    }
+
     /**
      * Methode qui renvoie la distance entre 2 points
      * @param p2 Point avec lequel on veut calculer la distance

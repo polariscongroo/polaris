@@ -53,4 +53,5 @@ public class Star extends Point{
             return -1;
         }
     }
+
 }

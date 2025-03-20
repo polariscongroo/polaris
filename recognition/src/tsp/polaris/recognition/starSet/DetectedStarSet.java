@@ -176,7 +176,7 @@ public class DetectedStarSet extends StarSet
                 ListTriangle listTriangleConstellation = new ListTriangle(trianglesConstellation);
 
                 // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
-                double[] liste_cout = listTriangleStarSet.couts(listTriangleConstellation,this,c);
+                double[] liste_cout = listTriangleStarSet.costs(listTriangleConstellation,this,c);
 
                 double total = sum(liste_cout);  // Calcul le total des coûts
 

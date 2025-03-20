@@ -18,8 +18,13 @@ public class Triangle extends StarSet
     public Triangle(Star... stars)
     {
         super(stars);
+        // Vérification que 3 points on été donnés
         if(stars.length != 3) {
             throw new IllegalArgumentException("Le triangle doit avoir 3 étoiles.");
+        }
+        // Vérification que ces points forment bien un triangle
+        if(stars[0].isCollinear(stars[1],stars[2])){
+            throw new IllegalArgumentException("Les points ne forment pas un triangle");
         }
     }
     
@@ -97,7 +102,7 @@ public class Triangle extends StarSet
      * @param t2 Triangle à comparer
      * @return double : Coût entre 2 triangles
      */
-    public double cout(Triangle t2)
+    public double cost(Triangle t2)
     {
     	// Tableau d'angles
         double[] angles1 = getAngles();

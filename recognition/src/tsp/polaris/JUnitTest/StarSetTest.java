@@ -21,7 +21,7 @@ public class StarSetTest {
 
     /**
      * Partie exécuté avant chaque test :
-     * On définie une constellation avec 6 points distincts
+     * On définie un set d'étoiles avec 6 points distincts
      */
     @BeforeEach
     public void setUp() {
