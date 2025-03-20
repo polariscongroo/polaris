@@ -1,4 +1,6 @@
 package tsp.polaris.recognition.other;
+import tsp.polaris.recognition.starSet.StarSet;
+
 import java.util.Arrays;
 
 /**
@@ -6,9 +8,8 @@ import java.util.Arrays;
  * @author Emma M., Chadi A.
  */
 
-public class Triangle
+public class Triangle extends StarSet
 {
-    private final Star[] stars;
 
     /**
      * Constructeur qui initialise les coordonnées des étoiles du triangle
@@ -16,10 +17,9 @@ public class Triangle
      */
     public Triangle(Star... stars)
     {
+        super(stars);
         if(stars.length != 3) {
             throw new IllegalArgumentException("Le triangle doit avoir 3 étoiles.");
-        } else {
-            this.stars = stars;
         }
     }
     
