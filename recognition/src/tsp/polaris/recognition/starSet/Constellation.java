@@ -30,8 +30,8 @@ public class Constellation extends StarSet {
      * @param data Données des étoiles
      * @return Constellation : Ensemble d'étoiles correspondant aux données d'étoiles.
      */
-    public static Constellation createConstellationWithData(Data data, String name) {
-        return new Constellation(data.getData().toArray(new Star[0]), name);
+    public static Constellation createConstellationWithData(Data data) {
+        return new Constellation(data.getData().toArray(new Star[0]), data.getFileName());
     }
 
     /**
@@ -50,7 +50,7 @@ public class Constellation extends StarSet {
      * 
      * @return Une chaîne de caractères représentant la liste des points.
      */
-    public String getNom() {
+    public String getName() {
         return name;
     }
 }

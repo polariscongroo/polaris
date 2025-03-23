@@ -51,7 +51,7 @@ public class DataTest {
     @Test
     @DisplayName("Test 1 : Vérification du chargement des données CSV")
     void testDataLoading() {
-        Data data = new Data(TEST_CSV);
+        Data data = new Data(TEST_CSV,"test_data");
         List<Star> stars = data.getData();
         assertEquals(3, stars.size(), "Le nombre de lignes lues ne correspond pas");
         assertTrue(new Star(1.0, 2.0, 3.0).equals(stars.get(0)), "Premier point incorrect");
@@ -65,7 +65,7 @@ public class DataTest {
     @Test
     @DisplayName("Test 2 : Vérification de l'effacement du fichier CSV")
     void testEraseCsv() throws IOException {
-        Data data = new Data(TEST_CSV);
+        Data data = new Data(TEST_CSV, "test_data");
         data.eraseCsv(TEST_CSV);
         assertTrue(Files.readAllLines(Paths.get(TEST_CSV)).isEmpty(), "Le fichier n'a pas été vidé");
     }

@@ -14,13 +14,15 @@ import java.util.List;
 
 public class Data {
     private List<Star> data;
+    private String fileName;
 
     /**
      * Constructeur de la classe Data qui lit le fichier csv et le vide
      *
      * @param path Chemin vers le fichier csv
      */
-    public Data(String path) {
+    public Data(String path, String fileName) {
+        this.fileName = fileName;
         try{
             // Lis le fichier csv créé par le script python
             data = new ArrayList<>();
@@ -69,5 +71,13 @@ public class Data {
      */
     public void eraseCsv(String path) throws IOException {
         new FileWriter(path).close();
+    }
+
+    /**
+     * Getteur de fileName
+     * @return String : Retourne le nom du fichier
+     */
+    public String getFileName() {
+        return fileName;
     }
 }

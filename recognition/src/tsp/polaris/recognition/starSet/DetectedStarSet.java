@@ -216,4 +216,13 @@ public class DetectedStarSet extends StarSet
         return selectedStarSet[minIndex];
 
     }
+
+    /**
+     * Getteur de la constellation la plus proche.
+     *
+     * @return La constellation la plus proche.
+     */
+    public Constellation getNearConstellation() {
+    	return nearConstellation;
+    }
 }
