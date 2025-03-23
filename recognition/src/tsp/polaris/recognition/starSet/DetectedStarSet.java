@@ -49,9 +49,7 @@ public class DetectedStarSet extends StarSet
      */
     private Star[] listAddElement(Star[] list, Star star) {
     	Star[] newList = new Star[list.length + 1];
-    	for(int i = 0; i < list.length; i += 1) {
-    		newList[i] = list[i];
-    	}
+        System.arraycopy(list, 0, newList, 0, list.length);
     	newList[list.length] = star;
     	return newList;
     }
@@ -123,7 +121,7 @@ public class DetectedStarSet extends StarSet
      * @return La liste d'étoiles ayant le coût minimal.
      * @throws TriangleMatchingException Si une erreur survient lors de l'appariement des constellations.
      */
-    public DetectedStarSet findRightStarSet(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
+    private DetectedStarSet findRightStarSet(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
     	// On cree une liste composee de toutes les combinaisons d'étoiles à k elements :
     	
     	// Nombre de combinaisons
@@ -158,7 +156,7 @@ public class DetectedStarSet extends StarSet
      * @return Le coût minimal entre la photo et les constellations.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    public double coutConstellation(Constellation... constellations) throws TriangleMatchingException
+    private double coutConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         Constellation winningConstellation = null; // Garde en mémoire la constellation la plus proche
         double minimum_cout = Double.MAX_VALUE; // Utilise une valeur maximale pour commencer.
@@ -200,14 +198,15 @@ public class DetectedStarSet extends StarSet
      */
     public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
         // On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
+        int nbEtoilesMax = 17; // LE 17 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
 
         // Liste d'étoiles choisies pour chaque constellation
-        DetectedStarSet[] selectedStarSet = new DetectedStarSet[10]; // LE 10 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
+        DetectedStarSet[] selectedStarSet = new DetectedStarSet[nbEtoilesMax - 3];
         // Cout minimal entre la liste d'étoile selectionne et les constellations
-        double[] minCostPerLength = new double[10];
+        double[] minCostPerLength = new double[nbEtoilesMax - 3];
 
         // Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
-        for(int i = 0; i < 10; i += 1) {
+        for(int i = 0; i < nbEtoilesMax - 3; i += 1) {
             selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
         }
 

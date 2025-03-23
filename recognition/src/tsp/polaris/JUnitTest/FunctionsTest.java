@@ -23,7 +23,6 @@ public class FunctionsTest {
     void testMinIndexGeneralCase() {
         double[] tab = {5.0, 3.2, 7.8, 1.5, 9.3};
         assertEquals(3, Functions.minIndex(tab));
-        System.out.println("Test réussi : testMinIndexGeneralCase");
     }
 
     /**
@@ -34,7 +33,6 @@ public class FunctionsTest {
     void testMinIndexFirstElement() {
         double[] tab = {0.1, 2.2, 3.3, 4.4};
         assertEquals(0, Functions.minIndex(tab));
-        System.out.println("Test réussi : testMinIndexFirstElement");
     }
 
     /**
@@ -45,7 +43,6 @@ public class FunctionsTest {
     void testMinIndexLastElement() {
         double[] tab = {5.5, 6.6, 7.7, -2.2};
         assertEquals(3, Functions.minIndex(tab));
-        System.out.println("Test réussi : testMinIndexLastElement");
     }
 
     /**
@@ -56,7 +53,6 @@ public class FunctionsTest {
     void testMinIndexAllEqual() {
         double[] tab = {4.4, 4.4, 4.4, 4.4};
         assertEquals(0, Functions.minIndex(tab));
-        System.out.println("Test réussi : testMinIndexAllEqual");
     }
 
     /**
@@ -67,7 +63,6 @@ public class FunctionsTest {
     void testMinIndexSingleElement() {
         double[] tab = {42.0};
         assertEquals(0, Functions.minIndex(tab));
-        System.out.println("Test réussi : testMinIndexSingleElement");
     }
 
     /**
@@ -78,7 +73,6 @@ public class FunctionsTest {
     void testMinIndexEmptyArray() {
         double[] tab = {};
         assertThrows(IllegalArgumentException.class, () -> Functions.minIndex(tab));
-        System.out.println("Test réussi : testMinIndexEmptyArray");
     }
 
     /**
@@ -89,7 +83,6 @@ public class FunctionsTest {
     void testSumGeneralCase() {
         double[] tab = {1.1, 2.2, 3.3, 4.4};
         assertEquals(11.0, Functions.sum(tab), 1e-9);
-        System.out.println("Test réussi : testSumGeneralCase");
     }
 
     /**
@@ -100,7 +93,6 @@ public class FunctionsTest {
     void testSumEmptyArray() {
         double[] tab = {};
         assertEquals(0.0, Functions.sum(tab), 1e-9);
-        System.out.println("Test réussi : testSumEmptyArray");
     }
 
     /**
@@ -111,7 +103,6 @@ public class FunctionsTest {
     void testSumSingleElement() {
         double[] tab = {7.7};
         assertEquals(7.7, Functions.sum(tab), 1e-9);
-        System.out.println("Test réussi : testSumSingleElement");
     }
 
     /**
@@ -122,7 +113,6 @@ public class FunctionsTest {
     void testSumNegativeValues() {
         double[] tab = {-1.1, -2.2, -3.3};
         assertEquals(-6.6, Functions.sum(tab), 1e-9);
-        System.out.println("Test réussi : testSumNegativeValues");
     }
 
     /**
@@ -133,6 +123,5 @@ public class FunctionsTest {
     void testSumMixedPositiveNegative() {
         double[] tab = {-1.1, 2.2, -3.3, 4.4};
         assertEquals(2.2, Functions.sum(tab), 1e-9);
-        System.out.println("Test réussi : testSumMixedPositiveNegative");
     }
 }

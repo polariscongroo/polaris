@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @author Chadi A., Emma M.
  */
 public class Constellation extends StarSet {
-    private String name;
+    private final String name;
 
     /**
      * Constructeur de la classe Constellation.
