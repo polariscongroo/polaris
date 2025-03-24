@@ -50,7 +50,7 @@ public class DataTest {
      */
     @Test
     @DisplayName("Test 1 : Vérification du chargement des données CSV")
-    void testDataLoading() {
+    void testgetData() {
         Data data = new Data(TEST_CSV,"test_data");
         List<Star> stars = data.getData();
         assertEquals(3, stars.size(), "Le nombre de lignes lues ne correspond pas");

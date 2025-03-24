@@ -23,17 +23,18 @@ public class Data {
      */
     public Data(String path, String fileName) {
         this.fileName = fileName;
+        System.out.println(fileName);
         try{
             // Lis le fichier csv créé par le script python
             data = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
             while ((line = br.readLine()) != null) {
+                System.out.println(line);
                 String[] values = line.split(",");
                 Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim()));
                 data.add(newPoint);
             }
-
             // Ferme le buffer
             br.close();
         }
