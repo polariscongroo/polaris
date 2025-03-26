@@ -131,7 +131,7 @@ public class DetectedStarSet extends StarSet
     	DetectedStarSet[] starsSetCombinations = new DetectedStarSet[nbCombination];
 
         // On remplit la liste
-    	combinationStar(k,starsSetCombinations, stars,new Star[k]);
+    	combinationStar(k,starsSetCombinations, stars,new Star[0]);
     	
     	// On cherche l'ensemble d'étoiles de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
     	double minCoutConstellation = Double.MAX_VALUE;
@@ -198,7 +198,7 @@ public class DetectedStarSet extends StarSet
      */
     public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
         // On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
-        int nbEtoilesMax = 17; // LE 17 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
+        int nbEtoilesMax = Functions.min(17, stars.length); // LE 17 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
 
         // Liste d'étoiles choisies pour chaque constellation
         DetectedStarSet[] selectedStarSet = new DetectedStarSet[nbEtoilesMax - 3];

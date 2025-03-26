@@ -43,5 +43,18 @@ public class Functions {
         return sum;
     }
 
+    /**
+     * Renvoie le plus petit des deux entiers
+     * @param a 1er entier
+     * @param b 2e entier
+     * @return Le plus petit des deux entiers
+     */
+    public static int min(int a, int b) {
+        if (a < b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
     
 }
