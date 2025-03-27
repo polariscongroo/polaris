@@ -138,7 +138,7 @@ public class DetectedStarSet extends StarSet
     	int indConstellation = -1;
     	
     	for(int i = 0; i < starsSetCombinations.length; i += 1) {
-    		double coutCons = starsSetCombinations[i].coutConstellation(constellations);
+    		double coutCons = starsSetCombinations[i].costConstellation(constellations);
     		if(minCoutConstellation > coutCons) {
     			indConstellation = i;
     			minCoutConstellation = coutCons;
@@ -156,7 +156,7 @@ public class DetectedStarSet extends StarSet
      * @return Le coût minimal entre la photo et les constellations.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    private double coutConstellation(Constellation... constellations) throws TriangleMatchingException
+    public double costConstellation(Constellation... constellations) throws TriangleMatchingException
     {
         Constellation winningConstellation = null; // Garde en mémoire la constellation la plus proche
         double minimum_cout = Double.MAX_VALUE; // Utilise une valeur maximale pour commencer.
@@ -201,15 +201,19 @@ public class DetectedStarSet extends StarSet
         int nbEtoilesMax = Functions.min(17, stars.length); // LE 17 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
 
         // Liste d'étoiles choisies pour chaque constellation
-        DetectedStarSet[] selectedStarSet = new DetectedStarSet[nbEtoilesMax - 3];
+        DetectedStarSet[] selectedStarSet = new DetectedStarSet[nbEtoilesMax - 2];
         // Cout minimal entre la liste d'étoile selectionne et les constellations
-        double[] minCostPerLength = new double[nbEtoilesMax - 3];
+        double[] minCostPerLength = new double[nbEtoilesMax - 2];
 
         // Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
-        for(int i = 0; i < nbEtoilesMax - 3; i += 1) {
+        for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
             selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
         }
 
+        // On divise le cout par la taille de l'ensemble d'étoiles
+        for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
+            minCostPerLength[i] /= (i+3);
+        }
         // On recherche la taille d'étoiles qui a le cout le plus faible
         int minIndex = Functions.minIndex(minCostPerLength);
 
