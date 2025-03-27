@@ -3,6 +3,7 @@ package tsp.polaris.recognition;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.dataTransmission.Database;
 import tsp.polaris.recognition.exceptions.TriangleMatchingException;
+import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
 
@@ -31,7 +32,16 @@ public class Main
             constellations[i] = Constellation.createConstellationWithData(database.getDataSet()[i]);
         }
 
-        DetectedStarSet bestStarSet = detectedStarSet.searchBestStarSet(constellations);
+        int N = detectedStarSet.getStars().length;
+        // On garde que les N étoiles les plus brillantes
+        Star[] starsKept = new Star[N];
+        for(int i = 0; i < N; i += 1) {
+            starsKept[i] = detectedStarSet.getStars()[i];
+        }
+
+        DetectedStarSet detectedStarSetKept = new DetectedStarSet(starsKept);
+
+        DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(constellations);
 
         System.out.println(bestStarSet.getNearConstellation().getName());
     }
