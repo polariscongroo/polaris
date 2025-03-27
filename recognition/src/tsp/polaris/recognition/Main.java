@@ -32,7 +32,7 @@ public class Main
             constellations[i] = Constellation.createConstellationWithData(database.getDataSet()[i]);
         }
 
-        int N = detectedStarSet.getStars().length;
+        int N = 20;
         // On garde que les N étoiles les plus brillantes
         Star[] starsKept = new Star[N];
         for(int i = 0; i < N; i += 1) {

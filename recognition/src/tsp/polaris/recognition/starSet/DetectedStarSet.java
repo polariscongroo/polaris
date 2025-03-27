@@ -207,7 +207,17 @@ public class DetectedStarSet extends StarSet
 
         // Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
         for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
-            selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
+            // DEBUG - A RETIRER
+            System.out.println(i);
+            // -------
+
+            // Cas ou il n'existe pas de constellations à i+3 étoiles dans notre base de données
+            if(existConstellationWithKStars(i+3,constellations)) {
+                selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
+            } else {
+                selectedStarSet[i] = null;
+                minCostPerLength[i] = Double.MAX_VALUE;
+            }
         }
 
         // On divise le cout par la taille de l'ensemble d'étoiles
@@ -219,6 +229,21 @@ public class DetectedStarSet extends StarSet
 
         return selectedStarSet[minIndex];
 
+    }
+
+    /**
+     * Verifie s'il existe une constellation a k étoiles.
+     * @param k
+     * @param constellations
+     * @return boolean : vrai s'il existe une constellation à k étoiles, faux sinon
+     */
+    private boolean existConstellationWithKStars(int k, Constellation[] constellations) {
+    	for(Constellation c : constellations) {
+    		if(c.getStars().length == k) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
 
     /**
