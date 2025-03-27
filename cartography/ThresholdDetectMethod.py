@@ -97,7 +97,6 @@ def determine_formes(threshold_mask):
                 formes.append(cree_une_forme((i, j), threshold_mask, explored))
     return formes
 
-
 def determine_coordonnees_etoiles(formes):
     """
     @brief Calcule les barycentres des formes détectées pour déterminer les coordonnées des étoiles.
@@ -113,6 +112,26 @@ def determine_coordonnees_etoiles(formes):
         cor.append(barycentre)
     return cor
 
+def trie_par_luminosite(coordonnees_des_etoiles, image_array):
+    """
+    """
+    etoiles = []
+    for k in range(len(coordonnees_des_etoiles)):
+        i = float(coordonnees_des_etoiles[k][0])
+        j = float(coordonnees_des_etoiles[k][1])
+        etoiles.append([j, i, image_array[int(i),int(j)]], k+1)
+    etoiles_triees = sorted(etoiles, key=lambda x: x[2])
+    return etoiles_triees
+
+def classe_les_étoiles(etoiles_triees):
+    """
+    Moyenne le classement des étoiles selon la taille de la forme à laquelle ils appartiennent et leur luminosité
+    """
+    for k in range(len(etoiles_triees)):
+        classement = int((k+1 + etoiles_triees[3])/2)
+        etoiles_triees.append(classement)
+        classement_final = sorted(etoiles_triees, key=lambda x: x[4])
+    return classement_final 
 
 def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
     """
@@ -125,11 +144,10 @@ def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
     for k in range(len(coordonneesdesetoiles)):
         i = float(coordonneesdesetoiles[k][0])
         j = float(coordonneesdesetoiles[k][1])
-        coordonnees.append([j, i, image_array[int(i)][int(j)]])  # Inverse les indices pour le format CSV
+        coordonnees.append([j, i, image_array[int(i),int(j)]])  # Inverse les indices pour le format CSV
     with open("recognition/coorPoints/liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
         writer = csv.writer(fichier)
         writer.writerows(coordonnees)
-
 
 def erase_txt():
     """
@@ -212,7 +230,9 @@ def main():
 
                     # Extraction des formes et calcul des coordonnées des étoiles
                     formes = determine_formes(threshold_mask)
-                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes)
+                    formes_triees = sorted(formes, key=lambda x: x.size, reverse=True) # La forme contenant le plus de points lumineux est placée en tête de liste
+                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes_triees)
+                    
 
                     print("8. Affichage lancé")
                     sys.stdout.flush()
