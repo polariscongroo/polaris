@@ -30,7 +30,7 @@ public class Data {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim()));
+                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim())*Float.parseFloat(values[3].trim()));
                 data.add(newPoint);
             }
             // Ferme le buffer
