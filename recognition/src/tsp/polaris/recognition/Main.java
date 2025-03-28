@@ -1,5 +1,6 @@
 package tsp.polaris.recognition;
 
+import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.dataTransmission.Database;
 import tsp.polaris.recognition.exceptions.TriangleMatchingException;
@@ -32,7 +33,7 @@ public class Main
             constellations[i] = Constellation.createConstellationWithData(database.getDataSet()[i]);
         }
 
-        int N = 20;
+        int N = Functions.min(20, detectedStarSet.getStars().length);
         // On garde que les N étoiles les plus brillantes
         Star[] starsKept = new Star[N];
         for(int i = 0; i < N; i += 1) {
