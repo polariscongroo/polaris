@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 from astropy.stats import mad_std
 from collections import deque
+import matplotlib.pyplot as plt
 import sys
 import os
 
@@ -79,7 +80,6 @@ def cree_une_forme(start, threshold_mask, explored):
                 queue.append(adj)
     return forme
 
-
 def determine_formes(threshold_mask):
     """
     @brief Identifie toutes les formes (groupes de pixels connectés) dans l'image seuillée.
@@ -103,39 +103,59 @@ def determine_coordonnees_etoiles(formes):
 
     @param formes L'ensemble des formes (étoiles/ensemble de points lumineux) repéré sur l'image. 
 
-    @return cor L'ensemble des coordonnées exactes des étoiles détectées).
+    @return cor L'ensemble des coordonnées exactes des étoiles détectées.
     """
     cor = []
-    for forme in formes:
-        points = np.array(forme)
-        barycentre = points.mean(axis=0)  # Moyenne des coordonnées pour trouver le centre
-        cor.append(barycentre)
+    for i in range(len(formes)):
+        points = np.array(formes[i])
+        barycentre = points.mean(axis=0)
+        cor.append([barycentre, len(formes[i])])
     return cor
 
-def trie_par_luminosite(coordonnees_des_etoiles, image_array):
+def attribue_lum_et_classement_taille(coordonnees_des_etoiles, image_array):
     """
+    @brief Rajoute les luminosités des étoiles et leur classement par taille de forme.
+
+    @param coordonnées_des_etoiles L'ensemble des coordonnées exactes des étoiles détectées.
+    @param image_array La matrice des intensités lumineuses générées avec Pillow (Notre Image).
+
+    @return etoiles La liste des étoiles mise à jour.
     """
     etoiles = []
     for k in range(len(coordonnees_des_etoiles)):
-        i = float(coordonnees_des_etoiles[k][0])
-        j = float(coordonnees_des_etoiles[k][1])
-        etoiles.append([j, i, image_array[int(i),int(j)]], k+1)
-    etoiles_triees = sorted(etoiles, key=lambda x: x[2])
-    return etoiles_triees
+            i = float(coordonnees_des_etoiles[k][0][0])
+            j = float(coordonnees_des_etoiles[k][0][1])
+            taille = int(coordonnees_des_etoiles[k][1])
+            etoiles.append([i, j, taille, image_array[int(i),int(j)], k+1])
+    return etoiles
 
 def classe_les_étoiles(etoiles_triees):
     """
-    Moyenne le classement des étoiles selon la taille de la forme à laquelle ils appartiennent et leur luminosité
+    @brief Moyenne le classement d'une étoile selon la taille de la forme à laquelle elle appartient et sa luminosité.
+    --penser à homogénéiser les classements--
+
+    @param etoiles_triees La liste des étoiles triées par taille décroissante des formes auxquelles elles appartiennent.
+
+    @return etoiles_triees Même liste donnée en paramètre à laquelle on ajoute le classement général.
     """
     for k in range(len(etoiles_triees)):
-        classement = int((k+1 + etoiles_triees[3])/2)
-        etoiles_triees.append(classement)
-        classement_final = sorted(etoiles_triees, key=lambda x: x[4])
-    return classement_final 
+        classement = int((0.3*etoiles_triees[k][3]) + (0.7*etoiles_triees[k][4])) + 1 
+        etoiles_triees[k].append(classement)
+    print(etoiles_triees)
+    etoiles_triees.sort(key=lambda x: x[5])
+    return etoiles_triees
 
 def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
     """
     @brief Enregistre les coordonnées des étoiles dans un fichier CSV.
+    Une ligne contient 6 éléments:
+    1- L'abscisse de l'étoile
+    2- L'ordonnée de l'étoile
+    3- La taille de la forme à laquelle l'étoile appartient
+    4- La luminosité de l'étoile
+    5- Le classement de l'étoile par taille de forme (classement pris en compte dans le csv)
+    6- Le classement général de l'étoile (par luminosité et taille de forme)
+
 
     @param coordonnesdesetoiles L'ensemble des coordonnées exactes des étoiles détectées.
     @param image_array La matrice des intensités lumineuses générées avec Pillow (Notre Image).
@@ -144,7 +164,11 @@ def enregistre_les_etoiles(coordonneesdesetoiles, image_array):
     for k in range(len(coordonneesdesetoiles)):
         i = float(coordonneesdesetoiles[k][0])
         j = float(coordonneesdesetoiles[k][1])
-        coordonnees.append([j, i, image_array[int(i),int(j)]])  # Inverse les indices pour le format CSV
+        taille_forme = int(coordonneesdesetoiles[k][2])
+        lum = float(coordonneesdesetoiles[k][3])
+        classement_par_lum = int(coordonneesdesetoiles[k][4])
+        classement_final= int(coordonneesdesetoiles[k][5])
+        coordonnees.append([j, i, taille_forme, lum, classement_par_lum, classement_final])  # Inverse les indices pour le format CSV
     with open("recognition/coorPoints/liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
         writer = csv.writer(fichier)
         writer.writerows(coordonnees)
@@ -226,13 +250,14 @@ def main():
                     # Détection des étoiles avec un seuil basé sur l'écart-type robuste (MAD)
                     sigma = mad_std(image_array)  # Calcul du bruit de fond
                     image_final = inverse_cor(image_array)  # Correction d'orientation
-                    threshold_mask = image_final > (21.0 * sigma)  # Seuil pour isoler les étoiles
+                    threshold_mask = image_final > 0.7  # Seuil pour isoler les étoiles
 
                     # Extraction des formes et calcul des coordonnées des étoiles
                     formes = determine_formes(threshold_mask)
-                    formes_triees = sorted(formes, key=lambda x: x.size, reverse=True) # La forme contenant le plus de points lumineux est placée en tête de liste
-                    coordonneesdesetoiles = determine_coordonnees_etoiles(formes_triees)
-                    
+                    formes.sort(key=len, reverse=True) # La forme contenant le plus de points lumineux est placée en tête de liste
+                    coordonnees_des_etoiles = determine_coordonnees_etoiles(formes)
+                    coordonnees_triees_taille = attribue_lum_et_classement_taille(coordonnees_des_etoiles, image_array)
+                    coordonnees_triees_final = classe_les_étoiles(coordonnees_triees_taille)
 
                     print("8. Affichage lancé")
                     sys.stdout.flush()
@@ -240,17 +265,17 @@ def main():
                     '''
                     # Affichage de l'image seuillée avec les étoiles détectées
                     plt.imshow(threshold_mask, cmap='gray', origin='lower')
-                    for star in coordonneesdesetoiles:
-                        plt.plot(star[1], star[0], 'ro')  # Marque les étoiles en rouge
+                    for star in coordonnees_des_etoiles:
+                        plt.plot(star[0][1], star[0][0], 'ro')  # Marque les étoiles en rouge
                     plt.title('Thresholded Image With Stars')
-                    plt.show(block=False)  # Ne bloque pas l'exécution du script
+                    plt.show(block=True)  # Ne bloque pas l'exécution du script
                     '''
 
                     # Sauvegarde des coordonnées des étoiles et réinitialisation des fichiers
-                    enregistre_les_etoiles(coordonneesdesetoiles, image_array)
+                    enregistre_les_etoiles(coordonnees_triees_final, image_array)
                     print("9. fichier csv créé et rempli")
                     sys.stdout.flush()
-
+                    
                     '''
                     # Boucle pour maintenir la fenêtre ouverte
                     while plt.get_fignums():
@@ -273,6 +298,7 @@ def main():
                     print(str(i))
                 except Exception as e:
                     print(f"Erreur lors du traitement de l'image {image_path}")
+                    print(e)
     except OutputNotFound as o:
         print(str(o))
 
