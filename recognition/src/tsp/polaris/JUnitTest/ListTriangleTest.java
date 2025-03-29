@@ -37,7 +37,7 @@ public class ListTriangleTest {
             starsConstellation[i] = new Star(i, (double)5/(i+1), i);
         }
         workingDetectedStarSet = new DetectedStarSet(starsDetected);
-        workingConstellation = new Constellation(starsConstellation, "TestConstellation");
+        workingConstellation = new Constellation(starsConstellation, "TestConstellation", null);
         workingDetectedStarSetListTriangle = new ListTriangle(workingDetectedStarSet.generateTriangles());
         workingConstellationListTriangle = new ListTriangle(workingConstellation.generateTriangles());
     }

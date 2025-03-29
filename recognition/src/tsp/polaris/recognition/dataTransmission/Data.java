@@ -14,7 +14,8 @@ import java.util.List;
 
 public class Data {
     private List<Star> data;
-    private String fileName;
+    private final String fileName;
+    private List<List<Integer>> adjacencyList;
 
     /**
      * Constructeur de la classe Data qui lit le fichier csv et le vide
@@ -28,10 +29,30 @@ public class Data {
             data = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
+            boolean isThereAdjacencyList = false;
             while ((line = br.readLine()) != null) {
+                if(line.equals("L")) {
+                    isThereAdjacencyList = true;
+                    break;
+                }
                 String[] values = line.split(",");
-                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim())*Float.parseFloat(values[3].trim()));
+                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim()) * Float.parseFloat(values[3].trim()));
                 data.add(newPoint);
+
+            }
+
+            // Maintenant on lit la liste d'adjacence si elle existe
+            if(isThereAdjacencyList) {
+                adjacencyList = new ArrayList<>();
+
+                while ((line = br.readLine()) != null) {
+                    String[] values = line.split(",");
+                    List<Integer> newList = new ArrayList<>();
+                    for (String value : values) {
+                        newList.add(Integer.parseInt(value));
+                    }
+                    adjacencyList.add(newList);
+                }
             }
             // Ferme le buffer
             br.close();
@@ -60,6 +81,18 @@ public class Data {
      */
     public List<Star> getData() {
         return data;
+    }
+
+    /**
+     * Getteur d'adjacencyList
+     * @return List<List<Integer>> : Retourne la liste d'adjacence du csv si elle existe
+     */
+    public List<List<Integer>> getAdjacencyList() {
+        if(adjacencyList != null) {
+            return adjacencyList;
+        } else {
+            throw new IllegalStateException("Ce n'est pas une constellation, donc il n'y a pas de liste d'adjacence");
+        }
     }
 
     /**

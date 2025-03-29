@@ -4,6 +4,7 @@ import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.other.Star;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Représente une constellation composée de plusieurs points.
@@ -13,15 +14,19 @@ import java.util.Arrays;
  */
 public class Constellation extends StarSet {
     private final String name;
+    private List<List<Integer>> adjacencyList;
 
     /**
      * Constructeur de la classe Constellation.
      * 
-     * @param stars Liste d'étoiles constituant la constellation.
+     * @param stars Liste d'étoiles constituant la constellation
+     * @param name Nom de la constellation
+     * @param adjacencyList Liste d'adjacence de la constellation
      */
-    public Constellation(Star[] stars, String name) {
+    public Constellation(Star[] stars, String name, List<List<Integer>> adjacencyList) {
         super(stars);
         this.name = name;
+        this.adjacencyList = adjacencyList;
     }
 
     /**
@@ -31,7 +36,7 @@ public class Constellation extends StarSet {
      * @return Constellation : Ensemble d'étoiles correspondant aux données d'étoiles.
      */
     public static Constellation createConstellationWithData(Data data) {
-        return new Constellation(data.getData().toArray(new Star[0]), data.getFileName());
+        return new Constellation(data.getData().toArray(new Star[0]), data.getFileName(), data.getAdjacencyList());
     }
 
     /**
@@ -52,5 +57,13 @@ public class Constellation extends StarSet {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Getteur d'adjacencyList
+     * @return List<List<Integer>> : Retourne la liste d'adjacence de la constellation
+     */
+    public List<List<Integer>> getAdjacencyList() {
+        return adjacencyList;
     }
 }
