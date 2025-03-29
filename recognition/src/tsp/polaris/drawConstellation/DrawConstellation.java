@@ -123,6 +123,7 @@ public class DrawConstellation extends Draw {
         // On récupère la liste d'adjacence
         List<List<Integer>> adjacencyList = constellation.getAdjacencyList();
 
+        // On trace toutes les lignes
         for (int i = 0; i < adjacencyList.size(); i += 2) {
             for(int j = 0; j < adjacencyList.get(i).size(); j += 1) {
                 drawLine(constellation.getStars()[i], constellation.getStars()[adjacencyList.get(i).get(j)], color);
