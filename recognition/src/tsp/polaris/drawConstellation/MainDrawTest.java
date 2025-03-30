@@ -13,9 +13,9 @@ public class MainDrawTest {
         Color col = new Color(79, 177, 205, 200); // Couleur de la ligne
         //DrawConstellation outputDrawing = new DrawConstellation(new File("recognition/src/tsp/polaris/drawConstellation/inputs/1_cancer.png")); // Nouvelle image
         //outputDrawing.drawLine(new Point(213, 238), new Point(476, 531), col); // Trace la ligne
-        DrawConstellation outputDrawing = new DrawConstellation(new File("/home/spokez/Téléchargements/ara.png")); // Nouvelle image
-        Data data = new Data("baseDDonnees_csv/ara.csv", "ara");
-        Constellation cassio = Constellation.createConstellationWithData(data);
-        outputDrawing.drawConstellation(cassio, col);
+        DrawConstellation outputDrawing = new DrawConstellation(new File("/home/spokez/Téléchargements/lepus.png")); // Nouvelle image
+        Data data = new Data("baseDDonnees_csv/lepus.csv", "lepus");
+        Constellation constellation = Constellation.createConstellationWithData(data);
+        outputDrawing.drawConstellation(constellation, col);
     }
 }
