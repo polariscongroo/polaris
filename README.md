@@ -6,24 +6,31 @@
 
 Automatic constellation recognition application for night sky observation with interactive interface.
 
-## ✨ Features
+## 👾 Features
 
 - **Automatic recognition** of constellations via pattern matching
 - **Precise extraction** of stellar coordinates
 - **Visual interface** displaying identified constellations
 - **Detailed information** about each constellation (history, mythology)
 
-## Key Features:
-1. **Clearly separated code blocks** with syntax highlighting
-2. **Interactive copy buttons** with state change
-3. **Integrated CSS styling** for better visibility
-4. **Minimal JS script** for visual feedback
-5. **Distinct sections** for installation/execution/examples
+## 👾 Key Features
 
-### JS/CSS-free alternative (universally compatible):
-```markdown
-## 📥 Installation (Copy/Paste)
-```
+- **Multi-language Architecture**  
+Python for constellation pattern recognition + Java for interactive visualization
+- **Advanced Star Matching**  
+Precise coordinate analysis using astrometry algorithms
+- **Modern JavaFX Interface**  
+Interactive sky map with constellation drawing capabilities
+- **Lightweight Data Management**  
+CSV-based star database for efficient processing
+- **Inter-process Communication**  
+Robust Python-Java data exchange via csv
+- **Visual Constellation Rendering**  
+Dynamic drawing of recognized star patterns with mythological information
+
+---
+
+### 📥 Installation (Copy/Paste)
 
 Clone the repository
 ```bash
@@ -46,23 +53,24 @@ Run
 ```bash
 java -jar target/constellation-recognition.jar
 ```
-graph TD
-    A[Night Sky Photo] --> B(Star Extraction - Python)
-    B --> C(Stellar Coordinates)
-    C --> D(Constellation Recognition - Java)
-    D --> E(User Interface - Java Swing)
 
-constellation-recognition/
-├── python/                # Image processing and star extraction
-│   ├── star_detection.py
-│   └── requirements.txt
-├── java/                  # Recognition and interface
-│   ├── src/
-│   │   ├── constellation/
-│   │   └── ui/
-│   └── pom.xml
-├── data/                  # Stellar databases
-├── docs/                  # Documentation
-└── images/                # Examples and screenshots
+## 👾 User Process
 
+- **Star Extraction**  
+A(Night Sky Photo) --> B(Star Extraction - Python)
+
+- **Star Coordinates**  
+B --> C(Stellar Coordinates)
+
+- **Constellation Recognition**  
+C --> D(Constellation Recognition - Java)
+
+- **Display on Interface**  
+D --> E(User Interface - JavaFx)  
+
+## 👾 Structure
+
+```markdown
+![Texte alternatif](chemin/vers/image.png)
+```
 ---
