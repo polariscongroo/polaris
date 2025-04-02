@@ -13,7 +13,7 @@ Automatic constellation recognition application for night sky observation with i
 - **Visual interface** displaying identified constellations
 - **Detailed information** about each constellation (history, mythology)
 
-## 👾 Key Features
+### Key Features
 
 - **Multi-language Architecture**  
 Python for constellation pattern recognition + Java for interactive visualization
@@ -54,7 +54,7 @@ Run
 java -jar target/constellation-recognition.jar
 ```
 
-## 👾 User Process
+## 👾 Process
 
 - **Star Extraction**  
 A(Night Sky Photo) --> B(Star Extraction - Python)
@@ -70,7 +70,6 @@ D --> E(User Interface - JavaFx)
 
 ## 👾 Structure
 
-```markdown
-![Texte alternatif](chemin/vers/image.png)
-```
----
+<img src="https://github.com/polariscongroo/polaris/blob/master/Github/Topmarche.png" width="900">  
+
+
