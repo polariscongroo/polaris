@@ -1,4 +1,8 @@
 package tsp.polaris.auxiliaries;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Classe utilitaire pour les fonctions.
@@ -55,6 +59,28 @@ public class Functions {
         } else {
             return b;
         }
+    }
+
+    /**
+     * Lit la seule ligne présente dans un fichier texte.
+     * 
+     * @param cheminFichier le chemin vers le fichier à lire
+     * @return le contenu de la ligne
+     * @throws IOException si une erreur de lecture survient
+     * @throws IllegalArgumentException si le fichier est vide ou contient plusieurs lignes
+     */
+    public static String lireLigneUnique(String cheminFichier) throws IOException {
+        List<String> lignes = Files.readAllLines(Paths.get(cheminFichier));
+        
+        if (lignes.isEmpty()) {
+            throw new IllegalArgumentException("Le fichier est vide");
+        }
+        
+        if (lignes.size() > 1) {
+            throw new IllegalArgumentException("Le fichier contient plusieurs lignes");
+        }
+        
+        return lignes.get(0);
     }
     
 }

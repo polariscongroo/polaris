@@ -124,6 +124,7 @@ public class Loader {
                 break;
             }
         }
+        // Lancer le java, on sait pas comment
     }
 
 	/**
