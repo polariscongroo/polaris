@@ -243,7 +243,7 @@ def main():
 
                     # Détection des étoiles avec un seuil basé sur l'écart-type robuste (MAD)
                     # sigma = mad_std(image_array)  # Calcul du bruit de fond
-                    image_final = inverse_cor(image_array)  # Correction d'orientation
+                    image_final = image_array
                     threshold_mask = image_final >= 0.7  # Seuil pour isoler les étoiles (à régler manuellement)
 
                     # Extraction des formes et calcul des coordonnées des étoiles
@@ -276,7 +276,7 @@ def main():
                         plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
                     '''
 
-                    erase_txt()  # Vide le fichier txt après traitement
+                    #erase_txt()  # Vide le fichier txt après traitement
                     print("10. fichier txt vidé")
                     sys.stdout.flush()
                     

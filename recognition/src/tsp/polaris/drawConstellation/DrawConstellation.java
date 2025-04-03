@@ -5,10 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import tsp.polaris.recognition.other.Point;
-import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

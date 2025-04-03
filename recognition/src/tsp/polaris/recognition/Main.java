@@ -9,7 +9,6 @@ import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
