@@ -1,4 +1,6 @@
 package tsp.polaris.recognition.other;
+import tsp.polaris.recognition.starSet.StarSet;
+
 import java.util.Arrays;
 
 /**
@@ -6,9 +8,8 @@ import java.util.Arrays;
  * @author Emma M., Chadi A.
  */
 
-public class Triangle
+public class Triangle extends StarSet
 {
-    private final Star[] stars;
 
     /**
      * Constructeur qui initialise les coordonnées des étoiles du triangle
@@ -16,10 +17,14 @@ public class Triangle
      */
     public Triangle(Star... stars)
     {
+        super(stars);
+        // Vérification que 3 points on été donnés
         if(stars.length != 3) {
             throw new IllegalArgumentException("Le triangle doit avoir 3 étoiles.");
-        } else {
-            this.stars = stars;
+        }
+        // Vérification que ces points forment bien un triangle
+        if(stars[0].isCollinear(stars[1],stars[2])){
+            throw new IllegalArgumentException("Les points ne forment pas un triangle");
         }
     }
     
@@ -27,12 +32,8 @@ public class Triangle
      * Getteur de l'étoile i
      * @return Point : La ième étoile du triangle
      */
-    public Star getStars(int i) throws IllegalArgumentException {
-        if(i < 0 || i > 2) {
-            throw new IllegalArgumentException("L'index doit etre compris entre 0 et 2.");
-        } else {
-            return stars[i];
-        }
+    public Star[] getStars() {
+        return stars;
     }
 
     /**
@@ -101,7 +102,7 @@ public class Triangle
      * @param t2 Triangle à comparer
      * @return double : Coût entre 2 triangles
      */
-    public double cout(Triangle t2)
+    public double cost(Triangle t2)
     {
     	// Tableau d'angles
         double[] angles1 = getAngles();

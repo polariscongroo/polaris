@@ -21,14 +21,15 @@ public class StarSetTest {
 
     /**
      * Partie exécuté avant chaque test :
-     * On définie une constellation avec 6 points distincts
+     * On définie un set d'étoiles avec 6 points distincts
      */
     @BeforeEach
     public void setUp() {
-        workingStarSet = new StarSet(new Star[6]);
+        Star[] stars = new Star[6];
         for(int i = 0; i < 6; i++){
-            workingStarSet.getStars()[i] = new Star(i, i, 0);
+            stars[i] = new Star(i, i, i);
         }
+        workingStarSet = new StarSet(stars);
     }
 
     /**
@@ -69,4 +70,34 @@ public class StarSetTest {
     /**
      * Test 4 : Le tri des étoiles par luminsoté est bien décroissant
      */
+    @Test
+    @DisplayName("Test 4 : Le tri des étoiles par luminsoté est bien décroissant")
+    public void luminosityOrderCheckStarSet() {
+        for (int i = 0; i < workingStarSet.getStars().length - 1; i++) {
+            Assertions.assertTrue(workingStarSet.getStars()[i].getBrightness() >= workingStarSet.getStars()[i + 1].getBrightness());
+        }
+    }
+
+    /**
+     * Test 5 : Méthode getIndex()
+     */
+    @Test
+    @DisplayName("Test 5 : Méthode getIndex()")
+    public void testGetIndex() {
+        for(int i = 0; i < workingStarSet.getStars().length; i++){
+            Assertions.assertEquals(i, workingStarSet.getIndex(workingStarSet.getStars()[i]));
+        }
+    }
+
+    /**
+     * Test 6 : La méthode findTriangle associe bien un triangle avec lui même
+     */
+    @Test
+    @DisplayName("Test 6 : La méthode findTriangle associe bien un triangle avec lui meme")
+    public void testFindTriangle() {
+        Triangle[] triangles = workingStarSet.generateTriangles();
+        for (Triangle triangle : triangles) {
+            Assertions.assertTrue(triangle.equals(workingStarSet.findTriangle(triangle, workingStarSet)));
+        }
+    }
 }

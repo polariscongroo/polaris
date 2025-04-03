@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import tsp.polaris.recognition.other.Point;
+import tsp.polaris.recognition.starSet.Constellation;
+import tsp.polaris.recognition.starSet.DetectedStarSet;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Crée une nouvelle image avec la constellation tracée à partir de l'image donnée et des coordonnées des points formant la constellation
@@ -106,6 +111,25 @@ public class DrawConstellation extends Draw {
     	}
 
         ImageIO.write(img, "PNG", outputFile); // Enregistrement de l'image
+    }
+
+    /**
+     * Dessine la constellation tracée
+     *
+     * @param detectedStarSet set d'étoiles détectées ou on va tracer
+     * @param color  couleur à appliquer
+     * @throws IOException erreur lancée lors de la copie de l'image
+     */
+    public void drawConstellation(DetectedStarSet detectedStarSet, Color color) throws IOException {
+        // On récupère la liste d'adjacence
+        List<List<Integer>> adjacencyList = detectedStarSet.getNearConstellation().getAdjacencyList();
+
+        // On trace toutes les lignes
+        for (int i = 0; i < adjacencyList.size(); i += 1) {
+            for(int j = 0; j < adjacencyList.get(i).size(); j += 1) {
+                drawLine(detectedStarSet.getStars()[i], detectedStarSet.getStars()[adjacencyList.get(i).get(j)], color);
+            }
+        }
     }
 
 }

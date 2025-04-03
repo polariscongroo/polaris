@@ -4,23 +4,8 @@ import ThresholdDetectMethod as TDM
 import numpy as np
 import os
 import csv
-
-class test_Inverse_cor(unittest.TestCase): ##verif ok
-    def test_inverse_matrix(self):
-            self.assertEqual(inverse_cor([[0,2],[1,2]]), [[1,2],[0,2]] )   
-
-class test_erase_txt(unittest.TestCase): ##verif ok
-    def test_erase_txt(self):
-        # Call the function without any arguments
-        erase_txt()
-        
-        # Define the path to the file that should be erased
-        file_path = "cartography/image_aTraiter/output.txt"
-        
-        # Check if the file does not exist after calling the function
-        self.assertFalse(os.path.exists(file_path), "File was not erased")
-            
-class test_Cree_une_forme(unittest.TestCase):#verif ok
+           
+class test_Cree_une_forme(unittest.TestCase):
     # S'exécute avant chaque test
     def setUp(self):
         pass
@@ -30,34 +15,41 @@ class test_Cree_une_forme(unittest.TestCase):#verif ok
         pass
     
     class test_Inverse_cor(unittest.TestCase):
-        def test_inverse_matrix(self):##verif ok
-            self.assertEqual(inverse_cor([[0,2],[1,2]]), [[1,2],[0,2]])
+        def test_inverse_matrix(self):
+            self.assertEqual(inverse_cor([[0,2],[1,2]]), [[1,2],[0,2]] )   
 
-    class test_erase_txt(unittest.TestCase):##verif ok
+    class test_erase_txt(unittest.TestCase):
         def test_erase_txt(self):
-            self.assertEqual(erase_txt("cartography/image_aTraiter/output.txt"), None)
-
-    class test_Cree_une_forme(unittest.TestCase): ##verif ok
+            # Call the function without any arguments
+            erase_txt()
+        
+            # Define the path to the file that should be erased
+            file_path = "cartography/image_aTraiter/output.txt"
+        
+            # Check if the file does not exist after calling the function
+            self.assertFalse(os.path.exists(file_path), "File was not erased")
+ 
+    class test_Cree_une_forme(unittest.TestCase):
         def test_cree_une_forme_single_point(self):
             threshold_mask = np.array([[1, 0], [0, 0]])
             explored = np.zeros_like(threshold_mask, dtype=bool)
             self.assertEqual(cree_une_forme((0, 0), threshold_mask, explored), [(0, 0)])
 
-        def test_cree_une_forme_multiple_points(self):##verif ok
+        def test_cree_une_forme_multiple_points(self):
             threshold_mask = np.array([[1, 1], [1, 0]])
             explored = np.zeros_like(threshold_mask, dtype=bool)
             self.assertEqual(cree_une_forme((1, 1), threshold_mask, explored), [(0, 0), (0, 1), (1, 0)])
 
-        def test_cree_une_forme_disconnected_points(self):##verif ok
+        def test_cree_une_forme_disconnected_points(self):
             threshold_mask = np.array([[1, 0], [0, 1]])
             explored = np.zeros_like(threshold_mask, dtype=bool)
             self.assertEqual(cree_une_forme((1, 1), threshold_mask, explored), [(1, 1)])
 
-    class test_Determine_points_adjacents(unittest.TestCase):##verif ok
+    class test_Determine_points_adjacents(unittest.TestCase):
         def test_determine_points_adjacents(self):
             self.assertEqual(determine_points_adjacents((0,0),2,2), [(1,0),(0,1),(1,1)])
 
-    class test_determine_formes(unittest.TestCase):##verif ok
+    class test_determine_formes(unittest.TestCase):
         def test_determine_formes(self):
             threshold_mask = np.array([[0, 1], [1, 1]])
             self.assertEqual(determine_formes(threshold_mask), [[(0, 1)], [(1, 0), (1, 1)]])

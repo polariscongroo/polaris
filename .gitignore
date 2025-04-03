@@ -11,14 +11,21 @@
 **/.checkstyle
 **/*.iml
 **/*.idea
+**/recognition/src/bin
+
+**/recognition/out
+
+# ignorer le .html
+**/*.html
 
 # ignorer les .class de l'interface
-interface_Polaris/build/classes/main/Loader.class
-interface_Polaris/build/classes/main/Loader$1.class
-interface_Polaris/build/classes/main/Loader$2.class
-interface_Polaris/build/classes/main/Loader$3.class
-interface_Polaris/build/classes/main/Loader$4.class
-interface_Polaris/build/classes/main/Loader$5.class
+
+# Environnement
+**/cartography/mon_env
+**/.venv/*
+
+# pycache
+**/cartography/__pycache__
 
 # ignorer les fichiers Mac
 **/.DS_Store
