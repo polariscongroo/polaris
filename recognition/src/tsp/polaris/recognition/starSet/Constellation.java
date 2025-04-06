@@ -44,9 +44,10 @@ public class Constellation extends StarSet {
      *
      * @return La chaîne de caractères representant la liste d'étoiles.
      */
+    @Override
     public String toString()
     {
-        return name + " -> " + Arrays.toString(stars);
+        return name + " -> " + super.toString();
     }
 
 

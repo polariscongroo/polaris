@@ -5,8 +5,7 @@ package tsp.polaris.recognition.other;
  * @author Emma M., Chadi A.
  */
 
-public class Point
-{
+public class Point {
     protected final double[] point;
 
     /**

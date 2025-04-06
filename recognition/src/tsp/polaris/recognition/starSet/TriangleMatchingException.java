@@ -1,4 +1,4 @@
-package tsp.polaris.recognition.exceptions;
+package tsp.polaris.recognition.starSet;
 /**
  * Exception personnalisee lancee lorsqu'une erreur survient lors de la correspondance des triangles.
  * * @author Chadi A., Emma M.

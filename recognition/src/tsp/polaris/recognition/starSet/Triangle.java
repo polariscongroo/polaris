@@ -1,5 +1,5 @@
-package tsp.polaris.recognition.other;
-import tsp.polaris.recognition.starSet.StarSet;
+package tsp.polaris.recognition.starSet;
+import tsp.polaris.recognition.other.Star;
 
 import java.util.Arrays;
 
@@ -27,22 +27,15 @@ public class Triangle extends StarSet
             throw new IllegalArgumentException("Les points ne forment pas un triangle");
         }
     }
-    
-    /**
-     * Getteur de l'étoile i
-     * @return Point : La ième étoile du triangle
-     */
-    public Star[] getStars() {
-        return stars;
-    }
 
     /**
      * Methode d'affichage
      * @return String : Affiche les étoiles du triangle
      */
+    @Override
     public String toString()
     {
-        return "Triangle(" + stars[0] + ", " + stars[1] + ", " + stars[2] + ")";
+        return "Triangle(" + super.toString() + ")";
     }
 
     /**

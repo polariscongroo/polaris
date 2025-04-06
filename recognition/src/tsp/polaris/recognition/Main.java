@@ -5,7 +5,7 @@ import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.drawConstellation.MainDrawTest;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.dataTransmission.Database;
-import tsp.polaris.recognition.exceptions.TriangleMatchingException;
+import tsp.polaris.recognition.starSet.TriangleMatchingException;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
@@ -16,8 +16,7 @@ import tsp.polaris.recognition.starSet.DetectedStarSet;
  * @author Emma M., Chadi A., Ryane S.
  */
 
-public class Main
-{
+public class Main {
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
         // Path de l'image
         String pathImage = "/home/spokez/Téléchargements/test_cancer.png";

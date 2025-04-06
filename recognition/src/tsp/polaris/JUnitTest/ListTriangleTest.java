@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.exceptions.TriangleMatchingException;
-import tsp.polaris.recognition.other.ListTriangle;
+import tsp.polaris.recognition.starSet.TriangleMatchingException;
+import tsp.polaris.recognition.starSet.ListTriangle;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
@@ -49,8 +49,6 @@ public class ListTriangleTest {
     @DisplayName("Test 1 : Le cout entre un set d'étoiles et elle meme est toujours 0")
     public void costBetweenStarSetAndItselfIsZero() throws TriangleMatchingException {
         for (int i = 0; i < workingDetectedStarSetListTriangle.getListTriangle().length; i++) {
-            System.out.println(workingDetectedStarSetListTriangle.costs(workingConstellationListTriangle, workingDetectedStarSet, workingConstellation)[i]);
-            System.out.println("-----------");
             Assertions.assertEquals(0, workingDetectedStarSetListTriangle.costs(workingConstellationListTriangle, workingDetectedStarSet, workingConstellation)[i]);
         }
     }

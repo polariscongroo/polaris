@@ -58,10 +58,10 @@ public class Data {
             br.close();
         }
         catch (FileNotFoundException f) {
-            System.out.println("Impossible de trouver le fichier");
+            System.err.println("Impossible de trouver le fichier");
         }
         catch (IOException e) {
-            System.out.println("Impossible de modifier le fichier");
+            System.err.println("Impossible de modifier le fichier");
         }
     }
 
@@ -87,7 +87,7 @@ public class Data {
      * Getteur d'adjacencyList
      * @return List<List<Integer>> : Retourne la liste d'adjacence du csv si elle existe
      */
-    public List<List<Integer>> getAdjacencyList() {
+    public List<List<Integer>> getAdjacencyList() throws IllegalStateException {
         if(adjacencyList != null) {
             return adjacencyList;
         } else {
