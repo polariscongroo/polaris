@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://python.org)
 [![Java](https://img.shields.io/badge/Java-11%2B-orange)](https://java.com)
 
-Automatic constellation recognition application for night sky observation with interactive interface.
+Automatic constellation recognition application for night sky observation with interactive interface. 
 
 ## 👾 Features
 
@@ -30,7 +30,7 @@ Dynamic drawing of recognized star patterns with mythological information
 
 ---
 
-### 📥 Installation (Copy/Paste)
+### 📥 Installation (Copy/Paste) Not working yet...
 
 Clone the repository
 ```bash
