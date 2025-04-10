@@ -18,14 +18,9 @@ import tsp.polaris.recognition.starSet.DetectedStarSet;
 
 public class Main {
     public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
-        // Path de l'image
-        String pathImage = "/home/spokez/Téléchargements/test_cancer.png";
-        
-        /* Via L'interface (Remplacer pathImage par pathImage_viaInterface)
+        // Via L'interface (Remplacer pathImage par pathImage_viaInterface)
         String output = "cartography/image_aTraiter/output.txt";
-        String pathImage_viaInterface = Functions.lireLigneUnique(output);
-        System.out.println(pathImage_viaInterface + "ca lit bien output YES");
-        */
+        String pathImage = Functions.lireLigneUnique(output);
 
         // Ensembles d'étoiles détectées
         Data data = new Data("recognition/coorPoints/liste_etoiles.csv", "liste_etoiles");
