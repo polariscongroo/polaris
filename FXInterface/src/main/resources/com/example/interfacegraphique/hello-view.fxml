@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="PrincipalPane" xmlns="http://javafx.com/javafx/17.0.12" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.example.interfacegraphique.HelloController"
+            prefHeight="800" prefWidth="1300">
+   
+   <!-- Vidéo en arrière-plan -->
+   <MediaView fx:id="mediaView" fitWidth="${PrincipalPane.width}" fitHeight="${PrincipalPane.height}" 
+              AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" 
+              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"/>
+   
+   <!-- Image de fond (optionnelle) -->
+   <ImageView fx:id="backgroundImage" fitWidth="${PrincipalPane.width}" fitHeight="${PrincipalPane.height}" 
+              AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" 
+              AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"/>
+   
+   <!-- Titre centré -->
+   <Label fx:id="POLARIS" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" 
+          text="POLARIS" 
+          AnchorPane.topAnchor="20" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+   
+   <!-- MenuBar fixe en haut -->
+   <MenuBar AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0">
+      <menus>
+         <Menu text="File"/>
+         <Menu text="Edit">
+            <items>
+               <MenuItem text="Delete"/>
+            </items>
+         </Menu>
+         <Menu text="Help">
+            <items>
+               <MenuItem text="About"/>
+            </items>
+         </Menu>
+      </menus>
+   </MenuBar>
+   
+   <!-- Boutons centrés -->
+   <VBox alignment="CENTER" spacing="20" 
+         AnchorPane.topAnchor="200" AnchorPane.bottomAnchor="200" 
+         AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+      <Button fx:id="loadingButton" text="RECOGNITION" 
+              style="-fx-font-weight: bold; -fx-font-size: 21; -fx-text-fill: #cca714db;" 
+              onAction="#onClickButton" 
+              prefWidth="300" prefHeight="80"/>
+      
+      <Button fx:id="switchButton" text="CONSTELLATION" 
+              style="-fx-font-weight: bold; -fx-font-size: 22; -fx-text-fill: #cca714db;" 
+              prefWidth="200" prefHeight="60"/>
+   </VBox>
+   
+   <!-- Barre de progression en bas -->
+   <ProgressBar fx:id="progressBar" opacity="0.67" prefWidth="300" 
+                AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50"/>
+   
+   <!-- Boutons +/- positionnés de manière relative -->
+   <HBox spacing="10" alignment="CENTER" 
+         AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+      <Button text="+" onMouseClicked="#addPoints" prefWidth="40" prefHeight="40"/>
+      <Button text="-" onMouseClicked="#subtractPoints" prefWidth="40" prefHeight="40"/>
+   </HBox>
+</AnchorPane>
