@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -36,7 +35,6 @@ public class HelloController {
     @FXML private Label POLARIS;
     @FXML private ProgressBar progressBar;
     @FXML private AnchorPane PrincipalPane;
-    @FXML private ImageView backgroundImage;
     @FXML private Button loadingButton;
     @FXML private Button switchButton;
     @FXML private VBox VB;
@@ -50,25 +48,60 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        setupVideoPlayer();
-        setupUIComponents();
-        
-        // Écouter les changements de taille après l'initialisation complète
+        try {
+            // Initialiser les composants dans le bon ordre
+            setupUIComponents();
+            setupVideoPlayer();
+            
+            // Configurer le redimensionnement
+            setupResizeListeners();
+            
+        } catch (Exception e) {
+            System.err.println("Erreur d'initialisation: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void setupResizeListeners() {
+        // Écouter les changements de taille
         PrincipalPane.widthProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal.doubleValue() > 0) {
-                updateButtonPosition();
+                Platform.runLater(this::updateElementsPosition);
             }
         });
         
         PrincipalPane.heightProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal.doubleValue() > 0) {
-                updateButtonPosition();
+                Platform.runLater(this::updateElementsPosition);
             }
         });
-        
-        // Position initiale après que tout soit chargé
-        Platform.runLater(this::updateButtonPosition);
     }
+
+    private void updateElementsPosition() {
+        double paneWidth = PrincipalPane.getWidth();
+        double paneHeight = PrincipalPane.getHeight();
+        
+        // Position centrale avec espacement
+        double centerX = paneWidth / 2;
+        double centerY = paneHeight / 2;
+        
+        // Positionner loadingButton à gauche du centre
+        loadingButton.setLayoutX(centerX - loadingButton.getWidth() - 20);
+        loadingButton.setLayoutY(centerY - loadingButton.getHeight()/2);
+        
+        // Positionner switchButton à droite du centre
+        switchButton.setLayoutX(centerX + 20);
+        switchButton.setLayoutY(centerY - switchButton.getHeight()/2);
+        
+        // Positionner la barre de progression
+        progressBar.setLayoutX(centerX - progressBar.getWidth()/2);
+        progressBar.setLayoutY(paneHeight * 0.8);
+        
+        // Positionner le titre
+        POLARIS.setLayoutX(centerX - POLARIS.getWidth()/2);
+        POLARIS.setLayoutY(paneHeight * 0.1);
+    }
+
 
     private void setupVideoPlayer() {
         try {
@@ -96,19 +129,6 @@ public class HelloController {
             }
         } catch (Exception e) {
             System.err.println("Media initialization failed: " + e.getMessage());
-        }
-    }
-
-    private void setupBackground() {
-        URL imageUrl = getClass().getResource("/images/valentin.jpeg");
-        if (imageUrl != null) {
-            Image image = new Image(imageUrl.toExternalForm());
-            backgroundImage.setImage(image);
-            backgroundImage.setPreserveRatio(false);
-            backgroundImage.setSmooth(true);
-            backgroundImage.setCache(true);
-            backgroundImage.fitWidthProperty().bind(PrincipalPane.widthProperty());
-            backgroundImage.fitHeightProperty().bind(PrincipalPane.heightProperty());
         }
     }
 
