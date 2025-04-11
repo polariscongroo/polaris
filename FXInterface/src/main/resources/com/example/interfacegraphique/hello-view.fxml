@@ -5,22 +5,24 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.media.Media?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
-    
-    <MediaView fx:id="backgroundMediaView" visible="true"/>
-    
-    <top>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
+
+    <!-- Le MediaView est au fond -->
+    <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
+
+    <!-- Tout le contenu visible par-dessus -->
+    <BorderPane fx:id="rootPane">
+        <top>
             <Label text="POLARIS" styleClass="header" alignment="CENTER" BorderPane.alignment="CENTER"/>
-    </top>
+        </top>
 
-    <center>
-        <VBox spacing="20" alignment="CENTER">
-            <Button text="RECOGNITION" styleClass="main-button" onAction="#handleRecognition"/> 
-            <Button text="CONSTELLATION" styleClass="secondary-button"/>
-            <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
-        </VBox>
-        
+        <center>
+            <VBox spacing="20" alignment="CENTER">
+                <Button text="RECOGNITION" styleClass="main-button" onAction="#handleRecognition"/> 
+                <Button text="CONSTELLATION" styleClass="secondary-button"/>
+                <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
+            </VBox>
+        </center>
+    </BorderPane>
 
-    </center>
-    
-</BorderPane>
+</StackPane>
