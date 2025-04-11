@@ -1,74 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="PrincipalPane" maxHeight="1600" maxWidth="2600" minHeight="400" minWidth="650" prefHeight="800.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.interfacegraphique.HelloController">
-   <children>
-      <Label fx:id="POLARIS" alignment="CENTER" style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: white;" text="POLARIS" AnchorPane.bottomAnchor="348.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <MenuBar layoutX="7.0" layoutY="1.0" AnchorPane.leftAnchor="0.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File" />
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <VBox layoutX="120.0" layoutY="78.0" prefHeight="431.0" prefWidth="423.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="78.0">
-         <children>
-            <Button fx:id="loadingButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickButton" prefHeight="150.0" prefWidth="150.0" text="RECOGNITION" textAlignment="CENTER" textFill="#cca714db">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
-            <Button fx:id="switchButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="44.0" prefWidth="246.0" text="CONSTELLATION " textFill="#cca714db">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-      <ProgressBar fx:id="progressBar" opacity="0.67" prefWidth="200.0" progress="0.0" AnchorPane.topAnchor="380.0" />
-      <Button layoutX="14.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#addPoints" text="+" />
-      <Button layoutX="130.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#subtractPoints" text="-" />
-   </children>
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.example.interfacegraphique.HelloController">
+    
+    <!-- Fond vidéo -->
+    <MediaView fx:id="backgroundMediaView" fitWidth="${rootPane.width}" fitHeight="${rootPane.height}"/>
+    
+    <!-- Couche de contenu -->
+    <Pane fx:id="contentPane" style="-fx-background-color: rgba(0,0,0,0.5);" 
+          AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        
+        <!-- Titre -->
+        <Label fx:id="titleLabel" text="POLARIS" styleClass="header" 
+               AnchorPane.topAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+        
+        <!-- Boutons principaux -->
+          <VBox alignment="CENTER" spacing="40" 
+                AnchorPane.topAnchor="300" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+              <Button fx:id="recognitionButton" text="Start" 
+                      onAction="#handleRecognition" prefWidth="200" prefHeight="60"/>
+          </VBox>
+        
+        <!-- Barre de progression -->
+        <ProgressBar fx:id="progressBar" progress="0" prefWidth="400" 
+                    AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+        
+        <!-- Boutons de contrôle -->
+        <HBox alignment="CENTER" spacing="20" 
+              AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+            <Button text="+" onAction="#increaseProgress" style="-fx-font-size: 20;"/>
+            <Button text="-" onAction="#decreaseProgress" style="-fx-font-size: 20;"/>
+        </HBox>
+    </Pane>
 </AnchorPane>
-
-
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
-   <?import javafx.scene.layout.*?>
-   
-   <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root">
-       <top>
-             <Label text="POLARIS" styleClass="header" alignment="CENTER" BorderPane.alignment="CENTER"/>
-       </top>
-   
-       <center>
-           <VBox spacing="20" alignment="CENTER">
-               <Button text="RECOGNITION" styleClass="main-button"/>
-               <Button text="CONSTELLATION" styleClass="secondary-button"/>
-                <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
-           </VBox>
-          
- 
-       </center>
-       
-   </BorderPane>
