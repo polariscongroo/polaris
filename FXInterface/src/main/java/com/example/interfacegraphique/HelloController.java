@@ -39,22 +39,36 @@ public class HelloController {
 
     private void setupBackgroundVideo() {
         try {
+            // Chargement de la vidéo
             URL videoUrl = getClass().getResource("/media/background.mp4");
-            if (videoUrl != null) {
-                Media media = new Media(videoUrl.toExternalForm());
-                mediaPlayer = new MediaPlayer(media);
-                backgroundMediaView.setMediaPlayer(mediaPlayer);
-                
-                mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                mediaPlayer.setVolume(0.1);
-                mediaPlayer.play();
-                
-                // Ajustement de la taille
-                backgroundMediaView.fitWidthProperty().bind(rootPane.widthProperty());
-                backgroundMediaView.fitHeightProperty().bind(rootPane.heightProperty());
+            if (videoUrl == null) {
+                System.err.println("ERREUR: Ressource vidéo non trouvée");
+                return;
             }
+    
+            Media media = new Media(videoUrl.toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            backgroundMediaView.setMediaPlayer(mediaPlayer);
+    
+            // Configuration pour être en arrière-plan
+            backgroundMediaView.toBack(); // Force le plan le plus bas
+    
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.setVolume(0.1);
+            
+            mediaPlayer.setOnReady(() -> {
+                System.out.println("Vidéo prête - dimensions: " 
+                    + media.getWidth() + "x" + media.getHeight());
+                mediaPlayer.play();
+            });
+    
+            // Liaison des dimensions
+            backgroundMediaView.fitWidthProperty().bind(rootPane.widthProperty());
+            backgroundMediaView.fitHeightProperty().bind(rootPane.heightProperty());
+    
         } catch (Exception e) {
-            System.err.println("Erreur lors du chargement de la vidéo: " + e.getMessage());
+            System.err.println("Échec de l'initialisation vidéo: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

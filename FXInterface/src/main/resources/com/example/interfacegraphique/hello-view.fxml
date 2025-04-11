@@ -7,30 +7,32 @@
 
 <AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="com.example.interfacegraphique.HelloController">
-    
-    <!-- Fond vidéo -->
-    <MediaView fx:id="backgroundMediaView" fitWidth="${rootPane.width}" fitHeight="${rootPane.height}"/>
-    
-    <!-- Couche de contenu -->
+
+    <!-- Plan 0: Fond vidéo (le plus en arrière) -->
+    <MediaView fx:id="backgroundMediaView" 
+               fitWidth="${rootPane.width}" 
+               fitHeight="${rootPane.height}"
+               pickOnBounds="false"/> <!-- Important pour les clics -->
+
+    <!-- Plan 1: Couche de contenu semi-transparente -->
     <Pane fx:id="contentPane" style="-fx-background-color: rgba(0,0,0,0.5);" 
           AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
-        
-        <!-- Titre -->
+
+        <!-- Plan 2: Éléments d'interface -->
         <Label fx:id="titleLabel" text="POLARIS" styleClass="header" 
                AnchorPane.topAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-        
-        <!-- Boutons principaux -->
-          <VBox alignment="CENTER" spacing="40" 
-                AnchorPane.topAnchor="300" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
-              <Button fx:id="recognitionButton" text="Start" 
-                      onAction="#handleRecognition" prefWidth="200" prefHeight="60"/>
-          </VBox>
-        
-        <!-- Barre de progression -->
+
+        <HBox alignment="CENTER" spacing="40" 
+              AnchorPane.topAnchor="300" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+            <Button fx:id="recognitionButton" text="RECONNAÎTRE" 
+                    onAction="#handleRecognition" prefWidth="200" prefHeight="60"/>
+            <Button fx:id="switchModeButton" text="MODE HISTOIRE" 
+                    onAction="#handleSwitchMode" prefWidth="200" prefHeight="60"/>
+        </HBox>
+
         <ProgressBar fx:id="progressBar" progress="0" prefWidth="400" 
                     AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-        
-        <!-- Boutons de contrôle -->
+
         <HBox alignment="CENTER" spacing="20" 
               AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <Button text="+" onAction="#increaseProgress" style="-fx-font-size: 20;"/>
