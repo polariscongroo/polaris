@@ -11,6 +11,7 @@ module com.example.interfacegraphique {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires javafx.media;
+    requires javafx.graphics;
 
     opens com.example.interfacegraphique to javafx.fxml;
     exports com.example.interfacegraphique;
