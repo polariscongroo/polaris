@@ -34,15 +34,17 @@ public class HelloApplication extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Polaris");
         primaryStage.setScene(scene);
+        primaryStage.setMinWidth(650);  // Taille minimale
+        primaryStage.setMinHeight(400);
         primaryStage.setResizable(true);
         
         // 3. Redimensionnement manuel
-        setupResizeListeners(root, primaryStage);
+        Resize(root, primaryStage);
         
         primaryStage.show();
     }
 
-    private void setupResizeListeners(Pane root, Stage stage) {
+    private void Resize(Pane root, Stage stage) {
         final int resizeMargin = 5;
         
         root.setOnMouseMoved(event -> {

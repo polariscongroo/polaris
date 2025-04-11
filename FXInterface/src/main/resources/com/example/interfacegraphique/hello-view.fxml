@@ -2,8 +2,13 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.media.Media?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
+    
+    <MediaView fx:id="backgroundMediaView" visible="true"/>
+    
     <top>
             <Label text="POLARIS" styleClass="header" alignment="CENTER" BorderPane.alignment="CENTER"/>
     </top>
