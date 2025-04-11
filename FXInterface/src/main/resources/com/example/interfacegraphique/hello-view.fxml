@@ -49,3 +49,26 @@
       <Button layoutX="130.0" layoutY="346.0" mnemonicParsing="false" onMouseClicked="#subtractPoints" text="-" />
    </children>
 </AnchorPane>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+   <?import javafx.scene.layout.*?>
+   
+   <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root">
+       <top>
+             <Label text="POLARIS" styleClass="header" alignment="CENTER" BorderPane.alignment="CENTER"/>
+       </top>
+   
+       <center>
+           <VBox spacing="20" alignment="CENTER">
+               <Button text="RECOGNITION" styleClass="main-button"/>
+               <Button text="CONSTELLATION" styleClass="secondary-button"/>
+                <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
+           </VBox>
+          
+ 
+       </center>
+       
+   </BorderPane>
