@@ -23,7 +23,8 @@ public class HelloController {
     private MediaPlayer mediaPlayer;
 
     @FXML
-    public void initialize() {
+    public void initialize() 
+    {
         setupBackgroundVideo();
     }
 
@@ -89,4 +90,7 @@ public class HelloController {
     public void handleConstellation() {
         System.out.println("Constellation");
     }
+
+    
+    
 }

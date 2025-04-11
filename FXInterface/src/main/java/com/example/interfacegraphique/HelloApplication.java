@@ -18,6 +18,9 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Pane root = fxmlLoader.load();
         Scene scene = new Scene(root);
+
+        // Chargement du CSS
+        scene.getStylesheets().add(getClass().getResource("/com/example/interfacegraphique/css/style.css").toExternalForm());
         
         // 1. Gestion du déplacement de la fenêtre
         root.setOnMousePressed((MouseEvent event) -> {

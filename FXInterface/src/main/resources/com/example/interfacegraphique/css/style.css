@@ -11,11 +11,11 @@
 }
 
 .main-button {
-    -fx-background-color: #007ACC;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
+    -fx-background-color: transparent;
+    -fx-text-fill: rgb(255, 0, 0);
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
     -fx-padding: 10 20;
-    -fx-background-radius: 5;
 }
 
 .secondary-button {
