@@ -84,4 +84,9 @@ public class HelloController {
             }
         }
     }
+
+    @FXML
+    public void handleConstellation() {
+        System.out.println("Constellation");
+    }
 }

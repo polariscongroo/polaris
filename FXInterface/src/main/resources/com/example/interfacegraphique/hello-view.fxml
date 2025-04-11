@@ -19,7 +19,7 @@
         <center>
             <VBox spacing="20" alignment="CENTER">
                 <Button text="RECOGNITION" styleClass="main-button" onAction="#handleRecognition"/> 
-                <Button text="CONSTELLATION" styleClass="secondary-button"/>
+                <Button text="CONSTELLATION" styleClass="secondary-button" onAction="#handleConstellation"/>
                 <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
             </VBox>
         </center>

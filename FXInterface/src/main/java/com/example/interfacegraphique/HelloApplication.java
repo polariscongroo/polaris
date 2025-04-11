@@ -78,8 +78,6 @@ public class HelloApplication extends Application {
         root.setOnMouseDragged(event -> {
             double x = event.getX();
             double y = event.getY();
-            double width = root.getWidth();
-            double height = root.getHeight();
             
             // Redimensionnement selon le bord
             if (root.getCursor() != javafx.scene.Cursor.DEFAULT) {
