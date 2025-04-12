@@ -9,7 +9,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +32,7 @@ public class HelloController {
     @FXML private final int largeur = 600; // Largeur fixe
     @FXML private final int hauteur = 400; // Hauteur fixe 
     @FXML private TextArea consoleOutput; // Pour afficher les logs
+    @FXML private ImageView imageView; // Pour afficher l'image
     // Variables
     private MediaPlayer mediaPlayer;
 
@@ -94,7 +94,7 @@ public class HelloController {
     
         if (selectedFile != null) {
             String path = selectedFile.getAbsolutePath(); // Chemin du fichier
-            System.out.println("1. Bouton bien actionné : Path de l'image écrit dans output.txt: " + path);
+            System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
             write_in_output(path); // Appel à ta méthode personnalisée
                 // Traitement du fichier sélectionné
             runPythonScript(path);
@@ -177,7 +177,6 @@ public class HelloController {
      */
     private void afficherImage(Image image) {
         // Utilisation d'un ImageView pour afficher l'image
-        ImageView imageView = new ImageView(image);
         imageView.setFitWidth(largeur);  // Largeur désirée
         imageView.setFitHeight(hauteur); // Hauteur désirée
         imageView.setPreserveRatio(true); // Conserver le ratio d'aspect
@@ -212,8 +211,8 @@ public class HelloController {
 	        writer.write(path);
 	        writer.close();
 	        File file = new File("cartography/image_aTraiter/output.txt");
-	        System.out.println("2. Chemin absolu de output.txt : " + file.getAbsolutePath());
-	        System.out.println("3. Output.txt a été correctement modifié");
+	        System.out.println("[Java] 2. Chemin absolu de output.txt : " + file.getAbsolutePath());
+	        System.out.println("[Java] 3. Output.txt a été correctement modifié");
 	    } catch (IOException e) {
 	        System.out.println("An error occurred.");
 	        e.printStackTrace();
@@ -225,44 +224,41 @@ public class HelloController {
             @Override
             protected Void call() throws Exception {
                 String projectPath = new File("").getAbsolutePath();
-                String scriptPath = projectPath + File.separator + "cartography/ThresholdDetectMethod.py";
-
-                updateMessage("Lancement du script Python...");
-
-                ProcessBuilder pb = new ProcessBuilder("python3", scriptPath, filePath); // On passe le chemin du fichier
+                String scriptPath = projectPath + File.separator + "cartography" + File.separator + "ThresholdDetectMethod.py";
+    
+                System.out.println("[Java] 4. Lancement du script Python...");
+    
+                ProcessBuilder pb = new ProcessBuilder("python", scriptPath, filePath);
                 pb.directory(new File(projectPath));
                 pb.redirectErrorStream(true);
-
+    
                 try {
                     Process process = pb.start();
-
-                    // Lecture des sorties
-                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+    
+                    // Lecture des sorties et redirection vers le terminal
+                    try (BufferedReader reader = new BufferedReader(
+                            new InputStreamReader(process.getInputStream()))) {
                         String line;
                         while ((line = reader.readLine()) != null) {
-                            updateMessage(line); // Envoie à l'interface
+                            System.out.println("[Python] " + line);  // Sortie vers le terminal
                         }
                     }
-
+    
                     int exitCode = process.waitFor();
                     if (exitCode == 0) {
-                        updateMessage("Script exécuté avec succès !");
+                        System.out.println("[Java] 5. Script exécuté avec succès !");
                     } else {
-                        updateMessage("Erreur (code " + exitCode + ")");
+                        System.err.println("[Java] 5. Erreur (code " + exitCode + ")");
                     }
                 } catch (IOException | InterruptedException e) {
-                    updateMessage("ERREUR: " + e.getMessage());
+                    System.err.println("[Java] ERREUR: " + e.getMessage());
+                    e.printStackTrace();
                 }
                 return null;
             }
         };
-
-        pythonTask.messageProperty().addListener((obs, oldVal, newVal) -> {
-            Platform.runLater(() -> {
-                consoleOutput.appendText(newVal + "\n");
-            });
-        });
-
+    
+        // On supprime l'écouteur qui écrivait dans consoleOutput
         new Thread(pythonTask).start();
     }
 

@@ -30,7 +30,7 @@
                 <ImageView fx:id="imageView" fitWidth="100" fitHeight="100" preserveRatio="true"/>
 
                 <!-- TextArea pour afficher le texte -->
-                <TextArea fx:id="textArea" prefHeight="200" prefWidth="200" wrapText="true" editable="false"/>
+                <TextArea fx:id="consoleOutput" prefHeight="200" prefWidth="200" wrapText="true" editable="false"/>
 
             </VBox>
         </center>

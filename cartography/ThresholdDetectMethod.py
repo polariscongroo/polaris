@@ -19,8 +19,6 @@ import os
 """
 file_path = "cartography/image_aTraiter/output.txt"
 
-
-
 def inverse_cor(coordonnees):
     """
     @brief Inverse les coordonnées de l'image verticalement pour corriger l'orientation.
@@ -212,6 +210,7 @@ def main():
     try:
         # Vérifie l'existence de output.txt
         if not os.path.exists(file_path):
+            print("6. Lecture de output.txt non réalisée")
             raise(OutputNotFound("Le fichier output.txt n'existe pas encore..."))
         
         # Lecture de output.txt
