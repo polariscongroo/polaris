@@ -8,8 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
+import java.nio.file.Path;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -129,25 +128,14 @@ public class HelloController {
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
      * @param cheminTexte Chemin relatif du fichier texte
      */
-    private void chargerTexte(String chemin) {
+    private void chargerTexte(String cheminTexte) {
         try {
-            InputStream is;
-            
-            // Essaie d'abord comme ressource interne
-            if (getClass().getResourceAsStream(chemin) != null) {
-                is = getClass().getResourceAsStream(chemin);
-            } 
-            // Sinon essaie comme chemin absolu
-            else {
-                is = Files.newInputStream(Paths.get(chemin));
-            }
-            
-            String content = new Scanner(is, "UTF-8").useDelimiter("\\A").next();
-            consoleOutput.setText(content);
-            is.close();
-        } catch (Exception e) {
-            System.err.println("Échec du chargement: " + e.getMessage());
-            consoleOutput.setText("Erreur de chargement:\n" + chemin);
+            String textFullPath = new File("").getAbsolutePath() + File.separator + cheminTexte;
+            String contenu = Files.readString(Path.of(textFullPath));
+            consoleOutput.setText(contenu);
+            System.out.println("Texte affiché : \n" + contenu);
+        } catch (IOException e) {
+            System.err.println("Erreur lors du chargement du texte : " + e.getMessage());
         }
     }
 
