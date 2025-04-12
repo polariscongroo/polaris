@@ -27,7 +27,7 @@
                 <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
 
                 <!-- ImageView pour afficher l’image -->
-                <ImageView fx:id="imageView" fitWidth="100" fitHeight="100" preserveRatio="true"/>
+                <ImageView fx:id="imageView" fitWidth="400" fitHeight="400" preserveRatio="true" visible="false" managed="false"/> <!-- managed="false" empêche la réserve d'espace quand invisible -->
 
                 <!-- TextArea pour afficher le texte -->
                 <TextArea fx:id="consoleOutput" prefHeight="200" prefWidth="200" wrapText="true" editable="false"/>

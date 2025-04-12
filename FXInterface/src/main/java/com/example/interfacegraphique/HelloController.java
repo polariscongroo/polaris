@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -20,7 +22,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -103,105 +104,50 @@ public class HelloController {
     
     @FXML
     public void handleConstellation(ActionEvent event) {
-        // Charger l'image
-        Image image = chargerImage("FXInterface/src/main/resources/images/orsaminor.jpg");
-        if (image == null) return;
-    
-        // Appliquer rotation si nécessaire
-        image = ajusterRotationImage(image);
-    
-        // Redimensionner l'image
-        Image fxImage = redimensionnerImage(image, largeur, hauteur); // JavaFX Image attendue
-    
-        // Afficher l'image
-        afficherImage(fxImage);
-    
-        // Charger et afficher le texte associé
-        chargerTexte("baseDDonnees_txt/apus.txt");
-    
-        System.out.println("L'image et le texte ont été affichés !");
-    }
-    
-    /**
-     * Charge une image à partir du chemin donné.
-     * @param cheminImage Chemin relatif de l'image
-     * @return L'image chargée ou null si échec
-     */
-    private Image chargerImage(String cheminImage) {
         try {
-            String imgFullPath = new File("").getAbsolutePath() + File.separator + cheminImage;
-            return new Image("file:" + imgFullPath);  // Charger une image JavaFX directement
+            // Charger l'image
+            InputStream imageStream = getClass().getResourceAsStream("/images/orsaminor.jpg");
+            if (imageStream == null) {
+                System.err.println("Image non trouvée dans les ressources");
+                return;
+            }
+            Image image = new Image(imageStream);
+            imageView.setImage(image);
+            imageView.setVisible(true);
+    
+            // Charger le texte - Utilisation du chemin relatif correct
+            chargerTexte("/baseDDonnees_txt/apus.txt"); // Notez le / au début
+    
+            System.out.println("Affichage réussi !");
         } catch (Exception e) {
-            System.err.println("Erreur lors du chargement de l'image : " + e.getMessage());
-            return null;
+            System.err.println("Erreur: " + e.getMessage());
+            e.printStackTrace();
         }
     }
-    
-    /**
-     * Vérifie si l'image est verticale et la fait pivoter si nécessaire.
-     * @param img Image d'origine
-     * @return Image ajustée
-     */
-    private Image ajusterRotationImage(Image img) {
-        // Si l'image est en mode portrait (hauteur > largeur), on la fait pivoter
-        if (img.getHeight() > img.getWidth()) {
-            // Créer un ImageView pour l'image
-            ImageView imageView = new ImageView(img);
-            
-            // Appliquer une rotation de 90 degrés autour du centre de l'image
-            Rotate rotation = new Rotate(90, img.getWidth() / 2, img.getHeight() / 2);
-            imageView.getTransforms().add(rotation);
-
-            // Retourner l'image transformée (appliquée à l'ImageView)
-            // L'ImageView est maintenant la représentation de l'image avec rotation appliquée
-            return imageView.getImage();
-        }
-        return img;
-    }
-    
-    /**
-     * Redimensionne une image aux dimensions spécifiées sans la déformer.
-     * @param img Image d'origine
-     * @param largeur Largeur cible
-     * @param hauteur Hauteur cible
-     * @return Image redimensionnée
-     */
-    private Image redimensionnerImage(Image img, int largeur, int hauteur) {
-        // Redimensionner l'image JavaFX avec un ratio d'aspect respecté
-        return new Image(img.getUrl(), largeur, hauteur, true, true);
-    }
-    
-    /**
-     * Affiche une image dans une ImageView JavaFX.
-     * @param image Image à afficher
-     */
-    private void afficherImage(Image image) {
-        // Utilisation d'un ImageView pour afficher l'image
-        imageView.setFitWidth(largeur);  // Largeur désirée
-        imageView.setFitHeight(hauteur); // Hauteur désirée
-        imageView.setPreserveRatio(true); // Conserver le ratio d'aspect
-    
-        // Ajouter l'ImageView à un StackPane ou autre container
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(imageView);
-        // Ici, vous pouvez utiliser une méthode pour ajouter cela au layout JavaFX existant, par exemple :
-        // mainLayout.getChildren().add(stackPane); ou l'afficher dans un autre conteneur comme un VBox.
-    }
-    
+ 
     /**
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
      * @param cheminTexte Chemin relatif du fichier texte
      */
-    private void chargerTexte(String cheminTexte) {
+    private void chargerTexte(String chemin) {
         try {
-            String textFullPath = new File("").getAbsolutePath() + File.separator + cheminTexte;
-            String contenu = Files.readString(Path.of(textFullPath));
-            // Afficher le contenu du texte dans un TextArea (si présent)
-            TextArea textarea = new TextArea(contenu);
-            textarea.setEditable(false);  // Le texte est en lecture seule
-            System.out.println("Texte affiché : \n" + contenu);
-        } catch (IOException e) {
-            System.err.println("Erreur lors du chargement du texte : " + e.getMessage());
+            InputStream is;
+            
+            // Essaie d'abord comme ressource interne
+            if (getClass().getResourceAsStream(chemin) != null) {
+                is = getClass().getResourceAsStream(chemin);
+            } 
+            // Sinon essaie comme chemin absolu
+            else {
+                is = Files.newInputStream(Paths.get(chemin));
+            }
+            
+            String content = new Scanner(is, "UTF-8").useDelimiter("\\A").next();
+            consoleOutput.setText(content);
+            is.close();
+        } catch (Exception e) {
+            System.err.println("Échec du chargement: " + e.getMessage());
+            consoleOutput.setText("Erreur de chargement:\n" + chemin);
         }
     }
 
@@ -261,5 +207,4 @@ public class HelloController {
         // On supprime l'écouteur qui écrivait dans consoleOutput
         new Thread(pythonTask).start();
     }
-
 }
