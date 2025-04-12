@@ -1,7 +1,6 @@
 package com.example.interfacegraphique;
 
 import java.io.BufferedReader;
-import tsp.polaris.recognition.Main;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -198,6 +197,6 @@ public class HelloController {
     }
 
     private void runJavaScript(String filePath) {
-        Main.reconnaissance();
+        //Main.reconnaissance();
     }
 }
