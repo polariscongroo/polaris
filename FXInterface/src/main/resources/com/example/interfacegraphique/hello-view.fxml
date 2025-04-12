@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.MediaView?>
-<?import javafx.scene.media.Media?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
 
@@ -18,9 +18,20 @@
 
         <center>
             <VBox spacing="20" alignment="CENTER">
+
+                <!-- Boutons -->
                 <Button text="RECOGNITION" styleClass="main-button" onAction="#handleRecognition"/> 
                 <Button text="CONSTELLATION" styleClass="secondary-button" onAction="#handleConstellation"/>
+
+                <!-- Barre de progression -->
                 <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
+
+                <!-- ImageView pour afficher l’image -->
+                <ImageView fx:id="imageView" fitWidth="800" fitHeight="400" preserveRatio="true"/>
+
+                <!-- TextArea pour afficher le texte -->
+                <TextArea fx:id="textArea" prefHeight="200" prefWidth="600" wrapText="true" editable="false"/>
+
             </VBox>
         </center>
     </BorderPane>

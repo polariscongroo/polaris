@@ -12,6 +12,7 @@ module com.example.interfacegraphique {
     requires com.almasb.fxgl.all;
     requires javafx.media;
     requires javafx.graphics;
+    requires java.desktop;
 
     opens com.example.interfacegraphique to javafx.fxml;
     exports com.example.interfacegraphique;
