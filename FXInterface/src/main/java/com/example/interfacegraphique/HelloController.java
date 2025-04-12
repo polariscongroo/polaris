@@ -1,5 +1,5 @@
 package com.example.interfacegraphique;
-
+//import com.chadi.Main;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -29,8 +29,6 @@ public class HelloController {
     // Éléments FXML
     @FXML private StackPane root;
     @FXML private MediaView backgroundMediaView;
-    @FXML private final int largeur = 600; // Largeur fixe
-    @FXML private final int hauteur = 400; // Hauteur fixe 
     @FXML private TextArea consoleOutput; // Pour afficher les logs
     @FXML private ImageView imageView; // Pour afficher l'image
     // Variables

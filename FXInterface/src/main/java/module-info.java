@@ -17,3 +17,4 @@ module com.example.interfacegraphique {
     opens com.example.interfacegraphique to javafx.fxml;
     exports com.example.interfacegraphique;
 }
+
