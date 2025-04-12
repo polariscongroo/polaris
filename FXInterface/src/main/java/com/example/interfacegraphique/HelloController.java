@@ -1,6 +1,7 @@
 package com.example.interfacegraphique;
 
 import java.io.BufferedReader;
+import tsp.polaris.recognition.Main;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -95,9 +96,9 @@ public class HelloController {
         if (selectedFile != null) {
             String path = selectedFile.getAbsolutePath(); // Chemin du fichier
             System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
-            write_in_output(path); // Appel à ta méthode personnalisée
-                // Traitement du fichier sélectionné
+            write_in_output(path);
             runPythonScript(path);
+            runJavaScript(path);
         }
     }
     
@@ -139,19 +140,19 @@ public class HelloController {
         }
     }
 
-	private static void write_in_output(String path) {
-	    try {
-	        FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
-	        writer.write(path);
-	        writer.close();
-	        File file = new File("cartography/image_aTraiter/output.txt");
-	        System.out.println("[Java] 2. Chemin absolu de output.txt : " + file.getAbsolutePath());
-	        System.out.println("[Java] 3. Output.txt a été correctement modifié");
-	    } catch (IOException e) {
-	        System.out.println("An error occurred.");
-	        e.printStackTrace();
-	    }
-	}
+    private static void write_in_output(String path) {
+        try {
+            FileWriter writer = new FileWriter("cartography/image_aTraiter/output.txt");
+            writer.write(path);
+            writer.close();
+            File file = new File("cartography/image_aTraiter/output.txt");
+            System.out.println("[Java] 2. Chemin absolu de output.txt : " + file.getAbsolutePath());
+            System.out.println("[Java] 3. Output.txt a été correctement modifié");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
     
     private void runPythonScript(String filePath) {
         Task<Void> pythonTask = new Task<>() {
@@ -194,5 +195,9 @@ public class HelloController {
     
         // On supprime l'écouteur qui écrivait dans consoleOutput
         new Thread(pythonTask).start();
+    }
+
+    private void runJavaScript(String filePath) {
+        Main.reconnaissance();
     }
 }

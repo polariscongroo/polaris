@@ -1,14 +1,15 @@
 package tsp.polaris.recognition;
 
 import java.io.IOException;
+
 import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.drawConstellation.MainDrawTest;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.dataTransmission.Database;
-import tsp.polaris.recognition.starSet.TriangleMatchingException;
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
+import tsp.polaris.recognition.starSet.TriangleMatchingException;
 
 /**
  * Classe principale qui va lancer notre programme
@@ -17,7 +18,7 @@ import tsp.polaris.recognition.starSet.DetectedStarSet;
  */
 
 public class Main {
-    public static void main(String[] args) throws TriangleMatchingException, NumberFormatException, IOException {
+    public static void reconnaissance() throws TriangleMatchingException, NumberFormatException, IOException {
         // Via L'interface (Remplacer pathImage par pathImage_viaInterface)
         String output = "cartography/image_aTraiter/output.txt";
         String pathImage = Functions.lireLigneUnique(output);
