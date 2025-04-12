@@ -104,7 +104,7 @@ public class HelloController {
     @FXML
     public void handleConstellation(ActionEvent event) {
         // Charger l'image
-        Image image = chargerImage("interface_Polaris/src/interfacegraphique/orsaminor.jpg");
+        Image image = chargerImage("FXInterface/src/main/resources/images/orsaminor.jpg");
         if (image == null) return;
     
         // Appliquer rotation si nécessaire
