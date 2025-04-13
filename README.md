@@ -32,27 +32,7 @@ Dynamic drawing of recognized star patterns with mythological information
 
 ### 📥 Installation (Copy/Paste) Not working yet...
 
-Clone the repository
-```bash
-git clone https://github.com/youruser/constellation-recognition.git
-cd constellation-recognition
-```
 
-Install Python dependencies
-```bash
-pip install -r python/requirements.txt
-```
-
-Compile (from java folder)
-```bash
-cd java
-mvn clean package
-```
-
-Run
-```bash
-java -jar target/constellation-recognition.jar
-```
 
 ## 👾 Process
 
