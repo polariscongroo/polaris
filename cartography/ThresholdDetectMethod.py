@@ -138,7 +138,7 @@ def classe_les_etoiles(etoiles):
     for k in range(len(etoiles)):
         produit = etoiles[k][2] * etoiles[k][3] 
         etoiles[k].append(produit)
-    etoiles.sort(key=lambda x: x[4], reverse=True)
+    etoiles.sort(key=lambda x: x[2]+x[3], reverse=True)
     return etoiles
 
 def enregistre_les_etoiles(etoiles_classees):

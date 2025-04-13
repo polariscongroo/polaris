@@ -220,6 +220,7 @@ public class DetectedStarSet extends StarSet
             // Cas ou il n'existe pas de constellations à i+3 étoiles dans notre base de données
             if(existConstellationWithKStars(i+3,constellations)) {
                 selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
+
             } else {
                 selectedStarSet[i] = null;
                 minCostPerLength[i] = Double.MAX_VALUE;
@@ -228,7 +229,14 @@ public class DetectedStarSet extends StarSet
 
         // On divise le cout par la taille de l'ensemble d'étoiles
         for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
-            minCostPerLength[i] /= (i+3);
+            int nbTriangle = Combinatorics.combination(stars.length, i+3);
+            minCostPerLength[i] /= nbTriangle;
+            System.out.println(minCostPerLength[i]);
+            if(selectedStarSet[i] == null) {
+                continue;
+            } else {
+                System.out.println(selectedStarSet[i].getNearConstellation().getName());
+            }
         }
         // On recherche la taille d'étoiles qui a le cout le plus faible
         int minIndex = Functions.minIndex(minCostPerLength);
