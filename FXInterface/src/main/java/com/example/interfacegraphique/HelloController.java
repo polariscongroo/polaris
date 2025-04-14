@@ -111,6 +111,7 @@ public class HelloController {
             Image image = new Image(imageStream);
             imageView.setImage(image);
             imageView.setVisible(true);
+            consoleOutput.setOpacity(1.0);
     
             // Charger le texte - Utilisation du chemin relatif correct
             chargerTexte("/baseDDonnees_txt/apus.txt"); // Notez le / au début
