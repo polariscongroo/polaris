@@ -22,6 +22,8 @@
                 <!-- Boutons -->
                 <Button text="RECOGNITION" styleClass="main-button" onAction="#handleRecognition"/> 
                 <Button text="CONSTELLATION" styleClass="secondary-button" onAction="#handleConstellation"/>
+                <Button text="Close" styleClass="closer" onAction="#handleClose"/>
+                <Button text="Maximize" styleClass="maximizer" onAction="#handleMaximiser"/>
 
                 <!-- Barre de progression -->
                 <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>

@@ -123,6 +123,21 @@ public class HelloController {
         }
     }
  
+    @FXML
+    public void handleClose(ActionEvent event) {
+        // Ferme l'application
+        System.out.println("Fermeture de l'application...");
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void handleMaximiser(ActionEvent event) {
+        // Maximiser la fenêtre
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setMaximized(true);
+    }
+
     /**
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
      * @param cheminTexte Chemin relatif du fichier texte

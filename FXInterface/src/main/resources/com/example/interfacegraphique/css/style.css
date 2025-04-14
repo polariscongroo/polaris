@@ -28,8 +28,8 @@
 }
 
 .animated-bar {
-    -fx-accent: #42A5F5;
-    -fx-background-radius: 10;
+    -fx-accent: #000000;
+    -fx-background-radius: 5;
     -fx-transition: all 0.5s ease-in-out;
 }
 
@@ -42,4 +42,18 @@
     -fx-border-color: transparent;
     -fx-border-radius: 5;
     -fx-padding: 10;
+}
+
+.maximizer {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-border-radius: 5;
+    -fx-padding: 10 20;
+}
+
+.closer {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-border-radius: 5;
+    -fx-padding: 10 20;
 }
