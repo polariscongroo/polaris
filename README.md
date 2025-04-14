@@ -50,6 +50,6 @@ D --> E(User Interface - JavaFx)
 
 ## 👾 Structure
 
-<img src="https://github.com/polariscongroo/polaris/blob/master/Github/Topmarche.png" width="900">  
+<img src="https://github.com/polariscongroo/polaris/blob/master/github/Topmarche.png" width="900">  
 
 
