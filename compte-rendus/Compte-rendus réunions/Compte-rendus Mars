@@ -1,0 +1,25 @@
+Projet POLARIS – Compte-rendu n°03
+Type de reunion : Reunion de lancement
+Lieu : Departement Info (D312) Telecom SudParis
+Date : Mardi 11/03/2025 8h15-9h10
+Membres presents :
+- Emma MELL
+- Ryane SERI
+- Beryl SPERELAKIS-BEEDHAM
+- Professeur encadrant : Eric Lallet
+
+Ordre du jour : 
+- Présentation de l'avancé de l'interface (déja sous forme d'un prototype) 
+- Présentation des tests unitaires
+
+tests unitaires : 
+Pour python : il n'est pas nécessaire de faire les tests d'intégration (passsage de python à java) 
+
+Interface graphique : 
+- Possibilité de faire un dossier source où seront tous les données pour l'interface : simplifie les problèmes de path (pas nécessaire)
+- Code interface Loader : modifications attendues => dans Loader il y a le code dédié à la partie graphique et une autre dédié au modèle de l'interface. Javaswing n'est pas utilisé depuis 10 ans il faut que le code soit adaptable si on veut le faire touner pour JAVAFx. Il faut être capable de pouvoir utiliser à partir de la meme classe graphique de passer à JAVAFX. Plus de détail : changer le main : le tout début du main fait la mise en place de l'interface graphique ligne 315 mais la boucle while est dans une autre classe.
+- Attributs de loader doivent être en début de code et non dispersés.
+- Question pour Chadi : pourquoi revenir à awt si swing utilisé ?
+et pas swingUtilisties.invokeLater ?
+
+Prochaine réunion : Jeudi 03/04/25 à 15h30

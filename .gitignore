@@ -25,7 +25,7 @@
 **/.venv/*
 
 # pycache
-**/cartography/__pycache__/
+**/cartography/__pycache__
 
 # ignorer les fichiers Mac
 **/.DS_Store

@@ -1,0 +1,67 @@
+\section{Extraction des étoiles et de leurs coordonnées}
+\subsection{Etat de l'art}
+
+Nous sommes dans un premier concentré sur les différents algorithmes et méthodes déjà implémentées pour l'extraction d'étoiles et le traitement d'image.
+
+\vspace{0.5cm}
+
+\noindent \textbf{ICP (Iterative Closest Point) pour la correspondance de nuages de points}
+
+Étape 1 : Correspondance des points. Recherche le point le plus proche dans le nuage cible. Créer des paires de points correspondants entre les deux ensembles.
+
+Étape 2 : Calcul de la transformation. Une transformation géométrique (rotation + translation) est calculée pour minimiser la distance entre les points correspondants. (minimisation de l’erreur quadratique).
+
+Étape 3 : Application de la transformation. 
+La transformation calculée est appliquée aux points du nuage source.
+
+Étape 4 : Convergence. Ces étapes sont répétées jusqu'à ce que la différence entre les itérations successives soit inférieure à un seuil (l'algorithme a convergé).
+
+\vspace{0.5cm}
+
+\noindent \textbf{SIFT (Scale-invariant feature transform) pour l'image matching}
+
+Détecter et décrire les features dans chaque image.
+Features = zones d’intérêt = intéressantes où se trouvent des formes remarquables.
+Comment les détecter? → Détecteur de Moravec
+On s’intéresse à un certain pixel de l’image et on regarde les changements d’intensité lumineuse dans son voisinage (Dérivées partielles de I)
+On décale ensuite le voisinage dans 2+ directions et on fait la différence des intensités lumineuses avec le voisinage local. Si différence assez grande, alors on a trouvé notre feature = notre étoile.
+
+\vspace{0.5cm}
+
+\noindent \textbf{Top Hat pour l'extraction de points lumineux}
+
+La transformation Top Hat est une opération qui permet d'extraire de petits éléments et détails d'images données. Il existe deux types de transformation top-hat : la transformation white top-hat est définie comme la différence entre l'image d'entrée et son ouverture par un élément structurant, tandis que la transformation black top-hat est définie comme la différence entre l'image de fermeture et l'image d'entrée. Les transformées top-hat sont utilisées pour diverses tâches de traitement d'images, telles que l'extraction de caractéristiques, l'égalisation d'arrière-plan, l'amélioration d'images, etc.
+
+\subsection{Solution choisie}
+
+\subsubsection{Extraction des étoiles et coordonnées : seulement avec la bibliothèque DAOStarfinder
+}
+
+Donne directement coordonnées des barycentres (toujours problèmes du seuil) Permet donc d'obetnir avec un seuil manuel, les coordonnées des étoiles
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{img/DAO.png}
+    \caption{Détection des points brillant avec seuil, bibliothèque DAOStarfinder}
+\end{figure}
+
+
+Le Top Hat paraît suffisant pour extraire les étoiles
+Problèmes à résoudre actuellement :
+Délimiter clairement les contours d’une étoile ce qui fausse l’établissement des barycentres => incertitudes (pour le moment on règle manuellement)
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.7\linewidth]{img/Topnaze.png}
+    \caption{marche pas}
+\end{figure}
+
+On test avec un seuil choisi manuellement
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.7\linewidth]{img/Topmarche.png}
+    \caption{marche}
+\end{figure}
+
+On doit automatiser tout ca

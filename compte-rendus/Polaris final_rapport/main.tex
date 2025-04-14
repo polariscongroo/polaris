@@ -1,0 +1,81 @@
+% CREDITS:
+\documentclass[a4paper,12pt]{article}
+\usepackage[left=30mm,top=30mm,right=30mm,bottom=30mm]{geometry}
+\usepackage{etoolbox} %required for cover page
+\usepackage{booktabs}
+\usepackage[usestackEOL]{stackengine}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[capitalise]{cleveref}
+\usepackage{enumitem,kantlipsum}
+\usepackage{amssymb}
+\usepackage[square,numbers,sort]{natbib}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{minted}
+\usemintedstyle{emacs}
+\usepackage[french]{babel}
+\usepackage{listings}
+
+
+\renewcommand{\listingscaption}{Algorithm}
+\renewcommand{\listoflistingscaption}{List of Algorithms}
+
+\bibliographystyle{unsrtnat}
+
+\hypersetup{
+    colorlinks,
+    linkcolor={black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\linespread{1}
+
+\newtheorem{theorem}{Theorem}[section]
+\graphicspath{{figures/}}	
+
+% ------------------- important:
+
+\begin{document}
+
+\pagenumbering{gobble} % remove page numbers (and reset to 1)
+
+\input{front}
+\renewcommand{\contentsname}{Table des matières}
+\tableofcontents
+
+\newpage
+%\listoffigures
+%\newpage
+%\listoftables
+%\newpage
+%\listofalgorithms % List of algorithms in pseudocode format
+%\newpage
+%\listoflistings % List of algorithms in code format
+%\newpage
+
+\pagenumbering{arabic} % Arabic page numbers (and reset to 1)
+
+
+% Sections
+\input{sections/introduction}
+\newpage
+\input{sections/extraction}
+\input{sections/correspondance}
+\newpage
+\input{sections/communication}
+\input{sections/conclusion}
+\clearpage % References in a separate page
+\bibliography{bibliography}
+
+
+\end{document}

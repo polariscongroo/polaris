@@ -1,0 +1,53 @@
+\section {Communications entre les programmes}
+
+\subsection{Plan global}
+
+\noindent Notre application fonctionne en 4 étapes :
+
+\vspace{0.5cm}
+
+1- Sélection de l'image à traiter.
+
+2- Extraction des étoiles sur l'image
+
+3- Reconnaissance de la constellation avec le set d'étoiles
+
+4- Affichage de la constellation et de son histoire
+
+\vspace{0.5cm}
+
+\noindent Naturellement, il est nécessaire de faire communiquer tout les programmes responsables, surtout que notre projet est multilangage (Java et Python). 
+
+\subsection{Interface -> Détecteur d'étoiles : Java -> Python}
+
+\noindent \textbf{Fichier txt}
+
+\vspace{0.2cm}
+
+\noindent La première étape de fonctionnement de l'application est la sélection de la photo du ciel étoilé.
+
+\vspace{0.3cm}
+
+\noindent L'interface doit donc communiquer l'emplacement de l'image pour qu'elle soit traitée par le détecteur d'étoiles.
+
+\vspace{0.3cm}
+
+\noindent Pour cela, on écrit le path de l'image choisi (via l'interface) dans un fichier txt nommé output.txt.
+
+
+\subsection{Détecteur d'étoiles -> Reconnaissance : Python -> Java}
+
+\noindent \textbf{Fichier csv}
+
+\vspace{0.2cm}
+
+\noindent La seconde étape est le traitement de l'image et l'extraction des étoiles. Pour fournir leur localisation à la partie reconnaissance, nous avons décider, après des tests infructueux avec le format json, d'utiliser le format csv.
+
+\subsection{Reconnaissance -> Interface : Python -> Java}
+
+\noindent \textbf{Fichier txt}
+
+\vspace{0.2cm}
+
+\noindent Tout comme le passage de la première à la seconde étape, il est facile de communiquer le nom de la constellation reconnue pour afficher le nom de la constellation, l'image prise en photo (path écris dans le fichier) et un texte présent dans la base de donnée.
+
