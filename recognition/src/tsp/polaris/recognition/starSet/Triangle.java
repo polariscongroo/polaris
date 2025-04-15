@@ -91,6 +91,18 @@ public class Triangle extends StarSet
     }
 
     /**
+     * Méthode qui calcule les tailles des étoiles normalisées
+     * @return double[] : Tailles des étoiles normalisées
+     */
+    public double[] ratioSize(){
+        double[] ratios = {stars[0].getBrightness(), stars[1].getBrightness(), stars[2].getBrightness()};
+        for(int i = 0; i < 3; i += 1){
+            ratios[i] /= ratios[(i+1)%3];
+        }
+        return ratios;
+    }
+
+    /**
      * Methode qui compare 2 triangles
      * @param t2 Triangle à comparer
      * @return double : Coût entre 2 triangles
@@ -102,8 +114,9 @@ public class Triangle extends StarSet
         double[] angles2 = t2.getAngles();
 
         // Rapports des côtes
-        double[] ratios1 = getRatios();
-        double[] ratios2 = t2.getRatios();
+        double[] ratiosLength1 = getRatios();
+        double[] ratiosLength2 = t2.getRatios();
+
 
         // Ponderation des critères (ratio longueur et angle) (alpha et beta à definir)
         double alpha = 1;
@@ -112,7 +125,7 @@ public class Triangle extends StarSet
         double cout = 0;
         for (int i = 0; i < 3; i++)
         {
-            cout += alpha*Math.abs(ratios1[i] - ratios2[i]) + beta*Math.abs(angles1[i] - angles2[i])/Math.PI; //Normalisation par PI
+            cout += alpha*Math.abs(ratiosLength1[i] - ratiosLength2[i]) + beta*Math.abs(angles1[i] - angles2[i])/Math.PI; //Normalisation par PI
         }
         return cout;
     }
