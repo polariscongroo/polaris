@@ -274,10 +274,6 @@ def main():
                     while plt.get_fignums():
                         plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
                     '''
-
-                    #erase_txt()  # Vide le fichier txt après traitement
-                    print("10. fichier txt vidé")
-                    sys.stdout.flush()
                     
                     '''
                     plt.close()  # Ferme la figure

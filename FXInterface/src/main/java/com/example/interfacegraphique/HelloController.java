@@ -31,53 +31,20 @@ public class HelloController {
     @FXML private MediaView backgroundMediaView;
     @FXML private TextArea consoleOutput; // Pour afficher les logs
     @FXML private ImageView imageView; // Pour afficher l'image
+
     // Variables
     private MediaPlayer mediaPlayer;
+    // Nettoyage des fichiers de sortie
+    private String outputpath="cartography/image_aTraiter/output.txt";
+    private String listeetoilepath="recognition/coorPoints/liste_etoiles.csv";
 
     @FXML
     public void initialize() { setupBackgroundVideo();}
 
-    private void setupBackgroundVideo() {
-        try {
-            URL videoUrl = getClass().getResource("/images/video_fond.mp4");
-            if (videoUrl == null) {
-                System.err.println("ERREUR: Fichier vidéo introuvable dans /images/video_fond.mp4");
-                return;
-            }
-    
-            Media media = new Media(videoUrl.toExternalForm());
-            mediaPlayer = new MediaPlayer(media);
-            backgroundMediaView.setMediaPlayer(mediaPlayer);
-    
-            // S'assure que le MediaView est bien en arrière-plan
-            root.getChildren().remove(backgroundMediaView);
-            root.getChildren().add(0, backgroundMediaView); // Index 0 = tout au fond
-    
-            // Resize auto
-            backgroundMediaView.fitWidthProperty().bind(root.widthProperty());
-            backgroundMediaView.fitHeightProperty().bind(root.heightProperty());
-    
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-            mediaPlayer.setVolume(0.1);
-    
-            mediaPlayer.setOnReady(() -> {
-                System.out.println("Vidéo chargée - Résolution: " 
-                    + media.getWidth() + "x" + media.getHeight());
-                mediaPlayer.play();
-            });
-    
-            mediaPlayer.setOnError(() -> {
-                System.err.println("Erreur média: " + mediaPlayer.getError().getMessage());
-            });
-    
-        } catch (Exception e) {
-            System.err.println("Échec de l'initialisation vidéo: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     public void handleRecognition(ActionEvent event) {
+        eraser(outputpath);
+        eraser(listeetoilepath);
         // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
         Object source = event.getSource();
     
@@ -125,6 +92,8 @@ public class HelloController {
  
     @FXML
     public void handleClose(ActionEvent event) {
+        eraser(outputpath);
+        eraser(listeetoilepath);
         // Ferme l'application
         System.out.println("Fermeture de l'application...");
         Stage stage = (Stage) root.getScene().getWindow();
@@ -136,6 +105,59 @@ public class HelloController {
         // Maximiser la fenêtre
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setMaximized(true);
+        System.out.println("Fenêtre maximisée");
+    }
+
+    @FXML
+    public void eraser(String path) {
+        try {
+            FileWriter writer = new FileWriter(path);
+            writer.write(""); // Empty the file
+            writer.close();
+            System.out.println("File content erased: " + path);
+        } catch (IOException e) {
+            System.err.println("An error occurred while erasing the file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void setupBackgroundVideo() {
+        try {
+            URL videoUrl = getClass().getResource("/images/video_fond.mp4");
+            if (videoUrl == null) {
+                System.err.println("ERREUR: Fichier vidéo introuvable dans /images/video_fond.mp4");
+                return;
+            }
+    
+            Media media = new Media(videoUrl.toExternalForm());
+            mediaPlayer = new MediaPlayer(media);
+            backgroundMediaView.setMediaPlayer(mediaPlayer);
+    
+            // S'assure que le MediaView est bien en arrière-plan
+            root.getChildren().remove(backgroundMediaView);
+            root.getChildren().add(0, backgroundMediaView); // Index 0 = tout au fond
+    
+            // Resize auto
+            backgroundMediaView.fitWidthProperty().bind(root.widthProperty());
+            backgroundMediaView.fitHeightProperty().bind(root.heightProperty());
+    
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            mediaPlayer.setVolume(0.1);
+    
+            mediaPlayer.setOnReady(() -> {
+                System.out.println("Vidéo chargée - Résolution: " 
+                    + media.getWidth() + "x" + media.getHeight());
+                mediaPlayer.play();
+            });
+    
+            mediaPlayer.setOnError(() -> {
+                System.err.println("Erreur média: " + mediaPlayer.getError().getMessage());
+            });
+    
+        } catch (Exception e) {
+            System.err.println("Échec de l'initialisation vidéo: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
