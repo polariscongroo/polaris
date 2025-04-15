@@ -78,6 +78,11 @@ public class HelloController {
 
     @FXML
     public void handleRecognition(ActionEvent event) {
+        // Nettoyage des fichiers de sortie
+        String outputpath="cartography/image_aTraiter/output.txt";
+        String listeetoilepath="recognition/coorPoints/liste_etoiles.csv";
+        eraser(outputpath);
+        eraser(listeetoilepath);
         // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
         Object source = event.getSource();
     
@@ -136,6 +141,20 @@ public class HelloController {
         // Maximiser la fenêtre
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setMaximized(true);
+        System.out.println("Fenêtre maximisée");
+    }
+
+    @FXML
+    public void eraser(String path) {
+        try {
+            FileWriter writer = new FileWriter(path);
+            writer.write(""); // Empty the file
+            writer.close();
+            System.out.println("File content erased: " + path);
+        } catch (IOException e) {
+            System.err.println("An error occurred while erasing the file: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
