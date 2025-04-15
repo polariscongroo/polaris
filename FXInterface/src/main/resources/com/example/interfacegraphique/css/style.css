@@ -4,15 +4,15 @@
 }
 
 .header {
-    -fx-font-size: 26px;
+    -fx-font-size: 24px;
     -fx-text-fill: #ffffff;
     -fx-padding: 10 0 20 0;
     -fx-alignment: center;
-    -fx-font-family: "cursive";
 }
 
 .main-button {
     -fx-background-color: transparent;
+    -fx-opacity: 1;
     -fx-text-fill: rgb(255, 255, 255);
     -fx-border-color: transparent;
     -fx-background-insets: 0;
@@ -21,6 +21,7 @@
 
 .secondary-button {
     -fx-background-color: transparent;
+    -fx-opacity: 1;
     -fx-border-color: #007ACC;
     -fx-border-radius: 5;
     -fx-text-fill: #ffffff;
@@ -37,7 +38,7 @@
     -fx-font-family: "Courier New";
     -fx-opacity: 0;
     -fx-font-size: 14px;
-    -fx-text-fill: #ff0000;
+    -fx-text-fill: #000000;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-radius: 5;
@@ -45,15 +46,15 @@
 }
 
 .maximizer {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
     -fx-border-radius: 5;
     -fx-padding: 10 20;
 }
 
 .closer {
-    -fx-background-color: #ffffff;
-    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
     -fx-border-radius: 5;
     -fx-padding: 10 20;
 }
