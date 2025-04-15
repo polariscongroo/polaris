@@ -10,7 +10,7 @@ public class Combinatorics {
 	/**
 	 * Constructeur vide
 	 */
-	public Combinatorics() {
+	private Combinatorics() {
 		
 	}
 	

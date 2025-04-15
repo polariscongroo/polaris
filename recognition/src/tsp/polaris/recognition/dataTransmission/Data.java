@@ -36,7 +36,7 @@ public class Data {
                     break;
                 }
                 String[] values = line.split(",");
-                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim()) * Float.parseFloat(values[3].trim()));
+                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim())+Float.parseFloat(values[3].trim()));
                 data.add(newPoint);
 
             }
@@ -58,10 +58,10 @@ public class Data {
             br.close();
         }
         catch (FileNotFoundException f) {
-            System.out.println("Impossible de trouver le fichier");
+            System.err.println("Impossible de trouver le fichier");
         }
         catch (IOException e) {
-            System.out.println("Impossible de modifier le fichier");
+            System.err.println("Impossible de modifier le fichier");
         }
     }
 
@@ -87,7 +87,7 @@ public class Data {
      * Getteur d'adjacencyList
      * @return List<List<Integer>> : Retourne la liste d'adjacence du csv si elle existe
      */
-    public List<List<Integer>> getAdjacencyList() {
+    public List<List<Integer>> getAdjacencyList() throws IllegalStateException {
         if(adjacencyList != null) {
             return adjacencyList;
         } else {

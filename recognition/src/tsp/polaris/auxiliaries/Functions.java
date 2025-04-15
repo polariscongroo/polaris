@@ -17,7 +17,7 @@ public class Functions {
      * @return l'indice du plus petit élément
      * @throws IllegalArgumentException si le tableau est vide ou null
      */
-    public static int minIndex(double[] tab) {
+    public static int minIndex(double[] tab) throws IllegalArgumentException {
         if (tab == null || tab.length == 0) {
             throw new IllegalArgumentException("Le tableau ne peut pas être vide ou null.");
         }
@@ -36,7 +36,7 @@ public class Functions {
      * @return double : somme d'un tableau
      * @throws IllegalArgumentException si le tableau est null
      */
-    public static double sum(double[] tab) {
+    public static double sum(double[] tab) throws IllegalArgumentException {
         if (tab == null) {
             throw new IllegalArgumentException("Le tableau ne peut pas être null.");
         }
@@ -54,11 +54,7 @@ public class Functions {
      * @return Le plus petit des deux entiers
      */
     public static int min(int a, int b) {
-        if (a < b) {
-            return a;
-        } else {
-            return b;
-        }
+        return Math.min(a, b);
     }
 
     /**
@@ -69,7 +65,7 @@ public class Functions {
      * @throws IOException si une erreur de lecture survient
      * @throws IllegalArgumentException si le fichier est vide ou contient plusieurs lignes
      */
-    public static String lireLigneUnique(String cheminFichier) throws IOException {
+    public static String lireLigneUnique(String cheminFichier) throws IOException, IllegalArgumentException {
         List<String> lignes = Files.readAllLines(Paths.get(cheminFichier));
         
         if (lignes.isEmpty()) {
@@ -80,7 +76,7 @@ public class Functions {
             throw new IllegalArgumentException("Le fichier contient plusieurs lignes");
         }
         
-        return lignes.get(0);
+        return lignes.getFirst();
     }
     
 }

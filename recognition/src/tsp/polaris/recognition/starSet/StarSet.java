@@ -2,7 +2,7 @@ package tsp.polaris.recognition.starSet;
 
 import tsp.polaris.auxiliaries.Combinatorics;
 import tsp.polaris.recognition.other.Star;
-import tsp.polaris.recognition.other.Triangle;
+
 import java.util.Arrays;
 import java.util.Comparator;
 

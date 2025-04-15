@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://python.org)
 [![Java](https://img.shields.io/badge/Java-11%2B-orange)](https://java.com)
 
-Automatic constellation recognition application for night sky observation with interactive interface.
+Automatic constellation recognition application for night sky observation with interactive interface. 
 
 ## 👾 Features
 
@@ -30,29 +30,9 @@ Dynamic drawing of recognized star patterns with mythological information
 
 ---
 
-### 📥 Installation (Copy/Paste)
+### 📥 Installation (Copy/Paste) Not working yet...
 
-Clone the repository
-```bash
-git clone https://github.com/youruser/constellation-recognition.git
-cd constellation-recognition
-```
 
-Install Python dependencies
-```bash
-pip install -r python/requirements.txt
-```
-
-Compile (from java folder)
-```bash
-cd java
-mvn clean package
-```
-
-Run
-```bash
-java -jar target/constellation-recognition.jar
-```
 
 ## 👾 Process
 

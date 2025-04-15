@@ -12,8 +12,8 @@
 **/*.iml
 **/*.idea
 **/recognition/src/bin
-
-**/recognition/out
+**/out/
+**/.vscode/
 
 # ignorer le .html
 **/*.html

@@ -1,12 +1,11 @@
 package tsp.polaris.JUnitTest;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tsp.polaris.recognition.other.Star;
-import tsp.polaris.recognition.other.Triangle;
+import tsp.polaris.recognition.starSet.Triangle;
 import tsp.polaris.recognition.starSet.StarSet;
 
 /**
@@ -27,7 +26,7 @@ public class StarSetTest {
     public void setUp() {
         Star[] stars = new Star[6];
         for(int i = 0; i < 6; i++){
-            stars[i] = new Star(i, i, i);
+            stars[i] = new Star(i, (double)5/(i+1), i);
         }
         workingStarSet = new StarSet(stars);
     }

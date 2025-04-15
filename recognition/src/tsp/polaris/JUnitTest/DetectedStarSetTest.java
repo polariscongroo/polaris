@@ -158,10 +158,5 @@ public class DetectedStarSetTest {
 				}
 			}
 		}
-
-		for(int i = 0; i < lengthSet; i += 1) {
-			System.out.println("blabla " + i);
-			System.out.println(resultCombination[i]);
-		}
 	}
 }

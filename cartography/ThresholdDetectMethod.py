@@ -19,8 +19,6 @@ import os
 """
 file_path = "cartography/image_aTraiter/output.txt"
 
-
-
 def inverse_cor(coordonnees):
     """
     @brief Inverse les coordonnées de l'image verticalement pour corriger l'orientation.
@@ -140,7 +138,7 @@ def classe_les_etoiles(etoiles):
     for k in range(len(etoiles)):
         produit = etoiles[k][2] * etoiles[k][3] 
         etoiles[k].append(produit)
-    etoiles.sort(key=lambda x: x[4], reverse=True)
+    etoiles.sort(key=lambda x: x[2]+x[3], reverse=True)
     return etoiles
 
 def enregistre_les_etoiles(etoiles_classees):
@@ -212,6 +210,7 @@ def main():
     try:
         # Vérifie l'existence de output.txt
         if not os.path.exists(file_path):
+            print("6. Lecture de output.txt non réalisée")
             raise(OutputNotFound("Le fichier output.txt n'existe pas encore..."))
         
         # Lecture de output.txt
