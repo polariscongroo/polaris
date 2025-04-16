@@ -4,6 +4,7 @@ import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.other.Star;
 
+import static tsp.polaris.auxiliaries.Functions.min;
 import static tsp.polaris.auxiliaries.Functions.sum;
 
 /**
@@ -232,7 +233,9 @@ public class DetectedStarSet extends StarSet
             int nbTriangle = Combinatorics.combination(stars.length, i+3);
             minCostPerLength[i] /= nbTriangle;
             System.out.println(minCostPerLength[i]);
+            System.out.println(i+3);
             if(selectedStarSet[i] == null) {
+                System.out.println("null");
                 continue;
             } else {
                 System.out.println(selectedStarSet[i].getNearConstellation().getName());
