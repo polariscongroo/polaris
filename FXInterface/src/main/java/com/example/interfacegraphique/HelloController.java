@@ -1,6 +1,7 @@
 package com.example.interfacegraphique;
 //import com.chadi.Main;
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,6 +24,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tsp.polaris.recognition.Recognition;
+import tsp.polaris.recognition.starSet.TriangleMatchingException;
 
 public class HelloController {
 
@@ -62,7 +65,19 @@ public class HelloController {
             System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
             write_in_output(path);
             runPythonScript(path);
-            runJavaScript(path);
+            //runJavaScript(path);
+            try {
+				Recognition.run();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (TriangleMatchingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
     
