@@ -1,7 +1,5 @@
 package com.example.interfacegraphique;
-//import com.chadi.Main;
 import java.io.BufferedReader;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,7 +43,7 @@ public class HelloController {
     public void initialize() { setupBackgroundVideo();}
 
     @FXML
-    public void handleRecognition(ActionEvent event) {
+    public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
         eraser(outputpath);
         eraser(listeetoilepath);
         // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
@@ -65,17 +63,14 @@ public class HelloController {
             System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
             write_in_output(path);
             runPythonScript(path);
-            //runJavaScript(path);
+            runJavaScript();
             try {
 				Recognition.run();
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (TriangleMatchingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }
@@ -247,7 +242,7 @@ public class HelloController {
         new Thread(pythonTask).start();
     }
 
-    private void runJavaScript(String filePath) {
-        //Main.reconnaissance();
+    private void runJavaScript() throws TriangleMatchingException, NumberFormatException, IOException {
+        Recognition.run();
     }
 }
