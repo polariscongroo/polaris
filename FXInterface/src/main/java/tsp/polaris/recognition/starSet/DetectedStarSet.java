@@ -4,7 +4,6 @@ import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.other.Star;
 
-import static tsp.polaris.auxiliaries.Functions.min;
 import static tsp.polaris.auxiliaries.Functions.sum;
 
 /**
