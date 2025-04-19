@@ -1,12 +1,9 @@
 package tsp.polaris.drawConstellation;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
-import tsp.polaris.recognition.dataTransmission.Data;
-import tsp.polaris.recognition.other.Point;
-import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
 
 public class MainDrawTest {

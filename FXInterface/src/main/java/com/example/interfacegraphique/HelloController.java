@@ -63,16 +63,7 @@ public class HelloController {
             System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
             write_in_output(path);
             runPythonScript(path);
-            runJavaScript();
-            try {
-				Recognition.run();
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (TriangleMatchingException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+
         }
     }
     
@@ -227,6 +218,17 @@ public class HelloController {
                     int exitCode = process.waitFor();
                     if (exitCode == 0) {
                         System.out.println("[Java] 5. Script exécuté avec succès !");
+                        
+                        // Lancement de la reconnaissance
+                        try {
+                            runJavaScript();
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        } catch (TriangleMatchingException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         System.err.println("[Java] 5. Erreur (code " + exitCode + ")");
                     }

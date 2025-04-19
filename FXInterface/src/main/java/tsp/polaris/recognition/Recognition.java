@@ -53,4 +53,5 @@ public class Recognition {
         // On dessine la constellation
         MainDrawTest.drawConstellation(pathImage,bestStarSet);
     }
+
 }
