@@ -4,6 +4,7 @@ import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.other.Star;
 
+
 import static tsp.polaris.auxiliaries.Functions.sum;
 
 /**
@@ -227,6 +228,8 @@ public class DetectedStarSet extends StarSet
             }
         }
 
+        double[] costPerAngles = new double[selectedStarSet.length];
+
         // On divise le cout par la taille de l'ensemble d'étoiles
         for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
             int nbTriangle = Combinatorics.combination(stars.length, i+3);
@@ -235,13 +238,20 @@ public class DetectedStarSet extends StarSet
             System.out.println(i+3);
             if(selectedStarSet[i] == null) {
                 System.out.println("null");
+                costPerAngles[i] = Double.MAX_VALUE;
                 continue;
             } else {
                 System.out.println(selectedStarSet[i].getNearConstellation().getName());
+                // On va à présent comparer les angles de chaque liste d'étoiles à la constellation qu'on lui a associé dans la base de données
+                costPerAngles[i] = selectedStarSet[i].getAngleCostThreeBrightest(selectedStarSet[i].getNearConstellation());
+                System.out.println(costPerAngles[i]);
             }
         }
+
+
+
         // On recherche la taille d'étoiles qui a le cout le plus faible
-        int minIndex = Functions.minIndex(minCostPerLength);
+        int minIndex = Functions.minIndex(costPerAngles);
 
         return selectedStarSet[minIndex];
 

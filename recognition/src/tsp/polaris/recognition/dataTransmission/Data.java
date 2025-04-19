@@ -36,7 +36,7 @@ public class Data {
                     break;
                 }
                 String[] values = line.split(",");
-                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim())*Float.parseFloat(values[3].trim()));
+                Star newPoint = new Star(Float.parseFloat(values[0].trim()), Float.parseFloat(values[1].trim()), Float.parseFloat(values[2].trim())*Float.parseFloat(values[3].trim()), Float.parseFloat(values[3].trim()));
                 data.add(newPoint);
 
             }

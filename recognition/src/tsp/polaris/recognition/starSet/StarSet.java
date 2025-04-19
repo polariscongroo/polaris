@@ -41,7 +41,7 @@ public class StarSet {
      *
      * @return La chaîne de caractères representant la liste d'étoiles.
      */
-    public String toString()
+    public String toString() 
     {
         return Arrays.toString(stars);
     }
@@ -101,5 +101,24 @@ public class StarSet {
         // On n'a pas besoin de retourner l'instance du triangle, on peut en créer un nouveau
         // Cela permet de simplifier le code et de l'optimiser en évitant de parcourir la liste des triangles
         return new Triangle(dataStars.getStars()[indexTriangle[0]], dataStars.getStars()[indexTriangle[1]], dataStars.getStars()[indexTriangle[2]]);
+    }
+
+    /**
+     * Méthode qui compare les triangles les plus lumineux de deux ensembles d'étoiles 
+     *
+     * @param starset Ensemble d'étoiles que l'on compare à l'ensemble actuel
+     * @return  Coût des deux triangles les plus lumineux
+     */
+    public double getAngleCostThreeBrightest(StarSet starset) {
+        Triangle t1 = new Triangle(stars[0], stars[1], stars[2]);
+        Triangle t2 = new Triangle(starset.stars[0], starset.stars[1], starset.stars[2]);
+        double cost = 0;
+        double[] angles1 = t1.getAngles();
+        double[] angles2 = t2.getAngles();
+
+        for (int i = 0; i < 3; i++) {
+            cost += Math.abs(angles1[i] - angles2[i]);
+        }
+        return cost;
     }
 }

@@ -1,5 +1,6 @@
 package tsp.polaris.recognition.starSet;
 import tsp.polaris.recognition.other.Star;
+import tsp.polaris.auxiliaries.Functions;
 
 import java.util.Arrays;
 
@@ -18,7 +19,7 @@ public class Triangle extends StarSet
     public Triangle(Star... stars)
     {
         super(stars);
-        // Vérification que 3 points on été donnés
+        // Vérification que 3 points ont été donnés
         if(stars.length != 3) {
             throw new IllegalArgumentException("Le triangle doit avoir 3 étoiles.");
         }
@@ -77,15 +78,17 @@ public class Triangle extends StarSet
     }
     
     /**
-     * Methode qui calcule les longueurs des côtes normalises du triangle
+     * Methode qui calcule les longueurs des côtes normalisees du triangle
      * @return double[] : Distances normalisees (par la distance la plus grande du triangle) 
      */
-    public double[] getRatios() 
+    public double[] getRatiosSides() 
     {
     	double[] sides = getSides();
     	double[] ratios = new double[3];
+        double sum = Functions.sum(sides);
     	for(int i = 0; i < 3; i += 1) {
-    		ratios[i] = sides[i]/sides[(i+1)%3];
+    		//ratios[i] = sides[i]/sides[(i+1)%3];
+            ratios[i] = sides[i]/sum;
     	}
     	return ratios;
     }
@@ -94,8 +97,8 @@ public class Triangle extends StarSet
      * Méthode qui calcule les tailles des étoiles normalisées
      * @return double[] : Tailles des étoiles normalisées
      */
-    public double[] ratioSize(){
-        double[] ratios = {stars[0].getBrightness(), stars[1].getBrightness(), stars[2].getBrightness()};
+    public double[] getRatiosSizes(){
+        double[] ratios = {stars[0].getSize(), stars[1].getSize(), stars[2].getSize()};
         for(int i = 0; i < 3; i += 1){
             ratios[i] /= ratios[(i+1)%3];
         }
@@ -114,18 +117,22 @@ public class Triangle extends StarSet
         double[] angles2 = t2.getAngles();
 
         // Rapports des côtes
-        double[] ratiosLength1 = getRatios();
-        double[] ratiosLength2 = t2.getRatios();
+        double[] ratiosLength1 = getRatiosSides();
+        double[] ratiosLength2 = t2.getRatiosSides();
 
+        // Rapport des tailles
+        double[] ratioSize1 = getRatiosSizes();
+        double[] ratioSize2 = t2.getRatiosSizes();
 
         // Ponderation des critères (ratio longueur et angle) (alpha et beta à definir)
         double alpha = 1;
         double beta = 1;
+        double gamma = 1;
 
         double cout = 0;
         for (int i = 0; i < 3; i++)
         {
-            cout += alpha*Math.abs(ratiosLength1[i] - ratiosLength2[i]) + beta*Math.abs(angles1[i] - angles2[i])/Math.PI; //Normalisation par PI
+            cout += alpha*Math.abs(ratiosLength1[i] - ratiosLength2[i]) + beta*Math.abs(ratioSize1[i]-ratioSize2[i]) + gamma*Math.abs(angles1[i] - angles2[i])/Math.PI; //Normalisation par PI
         }
         return cout;
     }
