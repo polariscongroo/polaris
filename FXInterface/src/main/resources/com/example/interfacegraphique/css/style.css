@@ -11,21 +11,12 @@
 }
 
 .main-button {
-<<<<<<< HEAD
-    -fx-background-color: transparent; /* Fond transparent */
-    -fx-background-insets: 0;         /* Supprime les marges internes */
-    -fx-background-radius: 5;         
-    -fx-border-color: transparent;    /* Bordure invisible */
-    -fx-padding: 10 20;               /* Ajoute un espacement interne */
-  
-=======
     -fx-background-color: transparent;
     -fx-opacity: 1;
     -fx-text-fill: rgb(255, 255, 255);
     -fx-border-color: transparent;
     -fx-background-insets: 0;
     -fx-padding: 10 20;
->>>>>>> 462ddd6d8ad622253a0344d9115a50236fc3854c
 }
 
 .secondary-button {
