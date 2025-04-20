@@ -7,6 +7,10 @@
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
 
+
+    <!-- Loader -->
+    <Region fx:id="loader" styleClass="loader" visible="false" managed="false"/>
+    
     <!-- Le MediaView est au fond -->
     <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
 
@@ -22,8 +26,8 @@
                 <!-- Boutons -->
                 <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognition"/>
                 <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellation"/>
-                <Button text="Close" styleClass="closer" onAction="#handleClose"/>
-                <Button text="Maximize" styleClass="maximizer" onAction="#handleMaximiser"/>
+                <Button text="Close" styleClass="button-container" onAction="#handleClose"/>
+                <Button text="Maximize" styleClass="button-container" onAction="#handleMaximiser"/>
 
                 <!-- Barre de progression -->
                 <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="animated-bar glossy-bar"/>
@@ -33,7 +37,7 @@
 
                 <!-- TextArea pour afficher le texte -->
                 <TextArea fx:id="consoleOutput" prefHeight="10" prefWidth="10" wrapText="true" editable="false" styleClass="console-text-area" opacity="0"/>
-
+                
             </VBox>
         </center>
     </BorderPane>

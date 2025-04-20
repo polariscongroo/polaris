@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -32,6 +33,7 @@ public class HelloController {
     @FXML private MediaView backgroundMediaView;
     @FXML private TextArea consoleOutput; // Pour afficher les logs
     @FXML private ImageView imageView; // Pour afficher l'image
+    @FXML private Region loader;
 
     // Variables
     private MediaPlayer mediaPlayer;
@@ -41,15 +43,17 @@ public class HelloController {
 
     @FXML
     public void initialize() { setupBackgroundVideo();}
-
     @FXML
     public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
         eraser(outputpath);
         eraser(listeetoilepath);
+    
+        // Afficher le loader
+        loader.setVisible(true);
+        loader.setManaged(true);
+    
         // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
         Object source = event.getSource();
-    
-        // Récupère la fenêtre principale (équivalent à null dans JFileChooser)
         Stage primaryStage = (Stage) ((Node) source).getScene().getWindow();
     
         FileChooser fileChooser = new FileChooser();
@@ -62,10 +66,42 @@ public class HelloController {
             String path = selectedFile.getAbsolutePath(); // Chemin du fichier
             System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
             write_in_output(path);
-            runPythonScript(path);
-
+    
+            // Exécuter le script Python dans un thread séparé
+            Task<Void> recognitionTask = new Task<>() {
+                @Override
+                protected Void call() throws Exception {
+                    runPythonScript(path); // Exécute le script Python
+                    return null;
+                }
+    
+                @Override
+                protected void succeeded() {
+                    // Masquer le loader après la tâche
+                    loader.setVisible(false);
+                    loader.setManaged(false);
+                    System.out.println("[Java] Recognition terminée !");
+                }
+    
+                @Override
+                protected void failed() {
+                    // Masquer le loader même en cas d'échec
+                    loader.setVisible(false);
+                    loader.setManaged(false);
+                    System.err.println("[Java] Une erreur est survenue pendant la reconnaissance.");
+                    getException().printStackTrace();
+                }
+            };
+    
+            // Lancer la tâche dans un thread séparé
+            new Thread(recognitionTask).start();
+        } else {
+            // Masquer le loader si aucun fichier n'est sélectionné
+            loader.setVisible(false);
+            loader.setManaged(false);
         }
     }
+    
     
     @FXML
     public void handleConstellation(ActionEvent event) {
