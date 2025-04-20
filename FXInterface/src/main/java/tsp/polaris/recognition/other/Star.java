@@ -27,7 +27,7 @@ public class Star extends Point implements Comparable<Star> {
     /**
      * Affichage des coordonnées et de la luminosité de l'étoile
      *
-     * @return Chaine de caractères contenant les coordonnées, la luminosité et la taille
+     * @return Chaine de caractères contenant les coordonnées et la luminosité
      */
     @Override
     public String toString() {

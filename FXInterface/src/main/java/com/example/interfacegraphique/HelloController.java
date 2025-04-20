@@ -1,5 +1,4 @@
 package com.example.interfacegraphique;
-//import com.chadi.Main;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -23,6 +22,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tsp.polaris.recognition.Recognition;
+import tsp.polaris.recognition.starSet.TriangleMatchingException;
 
 public class HelloController {
 
@@ -31,11 +32,95 @@ public class HelloController {
     @FXML private MediaView backgroundMediaView;
     @FXML private TextArea consoleOutput; // Pour afficher les logs
     @FXML private ImageView imageView; // Pour afficher l'image
+
     // Variables
     private MediaPlayer mediaPlayer;
+    // Nettoyage des fichiers de sortie
+    private String outputpath="cartography/image_aTraiter/output.txt";
+    private String listeetoilepath="recognition/coorPoints/liste_etoiles.csv";
 
     @FXML
     public void initialize() { setupBackgroundVideo();}
+
+    @FXML
+    public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+        eraser(outputpath);
+        eraser(listeetoilepath);
+        // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
+        Object source = event.getSource();
+    
+        // Récupère la fenêtre principale (équivalent à null dans JFileChooser)
+        Stage primaryStage = (Stage) ((Node) source).getScene().getWindow();
+    
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(".")); // Dossier par défaut
+    
+        // Ouvre la boîte de dialogue
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+    
+        if (selectedFile != null) {
+            String path = selectedFile.getAbsolutePath(); // Chemin du fichier
+            System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
+            write_in_output(path);
+            runPythonScript(path);
+
+        }
+    }
+    
+    @FXML
+    public void handleConstellation(ActionEvent event) {
+        try {
+            // Charger l'image
+            InputStream imageStream = getClass().getResourceAsStream("/images/orsaminor.jpg");
+            if (imageStream == null) {
+                System.err.println("Image non trouvée dans les ressources");
+                return;
+            }
+            Image image = new Image(imageStream);
+            imageView.setImage(image);
+            imageView.setVisible(true);
+            consoleOutput.setOpacity(1.0);
+    
+            // Charger le texte - Utilisation du chemin relatif correct
+            chargerTexte("/baseDDonnees_txt/apus.txt"); // Notez le / au début
+    
+            System.out.println("Affichage réussi !");
+        } catch (Exception e) {
+            System.err.println("Erreur: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+ 
+    @FXML
+    public void handleClose(ActionEvent event) {
+        eraser(outputpath);
+        eraser(listeetoilepath);
+        // Ferme l'application
+        System.out.println("Fermeture de l'application...");
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void handleMaximiser(ActionEvent event) {
+        // Maximiser la fenêtre
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setMaximized(true);
+        System.out.println("Fenêtre maximisée");
+    }
+
+    @FXML
+    public void eraser(String path) {
+        try {
+            FileWriter writer = new FileWriter(path);
+            writer.write(""); // Empty the file
+            writer.close();
+            System.out.println("File content erased: " + path);
+        } catch (IOException e) {
+            System.err.println("An error occurred while erasing the file: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     private void setupBackgroundVideo() {
         try {
@@ -76,52 +161,6 @@ public class HelloController {
         }
     }
 
-    @FXML
-    public void handleRecognition(ActionEvent event) {
-        // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
-        Object source = event.getSource();
-    
-        // Récupère la fenêtre principale (équivalent à null dans JFileChooser)
-        Stage primaryStage = (Stage) ((Node) source).getScene().getWindow();
-    
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(".")); // Dossier par défaut
-    
-        // Ouvre la boîte de dialogue
-        File selectedFile = fileChooser.showOpenDialog(primaryStage);
-    
-        if (selectedFile != null) {
-            String path = selectedFile.getAbsolutePath(); // Chemin du fichier
-            System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
-            write_in_output(path);
-            runPythonScript(path);
-            runJavaScript(path);
-        }
-    }
-    
-    @FXML
-    public void handleConstellation(ActionEvent event) {
-        try {
-            // Charger l'image
-            InputStream imageStream = getClass().getResourceAsStream("/images/orsaminor.jpg");
-            if (imageStream == null) {
-                System.err.println("Image non trouvée dans les ressources");
-                return;
-            }
-            Image image = new Image(imageStream);
-            imageView.setImage(image);
-            imageView.setVisible(true);
-    
-            // Charger le texte - Utilisation du chemin relatif correct
-            chargerTexte("/baseDDonnees_txt/apus.txt"); // Notez le / au début
-    
-            System.out.println("Affichage réussi !");
-        } catch (Exception e) {
-            System.err.println("Erreur: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
- 
     /**
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
      * @param cheminTexte Chemin relatif du fichier texte
@@ -179,6 +218,17 @@ public class HelloController {
                     int exitCode = process.waitFor();
                     if (exitCode == 0) {
                         System.out.println("[Java] 5. Script exécuté avec succès !");
+                        
+                        // Lancement de la reconnaissance
+                        try {
+                            runJavaScript();
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        } catch (TriangleMatchingException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         System.err.println("[Java] 5. Erreur (code " + exitCode + ")");
                     }
@@ -194,7 +244,7 @@ public class HelloController {
         new Thread(pythonTask).start();
     }
 
-    private void runJavaScript(String filePath) {
-        //Main.reconnaissance();
+    private void runJavaScript() throws TriangleMatchingException, NumberFormatException, IOException {
+        Recognition.run();
     }
 }

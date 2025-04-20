@@ -1,0 +1,31 @@
+Compte Rendu de Réunion
+Date : 19/04/2025
+Présents : Emma, Ryane, Eric, Beryl
+
+- Problèmes techniques
+
+Problème dans recognition 
+Si l’image est modifiée (ex. rotation), cela ne génère pas la même constellation.
+Eric n’a pas trouvé de solution pour le moment 
+
+Problèmes de chemins (paths) : Les chemins relatifs ne fonctionnent pas sur tous les IDEs.
+Il est possible d'utiliser le répertoire des ressources comme alternative.
+Mais tant que cela fonctionne sur notre IDE, cela reste acceptable pour l’avancement du projet développement.
+
+- Gestion des fichiers
+Ajouter la mention des fichiers temporaires dans le fichier README.md.
+S’assurer que tous les répertoires nécessaires sont bien présents dans le dépôt.
+
+Interface utilisateur
+Événements :
+L’utilisation de onAction est trop générale : elle déclenche plusieurs actions en même temps.
+
+Alternatives proposées : setOnMouseDragEntered / setOnDragOver
+
+Affichage :
+Aucun problème à définir une taille fixe pour l’interface.
+
+Prochaine réunion
+Date : Mercredi 14/05/2025
+Objectif : Discussion uniquement centrée sur la soutenance.
+

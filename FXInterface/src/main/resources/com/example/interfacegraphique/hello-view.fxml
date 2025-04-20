@@ -22,6 +22,8 @@
                 <!-- Boutons -->
                 <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognition"/>
                 <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellation"/>
+                <Button text="Close" styleClass="closer" onAction="#handleClose"/>
+                <Button text="Maximize" styleClass="maximizer" onAction="#handleMaximiser"/>
 
                 <!-- Barre de progression -->
                 <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="animated-bar glossy-bar"/>
@@ -30,7 +32,7 @@
                 <ImageView fx:id="imageView" fitWidth="400" fitHeight="400" preserveRatio="true" visible="false" managed="false"/> <!-- managed="false" empêche la réserve d'espace quand invisible -->
 
                 <!-- TextArea pour afficher le texte -->
-                <TextArea fx:id="consoleOutput" prefHeight="200" prefWidth="200" wrapText="true" editable="false"/>
+                <TextArea fx:id="consoleOutput" prefHeight="10" prefWidth="10" wrapText="true" editable="false" styleClass="console-text-area" opacity="0"/>
 
             </VBox>
         </center>

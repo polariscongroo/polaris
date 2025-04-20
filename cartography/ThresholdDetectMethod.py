@@ -138,7 +138,7 @@ def classe_les_etoiles(etoiles):
     for k in range(len(etoiles)):
         produit = etoiles[k][2] * etoiles[k][3] 
         etoiles[k].append(produit)
-    etoiles.sort(key=lambda x: x[2]+x[3], reverse=True)
+    etoiles.sort(key=lambda x: x[4], reverse=True)
     return etoiles
 
 def enregistre_les_etoiles(etoiles_classees):
@@ -274,10 +274,6 @@ def main():
                     while plt.get_fignums():
                         plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
                     '''
-
-                    #erase_txt()  # Vide le fichier txt après traitement
-                    print("10. fichier txt vidé")
-                    sys.stdout.flush()
                     
                     '''
                     plt.close()  # Ferme la figure

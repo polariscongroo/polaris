@@ -5,31 +5,41 @@
 
 .header {
     -fx-font-size: 24px;
-    -fx-text-fill: #333;
+    -fx-text-fill: #ffffff;
     -fx-padding: 10 0 20 0;
     -fx-alignment: center;
 }
 
 .main-button {
+<<<<<<< HEAD
     -fx-background-color: transparent; /* Fond transparent */
     -fx-background-insets: 0;         /* Supprime les marges internes */
     -fx-background-radius: 5;         
     -fx-border-color: transparent;    /* Bordure invisible */
     -fx-padding: 10 20;               /* Ajoute un espacement interne */
   
+=======
+    -fx-background-color: transparent;
+    -fx-opacity: 1;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 10 20;
+>>>>>>> 462ddd6d8ad622253a0344d9115a50236fc3854c
 }
 
 .secondary-button {
     -fx-background-color: transparent;
+    -fx-opacity: 1;
     -fx-border-color: #007ACC;
     -fx-border-radius: 5;
-    -fx-text-fill: #007ACC;
+    -fx-text-fill: #ffffff;
     -fx-font-size: 16px;
 }
 
 .animated-bar {
-    -fx-accent: #42A5F5;
-    -fx-background-radius: 10;
+    -fx-accent: #000000;
+    -fx-background-radius: 5;
     -fx-transition: all 0.5s ease-in-out;
 }
 
@@ -68,3 +78,27 @@
     -fx-scale-y: 1;                   /* Taille normale */
 }
 
+.console-text-area {
+    -fx-font-family: "Courier New";
+    -fx-opacity: 0;
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+}
+
+.maximizer {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5;
+    -fx-padding: 10 20;
+}
+
+.closer {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 5;
+    -fx-padding: 10 20;
+}

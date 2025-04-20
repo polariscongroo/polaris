@@ -41,7 +41,7 @@ public class StarSet {
      *
      * @return La chaîne de caractères representant la liste d'étoiles.
      */
-    public String toString() 
+    public String toString()
     {
         return Arrays.toString(stars);
     }
