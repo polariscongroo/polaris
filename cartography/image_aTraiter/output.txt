@@ -1,1 +1,0 @@
-/home/berylsb/polaris/FXInterface/src/main/resources/images/cassio.png

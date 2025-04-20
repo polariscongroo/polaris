@@ -102,9 +102,7 @@ public class HelloController {
             // Lancer la tâche dans un thread séparé
             new Thread(recognitionTask).start();
         } else {
-            // Masquer le loader si aucun fichier n'est sélectionné
-            loader.setVisible(false);
-            loader.setManaged(false);
+            
         }
     }
     
@@ -228,6 +226,44 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+        // Appeler la méthode handleRecognition
+        handleRecognition(event);
+
+        // Appeler la méthode playBackgroundMusic
+        playBackgroundMusic();
+    }
+
+/*activation de musique lorsque l'on clique sur un bouton*/
+    @FXML
+    public void handlePlayMusic(ActionEvent event) {
+        try {
+            // Charger le fichier audio
+            URL musicUrl = getClass().getResource("/audio/Spore - Galaxy Ambience.mp3");
+            if (musicUrl == null) {
+                System.err.println("ERREUR: Fichier audio introuvable dans /audio/Spore - Galaxy Ambience.mp3");
+                return;
+            }
+
+        Media media = new Media(musicUrl.toExternalForm());
+        MediaPlayer musicPlayer = new MediaPlayer(media);
+
+        // Configurer la musique
+        musicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Répéter en boucle
+        musicPlayer.setVolume(0.5); // Volume (0.0 à 1.0)
+
+        // Démarrer la musique
+        musicPlayer.play();
+        System.out.println("Musique démarrée.");
+    } catch (Exception e) {
+        System.err.println("Erreur lors de la lecture de la musique : " + e.getMessage());
+        e.printStackTrace();
+    }
+
+}
+
 
     /**
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
