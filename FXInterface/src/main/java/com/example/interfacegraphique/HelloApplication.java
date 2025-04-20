@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class HelloApplication extends Application {
     
@@ -34,11 +33,9 @@ public class HelloApplication extends Application {
         });
         
         // 2. Configuration de la fenêtre
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        
         primaryStage.setTitle("Polaris");
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(650);  // Taille minimale
-        primaryStage.setMinHeight(400);
         primaryStage.setResizable(true);
         
         // 3. Redimensionnement manuel

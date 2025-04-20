@@ -20,11 +20,11 @@
             <VBox spacing="20" alignment="CENTER">
 
                 <!-- Boutons -->
-                <Button text="RECOGNITION" styleClass="main-button" onAction="#handleRecognition"/> 
-                <Button text="CONSTELLATION" styleClass="secondary-button" onAction="#handleConstellation"/>
+                <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognition"/>
+                <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellation"/>
 
                 <!-- Barre de progression -->
-                <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="rounded-bar"/>
+                <ProgressBar fx:id="progressBar" prefWidth="400" styleClass="animated-bar glossy-bar"/>
 
                 <!-- ImageView pour afficher l’image -->
                 <ImageView fx:id="imageView" fitWidth="400" fitHeight="400" preserveRatio="true" visible="false" managed="false"/> <!-- managed="false" empêche la réserve d'espace quand invisible -->
