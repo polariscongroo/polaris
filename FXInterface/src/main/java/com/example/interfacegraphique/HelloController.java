@@ -37,17 +37,23 @@ public class HelloController {
 
     // Variables
     private MediaPlayer mediaPlayer;
+
+    
+    private MediaPlayer musicPlayer;
+
     // Nettoyage des fichiers de sortie
     private String outputpath="cartography/image_aTraiter/output.txt";
     private String listeetoilepath="recognition/coorPoints/liste_etoiles.csv";
 
     @FXML
-    public void initialize() { setupBackgroundVideo();}
+    public void initialize() {  setupBackgroundVideo(); // Configure la vidéo de fond
+        playBackgroundMusic();}
     @FXML
     public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
         eraser(outputpath);
         eraser(listeetoilepath);
     
+
         // Afficher le loader
         loader.setVisible(true);
         loader.setManaged(true);
@@ -196,6 +202,32 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+    @FXML
+
+    private void playBackgroundMusic() {
+        try {
+            // Charger le fichier audio
+            URL musicUrl = getClass().getResource("/audio/Spore - Galaxy Ambience.mp3");
+            if (musicUrl == null) {
+                System.err.println("ERREUR: FXInterface/src/main/resources/audio/Spore - Galaxy Ambience.mp3");
+                return;
+            }
+
+            Media media = new Media(musicUrl.toExternalForm());
+            musicPlayer = new MediaPlayer(media);
+
+            // Configurer la musique
+            musicPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Répéter en boucle
+            musicPlayer.setVolume(0.5); // Volume (0.0 à 1.0)
+
+            // Démarrer la musique
+            musicPlayer.play();
+            System.out.println("Musique de fond démarrée.");
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la lecture de la musique : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.
@@ -235,7 +267,7 @@ public class HelloController {
     
                 System.out.println("[Java] 4. Lancement du script Python...");
     
-                ProcessBuilder pb = new ProcessBuilder("python", scriptPath, filePath);
+                ProcessBuilder pb = new ProcessBuilder("python3", scriptPath, filePath);
                 pb.directory(new File(projectPath));
                 pb.redirectErrorStream(true);
     

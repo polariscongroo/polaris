@@ -4,9 +4,14 @@
 }
 
 .header {
-    -fx-font-size: 24px;
-    -fx-text-fill: #ffffff;
-    -fx-padding: 10 0 20 0;
+    -fx-background-color: transparent; /* Fond transparent au survol */
+    -fx-text-fill: #00b7ff;            /* Texte bleu */
+    -fx-font-size: 32px;               /* Double la taille de la police */
+    -fx-scale-x: 1;                  /* Agrandit légèrement le bouton horizontalement */
+    -fx-scale-y: 1;                  /* Agrandit légèrement le bouton verticalement */
+
+    /* Halo lumineux */
+    -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.6, 0, 0);
     -fx-alignment: center;
 }
 
@@ -19,6 +24,7 @@
     -fx-padding: 10 20;
 }
 
+/*
 .animated-bar {
     -fx-accent: #000000;
     -fx-background-radius: 5;
@@ -26,11 +32,13 @@
 }
 
 .glossy-bar {
+    -fx-background-color: transparent;
     -fx-accent: linear-gradient(to right, #29b6f6, #0288d1);
     -fx-background-insets: 0, 1;
     -fx-background-radius: 8, 7;
     -fx-padding: 2;
 }
+*/
 
 .button-container:hover {
     -fx-background-color: transparent; /* Fond transparent au survol */
@@ -60,7 +68,7 @@
     -fx-scale-y: 1;                   /* Taille normale */
 
     /* Transition fluide */
-    -fx-transition: all 0.3s ease;    /* Applique une transition fluide sur tous les changements */
+    -fx-transition: -fx-border-color 0.5s ease, -fx-text-fill 0.5s ease, -fx-scale-x 0.5s ease, -fx-scale-y 0.5s ease;
 }
 
 .console-text-area {
