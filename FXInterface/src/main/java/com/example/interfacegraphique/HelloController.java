@@ -227,23 +227,90 @@ public class HelloController {
         }
     }
 
+        @FXML
+    public void playMusicOnButtonClick(ActionEvent event) {
+        try {
+            // Charger le fichier audio
+            URL musicUrl = getClass().getResource("/audio/clickSound.mp3");
+            if (musicUrl == null) {
+                System.err.println("ERREUR: Fichier audio introuvable dans /audio/clickSound.mp3");
+                return;
+            }
+
+            Media media = new Media(musicUrl.toExternalForm());
+            MediaPlayer musicPlayer = new MediaPlayer(media);
+
+            // Configurer la musique
+            musicPlayer.setVolume(0.5); // Volume (0.0 à 1.0)
+
+            // Démarrer la musique
+            musicPlayer.play();
+            System.out.println("Musique déclenchée par le bouton.");
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la lecture de la musique : " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+        // Appeler la méthode playBackgroundMusic
+        playMusicOnButtonClick(event);
+        try {
+            Thread.sleep(500); // Attend 1000 millisecondes (1 seconde)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // Appeler la méthode handleRecognition
         handleRecognition(event);
 
-        // Appeler la méthode playBackgroundMusic
-        playBackgroundMusic();
+        
     }
+
+
+
+
+    @FXML
+    public void handleMaximiserAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+        // Appeler la méthode playBackgroundMusic
+        playMusicOnButtonClick(event);
+        try {
+            Thread.sleep(500); // Attend 1000 millisecondes (1 seconde)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Appeler la méthode handleRecognition
+        handleMaximiser(event);
+
+        
+    }
+
+    @FXML
+    public void handleConstellationAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+        // Appeler la méthode playBackgroundMusic
+        playMusicOnButtonClick(event);
+        try {
+            Thread.sleep(500); // Attend 1000 millisecondes (1 seconde)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // Appeler la méthode handleRecognition
+        handleConstellation(event);
+
+        
+    }
+
+
+
 
 /*activation de musique lorsque l'on clique sur un bouton*/
     @FXML
     public void handlePlayMusic(ActionEvent event) {
         try {
             // Charger le fichier audio
-            URL musicUrl = getClass().getResource("/audio/Spore - Galaxy Ambience.mp3");
+            URL musicUrl = getClass().getResource("/audio/clickSound.mp3");
             if (musicUrl == null) {
-                System.err.println("ERREUR: Fichier audio introuvable dans /audio/Spore - Galaxy Ambience.mp3");
+                System.err.println("ERREUR: Fichier audio introuvable dans /audio/clickSound.mp3");
                 return;
             }
 
@@ -263,7 +330,7 @@ public class HelloController {
     }
 
 }
-
+  
 
     /**
      * Charge et affiche le contenu d'un fichier texte dans la zone de texte.

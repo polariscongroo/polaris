@@ -21,13 +21,13 @@
         </top>
 
         <center>
-            <VBox spacing="20" alignment="CENTER">
+            <HBox spacing="20" alignment="CENTER">
 
                 <!-- Boutons -->
                 <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
-                <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellation"/>
+                <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
                 <Button text="Close" styleClass="button-container" onAction="#handleClose"/>
-                <Button text="Maximize" styleClass="button-container" onAction="#handleMaximiser"/>
+                <Button text="Maximize" styleClass="button-container" onAction="#handleMaximiserAndPlayMusic"/>
 
         
 
@@ -37,7 +37,7 @@
                 <!-- TextArea pour afficher le texte -->
                 <TextArea fx:id="consoleOutput" prefHeight="10" prefWidth="10" wrapText="true" editable="false" styleClass="console-text-area" opacity="0"/>
                 
-            </VBox>
+            </HBox>
         </center>
     </BorderPane>
 
