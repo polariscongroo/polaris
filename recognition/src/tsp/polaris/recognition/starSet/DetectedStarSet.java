@@ -197,7 +197,7 @@ public class DetectedStarSet extends StarSet
                     // On forme les permutations avec l'élément supprimé et les permutations obtenues dans le set sans l'élément
                     DetectedStarSet newElement = new DetectedStarSet(new Star[newPerm[j].getStars().length + 1]);
                     newElement.getStars()[0] = starsSet.getStars()[i];
-                    for(int k = 1; k < newPerm[j].getStars().length; k += 1) {
+                    for(int k = 1; k <= newPerm[j].getStars().length; k += 1) {
                         newElement.getStars()[k] = newPerm[j].getStars()[k - 1];
                     }
 
@@ -243,6 +243,7 @@ public class DetectedStarSet extends StarSet
         int indPermutation = -1;
     	
     	for(int i = 0; i < nbCombination; i += 1) {
+            System.out.println(i);
             for(int j = 0; j < 120 ; j += 1) {
                 double coutCons = starsSetCombinationsPlusPermutations[i][j].costConstellation(constellations);
                 if (minCoutConstellation > coutCons) {
