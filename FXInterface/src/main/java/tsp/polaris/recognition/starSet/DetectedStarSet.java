@@ -135,17 +135,17 @@ public class DetectedStarSet extends StarSet
     	int nbCombination = Combinatorics.combination(stars.length, k);
     	
     	// Liste de toutes les combinaisons de k étoiles
-    	DetectedStarSet[] starsSetCombinations = new DetectedStarSet[nbCombination];
+    	DetectedStarSet[] starSetCombinations = new DetectedStarSet[nbCombination];
 
         // On remplit la liste
-    	combinationStar(k,starsSetCombinations, stars,new Star[0]);
+    	combinationStar(k,starSetCombinations, stars,new Star[0]);
     	
     	// On cherche l'ensemble d'étoiles de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
     	double minCoutConstellation = Double.MAX_VALUE;
     	int indConstellation = -1;
     	
-    	for(int i = 0; i < starsSetCombinations.length; i += 1) {
-    		double coutCons = starsSetCombinations[i].costConstellation(constellations);
+    	for(int i = 0; i < starSetCombinations.length; i += 1) {
+    		double coutCons = starSetCombinations[i].costConstellation(constellations);
     		if(minCoutConstellation > coutCons) {
     			indConstellation = i;
     			minCoutConstellation = coutCons;
@@ -153,7 +153,7 @@ public class DetectedStarSet extends StarSet
     	}
     	
     	coutMinParTaille[k-3] = minCoutConstellation;
-    	return starsSetCombinations[indConstellation];
+    	return starSetCombinations[indConstellation];
     }
     
     /**

@@ -7,15 +7,17 @@ package tsp.polaris.recognition.other;
 
 public class Point {
     protected final double[] point;
+    protected final double size; // Taille du point
 
     /**
      * Constructeur qui initialise les coordonnees du point
      * @param x 1ère coordonnee du point
      * @param y 2e coordonnee du point
      */
-    public Point(double x, double y)
+    public Point(double x, double y, double size)
     {
         point = new double[]{x,y};
+        this.size = size;
     }
     
     /**

@@ -45,10 +45,10 @@ public class Main {
 
         DetectedStarSet detectedStarSetKept = new DetectedStarSet(starsKept);
 
+        // On cherche la constellation
         DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(constellations);
 
         System.out.println(bestStarSet.getNearConstellation().getName());
-        System.out.println(bestStarSet);
 
         // On dessine la constellation
         MainDrawTest.drawConstellation(pathImage,bestStarSet);

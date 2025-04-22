@@ -87,7 +87,6 @@ public class Triangle extends StarSet
     	double[] ratios = new double[3];
         double sum = Functions.sum(sides);
     	for(int i = 0; i < 3; i += 1) {
-    		//ratios[i] = sides[i]/sides[(i+1)%3];
             ratios[i] = sides[i]/sum;
     	}
     	return ratios;
@@ -99,8 +98,9 @@ public class Triangle extends StarSet
      */
     public double[] getRatiosSizes(){
         double[] ratios = {stars[0].getSize(), stars[1].getSize(), stars[2].getSize()};
+        double sum = Functions.sum(ratios);
         for(int i = 0; i < 3; i += 1){
-            ratios[i] /= ratios[(i+1)%3];
+            ratios[i] /= sum;
         }
         return ratios;
     }
@@ -124,7 +124,7 @@ public class Triangle extends StarSet
         double[] ratioSize1 = getRatiosSizes();
         double[] ratioSize2 = t2.getRatiosSizes();
 
-        // Ponderation des critères (ratio longueur et angle) (alpha et beta à definir)
+        // Ponderation des critères (ratios longueurs, ratios tailles et angle)
         double alpha = 1;
         double beta = 1;
         double gamma = 1;

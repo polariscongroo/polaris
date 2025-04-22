@@ -16,6 +16,10 @@ public class Constellation extends StarSet {
     private final String name;
     private List<List<Integer>> adjacencyList;
 
+    private Star[] firstFiveStars;
+    private ListTriangle firstFiveStarsListTriangle;
+
+
     /**
      * Constructeur de la classe Constellation.
      * 
@@ -27,6 +31,13 @@ public class Constellation extends StarSet {
         super(stars);
         this.name = name;
         this.adjacencyList = adjacencyList;
+
+        // A RETIRER : TOUTES LES CONSTELLATIONS AURONT AU MOINS 5 ETOILES
+        if(stars.length >= 5) {
+            this.firstFiveStars = firstFiveStars(stars);
+            // On calcule les triangles maintenant pour éviter de les calculer plusieurs fois par la suite
+            this.firstFiveStarsListTriangle = new ListTriangle((new DetectedStarSet(firstFiveStars)).generateTriangles());
+        }
     }
 
     /**
@@ -50,6 +61,32 @@ public class Constellation extends StarSet {
         return name + " -> " + super.toString();
     }
 
+    /**
+     * Getteur de firstFiveStarsListTriangle
+     *
+     * @return ListTriangle : Retourne la liste des triangles des 5 premières étoiles de la constellation
+     */
+    public ListTriangle getFirstFiveStarsListTriangle() {
+        return firstFiveStarsListTriangle;
+    }
+
+    /**
+     * Retourne les 5 premières étoiles d'un tableau d'étoiles.
+     *
+     * @param stars Tableau d'étoiles.
+     * @return Les 5 premières étoiles du tableau.
+     */
+    private Star[] firstFiveStars(Star[] stars) {
+        // Nouveau tableau d'étoiles
+        Star[] result = new Star[5];
+
+        // On copie les 5 premières étoiles dans ce tableau
+        for(int i = 0; i < 5; i += 1) {
+            result[i] = stars[i];
+        }
+
+        return result;
+    }
 
     /**
      * Retourne une representation sous forme de chaîne de caractères de la constellation.
