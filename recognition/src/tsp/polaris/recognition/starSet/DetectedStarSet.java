@@ -221,6 +221,44 @@ public class DetectedStarSet extends StarSet
             return result;
         }
     }
+
+    /**
+     * Calcule le coût minimal entre l'ensemble d'étoiles de la combinaison et un ensemble de constellations donnees.
+     *
+     * @param constellations Les constellations à comparer.
+     * @return Le coût minimal entre la photo et les constellations.
+     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
+     */
+    public double costConstellation(Constellation... constellations) throws TriangleMatchingException
+    {
+        Constellation winningConstellation = null; // Garde en mémoire la constellation la plus proche
+        double minimum_cout = Double.MAX_VALUE; // Utilise une valeur maximale pour commencer.
+
+        // Parcours les constellations passées en argument
+        for (Constellation cons : constellations)
+        {
+            // On ne regarde pas les constellations avec moins de 5 étoiles (A RETIRER PLUS TARD)
+            if(cons.getStars().length < 5) {
+                continue;
+            }
+
+            // On calcule la liste des triangles du set d'étoiles
+            ListTriangle listTriangleStarSet = new ListTriangle(generateTriangles());
+
+            // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
+            double[] liste_cout = listTriangleStarSet.costs(cons.getFirstFiveStarsListTriangle(),this,cons);
+
+            double total = sum(liste_cout);  // Calcul le total des coûts
+
+            // Verifiez si le total des coûts de cette constellation est le plus bas
+            if (minimum_cout > total) {
+                minimum_cout = total;  // Mettez à jour le coût minimal
+                winningConstellation = cons;
+            }
+        }
+        nearConstellation = winningConstellation;
+        return minimum_cout;  // Retourner le cout minimal de la constellation
+    }
     
     /**
      * Recherche la meilleure liste d'étoiles qui minimise le cout entre elle et les constellations.
@@ -285,44 +323,55 @@ public class DetectedStarSet extends StarSet
     public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
         // Liste d'étoiles choisies pour chaque constellation (on choisit de ne regarder que les 5 premières étoiles à chaque fois)
         int nbStudiedStars = 5;
-        return findRightStarSet(nbStudiedStars,constellations);
+        DetectedStarSet bestFirstFiveStars = findRightStarSet(nbStudiedStars,constellations);
+
+        // On cherche ensuite les autres étoiles de la constellations
+        DetectedStarSet bestStarSet = bestFirstFiveStars.findOtherStars();
+
+        return bestStarSet;
     }
 
     /**
-     * Calcule le coût minimal entre l'ensemble d'étoiles de la combinaison et un ensemble de constellations donnees.
+     * A partir des 5 premières étoiles qu'on a trouvées, on cherche les autres étoiles de la constellation.
      *
-     * @param constellations Les constellations à comparer.
-     * @return Le coût minimal entre la photo et les constellations.
-     * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
+     * @return La meilleure liste d'étoiles qui ressemble le plus à la constellation.
+     * @throws TriangleMatchingException
      */
-    public double costConstellation(Constellation... constellations) throws TriangleMatchingException
-    {
-        Constellation winningConstellation = null; // Garde en mémoire la constellation la plus proche
-        double minimum_cout = Double.MAX_VALUE; // Utilise une valeur maximale pour commencer.
+    public DetectedStarSet findOtherStars() throws TriangleMatchingException {
+        // Meilleur set d'étoiles
+        DetectedStarSet bestStarSet = new DetectedStarSet(new Star[nearConstellation.getStars().length]);
+        bestStarSet.nearConstellation = nearConstellation;
 
-        // Parcours les constellations passées en argument
-        for (Constellation cons : constellations)
-        {
-            // On ne regarde pas les constellations avec moins de 5 étoiles (A RETIRER PLUS TARD)
-            if(cons.getStars().length < 5) {
-                continue;
-            }
-
-            // On calcule la liste des triangles du set d'étoiles
-            ListTriangle listTriangleStarSet = new ListTriangle(generateTriangles());
-
-            // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
-            double[] liste_cout = listTriangleStarSet.costs(cons.getFirstFiveStarsListTriangle(),this,cons);
-
-            double total = sum(liste_cout);  // Calcul le total des coûts
-
-            // Verifiez si le total des coûts de cette constellation est le plus bas
-            if (minimum_cout > total) {
-                minimum_cout = total;  // Mettez à jour le coût minimal
-                winningConstellation = cons;
-            }
+        // On met les 5 premières étoiles qu'on a trouvé dans le set d'étoiles
+        for(int i = 0; i < 5; i += 1) {
+            bestStarSet.stars[i] = stars[i];
         }
-        nearConstellation = winningConstellation;
-        return minimum_cout;  // Retourner le cout minimal de la constellation
+
+        // On va calculer la positions des autres étoiles grâce aux positions des 2 premières et des angles formées par les autres
+        for(int i = 5; i < nearConstellation.getStars().length; i += 1) {
+            Star firstStar = stars[0];
+            Star secondStar = stars[1];
+
+            // On calcule ensuite les angles formées entre les 2 premières étoiles et l'étoile qu'on cherche
+            Triangle triangle = new Triangle(nearConstellation.getStars()[0], nearConstellation.getStars()[1], nearConstellation.getStars()[i]);
+
+            // On cherche les distances du triangle sur l'image
+            double a = firstStar.distance(secondStar);
+            double aNormalized = nearConstellation.getStars()[0].distance(nearConstellation.getStars()[1])/Functions.sum(triangle.getSides());
+            double coef = a / aNormalized;
+
+            double b = coef * triangle.getRatiosSides()[1];
+            double c = coef * triangle.getRatiosSides()[2];
+
+            double orientation = (triangle.getStars()[1].getPoint()[0] - triangle.getStars()[0].getPoint()[0])*(triangle.getStars()[2].getPoint()[1] - triangle.getStars()[0].getPoint()[1]) - (triangle.getStars()[1].getPoint()[1] - triangle.getStars()[0].getPoint()[1])*(triangle.getStars()[2].getPoint()[0] - triangle.getStars()[0].getPoint()[0]);
+
+            double[] coor = firstStar.getCoordinate(a, c, b, secondStar, orientation);
+
+            // On calcule la position de l'étoile
+
+            bestStarSet.stars[i] = new Star(coor[0], coor[1], 0, 0);
+        }
+
+        return bestStarSet;
     }
 }

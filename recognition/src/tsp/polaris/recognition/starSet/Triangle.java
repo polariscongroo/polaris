@@ -50,15 +50,14 @@ public class Triangle extends StarSet
 
     /**
      * Methode qui calcule les longueurs des côtés du triangle
-     * @return double[] : Liste des longueurs des côtes du triangle, ranges dans l'ordre croissant 
+     * @return double[] : Liste des longueurs des côtes du triangle, ranges dans l'ordre croissant
      */
-    private double[] getSides()
+    public double[] getSides()
     {
         double[] sides = new double[3];
         sides[0] = stars[0].distance(stars[1]);
         sides[1] = stars[1].distance(stars[2]);
         sides[2] = stars[2].distance(stars[0]);
-        Arrays.sort(sides);
         return sides;
     }
 
@@ -71,9 +70,9 @@ public class Triangle extends StarSet
         double[] sides = getSides();
         double a = sides[0], b = sides[1], c = sides[2];
         double[] angles = new double[3];
-        angles[0] = Math.acos((b * b + c * c - a * a) / (2 * b * c)); 
-        angles[1] = Math.acos((a * a + c * c - b * b) / (2 * a * c));
-        angles[2] = Math.acos((a * a + b * b - c * c) / (2 * a * b));
+        angles[0] = Math.acos((b * b + c * c - a * a) / (2 * b * c)); // Angle en stars[2]
+        angles[1] = Math.acos((a * a + c * c - b * b) / (2 * a * c)); // Angle en stars[0]
+        angles[2] = Math.acos((a * a + b * b - c * c) / (2 * a * b)); // Angle en stars[1]
         return angles;
     }
     
@@ -115,14 +114,20 @@ public class Triangle extends StarSet
     	// Tableau d'angles
         double[] angles1 = getAngles();
         double[] angles2 = t2.getAngles();
+        Arrays.sort(angles1);
+        Arrays.sort(angles2);
 
         // Rapports des côtes
         double[] ratiosLength1 = getRatiosSides();
         double[] ratiosLength2 = t2.getRatiosSides();
+        Arrays.sort(ratiosLength1);
+        Arrays.sort(ratiosLength2);
 
         // Rapport des tailles
         double[] ratioSize1 = getRatiosSizes();
         double[] ratioSize2 = t2.getRatiosSizes();
+        Arrays.sort(ratioSize1);
+        Arrays.sort(ratioSize2);
 
         // Ponderation des critères (ratios longueurs, ratios tailles et angle)
         double alpha = 1;
