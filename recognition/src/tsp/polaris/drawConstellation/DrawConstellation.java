@@ -125,6 +125,9 @@ public class DrawConstellation extends Draw {
         // On trace toutes les lignes
         for (int i = 0; i < adjacencyList.size(); i += 1) {
             for(int j = 0; j < adjacencyList.get(i).size(); j += 1) {
+                if(adjacencyList.get(i).get(j) > 4 || i > 4) {
+                    continue;
+                }
                 drawLine(detectedStarSet.getStars()[i], detectedStarSet.getStars()[adjacencyList.get(i).get(j)], color);
             }
         }

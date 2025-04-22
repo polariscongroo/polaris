@@ -54,9 +54,9 @@ public class DataTest {
         Data data = new Data(TEST_CSV,"test_data");
         List<Star> stars = data.getData();
         assertEquals(3, stars.size(), "Le nombre de lignes lues ne correspond pas");
-        assertTrue(new Star(1.0, 2.0, 3.0*10).equals(stars.get(0)), "Premier point incorrect");
-        assertTrue(new Star(4.0, 5.0, 6.0*11).equals(stars.get(1)), "Deuxième point incorrect");
-        assertTrue(new Star(7.0, 8.0, 9.0*12).equals(stars.get(2)), "Troisième point incorrect");
+        assertTrue(new Star(1.0, 2.0, 3.0*10,1).equals(stars.get(0)), "Premier point incorrect");
+        assertTrue(new Star(4.0, 5.0, 6.0*11,1).equals(stars.get(1)), "Deuxième point incorrect");
+        assertTrue(new Star(7.0, 8.0, 9.0*12,1).equals(stars.get(2)), "Troisième point incorrect");
     }
 
     /**

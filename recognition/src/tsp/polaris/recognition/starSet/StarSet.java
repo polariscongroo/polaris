@@ -24,7 +24,7 @@ public class StarSet {
         this.stars = stars;
 
         // Trie la liste d'étoiles par luminosité
-        sortByBrightness();
+        //sortByBrightness();
     }
 
     /**

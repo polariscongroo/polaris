@@ -33,8 +33,8 @@ public class ListTriangleTest {
         Star[] starsConstellation = new Star[6];
         for(int i = 0; i < 6; i++){
             // Il faut déclarer des étoiles qui ne forment pas des vecteurs colinéaires (sinon c'est pas un triangle)
-            starsDetected[i] = new Star(i, (double)5/(i+1), i);
-            starsConstellation[i] = new Star(i, (double)5/(i+1), i);
+            starsDetected[i] = new Star(i, (double)5/(i+1), i,1);
+            starsConstellation[i] = new Star(i, (double)5/(i+1), i,1);
         }
         workingDetectedStarSet = new DetectedStarSet(starsDetected);
         workingConstellation = new Constellation(starsConstellation, "TestConstellation", null);

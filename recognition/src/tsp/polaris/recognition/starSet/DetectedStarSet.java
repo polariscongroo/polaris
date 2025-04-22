@@ -1,4 +1,5 @@
 package tsp.polaris.recognition.starSet;
+import tsp.polaris.JUnitTest.DetectedStarSetTest;
 import tsp.polaris.auxiliaries.Combinatorics;
 import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.dataTransmission.Data;
@@ -118,17 +119,105 @@ public class DetectedStarSet extends StarSet
     		}
     	}
     }
+
+    /**
+     * Méthode qui permet de supprimer un élément de starsSet.
+     * @param index Index de l'étoile qu'on veut supprimer
+     *
+     * @return starsSet sans l'étoile en position index
+     */
+    private DetectedStarSet deleteElement(int index) {
+        Star[] newStarsSet = new Star[stars.length - 1];
+        for(int i = 0; i < index; i += 1) {
+            newStarsSet[i] = stars[i];
+        }
+        for(int i = index + 1; i < stars.length; i += 1) {
+            newStarsSet[i - 1] = stars[i];
+        }
+
+        return new DetectedStarSet(newStarsSet);
+    }
+
+    /**
+     * Méthode qui permet d'ajouter un élément dans starsSet.
+     * @param starsSet Tableau contenant toutes les permutations de starsSet
+     * @param newElement Liste d'étoiles qu'on veut rajouter
+     *
+     * @return starsSet avec newElement
+     */
+    private DetectedStarSet[] addElement(DetectedStarSet[] starsSet, DetectedStarSet newElement) {
+        DetectedStarSet[] newStarsSetPermutation = new DetectedStarSet[starsSet.length + 1];
+        for(int i = 0; i < starsSet.length; i += 1) {
+            newStarsSetPermutation[i] = starsSet[i];
+        }
+        newStarsSetPermutation[starsSet.length] = newElement;
+        return newStarsSetPermutation;
+    }
+
+    /**
+     * @return Une copie du set d'étoile courant
+     */
+    private DetectedStarSet copyDetectedStarSet(){
+        Star[] copyStar = new Star[stars.length];
+        for(int i = 0; i < stars.length; i += 1){
+            copyStar[i] = stars[i];
+        }
+        return new DetectedStarSet(copyStar);
+    }
+
+    /**
+    * Méthode qui permet de trouver toutes les permutations d'une liste d'étoiles.
+    * @param starsSet Set d'étoiles sur lequel on veut trouver les permutations
+    *
+    * @return Toutes les permutations de starsSet
+    */
+    public DetectedStarSet[] findAllPermutations(DetectedStarSet starsSet) {
+        if(starsSet.getStars().length == 0) {
+            // Cas ou la starSet est vide
+            return new DetectedStarSet[0];
+        } else if(starsSet.getStars().length == 1) {
+            // Cas ou starSet contient une seule étoile
+            DetectedStarSet[] starsSetPermutationTemp = new DetectedStarSet[1];
+            starsSetPermutationTemp[0] = starsSet.copyDetectedStarSet();
+            return starsSetPermutationTemp;
+        } else {
+            // Cas général
+
+            // Resultat renvoyé
+            DetectedStarSet[] result = new DetectedStarSet[0];
+            // On itère sur chaque étoile
+            for(int i = 0; i < starsSet.getStars().length; i += 1) {
+
+                // On supprime l'étoile en position i et on regarde les permutations possibles
+                DetectedStarSet[] newPerm = findAllPermutations(starsSet.deleteElement(i));
+
+                // On itère sur chaque permutation
+                for (int j = 0; j < newPerm.length; j += 1) {
+
+                    // On forme les permutations avec l'élément supprimé et les permutations obtenues dans le set sans l'élément
+                    DetectedStarSet newElement = new DetectedStarSet(new Star[newPerm[j].getStars().length + 1]);
+                    newElement.getStars()[0] = starsSet.getStars()[i];
+                    for(int k = 1; k < newPerm[j].getStars().length; k += 1) {
+                        newElement.getStars()[k] = newPerm[j].getStars()[k - 1];
+                    }
+
+                    // On ajoute la permutation au resultat
+                    result = addElement(result, newElement);
+                }
+            }
+            return result;
+        }
+    }
     
     /**
      * Recherche la meilleure liste d'étoiles qui minimise le cout entre elle et les constellations.
      *
      * @param k Nombre d'étoiles à selectionner.
-     * @param coutMinParTaille Tableau stockant les coûts minimaux par taille de constellation.
      * @param constellations Liste des constellations de reference.
      * @return La liste d'étoiles ayant le coût minimal.
      * @throws TriangleMatchingException Si une erreur survient lors de l'appariement des constellations.
      */
-    private DetectedStarSet findRightStarSet(int k, double[] coutMinParTaille, Constellation...constellations) throws TriangleMatchingException {
+    private DetectedStarSet findRightStarSet(int k, Constellation...constellations) throws TriangleMatchingException {
     	// On cree une liste composee de toutes les combinaisons d'étoiles à k elements :
     	
     	// Nombre de combinaisons
@@ -137,25 +226,49 @@ public class DetectedStarSet extends StarSet
     	// Liste de toutes les combinaisons de k étoiles
     	DetectedStarSet[] starsSetCombinations = new DetectedStarSet[nbCombination];
 
-        // On remplit la liste
+        // Liste de toutes les combinaisons et toutes leur bijection
+        DetectedStarSet[][] starsSetCombinationsPlusPermutations = new DetectedStarSet[nbCombination][120];
+
+        // On remplit la liste des combinaisons
     	combinationStar(k,starsSetCombinations, stars,new Star[0]);
-    	
+
+        // On remplit la liste des combinaisons et leurs différents ordres
+        for(int i = 0; i < nbCombination; i += 1){
+            starsSetCombinationsPlusPermutations[i] = findAllPermutations(starsSetCombinations[i]);
+        }
+
     	// On cherche l'ensemble d'étoiles de taille k qui ressemble le plus à une constellation -> on regarde le coût minimal
     	double minCoutConstellation = Double.MAX_VALUE;
     	int indConstellation = -1;
+        int indPermutation = -1;
     	
-    	for(int i = 0; i < starsSetCombinations.length; i += 1) {
-    		double coutCons = starsSetCombinations[i].costConstellation(constellations);
-    		if(minCoutConstellation > coutCons) {
-    			indConstellation = i;
-    			minCoutConstellation = coutCons;
-    		}
+    	for(int i = 0; i < nbCombination; i += 1) {
+            for(int j = 0; j < 120 ; j += 1) {
+                double coutCons = starsSetCombinationsPlusPermutations[i][j].costConstellation(constellations);
+                if (minCoutConstellation > coutCons) {
+                    indConstellation = i;
+                    indPermutation = j;
+                    minCoutConstellation = coutCons;
+                }
+            }
     	}
-    	
-    	coutMinParTaille[k-3] = minCoutConstellation;
-    	return starsSetCombinations[indConstellation];
+    	return starsSetCombinationsPlusPermutations[indConstellation][indPermutation];
     }
-    
+
+    /**
+     * Retourne les 5 premiers éléments d'un tableau d'étoiles.
+     *
+     * @param stars Tableau d'étoiles.
+     * @return Les 5 premiers éléments du tableau.
+     */
+    private Star[] firstFiveStars(Star[] stars) {
+        Star[] result = new Star[5];
+        for(int i = 0; i < 5; i += 1) {
+            result[i] = stars[i];
+        }
+        return result;
+    }
+
     /**
      * Calcule le coût minimal entre l'ensemble d'étoiles de la combinaison et un ensemble de constellations donnees.
      *
@@ -169,27 +282,32 @@ public class DetectedStarSet extends StarSet
         double minimum_cout = Double.MAX_VALUE; // Utilise une valeur maximale pour commencer.
 
         // Parcour les constellations passees en argument
-        for (Constellation c : constellations)
+        for (Constellation cons : constellations)
         {
-            // On ne regarde que les constellations qui ont le meme nombre d'étoiles
-            if(c.getStars().length == getStars().length) {
-                // Genere les triangles du set d'étoiles et la constellation c
-                Triangle[] trianglesStarSet = generateTriangles(); // Triangles du set d'étoiles
-                Triangle[] trianglesConstellation = c.generateTriangles(); // Triangles de la constellation c
+            // On ne regarde pas les constellations avec moins de 5 étoiles
+            if(cons.getStars().length < 5) {
+                continue;
+            }
 
-                ListTriangle listTriangleStarSet = new ListTriangle(trianglesStarSet);
-                ListTriangle listTriangleConstellation = new ListTriangle(trianglesConstellation);
+            Constellation c = new Constellation(firstFiveStars(cons.getStars()), cons.getName(), cons.getAdjacencyList());
 
-                // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
-                double[] liste_cout = listTriangleStarSet.costs(listTriangleConstellation,this,c);
+            // Genere les triangles du set d'étoiles et la constellation c
+            Triangle[] trianglesStarSet = generateTriangles(); // Triangles du set d'étoiles
+            Triangle[] trianglesConstellation = c.generateTriangles(); // Triangles de la constellation c
 
-                double total = sum(liste_cout);  // Calcul le total des coûts
 
-                // Verifiez si le total des coûts de cette constellation est le plus bas
-                if (minimum_cout > total) {
-                    minimum_cout = total;  // Mettez à jour le coût minimal
-                    winningConstellation = c;
-                }
+            ListTriangle listTriangleStarSet = new ListTriangle(trianglesStarSet);
+            ListTriangle listTriangleConstellation = new ListTriangle(trianglesConstellation);
+
+            // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
+            double[] liste_cout = listTriangleStarSet.costs(listTriangleConstellation,this,c);
+
+            double total = sum(liste_cout);  // Calcul le total des coûts
+
+            // Verifiez si le total des coûts de cette constellation est le plus bas
+            if (minimum_cout > total) {
+                minimum_cout = total;  // Mettez à jour le coût minimal
+                winningConstellation = c;
             }
         }
         nearConstellation = winningConstellation;
@@ -204,56 +322,10 @@ public class DetectedStarSet extends StarSet
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
     public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
-        // On va calculer pour chaque taille possible de constellation, le cout minimal entre toutes les constellations.
-        int nbEtoilesMax = Functions.min(17, stars.length); // LE 17 EST TOTALEMENT ARBITRAIRE, IL FAUDRAIT METTRE LA TAILLE DE LA PLUS GRANDE CONSTELLATION
-
         // Liste d'étoiles choisies pour chaque constellation
-        DetectedStarSet[] selectedStarSet = new DetectedStarSet[nbEtoilesMax - 2];
-        // Cout minimal entre la liste d'étoile selectionne et les constellations
-        double[] minCostPerLength = new double[nbEtoilesMax - 2];
+        DetectedStarSet selectedStarSet = findRightStarSet(5,constellations);
 
-        // Pour chaque taille d'ensemble d'étoiles, on va chercher l'ensemble d'étoiles qui ressemble le plus à une constellation
-        for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
-            // DEBUG - A RETIRER
-            System.out.println(i);
-            // -------
-
-            // Cas ou il n'existe pas de constellations à i+3 étoiles dans notre base de données
-            if(existConstellationWithKStars(i+3,constellations)) {
-                selectedStarSet[i] = findRightStarSet(i+3,minCostPerLength,constellations);
-
-            } else {
-                selectedStarSet[i] = null;
-                minCostPerLength[i] = Double.MAX_VALUE;
-            }
-        }
-
-        double[] costPerAngles = new double[selectedStarSet.length];
-
-        // On divise le cout par la taille de l'ensemble d'étoiles
-        for(int i = 0; i < nbEtoilesMax - 2; i += 1) {
-            int nbTriangle = Combinatorics.combination(stars.length, i+3);
-            minCostPerLength[i] /= nbTriangle;
-            System.out.println(minCostPerLength[i]);
-            System.out.println(i+3);
-            if(selectedStarSet[i] == null) {
-                System.out.println("null");
-                costPerAngles[i] = Double.MAX_VALUE;
-                continue;
-            } else {
-                System.out.println(selectedStarSet[i].getNearConstellation().getName());
-                // On va à présent comparer les angles de chaque liste d'étoiles à la constellation qu'on lui a associé dans la base de données
-                costPerAngles[i] = selectedStarSet[i].getAngleCostThreeBrightest(selectedStarSet[i].getNearConstellation());
-                System.out.println(costPerAngles[i]);
-            }
-        }
-
-
-
-        // On recherche la taille d'étoiles qui a le cout le plus faible
-        int minIndex = Functions.minIndex(costPerAngles);
-
-        return selectedStarSet[minIndex];
+        return selectedStarSet;
 
     }
 
