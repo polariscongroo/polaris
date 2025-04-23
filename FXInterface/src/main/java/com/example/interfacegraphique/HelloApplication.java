@@ -32,6 +32,13 @@ public class HelloApplication extends Application {
             primaryStage.setY(event.getScreenY() - yOffset);
         });
         
+
+        primaryStage.setOnCloseRequest(event -> {
+            event.consume(); // Empêche la fermeture immédiate
+            HelloController controller = fxmlLoader.getController();
+            controller.handleClose(null); // Appelle la méthode handleClose
+        });
+
         // 2. Configuration de la fenêtre
         
         primaryStage.setTitle("Polaris");
@@ -108,4 +115,5 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
 }

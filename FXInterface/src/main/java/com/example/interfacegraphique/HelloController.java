@@ -13,10 +13,10 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -33,7 +33,7 @@ public class HelloController {
     @FXML private MediaView backgroundMediaView;
     @FXML private TextArea consoleOutput; // Pour afficher les logs
     @FXML private ImageView imageView; // Pour afficher l'image
-    @FXML private Region loader;
+    @FXML private ProgressIndicator loader;
 
     // Variables
     private MediaPlayer mediaPlayer;
@@ -47,65 +47,86 @@ public class HelloController {
 
     @FXML
     public void initialize() {  setupBackgroundVideo(); // Configure la vidéo de fond
-        playBackgroundMusic();}
-    @FXML
-    public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
-        eraser(outputpath);
-        eraser(listeetoilepath);
-    
-
-        // Afficher le loader
-        loader.setVisible(true);
-        loader.setManaged(true);
-    
-        // Vérifie que l'action vient bien du bon bouton si nécessaire (optionnel ici)
-        Object source = event.getSource();
-        Stage primaryStage = (Stage) ((Node) source).getScene().getWindow();
-    
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(".")); // Dossier par défaut
-    
-        // Ouvre la boîte de dialogue
-        File selectedFile = fileChooser.showOpenDialog(primaryStage);
-    
-        if (selectedFile != null) {
-            String path = selectedFile.getAbsolutePath(); // Chemin du fichier
-            System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
-            write_in_output(path);
-    
-            // Exécuter le script Python dans un thread séparé
-            Task<Void> recognitionTask = new Task<>() {
-                @Override
-                protected Void call() throws Exception {
-                    runPythonScript(path); // Exécute le script Python
-                    return null;
-                }
-    
-                @Override
-                protected void succeeded() {
-                    // Masquer le loader après la tâche
-                    loader.setVisible(false);
-                    loader.setManaged(false);
-                    System.out.println("[Java] Recognition terminée !");
-                }
-    
-                @Override
-                protected void failed() {
-                    // Masquer le loader même en cas d'échec
-                    loader.setVisible(false);
-                    loader.setManaged(false);
-                    System.err.println("[Java] Une erreur est survenue pendant la reconnaissance.");
-                    getException().printStackTrace();
-                }
-            };
-    
-            // Lancer la tâche dans un thread séparé
-            new Thread(recognitionTask).start();
-        } else {
-            
+       
+        playBackgroundMusic();
+      // Afficher le loader
+      loader.setVisible(true);
+      loader.setManaged(true);
+      System.out.println("Loader activé au démarrage.");}
+         
+        @FXML
+        public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+            eraser(outputpath);
+            eraser(listeetoilepath);
+        
+          
+        
+            Object source = event.getSource();
+            Stage primaryStage = (Stage) ((Node) source).getScene().getWindow();
+        
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("."));
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        
+            if (selectedFile != null) {
+                String path = selectedFile.getAbsolutePath();
+                System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
+                write_in_output(path);
+        
+                Task<Void> recognitionTask = new Task<>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        String projectPath = new File("").getAbsolutePath();
+                        String scriptPath = projectPath + File.separator + "cartography" + File.separator + "ThresholdDetectMethod.py";
+        
+                        System.out.println("[Java] 4. Lancement du script Python...");
+        
+                        ProcessBuilder pb = new ProcessBuilder("python3", scriptPath, path);
+                        pb.directory(new File(projectPath));
+                        pb.redirectErrorStream(true);
+        
+                        Process process = pb.start();
+                        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                            String line;
+                            while ((line = reader.readLine()) != null) {
+                                System.out.println("[Python] " + line);
+                            }
+                        }
+        
+                        int exitCode = process.waitFor();
+                        if (exitCode == 0) {
+                            System.out.println("[Java] Script Python terminé. Lancement de la reconnaissance...");
+                            Recognition.run();
+                        } else {
+                            throw new RuntimeException("Script Python échoué avec code : " + exitCode);
+                        }
+                        return null;
+                    }
+        
+                    @Override
+                    protected void succeeded() {
+                        loader.setVisible(true);
+                        loader.setManaged(true);
+                        System.out.println("[Java] Tâche terminée avec succès !");
+                    }
+        
+                    @Override
+                    protected void failed() {
+                        loader.setVisible(true);
+                        loader.setManaged(true);
+                        System.err.println("[Java] Échec de la tâche !");
+                        getException().printStackTrace();
+                    }
+                };
+        
+                new Thread(recognitionTask).start();
+        
+            } else {
+                loader.setVisible(true);
+                loader.setManaged(true);
+                System.out.println("Aucun fichier sélectionné.");
+            }
         }
-    }
-    
     
     @FXML
     public void handleConstellation(ActionEvent event) {
@@ -138,6 +159,7 @@ public class HelloController {
         // Ferme l'application
         System.out.println("Fermeture de l'application...");
         Stage stage = (Stage) root.getScene().getWindow();
+       
         stage.close();
     }
 
@@ -226,6 +248,8 @@ public class HelloController {
             e.printStackTrace();
         }
     }
+
+
 
         @FXML
     public void playMusicOnButtonClick(ActionEvent event) {

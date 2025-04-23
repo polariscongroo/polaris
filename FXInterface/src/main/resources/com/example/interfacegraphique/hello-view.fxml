@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.media.MediaView?>
-
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
-
-
-    <!-- Loader -->
-    <Region fx:id="loader" styleClass="loader" visible="false" managed="false"/>
+    <?import javafx.scene.image.ImageView?>
+    <?import javafx.scene.layout.*?>
+    <?import javafx.scene.media.MediaView?>
     
-    <!-- Le MediaView est au fond -->
-    <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
-
-    <!-- Tout le contenu visible par-dessus -->
-    <BorderPane fx:id="rootPane">
-        <top>
-            <Label text="POLARIS" styleClass="header" alignment="CENTER" BorderPane.alignment="CENTER"/>
-        </top>
-
-        <center>
-            <HBox spacing="20" alignment="CENTER">
-
-                <!-- Boutons -->
-                <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
-                <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
-                <Button text="Close" styleClass="button-container" onAction="#handleClose"/>
-                <Button text="Maximize" styleClass="button-container" onAction="#handleMaximiserAndPlayMusic"/>
-
-        
-
-                <!-- ImageView pour afficher l’image -->
-                <ImageView fx:id="imageView" fitWidth="400" fitHeight="400" preserveRatio="true" visible="false" managed="false"/> <!-- managed="false" empêche la réserve d'espace quand invisible -->
-
-                <!-- TextArea pour afficher le texte -->
-                <TextArea fx:id="consoleOutput" prefHeight="10" prefWidth="10" wrapText="true" editable="false" styleClass="console-text-area" opacity="0"/>
+    <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
+    
+        <!-- Le MediaView est au fond -->
+        <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
+    
+        <!-- Loader -->
+        <ProgressIndicator fx:id="loader" visible="false" managed="false" maxWidth="100" maxHeight="100" StackPane.alignment="CENTER"/>
+    
+        <!-- Tout le contenu visible par-dessus -->
+        <BorderPane fx:id="rootPane">
+            <top>
+                <HBox alignment="CENTER" spacing="20">
+                    <!-- Bouton "Close" à gauche -->
+                    <Button text="Close" styleClass="button-container" onAction="#handleClose"/>
                 
-            </HBox>
-        </center>
-    </BorderPane>
-
-</StackPane>
+                    <!-- Espace flexible pour centrer le titre -->
+                    <Region HBox.hgrow="ALWAYS"/>
+                
+                    <!-- Titre "POLARIS" au centre -->
+                    <Label text="POLARIS" styleClass="header"/>
+                
+                    <!-- Espace flexible pour pousser le bouton "Maximize" à droite -->
+                    <Region HBox.hgrow="ALWAYS"/>
+                
+                    <!-- Bouton "Maximize" à droite -->
+                    <Button text="Maximize" styleClass="button-container" onAction="#handleMaximiser"/>
+                </HBox>
+            </top>
+    
+            <center>
+                <HBox spacing="0" alignment="CENTER">
+    
+                    <!-- Boutons -->
+                    <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
+                    <!-- Espace flexible pour centrer le titre -->
+                    <Region HBox.hgrow="ALWAYS"/>
+    
+                    <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
+                   
+                    <!-- ImageView pour afficher l’image -->
+                    <ImageView fx:id="imageView" fitWidth="400" fitHeight="400" preserveRatio="true" visible="false" managed="false"/> <!-- managed="false" empêche la réserve d'espace quand invisible -->
+    
+                    <!-- TextArea pour afficher le texte -->
+                    <TextArea fx:id="consoleOutput" prefHeight="10" prefWidth="10" wrapText="true" editable="false" styleClass="console-text-area" opacity="0"/>
+                    
+                </HBox>
+            </center>
+        </BorderPane>
+    
+    </StackPane>
