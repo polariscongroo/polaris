@@ -30,10 +30,13 @@ public class Recognition {
         // Lecture de notre base de données de constellations
         Database database = new Database("./baseDDonnees_csv");
 
+        // Nombre d'étoiles qu'on va chercher
+        int nbStudiedStars = 4;
+
         // Ensemble des constellations
         Constellation[] constellations = new Constellation[database.getDataSet().length];
         for (int i = 0; i < constellations.length; i++) {
-            constellations[i] = Constellation.createConstellationWithData(database.getDataSet()[i]);
+            constellations[i] = Constellation.createConstellationWithData(database.getDataSet()[i], nbStudiedStars);
         }
 
         int N = Functions.min(20, detectedStarSet.getStars().length);
@@ -44,9 +47,9 @@ public class Recognition {
         }
 
         DetectedStarSet detectedStarSetKept = new DetectedStarSet(starsKept);
-
+        
         // On cherche la constellation
-        DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(constellations);
+        DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(nbStudiedStars, constellations);
 
         System.out.println(bestStarSet.getNearConstellation().getName());
         System.out.println(bestStarSet);

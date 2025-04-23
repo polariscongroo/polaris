@@ -7,11 +7,8 @@ package tsp.polaris.auxiliaries;
 */
 public class Combinatorics {
 	
-	/**
-	 * Constructeur vide
-	 */
 	private Combinatorics() {
-		
+        // Constructeur prive pour empecher l'instanciation de cette classe utilitaire
 	}
 	
     /**

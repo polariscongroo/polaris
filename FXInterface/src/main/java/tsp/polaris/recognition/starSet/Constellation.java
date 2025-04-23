@@ -1,10 +1,9 @@
 package tsp.polaris.recognition.starSet;
 
+import java.util.List;
+
 import tsp.polaris.recognition.dataTransmission.Data;
 import tsp.polaris.recognition.other.Star;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Représente une constellation composée de plusieurs points.
@@ -16,8 +15,8 @@ public class Constellation extends StarSet {
     private final String name;
     private List<List<Integer>> adjacencyList;
 
-    private Star[] firstFiveStars;
-    private ListTriangle firstFiveStarsListTriangle;
+    private Star[] firstStars;
+    private ListTriangle firstStarsListTriangle;
 
 
     /**
@@ -27,16 +26,16 @@ public class Constellation extends StarSet {
      * @param name Nom de la constellation
      * @param adjacencyList Liste d'adjacence de la constellation
      */
-    public Constellation(Star[] stars, String name, List<List<Integer>> adjacencyList) {
+    public Constellation(Star[] stars, String name, List<List<Integer>> adjacencyList, int nbStudiedStars) {
         super(stars);
         this.name = name;
         this.adjacencyList = adjacencyList;
 
-        // A RETIRER : TOUTES LES CONSTELLATIONS AURONT AU MOINS 5 ETOILES
-        if(stars.length >= 5) {
-            this.firstFiveStars = firstFiveStars(stars);
+        // A RETIRER
+        if(stars.length >= nbStudiedStars) {
+            this.firstStars = firstStars(stars, nbStudiedStars);
             // On calcule les triangles maintenant pour éviter de les calculer plusieurs fois par la suite
-            this.firstFiveStarsListTriangle = new ListTriangle((new DetectedStarSet(firstFiveStars)).generateTriangles());
+            this.firstStarsListTriangle = new ListTriangle((new DetectedStarSet(firstStars)).generateTriangles());
         }
     }
 
@@ -44,10 +43,12 @@ public class Constellation extends StarSet {
      * Création d'une Constellation depuis des données d'étoiles.
      *
      * @param data Données des étoiles
+     * @param nbStudiedStars Nombre d'étoiles à étudier
+     * 
      * @return Constellation : Ensemble d'étoiles correspondant aux données d'étoiles.
      */
-    public static Constellation createConstellationWithData(Data data) {
-        return new Constellation(data.getData().toArray(new Star[0]), data.getFileName(), data.getAdjacencyList());
+    public static Constellation createConstellationWithData(Data data, int nbStudiedStars) {
+        return new Constellation(data.getData().toArray(new Star[0]), data.getFileName(), data.getAdjacencyList(), nbStudiedStars);
     }
 
     /**
@@ -66,8 +67,8 @@ public class Constellation extends StarSet {
      *
      * @return ListTriangle : Retourne la liste des triangles des 5 premières étoiles de la constellation
      */
-    public ListTriangle getFirstFiveStarsListTriangle() {
-        return firstFiveStarsListTriangle;
+    public ListTriangle getFirstStarsListTriangle() {
+        return firstStarsListTriangle;
     }
 
     /**
@@ -76,12 +77,12 @@ public class Constellation extends StarSet {
      * @param stars Tableau d'étoiles.
      * @return Les 5 premières étoiles du tableau.
      */
-    private Star[] firstFiveStars(Star[] stars) {
+    private Star[] firstStars(Star[] stars, int nbStudiedStars) {
         // Nouveau tableau d'étoiles
-        Star[] result = new Star[5];
+        Star[] result = new Star[nbStudiedStars];
 
         // On copie les 5 premières étoiles dans ce tableau
-        for(int i = 0; i < 5; i += 1) {
+        for(int i = 0; i < nbStudiedStars; i += 1) {
             result[i] = stars[i];
         }
 

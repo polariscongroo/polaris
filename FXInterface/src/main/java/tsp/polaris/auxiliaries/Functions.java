@@ -11,6 +11,11 @@ import java.util.List;
  */
 public class Functions {
 
+
+    private Functions() {
+        // Constructeur privé pour empêcher l'instanciation
+    }
+
     /**
      * Renvoie l'indice du plus petit élément d'un tableau
      * @param tab tableau de nombres
@@ -77,6 +82,18 @@ public class Functions {
         }
         
         return lignes.getFirst();
+    }
+
+    /**
+     * Renvoie k!
+     * @param k entier
+     * @return k!
+     */
+    public static int factorial(int k) {
+        if (k == 0 || k == 1) {
+            return 1;
+        }
+        return k * Functions.factorial(k - 1);
     }
     
 }

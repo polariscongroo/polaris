@@ -234,16 +234,12 @@ public class DetectedStarSet extends StarSet
         // Parcours les constellations passées en argument
         for (Constellation cons : constellations)
         {
-            // On ne regarde pas les constellations avec moins de 5 étoiles (A RETIRER PLUS TARD)
-            if(cons.getStars().length < 5) {
-                continue;
-            }
 
             // On calcule la liste des triangles du set d'étoiles
             ListTriangle listTriangleStarSet = new ListTriangle(generateTriangles());
 
             // Calcul les coûts entre les triangles du set d'étoiles et ceux de la constellation c
-            double[] liste_cout = listTriangleStarSet.costs(cons.getFirstFiveStarsListTriangle(),this,cons);
+            double[] liste_cout = listTriangleStarSet.costs(cons.getFirstStarsListTriangle(),this,cons);
 
             double total = sum(liste_cout);  // Calcul le total des coûts
 
@@ -267,7 +263,7 @@ public class DetectedStarSet extends StarSet
      */
     private DetectedStarSet findRightStarSet(int k, Constellation...constellations) throws TriangleMatchingException {
     	// On cree une liste composee de toutes les combinaisons d'étoiles à k éléments :
-    	
+
     	// Nombre de combinaisons
     	int nbCombination = Combinatorics.combination(stars.length, k);
     	
@@ -275,7 +271,7 @@ public class DetectedStarSet extends StarSet
     	DetectedStarSet[] starSetCombinations = new DetectedStarSet[nbCombination];
 
         // Liste de toutes les combinaisons et toutes leur bijection
-        DetectedStarSet[][] starSetCombinationsPlusPermutations = new DetectedStarSet[nbCombination][120];
+        DetectedStarSet[][] starSetCombinationsPlusPermutations = new DetectedStarSet[nbCombination][Functions.factorial(k)];
 
         // On remplit la liste des combinaisons
     	combinationStar(k,starSetCombinations, stars,new Star[0]);
@@ -291,7 +287,9 @@ public class DetectedStarSet extends StarSet
         int indPermutation = -1;
     	
     	for(int i = 0; i < nbCombination; i += 1) {
-            for(int j = 0; j < 120 ; j += 1) {
+            System.out.println(i);
+            for(int j = 0; j < Functions.factorial(k) ; j += 1) {
+                
                 // On calcule le cout minimal entre le set d'étoiles et les constellations
                 double coutCons = starSetCombinationsPlusPermutations[i][j].costConstellation(constellations);
 
@@ -304,7 +302,7 @@ public class DetectedStarSet extends StarSet
     	}
 
         // DEBUG - A RETIRER
-        System.out.println("Meilleur :" + minCoutConstellation);
+        System.out.println("Coût minimal :" + minCoutConstellation);
         // ---------
 
     	return starSetCombinationsPlusPermutations[indConstellation][indPermutation];
@@ -317,35 +315,36 @@ public class DetectedStarSet extends StarSet
      * @return La liste d'étoile qui ressemble le plus à une constellation.
      * @throws TriangleMatchingException Si une erreur se produit lors du calcul des coûts des triangles.
      */
-    public DetectedStarSet searchBestStarSet(Constellation... constellations) throws TriangleMatchingException {
-        // Liste d'étoiles choisies pour chaque constellation (on choisit de ne regarder que les 5 premières étoiles à chaque fois)
-        int nbStudiedStars = 5;
-        DetectedStarSet bestFirstFiveStars = findRightStarSet(nbStudiedStars,constellations);
+    public DetectedStarSet searchBestStarSet(int nbStudiedStars, Constellation... constellations) throws TriangleMatchingException {
+        // Liste d'étoiles choisies pour chaque constellation (on choisit de ne regarder que les nbStudiedStars premières étoiles à chaque fois)
+
+        DetectedStarSet bestFirstStars = findRightStarSet(nbStudiedStars,constellations);
 
         // On cherche ensuite les autres étoiles de la constellations
-        DetectedStarSet bestStarSet = bestFirstFiveStars.findOtherStars();
+        DetectedStarSet bestStarSet = bestFirstStars.findOtherStars(nbStudiedStars);
 
         return bestStarSet;
     }
 
     /**
-     * A partir des 5 premières étoiles qu'on a trouvées, on cherche les autres étoiles de la constellation.
+     * A partir des k premières étoiles qu'on a trouvées, on cherche les autres étoiles de la constellation.
      *
+     * @param k Nombre d'étoiles déjà trouvées.
      * @return La meilleure liste d'étoiles qui ressemble le plus à la constellation.
      * @throws TriangleMatchingException
      */
-    public DetectedStarSet findOtherStars() throws TriangleMatchingException {
+    public DetectedStarSet findOtherStars(int k) throws TriangleMatchingException {
         // Meilleur set d'étoiles
         DetectedStarSet bestStarSet = new DetectedStarSet(new Star[nearConstellation.getStars().length]);
         bestStarSet.nearConstellation = nearConstellation;
 
-        // On met les 5 premières étoiles qu'on a trouvé dans le set d'étoiles
-        for(int i = 0; i < 5; i += 1) {
+        // On met les k premières étoiles qu'on a trouvé dans le set d'étoiles
+        for(int i = 0; i < k; i += 1) {
             bestStarSet.stars[i] = stars[i];
         }
 
         // On va calculer la positions des autres étoiles grâce aux positions des 2 premières et des angles formées par les autres
-        for(int i = 5; i < nearConstellation.getStars().length; i += 1) {
+        for(int i = k; i < nearConstellation.getStars().length; i += 1) {
             Star firstStar = stars[0];
             Star secondStar = stars[1];
 
