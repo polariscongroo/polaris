@@ -24,7 +24,7 @@ public class DetectedStarSetTest {
 	public void setUp1() {
 		Star[] stars = new Star[6];
 		for(int i = 0; i < 6; i += 1) {
-			stars[i] = new Star(i,i,0);
+			stars[i] = new Star(i,i,0,1);
 		}
 		workingDetectedStarSet = new DetectedStarSet(stars);
 	}
@@ -34,13 +34,13 @@ public class DetectedStarSetTest {
 	 */
 	public void setUp2() {
 		Star[] stars = new Star[7];
-		stars[0] = new Star(112.54545454545455,16.636363636363637,0.9233870967741935);
-		stars[1] = new Star(168.0,33.0,1.0);
-		stars[2] = new Star(17.0,65.0,0.6370967741935484);
-		stars[3] = new Star(179.0,75.0,0.9959677419354839);
-		stars[4] = new Star(215.0,75.0,0.8266129032258065);
-		stars[5] = new Star(233.83333333333334,84.16666666666667,0.782258064516129);
-		stars[6] = new Star(213.6,139.4,0.9919354838709677);
+		stars[0] = new Star(112.54545454545455,16.636363636363637,0.9233870967741935,1);
+		stars[1] = new Star(168.0,33.0,1.0,1);
+		stars[2] = new Star(17.0,65.0,0.6370967741935484,1);
+		stars[3] = new Star(179.0,75.0,0.9959677419354839,1);
+		stars[4] = new Star(215.0,75.0,0.8266129032258065,1);
+		stars[5] = new Star(233.83333333333334,84.16666666666667,0.782258064516129,1);
+		stars[6] = new Star(213.6,139.4,0.9919354838709677,1);
 		workingDetectedStarSet = new DetectedStarSet(stars);
 	}
 	
