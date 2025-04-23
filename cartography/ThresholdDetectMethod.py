@@ -161,7 +161,7 @@ def enregistre_les_etoiles(etoiles_classees):
         lum = float(etoiles_classees[k][3])
         produit_taille_lum = float(etoiles_classees[k][4])
         etoiles_a_enregistrer.append([j, i, taille_forme, lum, produit_taille_lum])  # Inverse les indices pour le format CSV
-    with open("recognition/coorPoints/liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
+    with open("FXInterface/src/main/resources/transmission/liste_etoiles.csv", "w", newline="", encoding="utf-8") as fichier:
         writer = csv.writer(fichier)
         writer.writerows(etoiles_a_enregistrer)
 

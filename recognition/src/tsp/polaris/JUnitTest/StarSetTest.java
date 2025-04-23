@@ -26,7 +26,7 @@ public class StarSetTest {
     public void setUp() {
         Star[] stars = new Star[6];
         for(int i = 0; i < 6; i++){
-            stars[i] = new Star(i, (double)5/(i+1), i);
+            stars[i] = new Star(i, (double)5/(i+1), i,1);
         }
         workingStarSet = new StarSet(stars);
     }

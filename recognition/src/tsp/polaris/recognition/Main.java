@@ -45,6 +45,7 @@ public class Main {
 
         DetectedStarSet detectedStarSetKept = new DetectedStarSet(starsKept);
 
+        // On cherche la constellation
         DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(constellations);
 
         System.out.println(bestStarSet.getNearConstellation().getName());

@@ -15,9 +15,8 @@ public class Draw {
     protected File outputFile;
 
     public Draw(File file) throws IOException {
-        String outputPath = "FXInterface/src/main/java/tsp/polaris/drawConstellation/outputs/output.png";
-        copyImage(file, outputPath);
-        outputFile = new File(outputPath);
+        copyImage(file, "output");
+        outputFile = new File("FXInterface/src/main/resources/images/output.png");
         img = ImageIO.read(outputFile);
     }
 
@@ -25,11 +24,11 @@ public class Draw {
      * Effectue une copie d'un fichier
      *
      * @param imgFile fichier à copier
-     * @param outputPath    nom du nouveau fichier copié
+     * @param name    nom du nouveau fichier copié
      * @throws IOException erreur lancée lors de la copie de l'image
      */
-    public static void copyImage(File imgFile, String outputPath) throws IOException {
-        Path imgCopyPath = Paths.get(outputPath); // Chemin de la nouvelle image
+    public static void copyImage(File imgFile, String name) throws IOException {
+        Path imgCopyPath = Paths.get("FXInterface/src/main/resources/images/" + name + ".png"); // Chemin de la nouvelle image
         Path imgPath = imgFile.toPath(); // Chemin de l'ancienne image
         Files.copy(imgPath, imgCopyPath, StandardCopyOption.REPLACE_EXISTING); // Duplication de l'image (et remplacement si l'image existe déjà)
     }

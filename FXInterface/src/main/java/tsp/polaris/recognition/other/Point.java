@@ -7,15 +7,17 @@ package tsp.polaris.recognition.other;
 
 public class Point {
     protected final double[] point;
+    protected final double size; // Taille du point
 
     /**
      * Constructeur qui initialise les coordonnees du point
      * @param x 1ère coordonnee du point
      * @param y 2e coordonnee du point
      */
-    public Point(double x, double y)
+    public Point(double x, double y, double size)
     {
         point = new double[]{x,y};
+        this.size = size;
     }
     
     /**
@@ -78,5 +80,25 @@ public class Point {
         return coeff;
     }
 
+    public double[] getCoordinate(double a, double b, double c, Point secondPoint, double orientation){
+        double temp = (b*b - c*c + a*a)/(2*a);
+
+        Point p = new Point(point[0] + temp*(secondPoint.point[0] - point[0])/a, point[1] + temp*(secondPoint.point[1] - point[1])/a, size);
+
+        double h = Math.sqrt(b*b - temp*temp);
+
+        double x,y;
+
+        // En fonction de l'orientation (à la base on a 2 solutions pour le point), on choisit les bonnes coordonnées
+        if(orientation > 0) {
+            x = p.point[0] + h * (point[1] - secondPoint.point[1]) / a;
+            y = p.point[1] - h * (point[0] - secondPoint.point[0]) / a;
+        } else {
+            x = p.point[0] - h * (point[1] - secondPoint.point[1]) / a;
+            y = p.point[1] + h * (point[0] - secondPoint.point[0]) / a;
+        }
+
+        return new double[]{x, y};
+    }
 
 }

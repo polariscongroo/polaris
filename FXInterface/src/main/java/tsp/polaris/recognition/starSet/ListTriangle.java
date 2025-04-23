@@ -59,9 +59,7 @@ public class ListTriangle {
         // On va comparer chaque triangle entre eux et mettre leurs couts dans une liste
         double[] costs = new double[taille1];
         for (int i = 0; i < taille1; i++) {
-            // On retrouve le triangle associé au triangle courant (listTriangle[i])
-            Triangle triangleAssociated = detectedStars.findTriangle(listTriangle[i], dataStars);
-            costs[i] = listTriangle[i].cost(triangleAssociated);
+            costs[i] = listTriangle[i].cost(listeTriangle2.listTriangle[i]);
         }
         return costs;
     }

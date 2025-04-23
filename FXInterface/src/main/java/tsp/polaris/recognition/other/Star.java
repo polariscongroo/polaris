@@ -8,7 +8,6 @@ package tsp.polaris.recognition.other;
 
 public class Star extends Point implements Comparable<Star> {
     private final double brightness; // Luminosité de l'étoile
-    private final double size; // Taille de l'étoile
 
     /**
      * Constructeur de la classe Star
@@ -19,15 +18,14 @@ public class Star extends Point implements Comparable<Star> {
      * @param size Taille de l'étoile
      */
     public Star(double x, double y, double brightness, double size) {
-        super(x, y);
+        super(x, y, size);
         this.brightness = brightness;
-        this.size = size;
     }
 
     /**
      * Affichage des coordonnées et de la luminosité de l'étoile
      *
-     * @return Chaine de caractères contenant les coordonnées et la luminosité
+     * @return Chaine de caractères contenant les coordonnées, la luminosité et la taille
      */
     @Override
     public String toString() {
