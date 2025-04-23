@@ -88,59 +88,51 @@
     -fx-border-radius: 5;
     -fx-padding: 10 20;
 }
-
 .loader {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 6rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  width: 120px;
+  height: 140px;
+  background-image: radial-gradient(circle 30px, #fff 100%, transparent 0),
+  radial-gradient(circle 5px, #fff 100%, transparent 0),
+  radial-gradient(circle 5px, #fff 100%, transparent 0),
+  linear-gradient(#FFF 20px, transparent 0);
+  background-position: center 127px , 94px 102px , 16px 18px, center 114px;
+  background-size: 60px 60px, 10px 10px , 10px 10px , 4px 14px;
+  background-repeat: no-repeat;
+  z-index: 10;
+  perspective: 500px;
 }
-.loader:before,
-.loader:after {
-  content: "";
+.loader::before {
+  content: '';
   position: absolute;
-  border-radius: 50%;
-  animation: pulsOut 1.8s ease-in-out infinite;
-  filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
+  width: 100px;
+  height: 100px;
+  border-radius:50%;
+  border: 3px solid #fff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -55%) rotate(-45deg);
+  border-right-color: transparent;
+  box-sizing: border-box;
 }
-.loader:before {
-  width: 100%;
-  padding-bottom: 100%;
-  box-shadow: inset 0 0 0 1rem #fff;
-  animation-name: pulsIn;
-}
-.loader:after {
-  width: calc(100% - 2rem);
-  padding-bottom: calc(100% - 2rem);
-  box-shadow: 0 0 0 0 #fff;
-}
-
-@keyframes pulsIn {
-  0% {
-    box-shadow: inset 0 0 0 1rem #fff;
-    opacity: 1;
-  }
-  50%, 100% {
-    box-shadow: inset 0 0 0 0 #fff;
-    opacity: 0;
-  }
+.loader::after {
+  content: '';
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  transform: translate(-50%, -55%) rotate(-45deg) rotateY(0deg) ;
+  left: 50%;
+  top: 50%;
+  box-sizing: border-box;
+  border: 7px solid #FF3D00;
+  border-radius:50%;
+  animation: rotate 0.5s linear infinite;
 }
 
-@keyframes pulsOut {
-  0%, 50% {
-    box-shadow: 0 0 0 0 #fff;
-    opacity: 0;
-  }
-  100% {
-    box-shadow: 0 0 0 1rem #fff;
-    opacity: 1;
-  }
+@keyframes rotate {
+to{transform: translate(-50%, -55%) rotate(-45deg) rotateY(360deg)   }
 }
-    
+  
 
 
 

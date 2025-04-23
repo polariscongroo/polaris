@@ -13,10 +13,10 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -33,7 +33,7 @@ public class HelloController {
     @FXML private MediaView backgroundMediaView;
     @FXML private TextArea consoleOutput; // Pour afficher les logs
     @FXML private ImageView imageView; // Pour afficher l'image
-    @FXML private ProgressIndicator loader;
+    @FXML private Pane orbContainer;
 
     // Variables
     private MediaPlayer mediaPlayer;
@@ -49,10 +49,10 @@ public class HelloController {
     public void initialize() {  setupBackgroundVideo(); // Configure la vidéo de fond
        
         playBackgroundMusic();
-      // Afficher le loader
-      loader.setVisible(true);
-      loader.setManaged(true);
-      System.out.println("Loader activé au démarrage.");}
+        // Crée une orbite lumineuse
+        LuminousOrb orb = new LuminousOrb();
+        orbContainer.getChildren().add(orb);
+        System.out.println("Loader activé au démarrage.");}
          
         @FXML
         public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
@@ -103,27 +103,12 @@ public class HelloController {
                         return null;
                     }
         
-                    @Override
-                    protected void succeeded() {
-                        loader.setVisible(true);
-                        loader.setManaged(true);
-                        System.out.println("[Java] Tâche terminée avec succès !");
-                    }
-        
-                    @Override
-                    protected void failed() {
-                        loader.setVisible(true);
-                        loader.setManaged(true);
-                        System.err.println("[Java] Échec de la tâche !");
-                        getException().printStackTrace();
-                    }
                 };
         
                 new Thread(recognitionTask).start();
         
             } else {
-                loader.setVisible(true);
-                loader.setManaged(true);
+                
                 System.out.println("Aucun fichier sélectionné.");
             }
         }

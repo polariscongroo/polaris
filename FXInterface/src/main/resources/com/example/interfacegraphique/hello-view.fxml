@@ -10,9 +10,8 @@
         <!-- Le MediaView est au fond -->
         <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
     
-        <!-- Loader -->
-        <ProgressIndicator fx:id="loader" visible="false" managed="false" maxWidth="100" maxHeight="100" StackPane.alignment="CENTER"/>
-    
+        <Pane fx:id="orbContainer" prefWidth="300" prefHeight="300" layoutX="100" layoutY="100"/>
+
         <!-- Tout le contenu visible par-dessus -->
         <BorderPane fx:id="rootPane">
             <top>
