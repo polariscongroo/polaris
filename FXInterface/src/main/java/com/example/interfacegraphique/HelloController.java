@@ -43,7 +43,7 @@ public class HelloController {
 
     // Nettoyage des fichiers de sortie
     private String outputpath="cartography/image_aTraiter/output.txt";
-    private String listeetoilepath="recognition/coorPoints/liste_etoiles.csv";
+    private String listeetoilepath="FXInterface/src/main/resources/transmission/liste_etoiles.csv";
 
     @FXML
     public void initialize() {  setupBackgroundVideo(); // Configure la vidéo de fond

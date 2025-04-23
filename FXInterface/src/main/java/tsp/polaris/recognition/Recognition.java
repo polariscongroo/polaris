@@ -24,7 +24,7 @@ public class Recognition {
         String pathImage = Functions.lireLigneUnique(output);
 
         // Ensembles d'étoiles détectées
-        Data data = new Data("recognition/coorPoints/liste_etoiles.csv", "liste_etoiles");
+        Data data = new Data("FXInterface/src/main/resources/transmission/liste_etoiles.csv", "liste_etoiles");
         DetectedStarSet detectedStarSet = DetectedStarSet.createDetectedStarSetWithData(data);
 
         // Lecture de notre base de données de constellations
@@ -45,6 +45,7 @@ public class Recognition {
 
         DetectedStarSet detectedStarSetKept = new DetectedStarSet(starsKept);
 
+        // On cherche la constellation
         DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(constellations);
 
         System.out.println(bestStarSet.getNearConstellation().getName());
@@ -53,5 +54,4 @@ public class Recognition {
         // On dessine la constellation
         MainDrawTest.drawConstellation(pathImage,bestStarSet);
     }
-
 }
