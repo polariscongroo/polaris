@@ -14,7 +14,7 @@ public class LuminousOrb extends StackPane {
 
     public LuminousOrb() {
 
-        Circle circle = new Circle(40); // rayon de 40
+        Circle circle = new Circle(45); // rayon de 40
         circle.setFill(Color.TRANSPARENT); // intérieur foncé
         circle.setStroke(Color.WHITE); // contour blanc
         circle.setStrokeWidth(8);
@@ -43,6 +43,7 @@ public class LuminousOrb extends StackPane {
         pulse.setAutoReverse(true);
         pulse.play();
         this.getChildren().add(circle);
+      
      
     }
 }
