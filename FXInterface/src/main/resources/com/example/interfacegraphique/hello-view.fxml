@@ -10,7 +10,7 @@
         <!-- Le MediaView est au fond -->
         <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
     
-        <Pane fx:id="orbContainer" prefWidth="300" prefHeight="300" layoutX="100" layoutY="100"/>
+       
 
         <!-- Tout le contenu visible par-dessus -->
         <BorderPane fx:id="rootPane">
@@ -40,7 +40,9 @@
                     <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
                     <!-- Espace flexible pour centrer le titre -->
                     <Region HBox.hgrow="ALWAYS"/>
-    
+
+                    <Pane fx:id="orbContainer" prefWidth="300" prefHeight="300" layoutX="100" layoutY="100"/>
+                    
                     <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
                    
                     <!-- ImageView pour afficher l’image -->
