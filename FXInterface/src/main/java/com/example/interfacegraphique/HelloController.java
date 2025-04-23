@@ -38,6 +38,7 @@ public class HelloController {
     // Variables
     private MediaPlayer mediaPlayer;
 
+    private MediaPlayer clickSoundPlayer;
     
     private MediaPlayer musicPlayer;
 
@@ -236,10 +237,11 @@ public class HelloController {
 
 
 
-        @FXML
-    public void playMusicOnButtonClick(ActionEvent event) {
-        try {
-            // Charger le fichier audio
+     @FXML
+public void playMusicOnButtonClick(ActionEvent event) {
+    try {
+        // Initialiser le MediaPlayer une seule fois
+        if (clickSoundPlayer == null) {
             URL musicUrl = getClass().getResource("/audio/clickSound.mp3");
             if (musicUrl == null) {
                 System.err.println("ERREUR: Fichier audio introuvable dans /audio/clickSound.mp3");
@@ -247,19 +249,23 @@ public class HelloController {
             }
 
             Media media = new Media(musicUrl.toExternalForm());
-            MediaPlayer musicPlayer = new MediaPlayer(media);
+            clickSoundPlayer = new MediaPlayer(media);
 
-            // Configurer la musique
-            musicPlayer.setVolume(0.5); // Volume (0.0 à 1.0)
-
-            // Démarrer la musique
-            musicPlayer.play();
-            System.out.println("Musique déclenchée par le bouton.");
-        } catch (Exception e) {
-            System.err.println("Erreur lors de la lecture de la musique : " + e.getMessage());
-            e.printStackTrace();
+            // Réinitialiser le MediaPlayer après la fin de la lecture
+            clickSoundPlayer.setOnEndOfMedia(() -> {
+                clickSoundPlayer.stop(); // Arrêter le MediaPlayer
+            });
         }
+
+        // Redémarrer le son à chaque clic
+        clickSoundPlayer.stop(); // Arrêter si le son est déjà en cours
+        clickSoundPlayer.play(); // Jouer le son
+        System.out.println("Musique déclenchée par le bouton.");
+    } catch (Exception e) {
+        System.err.println("Erreur lors de la lecture de la musique : " + e.getMessage());
+        e.printStackTrace();
     }
+}
 
     @FXML
     public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
