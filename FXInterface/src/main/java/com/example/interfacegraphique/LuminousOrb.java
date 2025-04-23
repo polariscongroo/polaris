@@ -1,8 +1,6 @@
 package com.example.interfacegraphique;
 
-import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
-import javafx.animation.ScaleTransition;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -26,13 +24,6 @@ public class LuminousOrb extends StackPane {
         rotate.setInterpolator(javafx.animation.Interpolator.LINEAR);
         rotate.play();
 
-        ScaleTransition pulse = new ScaleTransition(Duration.seconds(1.5), circle);
-        pulse.setFromX(1);
-        pulse.setFromY(1);
-        pulse.setToX(1.1);
-        pulse.setToY(1.1);
-        pulse.setCycleCount(Animation.INDEFINITE);
-        pulse.setAutoReverse(true);
-        pulse.play();
+     
     }
 }
