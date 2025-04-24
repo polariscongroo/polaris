@@ -7,48 +7,27 @@
     
     <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.interfacegraphique.HelloController" fx:id="root" prefWidth="1300" prefHeight="800">
     
-        <!-- Le MediaView est au fond -->
+        <!-- Background Media -->
         <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
-            <!-- Conteneur pour le loader (orbContainer) centré au milieu -->
-        <Pane fx:id="orbContainer" prefWidth="300" prefHeight="300" style="-fx-border-color: transparent;" StackPane.alignment="CENTER"/>
-
-        <!-- Tout le contenu visible par-dessus -->
+    
+        <!-- Main Content -->
         <BorderPane fx:id="rootPane">
             <top>
                 <HBox alignment="CENTER" spacing="20">
-                    <!-- Bouton "Close" à gauche -->
-                    <Button text="Close" styleClass="button-container" onAction="#handleClose"/>
-                
-                    <!-- Espace flexible pour centrer le titre -->
-                    <Region HBox.hgrow="ALWAYS"/>
-                
-                    <!-- Titre "POLARIS" au centre -->
-                    <Label text="POLARIS" styleClass="header"/>
-                
-                    <!-- Espace flexible pour pousser le bouton "Maximize" à droite -->
-                    <Region HBox.hgrow="ALWAYS"/>
-                
-                    <!-- Bouton "Maximize" à droite -->
                     <Button text="Maximize" styleClass="button-container" onAction="#handleMaximiser"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <ImageView fx:id="bottomRightImage" fitWidth="300" fitHeight="300" preserveRatio="true" StackPane.alignment="BOTTOM_RIGHT"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="Close" styleClass="button-container" onAction="#handleClose"/>
                 </HBox>
             </top>
-    
             <center>
-                <HBox spacing="0" alignment="CENTER">
-    
-                    <!-- Boutons -->
+                <HBox alignment="CENTER" spacing="20">
                     <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
-                    <!-- Espace flexible pour centrer le titre -->
                     <Region HBox.hgrow="ALWAYS"/>
-    
+                    <Pane fx:id="orbContainer" prefWidth="250" prefHeight="250"/>
+                    <Region HBox.hgrow="ALWAYS"/>
                     <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
-                   
-                    <!-- ImageView pour afficher l’image -->
-                    <ImageView fx:id="imageView" fitWidth="400" fitHeight="400" preserveRatio="true" visible="false" managed="false"/> <!-- managed="false" empêche la réserve d'espace quand invisible -->
-    
-                    <!-- TextArea pour afficher le texte -->
-                    <TextArea fx:id="consoleOutput" prefHeight="10" prefWidth="10" wrapText="true" editable="false" styleClass="console-text-area" opacity="0"/>
-                    
                 </HBox>
             </center>
         </BorderPane>

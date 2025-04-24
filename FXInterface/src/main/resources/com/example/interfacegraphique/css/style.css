@@ -15,6 +15,8 @@
     -fx-alignment: center;
 }
 
+
+
 .main-button {
     -fx-background-color: transparent;
     -fx-opacity: 1;
@@ -24,27 +26,13 @@
     -fx-padding: 10 20;
 }
 
-/*
-.animated-bar {
-    -fx-accent: #000000;
-    -fx-background-radius: 5;
-    -fx-transition: all 0.5s ease-in-out;
-}
 
-.glossy-bar {
-    -fx-background-color: transparent;
-    -fx-accent: linear-gradient(to right, #29b6f6, #0288d1);
-    -fx-background-insets: 0, 1;
-    -fx-background-radius: 8, 7;
-    -fx-padding: 2;
-}
-*/
 
 .button-container:hover {
     -fx-background-color: transparent; /* Fond transparent au survol */
     -fx-border-color: #00b7ff;         /* Bordure bleue brillante */
     -fx-text-fill: #00b7ff;            /* Texte bleu */
-    -fx-font-size: 32px;               /* Double la taille de la police */
+    -fx-font-size: 26px;               /* Double la taille de la police */
     -fx-scale-x: 1.1;                  /* Agrandit légèrement le bouton horizontalement */
     -fx-scale-y: 1.1;                  /* Agrandit légèrement le bouton verticalement */
 
@@ -59,11 +47,18 @@
     
     -fx-text-fill: #00b7ff;            /* Texte bleu */
     -fx-font-size: 25px;              /* Taille de la police par défaut */
-    -fx-padding: 10 20;               /* Espacement interne */
-    -fx-background-radius: 10;        /* Coins arrondis */
+    
+    -fx-background-radius: 10;        /*Coins arrondis*/ 
     -fx-border-radius: 10;            /* Coins arrondis pour la bordure */
     -fx-cursor: hand;                 /* Curseur en forme de main */
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Pas d'effet par défaut */
+    -fx-pref-width: 200px;            /* Largeur fixe */
+    -fx-pref-height: 50px;            /* Hauteur fixe */
+    -fx-min-width: 275px;             /* Largeur minimale */
+    -fx-min-height: 75px;             /* Hauteur minimale */
+    -fx-max-width: 275px;             /* Largeur maximale */
+    -fx-max-height: 75px;             /* Hauteur maximale */
+                 
     -fx-scale-x: 1;                   /* Taille normale */
     -fx-scale-y: 1;                   /* Taille normale */
 
@@ -88,51 +83,6 @@
     -fx-border-radius: 5;
     -fx-padding: 10 20;
 }
-.loader {
-  position: relative;
-  width: 120px;
-  height: 140px;
-  background-image: radial-gradient(circle 30px, #fff 100%, transparent 0),
-  radial-gradient(circle 5px, #fff 100%, transparent 0),
-  radial-gradient(circle 5px, #fff 100%, transparent 0),
-  linear-gradient(#FFF 20px, transparent 0);
-  background-position: center 127px , 94px 102px , 16px 18px, center 114px;
-  background-size: 60px 60px, 10px 10px , 10px 10px , 4px 14px;
-  background-repeat: no-repeat;
-  z-index: 10;
-  perspective: 500px;
-}
-.loader::before {
-  content: '';
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius:50%;
-  border: 3px solid #fff;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -55%) rotate(-45deg);
-  border-right-color: transparent;
-  box-sizing: border-box;
-}
-.loader::after {
-  content: '';
-  position: absolute;
-  height: 80px;
-  width: 80px;
-  transform: translate(-50%, -55%) rotate(-45deg) rotateY(0deg) ;
-  left: 50%;
-  top: 50%;
-  box-sizing: border-box;
-  border: 7px solid #FF3D00;
-  border-radius:50%;
-  animation: rotate 0.5s linear infinite;
-}
-
-@keyframes rotate {
-to{transform: translate(-50%, -55%) rotate(-45deg) rotateY(360deg)   }
-}
-  
 
 
 

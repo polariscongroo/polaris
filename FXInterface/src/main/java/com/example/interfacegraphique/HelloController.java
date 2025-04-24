@@ -34,6 +34,7 @@ public class HelloController {
 @FXML private TextArea consoleOutput;
 @FXML private ImageView imageView;
 @FXML private Pane orbContainer;
+@FXML private ImageView bottomRightImage;
 
 private MediaPlayer mediaPlayer;
 private MediaPlayer clickSoundPlayer;
@@ -45,7 +46,9 @@ private String listeetoilepath="FXInterface/src/main/resources/transmission/list
 @FXML
 public void initialize() {
     setupBackgroundVideo();
+    bottomRightImage.setImage(new Image(getClass().getResource("/images/polaris 2.png").toExternalForm()));
     playBackgroundMusic();
+    
     LuminousOrb orb = new LuminousOrb();
     orbContainer.getChildren().add(orb);
     System.out.println("Loader activé au démarrage.");
@@ -147,9 +150,9 @@ public void eraser(String path) {
 
 private void setupBackgroundVideo() {
     try {
-        URL videoUrl = getClass().getResource("/images/polaris1.mp4");
+        URL videoUrl = getClass().getResource("/images/video_fond.mp4");
         if (videoUrl == null) {
-            System.err.println("ERREUR: Fichier vidéo introuvable dans /images/polaris1.mp4");
+            System.err.println("ERREUR: Fichier vidéo introuvable dans /images/video_fond.mp4");
             return;
         }
         Media media = new Media(videoUrl.toExternalForm());
