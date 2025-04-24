@@ -54,7 +54,7 @@
 
 .button-container {
     -fx-background-color: transparent; /* Fond transparent */
-    -fx-border-color: transparent;    /* Bordure invisible par défaut */
+    -fx-border-color: #00b7ff;    /* Bordure invisible par défaut */
     -fx-border-width: 2px;            /* Épaisseur de la bordure */
     
     -fx-text-fill: #00b7ff;            /* Texte bleu */

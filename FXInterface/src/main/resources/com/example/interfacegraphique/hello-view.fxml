@@ -9,8 +9,8 @@
     
         <!-- Le MediaView est au fond -->
         <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
-    
-        <Pane fx:id="orbContainer" prefWidth="300" prefHeight="300" layoutX="100" layoutY="100"/>
+            <!-- Conteneur pour le loader (orbContainer) centré au milieu -->
+        <Pane fx:id="orbContainer" prefWidth="300" prefHeight="300" style="-fx-border-color: transparent;" StackPane.alignment="CENTER"/>
 
         <!-- Tout le contenu visible par-dessus -->
         <BorderPane fx:id="rootPane">
