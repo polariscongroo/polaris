@@ -1,8 +1,10 @@
 package com.example.interfacegraphique;
 
 import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.StackPane;
@@ -43,7 +45,13 @@ public class LuminousOrb extends StackPane {
         pulse.setAutoReverse(true);
         pulse.play();
         this.getChildren().add(circle);
-      
+        Timeline particleEmitter = new Timeline(new KeyFrame(Duration.millis(150), e -> {
+        OrbParticle particle = new OrbParticle(0, 0); // part du centre
+        this.getChildren().add(particle);
+        }));
+        particleEmitter.setCycleCount(Animation.INDEFINITE);
+        particleEmitter.play();
+
      
     }
 }
