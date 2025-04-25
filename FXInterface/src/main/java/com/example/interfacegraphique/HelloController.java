@@ -109,7 +109,7 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
     String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");
     System.out.println("[Java] 11. Nom de la constellation : " + name);
     try {
-        InputStream imageStream = getClass().getResourceAsStream("/images/" + name + ".jpg");
+        InputStream imageStream = getClass().getResourceAsStream("/images/orsaminor.jpg");
         if (imageStream == null) {
             System.err.println("Image non trouvée dans les ressources");
             return;
