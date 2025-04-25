@@ -1,4 +1,6 @@
 package tsp.polaris.auxiliaries;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -60,6 +62,20 @@ public class Functions {
      */
     public static int min(int a, int b) {
         return Math.min(a, b);
+    }
+
+    public static void write_in_namefile(String contenu) {
+        try {
+            FileWriter writer = new FileWriter("FXInterface/src/main/resources/transmission/name.txt");
+            writer.write(contenu);
+            writer.close();
+            File file = new File("FXInterface/src/main/resources/transmission/name.txt");
+            System.out.println("[Java] 2. Chemin absolu de output.txt : " + file.getAbsolutePath());
+            System.out.println("[Java] 3. Output.txt a été correctement modifié");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     /**

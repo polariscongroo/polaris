@@ -24,6 +24,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.Recognition;
 import tsp.polaris.recognition.starSet.TriangleMatchingException;
 
@@ -46,6 +47,10 @@ private String listeetoilepath="FXInterface/src/main/resources/transmission/list
 @FXML
 public void initialize() {
     setupBackgroundVideo();
+    setupLoaderandPolaris();
+}
+
+private void setupLoaderandPolaris() {
     bottomRightImage.setImage(new Image(getClass().getResource("/images/polaris 2.png").toExternalForm()));
     playBackgroundMusic();
     
@@ -100,9 +105,11 @@ public void handleRecognition(ActionEvent event) throws NumberFormatException, T
 }
 
 @FXML
-public void handleConstellation(ActionEvent event) {
+public void handleConstellation(ActionEvent event) throws IOException, IllegalArgumentException {
+    String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");
+    System.out.println("[Java] 11. Nom de la constellation : " + name);
     try {
-        InputStream imageStream = getClass().getResourceAsStream("/images/orsaminor.jpg");
+        InputStream imageStream = getClass().getResourceAsStream("/images/output.png");
         if (imageStream == null) {
             System.err.println("Image non trouvée dans les ressources");
             return;
@@ -111,7 +118,7 @@ public void handleConstellation(ActionEvent event) {
         imageView.setImage(image);
         imageView.setVisible(true);
         consoleOutput.setOpacity(1.0);
-        chargerTexte("/baseDDonnees_txt/apus.txt");
+        chargerTexte("/baseDDonnees_txt/" + name + ".txt");
         System.out.println("Affichage réussi !");
     } catch (Exception e) {
         System.err.println("Erreur: " + e.getMessage());
