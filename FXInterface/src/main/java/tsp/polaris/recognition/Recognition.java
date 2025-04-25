@@ -50,8 +50,9 @@ public class Recognition {
         
         // On cherche la constellation
         DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(nbStudiedStars, constellations);
-
-        System.out.println(bestStarSet.getNearConstellation().getName());
+        String name = bestStarSet.getNearConstellation().getName();
+        System.out.println(name);
+        Functions.write_in_namefile(name);
         System.out.println(bestStarSet);
 
         // On dessine la constellation
