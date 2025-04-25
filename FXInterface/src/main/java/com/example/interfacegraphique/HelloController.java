@@ -46,6 +46,10 @@ private String listeetoilepath="FXInterface/src/main/resources/transmission/list
 @FXML
 public void initialize() {
     setupBackgroundVideo();
+    setupLoaderandPolaris();
+}
+
+private void setupLoaderandPolaris() {
     bottomRightImage.setImage(new Image(getClass().getResource("/images/polaris 2.png").toExternalForm()));
     playBackgroundMusic();
     
