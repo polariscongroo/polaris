@@ -17,14 +17,6 @@
 
 
 
-.main-button {
-    -fx-background-color: transparent;
-    -fx-opacity: 1;
-    -fx-text-fill: rgb(255, 255, 255);
-    -fx-border-color: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 10 20;
-}
 
 
 
@@ -66,6 +58,52 @@
     -fx-transition: -fx-border-color 1s linear, -fx-text-fill 1s linear, -fx-scale-x 1s linear, -fx-scale-y 1s linear;
 }
 
+
+.button-container2:hover {
+    -fx-background-color: transparent; /* Fond transparent au survol */
+    -fx-border-color: #00b7ff;         /* Bordure bleue brillante */
+    -fx-text-fill: #00b7ff;            /* Texte bleu */
+    -fx-font-size: 16px;               /* Double la taille de la police */
+    -fx-scale-x: 1.1;                  /* Agrandit légèrement le bouton horizontalement */
+    -fx-scale-y: 1.1;                  /* Agrandit légèrement le bouton verticalement */
+
+    /* Halo lumineux */
+    -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.6, 0, 0);
+}
+
+.button-container2 {
+    -fx-background-color: transparent; /* Fond transparent */
+    -fx-border-color: #00b7ff;    /* Bordure invisible par défaut */
+    -fx-border-width: 2px;            /* Épaisseur de la bordure */
+    
+    -fx-text-fill: #00b7ff;            /* Texte bleu */
+    -fx-font-size: 20px;              /* Taille de la police par défaut */
+    
+    -fx-background-radius: 10;        /*Coins arrondis*/ 
+    -fx-border-radius: 10;            /* Coins arrondis pour la bordure */
+    -fx-cursor: hand;                 /* Curseur en forme de main */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Pas d'effet par défaut */
+    -fx-pref-width: 200px;            /* Largeur fixe */
+    -fx-pref-height: 50px;            /* Hauteur fixe */
+    -fx-min-width: 200px;             /* Largeur minimale */
+    -fx-min-height: 50px;             /* Hauteur minimale */
+    -fx-max-width: 200px;             /* Largeur maximale */
+    -fx-max-height: 50px;             /* Hauteur maximale */
+                 
+    -fx-scale-x: 1;                   /* Taille normale */
+    -fx-scale-y: 1;                   /* Taille normale */
+
+    /* Transition fluide */
+    -fx-transition: -fx-border-color 1s linear, -fx-text-fill 1s linear, -fx-scale-x 1s linear, -fx-scale-y 1s linear;
+}
+
+
+
+
+
+
+
+
 .console-text-area {
     -fx-font-family: "Courier New";
     -fx-opacity: 0;
@@ -76,6 +114,9 @@
     -fx-border-radius: 5;
     -fx-padding: 10;
 }
+
+
+
 
 .maximizer {
     -fx-background-color: transparent;
