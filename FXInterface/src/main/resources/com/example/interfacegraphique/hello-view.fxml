@@ -13,22 +13,15 @@
         <!-- Main Content -->
         <BorderPane fx:id="rootPane" >
             <top>
-                <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;">
-                    <!-- Bouton pour maximiser à gauche -->
-                    <Button text="□" styleClass="window-button" onAction="#handleMaximiser"/>
-            
-                    <!-- Espace extensible -->
-                    <Region HBox.hgrow="ALWAYS"/>
-            
-                    <!-- Image Polaris (logo) bien centrée -->
-                    <ImageView fx:id="bottomRightImage" fitWidth="150" preserveRatio="true"/>
-            
-                    <!-- Espace extensible -->
-                    <Region HBox.hgrow="ALWAYS"/>
-            
-                    <!-- Bouton pour fermer à droite -->
-                    <Button text="✕" styleClass="window-button" onAction="#handleClose"/>
-                </HBox>
+                <VBox alignment="TOP_CENTER">
+                    <HBox alignment="CENTER" spacing="20" VBox.vgrow="NEVER">
+                        <Button text="□" styleClass="window-button" onAction="#handleMaximiseAndPlayMusic"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="200" preserveRatio="true"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="✕" styleClass="window-button" onAction="#handleClose"/>
+                    </HBox>
+                </VBox>
             </top>
             <center>
                 <HBox alignment="CENTER" spacing="20">

@@ -33,6 +33,7 @@
 }
 
 .button-container {
+    -fx-font-family: 'Segoe UI', sans-serif;
     -fx-background-color: transparent; /* Fond transparent */
     -fx-border-color: #00b7ff;    /* Bordure invisible par défaut */
     -fx-border-width: 2px;            /* Épaisseur de la bordure */
