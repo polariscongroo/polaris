@@ -97,9 +97,25 @@
     -fx-transition: -fx-border-color 1s linear, -fx-text-fill 1s linear, -fx-scale-x 1s linear, -fx-scale-y 1s linear;
 }
 
+.window-button {
+    -fx-background-color: transparent; /* Fond transparent */
+    -fx-text-fill: #0066ff;              /* Couleur du texte */
+    -fx-font-size: 25 px;               /* Taille de la police */
+    -fx-border-color: transparent;     /* Pas de bordure */
+    -fx-cursor: hand;                  /* Curseur en forme de main */
+    -fx-padding: 0;                    /* Espacement interne */
+}
 
+.window-button:hover {
+    -fx-background-color: #ff0000;     /* Fond rouge au survol */
+    -fx-text-fill: white;              /* Texte blanc */
 
+}
 
+.window-button:focused {
+    -fx-background-color: transparent; /* Pas de changement au focus */
+    -fx-border-color: transparent;
+}
 
 
 
@@ -118,18 +134,4 @@
 
 
 
-.maximizer {
-    -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
-    -fx-border-radius: 5;
-    -fx-padding: 10 20;
-}
-
-
-
-.closer {
-    -fx-background-color: transparent;
-    -fx-text-fill: #ffffff;
-    -fx-border-radius: 5;
-    -fx-padding: 10 20;
-}
+.

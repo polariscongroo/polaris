@@ -157,9 +157,9 @@ public void eraser(String path) {
 
 private void setupBackgroundVideo() {
     try {
-        URL videoUrl = getClass().getResource("/images/video_fond.mp4");
+        URL videoUrl = getClass().getResource("/images/propEmma.mp4");
         if (videoUrl == null) {
-            System.err.println("ERREUR: Fichier vidéo introuvable dans /images/video_fond.mp4");
+            System.err.println("ERREUR: Fichier vidéo introuvable dans /images/propEmma.mp4");
             return;
         }
         Media media = new Media(videoUrl.toExternalForm());

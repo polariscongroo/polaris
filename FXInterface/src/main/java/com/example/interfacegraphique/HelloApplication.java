@@ -47,7 +47,8 @@ public class HelloApplication extends Application {
         
         // 3. Redimensionnement manuel
         Resize(root, primaryStage);
-        
+
+        primaryStage.initStyle(javafx.stage.StageStyle.UNDECORATED);
         primaryStage.show();
     }
 

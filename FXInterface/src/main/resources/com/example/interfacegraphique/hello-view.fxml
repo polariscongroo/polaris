@@ -11,14 +11,14 @@
         <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
     
         <!-- Main Content -->
-        <BorderPane fx:id="rootPane">
+        <BorderPane fx:id="rootPane" >
             <top>
-                <HBox alignment="CENTER" spacing="20">
-                    <Button text="Maximize" styleClass="button-container2" onAction="#handleMaximiser"/>
+                <HBox alignment="CENTER" spacing="20" VBox.vgrow="NEVER">
+                    <Button text="□" styleClass="window-button" onAction="#handleMaximiser"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="250" preserveRatio="true" StackPane.alignment="BOTTOM_RIGHT"/>
+                    <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="200" preserveRatio="true" StackPane.alignment="BOTTOM_RIGHT"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Button text="Close" styleClass="button-container2" onAction="#handleClose"/>
+                    <Button text="✕" styleClass="window-button" onAction="#handleClose"/>
                 </HBox>
             </top>
             <center>
