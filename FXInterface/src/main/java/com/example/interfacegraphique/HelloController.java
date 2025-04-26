@@ -288,6 +288,20 @@ public void handleConstellationAndPlayMusic(ActionEvent event) throws NumberForm
     handleConstellation(event);
 }
 
+@FXML
+public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+    playMusicOnButtonClick(event);
+    playMusicOnButtonHover(event);
+    try {
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    handleMaximiser(event);
+}
+
+
+
 private void chargerTexte(String cheminTexte) {
     try {
         String textFullPath = new File("").getAbsolutePath() + File.separator + cheminTexte;
