@@ -2,7 +2,6 @@ package com.example.interfacegraphique;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
-import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.scene.effect.DropShadow;
@@ -30,11 +29,6 @@ public class LuminousOrb extends StackPane {
         outer.setEffect(new Glow(0.9));
         this.getChildren().addAll(outer, inner);
 
-        RotateTransition rotate = new RotateTransition(Duration.seconds(2), this);
-        rotate.setByAngle(360);
-        rotate.setCycleCount(RotateTransition.INDEFINITE);
-        rotate.setInterpolator(javafx.animation.Interpolator.LINEAR);
-        rotate.play();
 
         ScaleTransition pulse = new ScaleTransition(Duration.seconds(1.5), circle);
         pulse.setFromX(1);
@@ -45,7 +39,7 @@ public class LuminousOrb extends StackPane {
         pulse.setAutoReverse(true);
         pulse.play();
         this.getChildren().add(circle);
-        Timeline particleEmitter = new Timeline(new KeyFrame(Duration.millis(150), e -> {
+        Timeline particleEmitter = new Timeline(new KeyFrame(Duration.millis(210), e -> {
         OrbParticle particle = new OrbParticle(0, 0); // part du centre
         this.getChildren().add(particle);
         }));
