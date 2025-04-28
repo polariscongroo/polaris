@@ -1,11 +1,4 @@
-package tsp.polaris.JUnitTest;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.dataTransmission.Data;
-import tsp.polaris.recognition.other.Star;
+package JUnitTestRecognition;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import tsp.polaris.recognition.dataTransmission.Data;
+import tsp.polaris.recognition.other.Star;
 
 /**
  * Classe de test pour la classe Data

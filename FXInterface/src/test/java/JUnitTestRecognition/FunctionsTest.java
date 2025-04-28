@@ -1,10 +1,11 @@
-package tsp.polaris.JUnitTest;
+package JUnitTestRecognition;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.auxiliaries.Functions;
 
-import static org.junit.jupiter.api.Assertions.*;
+import tsp.polaris.auxiliaries.Functions;
 
 /**
  * Classe de test pour les fonctions de la classe Functions.

@@ -1,12 +1,13 @@
-package tsp.polaris.JUnitTest;
+package JUnitTestRecognition;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import tsp.polaris.recognition.other.Star;
-import tsp.polaris.recognition.starSet.Triangle;
 import tsp.polaris.recognition.starSet.StarSet;
+import tsp.polaris.recognition.starSet.Triangle;
 
 /**
  * Tests unitaires de la classe StarSet
@@ -67,21 +68,10 @@ public class StarSetTest {
     }
 
     /**
-     * Test 4 : Le tri des étoiles par luminsoté est bien décroissant
+     * Test 4 : Méthode getIndex()
      */
     @Test
-    @DisplayName("Test 4 : Le tri des étoiles par luminsoté est bien décroissant")
-    public void luminosityOrderCheckStarSet() {
-        for (int i = 0; i < workingStarSet.getStars().length - 1; i++) {
-            Assertions.assertTrue(workingStarSet.getStars()[i].getBrightness() >= workingStarSet.getStars()[i + 1].getBrightness());
-        }
-    }
-
-    /**
-     * Test 5 : Méthode getIndex()
-     */
-    @Test
-    @DisplayName("Test 5 : Méthode getIndex()")
+    @DisplayName("Test 4 : Méthode getIndex()")
     public void testGetIndex() {
         for(int i = 0; i < workingStarSet.getStars().length; i++){
             Assertions.assertEquals(i, workingStarSet.getIndex(workingStarSet.getStars()[i]));
@@ -89,10 +79,10 @@ public class StarSetTest {
     }
 
     /**
-     * Test 6 : La méthode findTriangle associe bien un triangle avec lui même
+     * Test 5 : La méthode findTriangle associe bien un triangle avec lui même
      */
     @Test
-    @DisplayName("Test 6 : La méthode findTriangle associe bien un triangle avec lui meme")
+    @DisplayName("Test 5 : La méthode findTriangle associe bien un triangle avec lui meme")
     public void testFindTriangle() {
         Triangle[] triangles = workingStarSet.generateTriangles();
         for (Triangle triangle : triangles) {

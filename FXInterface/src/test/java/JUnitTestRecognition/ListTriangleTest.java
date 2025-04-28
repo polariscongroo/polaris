@@ -1,14 +1,15 @@
-package tsp.polaris.JUnitTest;
+package JUnitTestRecognition;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tsp.polaris.recognition.starSet.TriangleMatchingException;
-import tsp.polaris.recognition.starSet.ListTriangle;
+
 import tsp.polaris.recognition.other.Star;
 import tsp.polaris.recognition.starSet.Constellation;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
+import tsp.polaris.recognition.starSet.ListTriangle;
+import tsp.polaris.recognition.starSet.TriangleMatchingException;
 
 /**
  * Tests unitaires de la classe ListTriangle
@@ -37,7 +38,7 @@ public class ListTriangleTest {
             starsConstellation[i] = new Star(i, (double)5/(i+1), i,1);
         }
         workingDetectedStarSet = new DetectedStarSet(starsDetected);
-        workingConstellation = new Constellation(starsConstellation, "TestConstellation", null);
+        workingConstellation = new Constellation(starsConstellation, "TestConstellation", null,4);
         workingDetectedStarSetListTriangle = new ListTriangle(workingDetectedStarSet.generateTriangles());
         workingConstellationListTriangle = new ListTriangle(workingConstellation.generateTriangles());
     }
