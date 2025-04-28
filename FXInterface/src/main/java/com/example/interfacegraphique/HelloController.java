@@ -205,7 +205,7 @@ public void eraser(String path) {
 
 private void setupBackgroundVideo() {
     try {
-        URL videoUrl = getClass().getResource("/images/test2.mp4");
+        URL videoUrl = getClass().getResource("/images/cassio.mp4");
         if (videoUrl == null) {
             System.err.println("ERREUR: Fichier vidéo introuvable dans /images/propEmma.mp4");
             return;
