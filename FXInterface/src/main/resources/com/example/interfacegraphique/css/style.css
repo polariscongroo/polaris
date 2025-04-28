@@ -24,7 +24,7 @@
     -fx-background-color: transparent; /* Fond transparent au survol */
     -fx-border-color: #00b7ff;         /* Bordure bleue brillante */
     -fx-text-fill: #00b7ff;            /* Texte bleu */
-    -fx-font-size: 26px;               /* Double la taille de la police */
+    -fx-font-size: 29px;               /* Double la taille de la police */
     -fx-scale-x: 1.1;                  /* Agrandit légèrement le bouton horizontalement */
     -fx-scale-y: 1.1;                  /* Agrandit légèrement le bouton verticalement */
 
@@ -39,7 +39,7 @@
     -fx-border-width: 2px;            /* Épaisseur de la bordure */
     
     -fx-text-fill: #00b7ff;            /* Texte bleu */
-    -fx-font-size: 25px;              /* Taille de la police par défaut */
+    -fx-font-size: 30 px;              /* Taille de la police par défaut */
     
     -fx-background-radius: 10;        /*Coins arrondis*/ 
     -fx-border-radius: 10;            /* Coins arrondis pour la bordure */
@@ -47,10 +47,10 @@
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Pas d'effet par défaut */
     -fx-pref-width: 200px;            /* Largeur fixe */
     -fx-pref-height: 50px;            /* Hauteur fixe */
-    -fx-min-width: 275px;             /* Largeur minimale */
-    -fx-min-height: 75px;             /* Hauteur minimale */
-    -fx-max-width: 275px;             /* Largeur maximale */
-    -fx-max-height: 75px;             /* Hauteur maximale */
+    -fx-min-width: 325px;             /* Largeur minimale */
+    -fx-min-height: 100px;             /* Hauteur minimale */
+    -fx-max-width: 325px;             /* Largeur maximale */
+    -fx-max-height: 100px;             /* Hauteur maximale */
                  
     -fx-scale-x: 1;                   /* Taille normale */
     -fx-scale-y: 1;                   /* Taille normale */

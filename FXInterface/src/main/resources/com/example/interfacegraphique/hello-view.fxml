@@ -27,7 +27,7 @@
             </top>
             <center>
                 <HBox alignment="CENTER" spacing="20">
-                    <Button text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
+                    <Button fx:id="RECOGNITION" text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
                     <Region HBox.hgrow="ALWAYS"/>
                     <VBox spacing="10" alignment="CENTER">
                         <ImageView fx:id="imageView" fitWidth="600" preserveRatio="true" visible="false"/>
@@ -35,7 +35,7 @@
                     </VBox>
                     <Pane fx:id="orbContainer" prefWidth="250" prefHeight="250"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                    <Button text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
+                    <Button fx:id="CONSTELLATION" text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
                 </HBox>
             </center>
         </BorderPane>

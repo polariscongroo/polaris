@@ -1,5 +1,6 @@
 package com.example.interfacegraphique;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,10 +11,13 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +28,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.Recognition;
 import tsp.polaris.recognition.starSet.TriangleMatchingException;
@@ -36,18 +41,37 @@ public class HelloController {
 @FXML private ImageView imageView;
 @FXML private Pane orbContainer;
 @FXML private ImageView bottomRightImage;
+@FXML private Button RECOGNITION;
+@FXML private Button CONSTELLATION;
 
 private MediaPlayer mediaPlayer;
 private MediaPlayer clickSoundPlayer;
 private MediaPlayer musicPlayer;
+private boolean isConstellationVisible = false; // État initial : non visible
 
 private String outputpath="cartography/image_aTraiter/output.txt";
 private String listeetoilepath="FXInterface/src/main/resources/transmission/liste_etoiles.csv";
 
 @FXML
 public void initialize() {
+    // Au début, l'image et le texte sont invisibles
+    CONSTELLATION.setVisible(false);
+    animateButton(RECOGNITION);
+    
+    animateButton(CONSTELLATION);
+
+    
     setupBackgroundVideo();
     setupLoaderandPolaris();
+}
+
+private void animateButton(Button button) {
+    Timeline timeline = new Timeline(
+        new KeyFrame(Duration.seconds(0), event -> button.getStyleClass().add("button-container:hover")),
+        new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().remove("button-container:hover"))
+    );
+    timeline.setCycleCount(Timeline.INDEFINITE); // Répète l'animation indéfiniment
+    timeline.play();
 }
 
 private void setupLoaderandPolaris() {
@@ -106,24 +130,35 @@ public void handleRecognition(ActionEvent event) throws NumberFormatException, T
 
 @FXML
 public void handleConstellation(ActionEvent event) throws IOException, IllegalArgumentException {
-    String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");
-    System.out.println("[Java] 11. Nom de la constellation : " + name);
-    try {
-        InputStream imageStream = getClass().getResourceAsStream("/images/output.png");
-        if (imageStream == null) {
-            System.err.println("Image non trouvée dans les ressources");
-            return;
+    if (isConstellationVisible) {
+        System.out.println("Constellation déjà visible.");
+        imageView.setVisible(false);
+        orbContainer.setVisible(true);
+        isConstellationVisible = false;
+        consoleOutput.setOpacity(0.0);
+
+    }else{
+        String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");
+        System.out.println("[Java] 11. Nom de la constellation : " + name);
+        try {
+            InputStream imageStream = getClass().getResourceAsStream("/images/output.png");
+            if (imageStream == null) {
+                System.err.println("Image non trouvée dans les ressources");
+                return;
+            }
+            Image image = new Image(imageStream);
+            imageView.setImage(image);
+            imageView.setVisible(true);
+            consoleOutput.setOpacity(1.0);
+            chargerTexte("/baseDDonnees_txt/" + name + ".txt");
+            System.out.println("Affichage réussi !");
+        } catch (Exception e) {
+            System.err.println("Erreur: " + e.getMessage());
+            e.printStackTrace();
         }
-        Image image = new Image(imageStream);
-        imageView.setImage(image);
-        imageView.setVisible(true);
-        consoleOutput.setOpacity(1.0);
-        chargerTexte("/baseDDonnees_txt/" + name + ".txt");
-        System.out.println("Affichage réussi !");
-    } catch (Exception e) {
-        System.err.println("Erreur: " + e.getMessage());
-        e.printStackTrace();
     }
+    //on inverse de l'état
+    isConstellationVisible = !isConstellationVisible;
 }
 
 @FXML
@@ -274,9 +309,17 @@ public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormat
     } catch (InterruptedException e) {
         e.printStackTrace();
     }
+
     handleRecognition(event);
+
+    // Ajout important après reconnaissance
+    RECOGNITION.setVisible(false);
+    orbContainer.setVisible(false);
+    CONSTELLATION.setVisible(true);
+   
 }
 
+  
 @FXML
 public void handleMaximiserAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     playMusicOnButtonClick(event);
