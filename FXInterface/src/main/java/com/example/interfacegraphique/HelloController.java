@@ -142,6 +142,19 @@ public void handleMaximiser(ActionEvent event) {
     System.out.println("Fenêtre maximisée");
 }
 
+// Méthode pour minimiser la fenêtre
+public void handleMinimize(ActionEvent event) {
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setIconified(true); // Met la fenêtre en petit écran
+}
+
+@FXML
+public void handleRestore(ActionEvent event) {
+    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    stage.setMaximized(false); // Remet la fenêtre en petite taille
+    System.out.println("Fenêtre restaurée à sa taille normale.");
+}
+
 @FXML
 public void eraser(String path) {
     try {
