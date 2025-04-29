@@ -67,8 +67,9 @@ public void initialize() {
 
 private void animateButton(Button button) {
     Timeline timeline = new Timeline(
-        new KeyFrame(Duration.seconds(0), event -> button.getStyleClass().add("button-container:hover")),
-        new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().remove("button-container:hover"))
+        new KeyFrame(Duration.seconds(0), event -> button.getStyleClass().add("button-container")),
+        new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().remove("button-container")),
+        new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().add("button-effect"))
     );
     timeline.setCycleCount(Timeline.INDEFINITE); // Répète l'animation indéfiniment
     timeline.play();

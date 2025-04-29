@@ -3,20 +3,14 @@
     -fx-padding: 20;
 }
 
-.header {
+
+
+.button-effect {
     -fx-background-color: transparent; /* Fond transparent au survol */
+    -fx-border-color: #00b7ff;         /* Bordure bleue brillante */
     -fx-text-fill: #00b7ff;            /* Texte bleu */
-    -fx-font-size: 32px;               /* Double la taille de la police */
-    -fx-scale-x: 1;                  /* Agrandit légèrement le bouton horizontalement */
-    -fx-scale-y: 1;                  /* Agrandit légèrement le bouton verticalement */
-
-    /* Halo lumineux */
     -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.6, 0, 0);
-    -fx-alignment: center;
 }
-
-
-
 
 
 
@@ -25,8 +19,8 @@
     -fx-border-color: #00b7ff;         /* Bordure bleue brillante */
     -fx-text-fill: #00b7ff;            /* Texte bleu */
     -fx-font-size: 29px;               /* Double la taille de la police */
-    -fx-scale-x: 1.1;                  /* Agrandit légèrement le bouton horizontalement */
-    -fx-scale-y: 1.1;                  /* Agrandit légèrement le bouton verticalement */
+    -fx-scale-x: 1;                  /* Agrandit légèrement le bouton horizontalement */
+    -fx-scale-y: 1;                  /* Agrandit légèrement le bouton verticalement */
 
     /* Halo lumineux */
     -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.6, 0, 0);
