@@ -26,7 +26,7 @@ public class OrbParticle extends Circle {
         setTranslateX(centerX);
         setTranslateY(centerY);
 
-        // Animation aléatoire vers l'extérieur
+        // +ion aléatoire vers l'extérieur
         double angle = Math.random() * 2 * Math.PI;
         double distance = 100 + Math.random() * 50;
         double x = Math.cos(angle) * distance;

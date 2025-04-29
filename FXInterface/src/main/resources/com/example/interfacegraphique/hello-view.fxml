@@ -9,6 +9,7 @@
     
         <!-- Background Media -->
         <MediaView fx:id="backgroundMediaView" visible="true" preserveRatio="false"/>
+
     
         <!-- Main Content -->
         <BorderPane fx:id="rootPane" >

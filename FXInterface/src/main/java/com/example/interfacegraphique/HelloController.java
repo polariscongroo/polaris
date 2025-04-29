@@ -135,6 +135,8 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
         System.out.println("Constellation déjà visible.");
         imageView.setVisible(false);
         orbContainer.setVisible(true);
+        RECOGNITION.setVisible(true);
+        CONSTELLATION.setVisible(false);
         isConstellationVisible = false;
         consoleOutput.setOpacity(0.0);
 
