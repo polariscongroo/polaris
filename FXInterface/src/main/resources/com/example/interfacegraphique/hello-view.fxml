@@ -20,10 +20,10 @@
                     <Button text="◱" styleClass="window-button" onAction="#handleRestore"/> <!-- Restaurer -->
                     <Region HBox.hgrow="ALWAYS"/>
 
-                    <VBox spacing="10" alignment="CENTER">
+                   
                         <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="200" preserveRatio="true"/>
-                        <Pane fx:id="orbContainer" prefWidth="250" prefHeight="200"/>
-                     </VBox>  
+                        
+                    
                     
                         
 
@@ -36,14 +36,14 @@
             </top>
 
             <center>
-                <VBox alignment="CENTER" spacing="30">
-                    <ImageView fx:id="topLeftImage" fitWidth="250" fitHeight="200" preserveRatio="true"/>
-                    <Pane fx:id="orbContainer2" prefWidth="250" prefHeight="200"/>
+                  
+                <StackPane alignment="CENTER">
+                    <StackPane fx:id="orbContainer" prefWidth="250" prefHeight="200" alignment="CENTER"/>
+                </StackPane>
 
-                </VBox>
             </center>
 
-            <center>
+            <bottom>
                 <HBox alignment="CENTER" spacing="20">
                     <Button fx:id="RECOGNITION" text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
                     <Region HBox.hgrow="ALWAYS"/>
@@ -54,7 +54,7 @@
                     <Region HBox.hgrow="ALWAYS"/>
                     <Button fx:id="CONSTELLATION" text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
                 </HBox>
-            </center>
+            </bottom>
            
         </BorderPane>
     
