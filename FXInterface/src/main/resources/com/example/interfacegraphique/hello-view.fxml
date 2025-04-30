@@ -38,7 +38,7 @@
             <center>
                   
                 <StackPane alignment="CENTER">
-                    <StackPane fx:id="orbContainer" prefWidth="250" prefHeight="200" alignment="CENTER"/>
+                    <StackPane fx:id="compassContainer" prefWidth="250" prefHeight="200" alignment="CENTER"/>
                 </StackPane>
 
             </center>

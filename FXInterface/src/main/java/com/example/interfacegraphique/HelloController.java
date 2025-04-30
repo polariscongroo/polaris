@@ -11,8 +11,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,14 +19,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import tsp.polaris.auxiliaries.Functions;
 import tsp.polaris.recognition.Recognition;
 import tsp.polaris.recognition.starSet.TriangleMatchingException;
@@ -39,15 +35,16 @@ public class HelloController {
 @FXML private MediaView backgroundMediaView;
 @FXML private TextArea consoleOutput;
 @FXML private ImageView imageView;
-@FXML private Pane orbContainer;
 @FXML private ImageView bottomRightImage;
 @FXML private Button RECOGNITION;
 @FXML private Button CONSTELLATION;
+@FXML private StackPane compassContainer;
 
 private MediaPlayer mediaPlayer;
 private MediaPlayer clickSoundPlayer;
 private MediaPlayer musicPlayer;
 private boolean isConstellationVisible = false; // État initial : non visible
+private MediaPlayer hoverSoundPlayer;
 
 private String outputpath="cartography/image_aTraiter/output.txt";
 private String listeetoilepath="FXInterface/src/main/resources/transmission/liste_etoiles.csv";
@@ -56,16 +53,12 @@ private String listeetoilepath="FXInterface/src/main/resources/transmission/list
 public void initialize() {
     // Au début, l'image et le texte sont invisibles
     CONSTELLATION.setVisible(false);
-    animateButton(RECOGNITION);
-    
-    animateButton(CONSTELLATION);
-
     
     setupBackgroundVideo();
     setupLoaderandPolaris();
 }
 
-private void animateButton(Button button) {
+/*private void animateButton(Button button) {
     Timeline timeline = new Timeline(
         new KeyFrame(Duration.seconds(0), event -> button.getStyleClass().add("button-container")),
         new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().remove("button-container")),
@@ -73,14 +66,14 @@ private void animateButton(Button button) {
     );
     timeline.setCycleCount(Timeline.INDEFINITE); // Répète l'animation indéfiniment
     timeline.play();
-}
+}*/ 
 
 private void setupLoaderandPolaris() {
     bottomRightImage.setImage(new Image(getClass().getResource("/images/polaris 2.png").toExternalForm()));
     playBackgroundMusic();
     
-    LuminousOrb orb = new LuminousOrb();
-    orbContainer.getChildren().add(orb);
+    CompassRose compass = new CompassRose();
+    compassContainer.getChildren().add(compass);
     System.out.println("Loader activé au démarrage.");
 }
 
@@ -134,7 +127,7 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
     if (isConstellationVisible) {
         System.out.println("Constellation déjà visible.");
         imageView.setVisible(false);
-        orbContainer.setVisible(true);
+        compassContainer.setVisible(true);
         RECOGNITION.setVisible(true);
         CONSTELLATION.setVisible(false);
         isConstellationVisible = false;
@@ -283,7 +276,7 @@ public void playMusicOnButtonClick(ActionEvent event) {
 public void playMusicOnButtonHover(ActionEvent event) {
     try {
         if (clickSoundPlayer == null) {
-            URL musicUrl = getClass().getResource("/audio/hover3.mp3");
+            URL musicUrl = getClass().getResource("/audio/hoverSound.mp3");
             if (musicUrl == null) {
                 System.err.println("ERREUR: Fichier audio introuvable dans /audio/hover3.mp3");
                 return;
@@ -317,7 +310,7 @@ public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormat
 
     // Ajout important après reconnaissance
     RECOGNITION.setVisible(false);
-    orbContainer.setVisible(false);
+    compassContainer.setVisible(false);
     CONSTELLATION.setVisible(true);
    
 }
