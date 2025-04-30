@@ -1,13 +1,14 @@
 package tsp.polaris.drawConstellation;
 
-import java.awt.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import javax.imageio.ImageIO;
+
 import tsp.polaris.recognition.other.Point;
 import tsp.polaris.recognition.starSet.DetectedStarSet;
-
-import java.util.List;
 
 /**
  * Crée une nouvelle image avec la constellation tracée à partir de l'image donnée et des coordonnées des points formant la constellation
