@@ -6,6 +6,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
@@ -23,16 +24,18 @@ import javafx.util.Duration;
 public class CompassRose extends BorderPane {
 
     public CompassRose() {
-
         Pane centerPane = new Pane();
-        this.setCenter(centerPane); // 👈 Ajout dans la zone centrale du BorderPane
+        this.setCenter(centerPane);
 
-        // 🔵 Dégradé radial
+        // ✅ Group qui contiendra uniquement les éléments rotatifs
+        Group compassGroup = new Group();
+        centerPane.getChildren().add(compassGroup);
+
+        // 🔵 Dégradé radial de fond (fixe, donc pas dans le groupe)
         Circle background = new Circle();
         background.radiusProperty().bind(Bindings.createDoubleBinding(() ->
                 Math.min(0.55 * Math.min(centerPane.getWidth(), centerPane.getHeight()) / 2, 200),
                 centerPane.widthProperty(), centerPane.heightProperty()));
-
         background.centerXProperty().bind(centerPane.widthProperty().divide(2));
         background.centerYProperty().bind(centerPane.heightProperty().divide(2));
         background.setFill(new RadialGradient(
@@ -44,7 +47,7 @@ public class CompassRose extends BorderPane {
                 new Stop(0, Color.web("#2c3e50")),
                 new Stop(1, Color.web("rgba(0, 0, 0, 0.4)"))
         ));
-        centerPane.getChildren().add(background);
+        centerPane.getChildren().add(0, background); // mettre le fond en arrière-plan
 
         double radius = 50;
         String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
@@ -62,30 +65,28 @@ public class CompassRose extends BorderPane {
             label.setFont(Font.font("Verdana", i % 2 == 0 ? 20 : 14));
             label.setEffect(new DropShadow(5, Color.CYAN));
 
-            line.startXProperty().bind(centerPane.widthProperty().divide(2));
-            line.startYProperty().bind(centerPane.heightProperty().divide(2));
-            line.endXProperty().bind(Bindings.createDoubleBinding(() ->
-                    centerPane.getWidth() / 2 + radius * Math.cos(angle),
-                    centerPane.widthProperty()));
-            line.endYProperty().bind(Bindings.createDoubleBinding(() ->
-                    centerPane.getHeight() / 2 - radius * Math.sin(angle),
-                    centerPane.heightProperty()));
+            double offset = (radius + 20);
 
-            label.xProperty().bind(Bindings.createDoubleBinding(() ->
-                    centerPane.getWidth() / 2 + (radius + 20) * Math.cos(angle) - 10,
-                    centerPane.widthProperty()));
-            label.yProperty().bind(Bindings.createDoubleBinding(() ->
-                    centerPane.getHeight() / 2 - (radius + 20) * Math.sin(angle) + 5,
-                    centerPane.heightProperty()));
+            line.setStartX(0);
+            line.setStartY(0);
+            line.setEndX(radius * Math.cos(angle));
+            line.setEndY(-radius * Math.sin(angle));
 
-            centerPane.getChildren().addAll(line, label);
+            label.setX(offset * Math.cos(angle) - 10);
+            label.setY(-offset * Math.sin(angle) + 5);
+
+            compassGroup.getChildren().addAll(line, label);
         }
 
+        // Centrer le compassGroup
+        compassGroup.layoutXProperty().bind(centerPane.widthProperty().divide(2));
+        compassGroup.layoutYProperty().bind(centerPane.heightProperty().divide(2));
+
         this.setPrefSize(200, 200);
-        animateCompass(centerPane);
+        animateCompass(compassGroup); // ✅ Ne rotate QUE le compas
     }
 
-    private void animateCompass(Pane node) {
+    private void animateCompass(Group compassGroup) {
         Random random = new Random();
 
         Runnable rotateStep = new Runnable() {
@@ -94,7 +95,7 @@ public class CompassRose extends BorderPane {
                 double newAngle = -180 + random.nextDouble() * 360;
                 double duration = 1.5 + random.nextDouble() * 1.5;
 
-                RotateTransition rt = new RotateTransition(Duration.seconds(duration), node);
+                RotateTransition rt = new RotateTransition(Duration.seconds(duration), compassGroup);
                 rt.setToAngle(newAngle);
                 rt.setInterpolator(Interpolator.EASE_BOTH);
                 rt.setOnFinished(e -> Platform.runLater(this));
@@ -105,4 +106,3 @@ public class CompassRose extends BorderPane {
         rotateStep.run();
     }
 }
-
