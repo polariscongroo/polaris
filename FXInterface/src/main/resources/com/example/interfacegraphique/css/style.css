@@ -54,51 +54,17 @@
 }
 
 
-.button-container2:hover {
-    -fx-background-color: transparent; /* Fond transparent au survol */
-    -fx-border-color: #00b7ff;         /* Bordure bleue brillante */
-    -fx-text-fill: #00b7ff;            /* Texte bleu */
-    -fx-font-size: 16px;               /* Double la taille de la police */
-    -fx-scale-x: 1.1;                  /* Agrandit légèrement le bouton horizontalement */
-    -fx-scale-y: 1.1;                  /* Agrandit légèrement le bouton verticalement */
 
-    /* Halo lumineux */
-    -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.6, 0, 0);
-}
-
-.button-container2 {
-    -fx-background-color: transparent; /* Fond transparent */
-    -fx-border-color: #00b7ff;    /* Bordure invisible par défaut */
-    -fx-border-width: 2px;            /* Épaisseur de la bordure */
-    
-    -fx-text-fill: #00b7ff;            /* Texte bleu */
-    -fx-font-size: 20px;              /* Taille de la police par défaut */
-    
-    -fx-background-radius: 10;        /*Coins arrondis*/ 
-    -fx-border-radius: 10;            /* Coins arrondis pour la bordure */
-    -fx-cursor: hand;                 /* Curseur en forme de main */
-    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Pas d'effet par défaut */
-    -fx-pref-width: 200px;            /* Largeur fixe */
-    -fx-pref-height: 50px;            /* Hauteur fixe */
-    -fx-min-width: 200px;             /* Largeur minimale */
-    -fx-min-height: 50px;             /* Hauteur minimale */
-    -fx-max-width: 200px;             /* Largeur maximale */
-    -fx-max-height: 50px;             /* Hauteur maximale */
-                 
-    -fx-scale-x: 1;                   /* Taille normale */
-    -fx-scale-y: 1;                   /* Taille normale */
-
-    /* Transition fluide */
-    -fx-transition: -fx-border-color 1s linear, -fx-text-fill 1s linear, -fx-scale-x 1s linear, -fx-scale-y 1s linear;
-}
 
 .window-button {
     -fx-background-color: transparent; /* Fond transparent */
-    -fx-text-fill: #0066ff;              /* Couleur du texte */
-    -fx-font-size: 25 px;               /* Taille de la police */
-    -fx-border-color: transparent;     /* Pas de bordure */
+    -fx-text-fill:  #00b7ff;              /* Couleur du texte */
+    -fx-font-size: 40 px;               /* Taille de la police */
+    -fx-border-color: #00b7ff;     /* Pas de bordure */
     -fx-cursor: hand;                  /* Curseur en forme de main */
-    -fx-padding: 0;                    /* Espacement interne */
+    -fx-padding: 3;                    /* Espacement interne */
+    /* Halo lumineux */
+    -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.6, 0, 0);
 }
 
 .window-button:hover {
