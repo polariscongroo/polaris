@@ -8,8 +8,8 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.RadialGradient;
@@ -20,19 +20,21 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class CompassRose extends StackPane {
+public class CompassRose extends BorderPane {
 
     public CompassRose() {
-        Pane root = new Pane();
-        this.getChildren().add(root);
 
-        // 🔵 Ajout d’un fond en dégradé radial
+        Pane centerPane = new Pane();
+        this.setCenter(centerPane); // 👈 Ajout dans la zone centrale du BorderPane
+
+        // 🔵 Dégradé radial
         Circle background = new Circle();
         background.radiusProperty().bind(Bindings.createDoubleBinding(() ->
-                Math.min(0.55 * Math.min(root.getWidth(), root.getHeight()) / 2, 200), root.widthProperty(), root.heightProperty()));
+                Math.min(0.55 * Math.min(centerPane.getWidth(), centerPane.getHeight()) / 2, 200),
+                centerPane.widthProperty(), centerPane.heightProperty()));
 
-        background.centerXProperty().bind(root.widthProperty().divide(2));
-        background.centerYProperty().bind(root.heightProperty().divide(2));
+        background.centerXProperty().bind(centerPane.widthProperty().divide(2));
+        background.centerYProperty().bind(centerPane.heightProperty().divide(2));
         background.setFill(new RadialGradient(
                 0, 0,
                 0.5, 0.5,
@@ -42,7 +44,7 @@ public class CompassRose extends StackPane {
                 new Stop(0, Color.web("#2c3e50")),
                 new Stop(1, Color.web("rgba(0, 0, 0, 0.4)"))
         ));
-        root.getChildren().add(background);
+        centerPane.getChildren().add(background);
 
         double radius = 50;
         String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
@@ -60,27 +62,27 @@ public class CompassRose extends StackPane {
             label.setFont(Font.font("Verdana", i % 2 == 0 ? 20 : 14));
             label.setEffect(new DropShadow(5, Color.CYAN));
 
-            line.startXProperty().bind(root.widthProperty().divide(2));
-            line.startYProperty().bind(root.heightProperty().divide(2));
+            line.startXProperty().bind(centerPane.widthProperty().divide(2));
+            line.startYProperty().bind(centerPane.heightProperty().divide(2));
             line.endXProperty().bind(Bindings.createDoubleBinding(() ->
-                    root.getWidth() / 2 + radius * Math.cos(angle),
-                    root.widthProperty()));
+                    centerPane.getWidth() / 2 + radius * Math.cos(angle),
+                    centerPane.widthProperty()));
             line.endYProperty().bind(Bindings.createDoubleBinding(() ->
-                    root.getHeight() / 2 - radius * Math.sin(angle),
-                    root.heightProperty()));
+                    centerPane.getHeight() / 2 - radius * Math.sin(angle),
+                    centerPane.heightProperty()));
 
             label.xProperty().bind(Bindings.createDoubleBinding(() ->
-                    root.getWidth() / 2 + (radius + 20) * Math.cos(angle) - 10,
-                    root.widthProperty()));
+                    centerPane.getWidth() / 2 + (radius + 20) * Math.cos(angle) - 10,
+                    centerPane.widthProperty()));
             label.yProperty().bind(Bindings.createDoubleBinding(() ->
-                    root.getHeight() / 2 - (radius + 20) * Math.sin(angle) + 5,
-                    root.heightProperty()));
+                    centerPane.getHeight() / 2 - (radius + 20) * Math.sin(angle) + 5,
+                    centerPane.heightProperty()));
 
-            root.getChildren().addAll(line, label);
+            centerPane.getChildren().addAll(line, label);
         }
 
-        // 💫 Rotation avec angles aléatoires
-        animateCompass(root);
+        this.setPrefSize(200, 200);
+        animateCompass(centerPane);
     }
 
     private void animateCompass(Pane node) {
@@ -89,18 +91,18 @@ public class CompassRose extends StackPane {
         Runnable rotateStep = new Runnable() {
             @Override
             public void run() {
-                double newAngle = -180 + random.nextDouble() * 360; // [-180°, 180°]
-                double duration = 1.5 + random.nextDouble() * 1.5;   // [1.5s, 3s]
+                double newAngle = -180 + random.nextDouble() * 360;
+                double duration = 1.5 + random.nextDouble() * 1.5;
 
                 RotateTransition rt = new RotateTransition(Duration.seconds(duration), node);
                 rt.setToAngle(newAngle);
                 rt.setInterpolator(Interpolator.EASE_BOTH);
-                rt.setOnFinished(e -> Platform.runLater(this)); // Relancer après chaque fin
+                rt.setOnFinished(e -> Platform.runLater(this));
                 rt.play();
             }
         };
 
-        rotateStep.run(); // Lancer le premier cycle
+        rotateStep.run();
     }
 }
 
