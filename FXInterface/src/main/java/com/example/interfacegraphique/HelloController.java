@@ -79,6 +79,7 @@ private void setupLoaderandPolaris() {
 
 @FXML
 public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+    isConstellationVisible = false; // ← reset
     eraser(outputpath);
     eraser(listeetoilepath);
     Object source = event.getSource();
@@ -117,6 +118,9 @@ public void handleRecognition(ActionEvent event) throws NumberFormatException, T
             }
         };
         new Thread(recognitionTask).start();
+        RECOGNITION.setVisible(false);
+        compassContainer.setVisible(false);
+        CONSTELLATION.setVisible(true);
     } else {
         System.out.println("Aucun fichier sélectionné.");
     }
@@ -309,9 +313,7 @@ public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormat
     handleRecognition(event);
 
     // Ajout important après reconnaissance
-    RECOGNITION.setVisible(false);
-    compassContainer.setVisible(false);
-    CONSTELLATION.setVisible(true);
+    
    
 }
 
