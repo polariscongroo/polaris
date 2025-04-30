@@ -1,6 +1,10 @@
 package com.example.interfacegraphique;
 
+import java.util.Random;
+
+import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
@@ -25,7 +29,8 @@ public class CompassRose extends StackPane {
         // 🔵 Ajout d’un fond en dégradé radial
         Circle background = new Circle();
         background.radiusProperty().bind(Bindings.createDoubleBinding(() ->
-                Math.min(root.getWidth(), root.getHeight()) / 2, root.widthProperty(), root.heightProperty()));
+                Math.min(0.55 * Math.min(root.getWidth(), root.getHeight()) / 2, 200), root.widthProperty(), root.heightProperty()));
+
         background.centerXProperty().bind(root.widthProperty().divide(2));
         background.centerYProperty().bind(root.heightProperty().divide(2));
         background.setFill(new RadialGradient(
@@ -35,11 +40,11 @@ public class CompassRose extends StackPane {
                 true,
                 CycleMethod.NO_CYCLE,
                 new Stop(0, Color.web("#2c3e50")),
-                new Stop(1, Color.web("#000000"))
+                new Stop(1, Color.web("rgba(0, 0, 0, 0.4)"))
         ));
         root.getChildren().add(background);
 
-        double radius = 100;
+        double radius = 50;
         String[] directions = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
 
         for (int i = 0; i < directions.length; i++) {
@@ -74,11 +79,28 @@ public class CompassRose extends StackPane {
             root.getChildren().addAll(line, label);
         }
 
-        // 💫 Rotation subtile et infinie
-        RotateTransition rotate = new RotateTransition(Duration.seconds(20), root);
-        rotate.setByAngle(360);
-        rotate.setCycleCount(RotateTransition.INDEFINITE);
-        rotate.setInterpolator(javafx.animation.Interpolator.LINEAR);
-        rotate.play();
+        // 💫 Rotation avec angles aléatoires
+        animateCompass(root);
+    }
+
+    private void animateCompass(Pane node) {
+        Random random = new Random();
+
+        Runnable rotateStep = new Runnable() {
+            @Override
+            public void run() {
+                double newAngle = -180 + random.nextDouble() * 360; // [-180°, 180°]
+                double duration = 1.5 + random.nextDouble() * 1.5;   // [1.5s, 3s]
+
+                RotateTransition rt = new RotateTransition(Duration.seconds(duration), node);
+                rt.setToAngle(newAngle);
+                rt.setInterpolator(Interpolator.EASE_BOTH);
+                rt.setOnFinished(e -> Platform.runLater(this)); // Relancer après chaque fin
+                rt.play();
+            }
+        };
+
+        rotateStep.run(); // Lancer le premier cycle
     }
 }
+
