@@ -1,10 +1,14 @@
 package tsp.polaris.recognition.dataTransmission;
 
-import tsp.polaris.recognition.other.Star;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import tsp.polaris.recognition.other.Star;
 
 /**
  * Classe de données lues dans le fichier csv du script python
@@ -49,7 +53,9 @@ public class Data {
                     String[] values = line.split(",");
                     List<Integer> newList = new ArrayList<>();
                     for (String value : values) {
-                        newList.add(Integer.parseInt(value));
+                        if (Integer.parseInt(value) > 0) {
+                            newList.add(Integer.parseInt(value));
+                        }
                     }
                     adjacencyList.add(newList);
                 }
