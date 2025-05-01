@@ -11,6 +11,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +45,7 @@ private MediaPlayer mediaPlayer;
 private MediaPlayer clickSoundPlayer;
 private MediaPlayer musicPlayer;
 private boolean isConstellationVisible = false; // État initial : non visible
-private MediaPlayer hoverSoundPlayer;
+
 
 private String outputpath="cartography/image_aTraiter/output.txt";
 private String listeetoilepath="FXInterface/src/main/resources/transmission/liste_etoiles.csv";
@@ -79,18 +80,26 @@ private void setupLoaderandPolaris() {
 
 @FXML
 public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
-    isConstellationVisible = false; // ← reset
+    isConstellationVisible = false;
     eraser(outputpath);
     eraser(listeetoilepath);
+
+    // ⬇️ NOUVEAU : Cacher les deux boutons au début
+    RECOGNITION.setVisible(false);
+    CONSTELLATION.setVisible(false);
+    compassContainer.setVisible(true);
+
     Object source = event.getSource();
     Stage primaryStage = (Stage) ((Node) source).getScene().getWindow();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setInitialDirectory(new File("."));
     File selectedFile = fileChooser.showOpenDialog(primaryStage);
+
     if (selectedFile != null) {
         String path = selectedFile.getAbsolutePath();
         System.out.println("[Java] 1. Bouton bien actionné : Path de l'image dans output.txt: " + path);
         write_in_output(path);
+
         Task<Void> recognitionTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -101,65 +110,92 @@ public void handleRecognition(ActionEvent event) throws NumberFormatException, T
                 pb.directory(new File(projectPath));
                 pb.redirectErrorStream(true);
                 Process process = pb.start();
+
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         System.out.println("[Python] " + line);
                     }
                 }
+
                 int exitCode = process.waitFor();
                 if (exitCode == 0) {
                     System.out.println("[Java] Script Python terminé. Lancement de la reconnaissance...");
                     Recognition.run();
+
+                    // ⬇️ NOUVEAU : Montrer le bouton constellation après traitement
+                    Platform.runLater(() -> {
+                        CONSTELLATION.setVisible(true);
+                        compassContainer.setVisible(false); // Optionnel si tu veux le garder caché
+                    });
+
                 } else {
                     throw new RuntimeException("Script Python échoué avec code : " + exitCode);
                 }
+
                 return null;
             }
         };
+
         new Thread(recognitionTask).start();
-        RECOGNITION.setVisible(false);
-        compassContainer.setVisible(false);
-        CONSTELLATION.setVisible(true);
     } else {
         System.out.println("Aucun fichier sélectionné.");
+        // ⬇️ NOUVEAU : Si l'utilisateur annule, on remet les boutons visibles
+        RECOGNITION.setVisible(true);
+        CONSTELLATION.setVisible(false);
+        compassContainer.setVisible(true);
     }
 }
 
+
 @FXML
 public void handleConstellation(ActionEvent event) throws IOException, IllegalArgumentException {
+    CONSTELLATION.setDisable(true); // ← désactive le bouton immédiatement
+
     if (isConstellationVisible) {
         System.out.println("Constellation déjà visible.");
         imageView.setVisible(false);
         compassContainer.setVisible(true);
         RECOGNITION.setVisible(true);
-        CONSTELLATION.setVisible(false);
+        CONSTELLATION.setVisible(false); // ← le bouton disparaît
         isConstellationVisible = false;
         consoleOutput.setOpacity(0.0);
-
-    }else{
+        CONSTELLATION.setDisable(false); // ← réactive le bouton après repli
+    } else {
         String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");
         System.out.println("[Java] 11. Nom de la constellation : " + name);
-        try {
-            InputStream imageStream = getClass().getResourceAsStream("/images/output.png");
-            if (imageStream == null) {
-                System.err.println("Image non trouvée dans les ressources");
-                return;
+
+        Task<Void> loadConstellationTask = new Task<>() {
+            @Override
+            protected Void call() {
+                try (InputStream imageStream = getClass().getResourceAsStream("/images/output.png")) {
+                    if (imageStream == null) {
+                        System.err.println("Image non trouvée dans les ressources");
+                        return null;
+                    }
+                    Image image = new Image(imageStream);
+                    javafx.application.Platform.runLater(() -> {
+                        imageView.setImage(image);
+                        imageView.setVisible(true);
+                        consoleOutput.setOpacity(1.0);
+                        chargerTexte("/baseDDonnees_txt/" + name + ".txt");
+                        System.out.println("Affichage réussi !");
+                        CONSTELLATION.setDisable(false); // ← bouton réactivé ici
+                    });
+                } catch (IOException e) {
+                    System.err.println("Erreur: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                return null;
             }
-            Image image = new Image(imageStream);
-            imageView.setImage(image);
-            imageView.setVisible(true);
-            consoleOutput.setOpacity(1.0);
-            chargerTexte("/baseDDonnees_txt/" + name + ".txt");
-            System.out.println("Affichage réussi !");
-        } catch (Exception e) {
-            System.err.println("Erreur: " + e.getMessage());
-            e.printStackTrace();
-        }
+        };
+
+        new Thread(loadConstellationTask).start();
     }
-    //on inverse de l'état
+
     isConstellationVisible = !isConstellationVisible;
 }
+
 
 @FXML
 public void handleClose(ActionEvent event) {
@@ -276,34 +312,11 @@ public void playMusicOnButtonClick(ActionEvent event) {
     }
 }
 
-@FXML
-public void playMusicOnButtonHover(ActionEvent event) {
-    try {
-        if (clickSoundPlayer == null) {
-            URL musicUrl = getClass().getResource("/audio/hoverSound.mp3");
-            if (musicUrl == null) {
-                System.err.println("ERREUR: Fichier audio introuvable dans /audio/hover3.mp3");
-                return;
-            }
-            Media media = new Media(musicUrl.toExternalForm());
-            clickSoundPlayer = new MediaPlayer(media);
-            clickSoundPlayer.setOnEndOfMedia(() -> {
-                clickSoundPlayer.stop();
-            });
-        }
-        clickSoundPlayer.stop();
-        clickSoundPlayer.play();
-        System.out.println("Musique déclenchée par le bouton.");
-    } catch (Exception e) {
-        System.err.println("Erreur lors de la lecture de la musique : " + e.getMessage());
-        e.printStackTrace();
-    }
-}
 
 @FXML
 public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     playMusicOnButtonClick(event);
-    playMusicOnButtonHover(event);
+    
     try {
         Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -321,7 +334,7 @@ public void handleRecognitionAndPlayMusic(ActionEvent event) throws NumberFormat
 @FXML
 public void handleMaximiserAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     playMusicOnButtonClick(event);
-    playMusicOnButtonHover(event);
+
     try {
         Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -333,7 +346,7 @@ public void handleMaximiserAndPlayMusic(ActionEvent event) throws NumberFormatEx
 @FXML
 public void handleConstellationAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     playMusicOnButtonClick(event);
-    playMusicOnButtonHover(event);
+    
     try {
         Thread.sleep(500);
     } catch (InterruptedException e) {
@@ -345,7 +358,6 @@ public void handleConstellationAndPlayMusic(ActionEvent event) throws NumberForm
 @FXML
 public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     playMusicOnButtonClick(event);
-    playMusicOnButtonHover(event);
     try {
         Thread.sleep(500);
     } catch (InterruptedException e) {
