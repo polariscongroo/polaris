@@ -27,11 +27,11 @@ public class CompassRose extends BorderPane {
         Pane centerPane = new Pane();
         this.setCenter(centerPane);
 
-        // ✅ Group qui contiendra uniquement les éléments rotatifs
+        // Group qui contiendra uniquement les éléments rotatifs
         Group compassGroup = new Group();
         centerPane.getChildren().add(compassGroup);
 
-        // 🔵 Dégradé radial de fond (fixe, donc pas dans le groupe)
+        // Dégradé radial de fond (fixe, donc pas dans le groupe)
         Circle background = new Circle();
         background.radiusProperty().bind(Bindings.createDoubleBinding(() ->
                 Math.min(0.55 * Math.min(centerPane.getWidth(), centerPane.getHeight()) / 2, 200),
