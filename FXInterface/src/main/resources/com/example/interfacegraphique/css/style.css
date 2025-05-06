@@ -60,7 +60,7 @@
     -fx-background-color: transparent; /* Fond transparent */
     -fx-text-fill:  #00b7ff;              /* Couleur du texte */
     -fx-font-size: 40 px;               /* Taille de la police */
-    -fx-border-color: #00b7ff;     /* Pas de bordure */
+    -fx-border-color: transparent;     /* Pas de bordure */
     -fx-cursor: hand;                  /* Curseur en forme de main */
     -fx-padding: 3;                    /* Espacement interne */
     /* Halo lumineux */
@@ -68,7 +68,7 @@
 }
 
 .window-button:hover {
-    -fx-background-color: #ff0000;     /* Fond rouge au survol */
+    
     -fx-text-fill: white;              /* Texte blanc */
 
 }
