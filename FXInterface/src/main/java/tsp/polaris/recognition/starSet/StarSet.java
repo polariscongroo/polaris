@@ -4,7 +4,6 @@ import tsp.polaris.auxiliaries.Combinatorics;
 import tsp.polaris.recognition.other.Star;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Classe représentant une constellation composée de plusieurs étoiles.
@@ -63,17 +62,6 @@ public class StarSet {
             }
         }
         return triangles;
-    }
-
-    /**
-     * Trie la liste d'étoile en attribut par luminosité décroissante
-     */
-    public void sortByBrightness(){
-        Arrays.sort(stars, new Comparator<Star>() {
-            public int compare(Star firstStar, Star secondStar) {
-                return firstStar.compareTo(secondStar);
-            }
-        });
     }
 
     /**

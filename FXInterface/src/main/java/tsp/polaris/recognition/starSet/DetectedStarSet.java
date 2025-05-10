@@ -287,7 +287,6 @@ public class DetectedStarSet extends StarSet
         int indPermutation = -1;
     	
     	for(int i = 0; i < nbCombination; i += 1) {
-            System.out.println(i);
             for(int j = 0; j < Functions.factorial(k) ; j += 1) {
                 
                 // On calcule le cout minimal entre le set d'étoiles et les constellations
@@ -300,10 +299,6 @@ public class DetectedStarSet extends StarSet
                 }
             }
     	}
-
-        // DEBUG - A RETIRER
-        System.out.println("Coût minimal :" + minCoutConstellation);
-        // ---------
 
     	return starSetCombinationsPlusPermutations[indConstellation][indPermutation];
     }

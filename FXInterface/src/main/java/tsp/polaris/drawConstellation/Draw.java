@@ -11,9 +11,15 @@ import java.nio.file.StandardCopyOption;
 import javax.imageio.ImageIO;
 
 public class Draw {
-    protected BufferedImage img;
-    protected File outputFile;
+    protected BufferedImage img; // Image à traiter
+    protected File outputFile; // Fichier de sortie
 
+    /**
+     * Constructeur de la classe Draw qui initialise le buffer
+     *
+     * @param file image à traiter
+     * @throws IOException erreur lancée lors de la lecture de l'image
+     */
     public Draw(File file) throws IOException {
         copyImage(file, "output");
         outputFile = new File("FXInterface/src/main/resources/images/output.png");

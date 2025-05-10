@@ -17,9 +17,9 @@ import tsp.polaris.recognition.other.Star;
  */
 
 public class Data {
-    private List<Star> data;
-    private final String fileName;
-    private List<List<Integer>> adjacencyList;
+    private List<Star> data; // Liste des étoiles
+    private final String fileName; // Nom du fichier
+    private List<List<Integer>> adjacencyList; // Liste d'adjacence des étoiles
 
     /**
      * Constructeur de la classe Data qui lit le fichier csv et le vide

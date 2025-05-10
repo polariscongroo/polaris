@@ -6,7 +6,7 @@ package tsp.polaris.recognition.other;
  */
 
 public class Point {
-    protected final double[] point;
+    protected final double[] point; // Coordonnees du point
     protected final double size; // Taille du point
 
     /**
@@ -80,6 +80,15 @@ public class Point {
         return coeff;
     }
 
+    /**
+     * Calcule les coordonnees d'un point à partir de 2 autres points et de la distance entre eux
+     * @param a distance entre le point et le 1er point
+     * @param b distance entre le point et le 2e point
+     * @param c distance entre le 1er et le 2e point
+     * @param secondPoint 2e point
+     * @param orientation orientation du point
+     * @return double[] : Coordonnees du point
+     */
     public double[] getCoordinate(double a, double b, double c, Point secondPoint, double orientation){
         double temp = (b*b - c*c + a*a)/(2*a);
 

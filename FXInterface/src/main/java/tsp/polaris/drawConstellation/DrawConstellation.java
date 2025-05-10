@@ -18,6 +18,12 @@ import tsp.polaris.recognition.starSet.DetectedStarSet;
 
 public class DrawConstellation extends Draw {
 
+    /**
+     * Constructeur de la classe DrawConstellation qui initialise le buffer
+     *
+     * @param file image à traiter
+     * @throws IOException erreur lancée lors de la lecture de l'image
+     */
     public DrawConstellation(File file) throws IOException{
         super(file);
     }
@@ -25,7 +31,7 @@ public class DrawConstellation extends Draw {
     /**
      * Renvoie vrai si les coordonnées du pixels sont valides
      *
-     * @param coor   coordonnées du pixel
+     * @param coor coordonnées du pixel
      * @return vrai si les coordonées du pixels sont valides, faux sinon
      */
     private boolean isValid(int[] coor) {
@@ -37,8 +43,8 @@ public class DrawConstellation extends Draw {
     /**
      * Colorie les points adjacents aux point de coordonnées (x,y)
      *
-     * @param x     abscisse du point
-     * @param y     ordonnée du point
+     * @param x abscisse du point
+     * @param y ordonnée du point
      * @param color couleur à appliquer
      */
     private void drawPoint(int x, int y, Color color) {
@@ -86,9 +92,9 @@ public class DrawConstellation extends Draw {
     /**
      * Dessine une ligne passant entre 2 points sur l'image
      *
-     * @param p1      1er point
-     * @param p2      2e point
-     * @param color   couleur à appliquer
+     * @param p1 1er point
+     * @param p2 2e point
+     * @param color couleur à appliquer
      * @throws IOException erreur lancée lors de la copie de l'image
      */
     public void drawLine(Point p1, Point p2, Color color) throws IOException {
@@ -116,7 +122,7 @@ public class DrawConstellation extends Draw {
      * Dessine la constellation tracée
      *
      * @param detectedStarSet set d'étoiles détectées ou on va tracer
-     * @param color  couleur à appliquer
+     * @param color couleur à appliquer
      * @throws IOException erreur lancée lors de la copie de l'image
      */
     public void drawConstellation(DetectedStarSet detectedStarSet, Color color) throws IOException {

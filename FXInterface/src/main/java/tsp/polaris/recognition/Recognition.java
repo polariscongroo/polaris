@@ -18,8 +18,11 @@ import tsp.polaris.recognition.starSet.TriangleMatchingException;
  */
 
 public class Recognition {
+    /**
+     * Méthode principale qui va lancer le programme
+     */
     public static void run() throws TriangleMatchingException, NumberFormatException, IOException {
-        // Via L'interface (Remplacer pathImage par pathImage_viaInterface)
+        // Lecture du path de l'image à traiter
         String output = "cartography/image_aTraiter/output.txt";
         String pathImage = Functions.lireLigneUnique(output);
 
@@ -51,9 +54,7 @@ public class Recognition {
         // On cherche la constellation
         DetectedStarSet bestStarSet = detectedStarSetKept.searchBestStarSet(nbStudiedStars, constellations);
         String name = bestStarSet.getNearConstellation().getName();
-        System.out.println(name);
         Functions.write_in_namefile(name);
-        System.out.println(bestStarSet);
 
         // On dessine la constellation
         MainDrawTest.drawConstellation(pathImage,bestStarSet);

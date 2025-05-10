@@ -12,12 +12,11 @@ import tsp.polaris.recognition.other.Star;
  * @author Chadi A., Emma M.
  */
 public class Constellation extends StarSet {
-    private final String name;
-    private List<List<Integer>> adjacencyList;
+    private final String name; // Nom de la constellation
+    private List<List<Integer>> adjacencyList; // Liste d'adjacence de la constellation
 
-    private Star[] firstStars;
-    private ListTriangle firstStarsListTriangle;
-
+    private Star[] firstStars; // Liste des 4 premières étoiles de la constellation
+    private ListTriangle firstStarsListTriangle; // Liste des triangles formés par les 4 premières étoiles de la constellation
 
     /**
      * Constructeur de la classe Constellation.
@@ -31,7 +30,6 @@ public class Constellation extends StarSet {
         this.name = name;
         this.adjacencyList = adjacencyList;
 
-        // A RETIRER
         if(stars.length >= nbStudiedStars) {
             this.firstStars = firstStars(stars, nbStudiedStars);
             // On calcule les triangles maintenant pour éviter de les calculer plusieurs fois par la suite
