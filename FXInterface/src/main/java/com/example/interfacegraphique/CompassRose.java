@@ -30,8 +30,7 @@ import javafx.util.Duration;
  * tels que les ombres portées et les dégradés radiaux, qui sont difficiles à exprimer
  * uniquement en CSS avec JavaFX.</p>
  *
- * @author Beryl S., 
- 
+ * @author Beryl S. 
  */
 
 
