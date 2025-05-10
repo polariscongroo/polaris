@@ -41,6 +41,21 @@ public class HelloController {
 @FXML private Button CONSTELLATION;
 @FXML private StackPane compassContainer;
 
+
+/**
+    * Contrôleur principal de l'application JavaFX.
+    * Il gère les interactions utilisateur, la reconnaissance d'images,
+    * l'affichage de constellations, et la gestion des ressources multimédia.
+    *
+    * <p>Cette classe utilise JavaFX pour créer une interface utilisateur interactive
+    * et intègre des fonctionnalités de détection à partir de la classe ThresholdDetectMethod d'étoiles reconnaissance d'images pour identifier
+    * des constellations à partir d'images fournies par l'utilisateur et utilise la classe Recognition pour la reconnaissance des constellations .</p>
+    *
+ * @author Beryl S;, Chadi A.
+
+ */
+
+
 private MediaPlayer mediaPlayer;
 private MediaPlayer clickSoundPlayer;
 private MediaPlayer musicPlayer;
@@ -59,15 +74,6 @@ public void initialize() {
     setupLoaderandPolaris();
 }
 
-/*private void animateButton(Button button) {
-    Timeline timeline = new Timeline(
-        new KeyFrame(Duration.seconds(0), event -> button.getStyleClass().add("button-container")),
-        new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().remove("button-container")),
-        new KeyFrame(Duration.seconds(1), event -> button.getStyleClass().add("button-effect"))
-    );
-    timeline.setCycleCount(Timeline.INDEFINITE); // Répète l'animation indéfiniment
-    timeline.play();
-}*/ 
 
 private void setupLoaderandPolaris() {
     bottomRightImage.setImage(new Image(getClass().getResource("/images/polaris 2.png").toExternalForm()));

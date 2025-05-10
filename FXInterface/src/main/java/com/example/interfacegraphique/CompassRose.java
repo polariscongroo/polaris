@@ -21,8 +21,26 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class CompassRose extends BorderPane {
+/**
+ * Composant graphique représentant une rose des vents animée,
+ * utilisée comme loader visuel dans l'interface utilisateur JavaFX.
+ *
+ * <p>Cette classe hérite de {@link BorderPane} et crée dynamiquement une boussole centrée,
+ * avec des animations de rotation infinies. L'affichage repose sur des effets visuels
+ * tels que les ombres portées et les dégradés radiaux, qui sont difficiles à exprimer
+ * uniquement en CSS avec JavaFX.</p>
+ *
+ * @author Beryl S., 
+ 
+ */
 
+
+public class CompassRose extends BorderPane {
+    /**
+     * Construit une rose des vents animée.
+     * Initialise le fond, les directions cardinales, les effets graphiques,
+     * et lance l'animation de rotation continue.
+     */
     public CompassRose() {
         Pane centerPane = new Pane();
         this.setCenter(centerPane);
@@ -85,6 +103,14 @@ public class CompassRose extends BorderPane {
         this.setPrefSize(200, 200);
         animateCompass(compassGroup); // ✅ Ne rotate QUE le compas
     }
+
+     /**
+     * Anime la rotation du groupe représentant la rose des vents.
+     * Chaque animation utilise une durée et un angle aléatoire pour
+     * donner un effet naturel et continu.
+     *
+     * @param compassGroup Le groupe contenant les éléments à faire tourner.
+     */
 
     private void animateCompass(Group compassGroup) {
         Random random = new Random();
