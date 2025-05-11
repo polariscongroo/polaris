@@ -52,7 +52,7 @@
                                 fitHeight="200"
                                 preserveRatio="true"
                                 visible="false"/>
-                            <TextArea fx:id="consoleOutput" prefWidth="600" prefHeight="200" wrapText="true" editable="false" opacity="0.0"/>
+                            <TextArea fx:id="consoleOutput" prefWidth="600" prefHeight="100" wrapText="true" editable="false" opacity="0.0"/>
                         </VBox>
                     
                     
