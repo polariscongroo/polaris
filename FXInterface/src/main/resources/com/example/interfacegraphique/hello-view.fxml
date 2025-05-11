@@ -19,45 +19,43 @@
                     <Button text="□" styleClass="window-button" onAction="#handleMaximiseAndPlayMusic"/>
                     <Button text="◱" styleClass="window-button" onAction="#handleRestore"/> <!-- Restaurer -->
                     <Region HBox.hgrow="ALWAYS"/>
-
-                   
-                        <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="200" preserveRatio="true"/>
-                        
-                    
-                    
-                        
-
+                    <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="200" preserveRatio="true"/>
                     <Region HBox.hgrow="ALWAYS"/>
+
                     <Button text="—" styleClass="window-button" onAction="#handleMinimize"/> <!-- minimise -->
                     <Button text="✕" styleClass="window-button" onAction="#handleClose"/>
-                    
                 </HBox>
+
 
             </top>
 
             <center>
-                  
                 <StackPane alignment="CENTER">
                     <StackPane fx:id="compassContainer" prefWidth="100" prefHeight="100" alignment="CENTER"/>
                 </StackPane>
-
             </center>
+            
+            <!-- <right>
+                <ScrollPane fx:id="sideScrollPane" fitToWidth="true" visible="false">
+                    <VBox fx:id="contentBox" spacing="10" padding="10"/>
+                </ScrollPane>
+            </right>-->
 
             <bottom>
                 <HBox alignment="CENTER" spacing="20">
                     <Button fx:id="RECOGNITION" text="RECOGNITION" styleClass="button-container" onAction="#handleRecognitionAndPlayMusic"/>
                     <Region HBox.hgrow="ALWAYS"/>
-                        <StackPane fx:id="imageContainer" alignment="CENTER">
-                            <VBox spacing="10" alignment="CENTER">
-                                <ImageView fx:id="imageView"
+                    
+                        <VBox spacing="10" alignment="CENTER">
+                            <ImageView fx:id="imageView"
                                 fitWidth="600"
-                                fitHeight="400"
+                                fitHeight="200"
                                 preserveRatio="true"
                                 visible="false"/>
                             <TextArea fx:id="consoleOutput" prefWidth="600" prefHeight="200" wrapText="true" editable="false" opacity="0.0"/>
-                            </VBox>
-                    </StackPane> 
-                    <Region HBox.hgrow="ALWAYS"/>
+                        </VBox>
+                    
+                    
                     <Button fx:id="CONSTELLATION" text="CONSTELLATION" styleClass="button-container" onAction="#handleConstellationAndPlayMusic"/>
                 </HBox>
             </bottom>

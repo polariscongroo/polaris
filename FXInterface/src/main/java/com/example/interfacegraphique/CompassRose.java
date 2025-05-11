@@ -62,7 +62,7 @@ public class CompassRose extends BorderPane {
                 true,
                 CycleMethod.NO_CYCLE,
                 new Stop(0, Color.web("#2c3e50")),
-                new Stop(1, Color.web("rgba(0, 0, 0, 0.4)"))
+                new Stop(1, Color.web("rgba(0, 0, 0, 0)"))
         ));
         centerPane.getChildren().add(0, background); // mettre le fond en arrière-plan
 

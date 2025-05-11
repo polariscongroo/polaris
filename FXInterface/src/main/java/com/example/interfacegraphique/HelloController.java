@@ -17,10 +17,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -40,6 +42,9 @@ public class HelloController {
 @FXML private Button RECOGNITION;
 @FXML private Button CONSTELLATION;
 @FXML private StackPane compassContainer;
+ @FXML private ScrollPane sideScrollPane;
+ @FXML private VBox contentBox;
+
 
 
 /**
@@ -72,6 +77,9 @@ public void initialize() {
     
     setupBackgroundVideo();
     setupLoaderandPolaris();
+    // sideScrollPane.setFitToWidth(true);
+
+
 }
 
 
@@ -352,6 +360,7 @@ public void handleMaximiserAndPlayMusic(ActionEvent event) throws NumberFormatEx
 @FXML
 public void handleConstellationAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     playMusicOnButtonClick(event);
+    //handleAfficher(event);
     
     try {
         Thread.sleep(500);
@@ -371,6 +380,18 @@ public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatExc
     }
     handleMaximiser(event);
 }
+
+/*@FXML
+public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+    playMusicOnButtonClick(event);
+    try {
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    handleMaximiser(event);
+}*/
+
 
 
 
@@ -441,4 +462,22 @@ private void runPythonScript(String filePath) {
 private void runJavaScript() throws TriangleMatchingException, NumberFormatException, IOException {
     Recognition.run();
 }
+
+
+    /*@FXML
+    private void handleAfficher(ActionEvent event) {
+        // Créer un Label pour le texte
+        Label texte = new Label("Voici un long texte descriptif...\nIl peut contenir plusieurs lignes.");
+        texte.setWrapText(true);
+
+        // Charger l'image
+        Image image = new Image("file:chemin/vers/image.jpg"); // ou "classpath:/..."
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(300); // redimensionner si besoin
+        imageView.setPreserveRatio(true);
+
+        // Ajouter au VBox
+        contentBox.getChildren().addAll(texte, imageView);
+    }
+        */
 }
