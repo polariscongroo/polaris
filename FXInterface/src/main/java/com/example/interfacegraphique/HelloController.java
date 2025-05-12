@@ -47,6 +47,7 @@ public class HelloController {
 
 
 
+
 /**
     * Contrôleur principal de l'application JavaFX.
     * Il gère les interactions utilisateur, la reconnaissance d'images,
@@ -77,6 +78,7 @@ public void initialize() {
     
     setupBackgroundVideo();
     setupLoaderandPolaris();
+    sideScrollPane.setVisible(false);
     // sideScrollPane.setFitToWidth(true);
 
 
@@ -171,10 +173,10 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
         imageView.setVisible(false);
         compassContainer.setVisible(true);
         RECOGNITION.setVisible(true);
-        CONSTELLATION.setVisible(false); // ← le bouton disparaît
-        isConstellationVisible = false;
+        CONSTELLATION.setVisible(false);
         consoleOutput.setOpacity(0.0);
-        CONSTELLATION.setDisable(false); // ← réactive le bouton après repli
+        sideScrollPane.setVisible(false); // ← cacher le ScrollPane
+        CONSTELLATION.setDisable(false);
     } else {
         String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");
         System.out.println("[Java] 11. Nom de la constellation : " + name);
@@ -188,13 +190,15 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
                         return null;
                     }
                     Image image = new Image(imageStream);
-                    javafx.application.Platform.runLater(() -> {
+                    Platform.runLater(() -> {
                         imageView.setImage(image);
                         imageView.setVisible(true);
                         consoleOutput.setOpacity(1.0);
+                        sideScrollPane.setVisible(true); // ✅ afficher le ScrollPane
+                        compassContainer.setVisible(false); // optionnel
                         chargerTexte("/baseDDonnees_txt/" + name + ".txt");
                         System.out.println("Affichage réussi !");
-                        CONSTELLATION.setDisable(false); // ← bouton réactivé ici
+                        CONSTELLATION.setDisable(false);
                     });
                 } catch (IOException e) {
                     System.err.println("Erreur: " + e.getMessage());
@@ -381,17 +385,6 @@ public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatExc
     handleMaximiser(event);
 }
 
-/*@FXML
-public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
-    playMusicOnButtonClick(event);
-    try {
-        Thread.sleep(500);
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-    handleMaximiser(event);
-}*/
-
 
 
 
@@ -464,20 +457,5 @@ private void runJavaScript() throws TriangleMatchingException, NumberFormatExcep
 }
 
 
-    /*@FXML
-    private void handleAfficher(ActionEvent event) {
-        // Créer un Label pour le texte
-        Label texte = new Label("Voici un long texte descriptif...\nIl peut contenir plusieurs lignes.");
-        texte.setWrapText(true);
-
-        // Charger l'image
-        Image image = new Image("file:chemin/vers/image.jpg"); // ou "classpath:/..."
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(300); // redimensionner si besoin
-        imageView.setPreserveRatio(true);
-
-        // Ajouter au VBox
-        contentBox.getChildren().addAll(texte, imageView);
-    }
-        */
+ 
 }
