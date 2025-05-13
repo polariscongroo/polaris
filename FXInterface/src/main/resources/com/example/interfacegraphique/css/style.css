@@ -42,9 +42,9 @@
     -fx-pref-width: 200px;            /* Largeur fixe */
     -fx-pref-height: 50px;            /* Hauteur fixe */
     -fx-min-width: 325px;             /* Largeur minimale */
-    -fx-min-height: 100px;             /* Hauteur minimale */
+    -fx-min-height: 90px;             /* Hauteur minimale */
     -fx-max-width: 325px;             /* Largeur maximale */
-    -fx-max-height: 100px;             /* Hauteur maximale */
+    -fx-max-height: 90px;             /* Hauteur maximale */
                  
     -fx-scale-x: 1;                   /* Taille normale */
     -fx-scale-y: 1;                   /* Taille normale */
@@ -95,7 +95,7 @@
 
 
 #sideScrollPane {
-    -fx-background-image: url("../../../../images/scrollpane.png");
+    -fx-background-image: url("../../../../images/night.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
@@ -106,10 +106,10 @@
     -fx-padding: 15;
 
     /* Ombre portée douce */
-    -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.4, 0, 4);
+    -fx-effect: dropshadow(gaussian, #452fd6, 20, 0.4, 0, 4);
     
     /* Bordure légère et élégante */
-    -fx-border-color: #00ffc844; /* Bleu avec un peu de transparence */
+    -fx-border-color: #00000044; /* Bleu avec un peu de transparence */
     -fx-border-width: 1.5;
 }
 
