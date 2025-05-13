@@ -96,18 +96,29 @@
 
 #sideScrollPane {
     -fx-background-image: url("../../../../images/scrollpane.png");
-    -fx-background-radius: 50;        /*Coins arrondis*/ 
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
-    -fx-padding: 10;
-    /* Pour que le fond soit visible même si le contenu est transparent */
-    -fx-background-color: transparent;
+
+    -fx-background-color: rgba(255, 255, 255, 0.05); /* Légère transparence blanche */
+    -fx-border-radius: 15;       /* Coins plus doux */
+    -fx-background-radius: 15;   /* Arrondi du fond */
+    -fx-padding: 15;
+
+    /* Ombre portée douce */
+    -fx-effect: dropshadow(gaussian, #00b7ff, 20, 0.4, 0, 4);
+    
+    /* Bordure légère et élégante */
+    -fx-border-color: #00ffc844; /* Bleu avec un peu de transparence */
+    -fx-border-width: 1.5;
 }
 
 #sideScrollPane .viewport {
     -fx-background-color: transparent;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
 }
+
 
 
 
