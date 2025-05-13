@@ -94,6 +94,7 @@ private void setupLoaderandPolaris() {
     System.out.println("Loader activé au démarrage.");
 }
 
+
 @FXML
 public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     isConstellationVisible = false;
@@ -170,12 +171,13 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
 
     if (isConstellationVisible) {
         System.out.println("Constellation déjà visible.");
-        imageView.setVisible(false);
         compassContainer.setVisible(true);
         RECOGNITION.setVisible(true);
         CONSTELLATION.setVisible(false);
         consoleOutput.setOpacity(0.0);
         sideScrollPane.setVisible(false); // ← cacher le ScrollPane
+        imageView.setImage(new Image(getClass().getResource("/images/scrollpane.png").toExternalForm()));
+        imageView.setVisible(true);
         CONSTELLATION.setDisable(false);
     } else {
         String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");

@@ -30,7 +30,7 @@
         <!-- 1) boussole (visible par défaut) -->
         <StackPane fx:id="compassContainer" prefWidth="100" prefHeight="100" alignment="CENTER"/>
         <!-- 2) Le ScrollPane (caché au lancement) -->
-        <ScrollPane fx:id="sideScrollPane"
+        <ScrollPane fx:id="sideScrollPane" id="sideScrollPane"
                                               fitToWidth="true"
                                               visible="false"
                                               pickOnBounds="false"
@@ -39,9 +39,7 @@
                                                 spacing="20"
                                                 alignment="TOP_CENTER">
             <!-- Filler pour forcer le scroll -->
-            <Region prefHeight="600"/>
-            <!--<Insets left="20" right="20" top="20" bottom="20"/>-->
-            <!-- Image + texte masqués par défaut -->
+            <Region prefHeight="50"/>
             <ImageView fx:id="imageView"
                                                          fitWidth="600"
                                                          preserveRatio="true"
