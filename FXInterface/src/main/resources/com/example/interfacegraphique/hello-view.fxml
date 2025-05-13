@@ -14,12 +14,12 @@
     <top>
       <HBox alignment="CENTER" spacing="20" VBox.vgrow="NEVER">
         <Button text="□" styleClass="window-button" onAction="#handleMaximiseAndPlayMusic"/>
-        <Button text="◱" styleClass="window-button" onAction="#handleRestore"/>
+        <Button text="◱" styleClass="window-button" onAction="#handleRestoreAndPlayMusic"/>
         <!-- Restaurer -->
         <Region HBox.hgrow="ALWAYS"/>
         <ImageView fx:id="bottomRightImage" fitWidth="250" fitHeight="200" preserveRatio="true"/>
         <Region HBox.hgrow="ALWAYS"/>
-        <Button text="—" styleClass="window-button" onAction="#handleMinimize"/>
+        <Button text="—" styleClass="window-button" onAction="#handleMinimizeAndPlayMusic"/>
         <!-- minimise -->
         <Button text="✕" styleClass="window-button" onAction="#handleClose"/>
       </HBox>
@@ -45,7 +45,7 @@
                                                          preserveRatio="true"
                                                          visible="false"/>
             <TextArea fx:id="consoleOutput"
-                                                        prefWidth="600"
+                                                        prefWidth="550"
                                                         prefHeight="50"
                                                         wrapText="true"
                                                         editable="false"

@@ -262,7 +262,7 @@ private void setupBackgroundVideo() {
     try {
         URL videoUrl = getClass().getResource("/images/background_video.mp4");
         if (videoUrl == null) {
-            System.err.println("ERREUR: Fichier vidéo introuvable dans /images/propEmma.mp4");
+            System.err.println("ERREUR: Fichier vidéo introuvable dans /images/background_video.mp4");
             return;
         }
         Media media = new Media(videoUrl.toExternalForm());
@@ -384,6 +384,34 @@ public void handleMaximiseAndPlayMusic(ActionEvent event) throws NumberFormatExc
         e.printStackTrace();
     }
     handleMaximiser(event);
+}
+
+
+
+@FXML
+public void handleRestoreAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+    playMusicOnButtonClick(event);
+    //handleAfficher(event);
+    
+    try {
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    handleRestore(event);
+}
+
+@FXML
+public void handleMinimizeAndPlayMusic(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
+    playMusicOnButtonClick(event);
+    //handleAfficher(event);
+    
+    try {
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+    handleMinimize(event);
 }
 
 
