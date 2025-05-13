@@ -92,19 +92,19 @@
     -fx-padding: 10;
 }
 
+
+
 #sideScrollPane {
-    -fx-background-image: url("/images/scrollpane.png");
+    -fx-background-image: url("../../../../images/scrollpane.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
+    -fx-padding: 10;
     /* Pour que le fond soit visible même si le contenu est transparent */
     -fx-background-color: transparent;
 }
 
 #sideScrollPane .viewport {
-    -fx-background-color: transparent;
-}
-#contentBox {
     -fx-background-color: transparent;
 }
 

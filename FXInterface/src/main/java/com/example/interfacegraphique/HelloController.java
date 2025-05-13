@@ -176,8 +176,7 @@ public void handleConstellation(ActionEvent event) throws IOException, IllegalAr
         CONSTELLATION.setVisible(false);
         consoleOutput.setOpacity(0.0);
         sideScrollPane.setVisible(false); // ← cacher le ScrollPane
-        imageView.setImage(new Image(getClass().getResource("/images/scrollpane.png").toExternalForm()));
-        imageView.setVisible(true);
+       
         CONSTELLATION.setDisable(false);
     } else {
         String name = Functions.lireLigneUnique("FXInterface/src/main/resources/transmission/name.txt");

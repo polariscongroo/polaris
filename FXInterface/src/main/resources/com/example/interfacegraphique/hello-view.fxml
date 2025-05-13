@@ -32,21 +32,21 @@
         <!-- 2) Le ScrollPane (caché au lancement) -->
         <ScrollPane fx:id="sideScrollPane" id="sideScrollPane"
                                               fitToWidth="true"
-                                              visible="false"
+                                              visible="true"
                                               pickOnBounds="false"
                                               >
           <VBox fx:id="contentBox"
                                                 spacing="20"
                                                 alignment="TOP_CENTER">
             <!-- Filler pour forcer le scroll -->
-            <Region prefHeight="50"/>
+            <!--Region prefHeight="50"/-->
             <ImageView fx:id="imageView"
                                                          fitWidth="600"
                                                          preserveRatio="true"
                                                          visible="false"/>
             <TextArea fx:id="consoleOutput"
                                                         prefWidth="600"
-                                                        prefHeight="200"
+                                                        prefHeight="50"
                                                         wrapText="true"
                                                         editable="false"
                                                         opacity="0.0"/>
