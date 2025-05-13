@@ -96,6 +96,7 @@
 
 #sideScrollPane {
     -fx-background-image: url("../../../../images/scrollpane.png");
+    -fx-background-radius: 50;        /*Coins arrondis*/ 
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-background-position: center center;
