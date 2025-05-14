@@ -35,7 +35,6 @@
     -fx-text-fill: #00b7ff;            /* Texte bleu */
     -fx-font-size: 30 px;              /* Taille de la police par défaut */
     
-    -fx-background-radius: 10;        /*Coins arrondis*/ 
     -fx-border-radius: 10;            /* Coins arrondis pour la bordure */
     -fx-cursor: hand;                 /* Curseur en forme de main */
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Pas d'effet par défaut */
@@ -81,19 +80,6 @@
 
 
 
-.console-text-area {
-    -fx-font-family: "Courier New";
-    -fx-opacity: 0;
-    -fx-font-size: 14px;
-    -fx-text-fill: #000000;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-radius: 5;
-    -fx-padding: 10;
-}
-
-
-
 #sideScrollPane {
     -fx-background-image: url("../../../../images/night.jpg");
     -fx-background-repeat: no-repeat;
@@ -102,7 +88,6 @@
 
     -fx-background-color: rgba(255, 255, 255, 0.05); /* Légère transparence blanche */
     -fx-border-radius: 15;       /* Coins plus doux */
-    -fx-background-radius: 15;   /* Arrondi du fond */
     -fx-padding: 15;
 
     /* Ombre portée douce */
@@ -115,8 +100,24 @@
 
 #sideScrollPane .viewport {
     -fx-background-color: transparent;
-    -fx-background-radius: 15;
     -fx-border-radius: 15;
+}
+
+#consoleOutput {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-opacity: 1.0; /* Assure que le texte est visible */
+    -fx-font-size: 20px; /* Taille de la police */
+    -fx-text-fill: rgb(0, 0, 0); /* Couleur du texte */
+    -fx-border-color: rgb(0,0,0);
+    -fx-border-width: 3px; /* Épaisseur de la bordure */ 
+    -fx-border-radius: 20; /* Coins arrondis */
+    -fx-background-color: rgba(0, 0, 0, 1.0); /* Fond blanc avec transparence */
+    
+}
+
+
+#consoleOutput .text-area .content {
+    -fx-text-alignment: center; /* Centre le texte */
 }
 
 

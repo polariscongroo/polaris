@@ -34,17 +34,18 @@
                                               fitToWidth="true"
                                               visible="true"
                                               pickOnBounds="false"
+                                              
                                               >
           <VBox fx:id="contentBox"
                                                 spacing="20"
                                                 alignment="TOP_CENTER">
             <!-- Filler pour forcer le scroll -->
             <!--Region prefHeight="50"/-->
-            <ImageView fx:id="imageView"
+            <ImageView fx:id="imageView" 
                                                          fitWidth="600"
                                                          preserveRatio="true"
                                                          visible="false"/>
-            <TextArea fx:id="consoleOutput"
+            <TextArea fx:id="consoleOutput" id ="consoleOutput"
                                                         prefWidth="550"
                                                         prefHeight="50"
                                                         wrapText="true"

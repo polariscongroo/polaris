@@ -1,0 +1,1 @@
+Circinus représente un compas de géomètre céleste.
