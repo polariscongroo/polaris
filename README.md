@@ -50,6 +50,13 @@ D --> E(User Interface - JavaFx)
 
 ## 👾 Structure
 
-<img src="https://github.com/polariscongroo/polaris/blob/master/Github/Topmarche.png" width="900">  
+- When launched, the app displays its starting screen. Click on the Recognition Button to begin by selecting the photo you want to analyze.
+<img src="https://github.com/polariscongroo/polaris/blob/master/Github/Startingscreen.png" width="800">
+
+- The button will disappear, and you will wait until the Constellation Button appears. Click it to view the detected constellation along with a brief description.
+<img src="https://github.com/polariscongroo/polaris/blob/master/Github/ShowConstellation.png" width="800">
+
+
+- Enjoy!
 
 
