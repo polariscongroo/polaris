@@ -54,8 +54,8 @@ D --> E(User Interface - JavaFx)
 <img src="https://github.com/polariscongroo/polaris/blob/master/Github/Startingscreen.png" width="800">
 
 - The button will disappear, and you will wait until the Constellation Button appears. Click it to view the detected constellation along with a brief description.
-<img src="https://github.com/polariscongroo/polaris/blob/master/Github/ShowConstellation.png" width="800">
-<img src="https://github.com/polariscongroo/polaris/blob/master/FXInterface/src/main/resources/images/const.png" width="800">
+
+<img src="https://github.com/polariscongroo/polaris/blob/master/Github/ShowConstellation.png" width="500"> <img src="https://github.com/polariscongroo/polaris/blob/master/Github/const.png" width="500">
 
 - Enjoy!
 
