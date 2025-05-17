@@ -95,6 +95,13 @@ private void setupLoaderandPolaris() {
 }
 
 
+
+/** 
+ * @param event
+ * @throws NumberFormatException
+ * @throws TriangleMatchingException
+ * @throws IOException
+ */
 @FXML
 public void handleRecognition(ActionEvent event) throws NumberFormatException, TriangleMatchingException, IOException {
     isConstellationVisible = false;

@@ -67,26 +67,4 @@ public class StarSetTest {
         }
     }
 
-    /**
-     * Test 4 : Méthode getIndex()
-     */
-    @Test
-    @DisplayName("Test 4 : Méthode getIndex()")
-    public void testGetIndex() {
-        for(int i = 0; i < workingStarSet.getStars().length; i++){
-            Assertions.assertEquals(i, workingStarSet.getIndex(workingStarSet.getStars()[i]));
-        }
-    }
-
-    /**
-     * Test 5 : La méthode findTriangle associe bien un triangle avec lui même
-     */
-    @Test
-    @DisplayName("Test 5 : La méthode findTriangle associe bien un triangle avec lui meme")
-    public void testFindTriangle() {
-        Triangle[] triangles = workingStarSet.generateTriangles();
-        for (Triangle triangle : triangles) {
-            Assertions.assertTrue(triangle.equals(workingStarSet.findTriangle(triangle, workingStarSet)));
-        }
-    }
 }

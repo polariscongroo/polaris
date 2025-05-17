@@ -1,9 +1,9 @@
 package tsp.polaris.recognition.starSet;
 
+import java.util.Arrays;
+
 import tsp.polaris.auxiliaries.Combinatorics;
 import tsp.polaris.recognition.other.Star;
-
-import java.util.Arrays;
 
 /**
  * Classe représentant une constellation composée de plusieurs étoiles.
@@ -64,27 +64,4 @@ public class StarSet {
         return triangles;
     }
 
-    /**
-     * Méthode qui retourne l'index d'une étoile dans la liste des étoiles
-     * @param star Etoile dont on veut connaitre l'index
-     * @return Index de l'etoile
-     */
-    public int getIndex(Star star){
-        return Arrays.asList(stars).indexOf(star);
-    }
-
-    /**
-     * Méthode qui cherche le triangle dans la liste de triangles, correspondant au triangle passé en parametre
-     * @param triangle Triangle dont on cherche le triangle correspondant
-     * @param dataStars Constellation dont on cherche le triangle correspondant
-     * @return Triangle correspondant
-     */
-    public Triangle findTriangle(Triangle triangle, StarSet dataStars) {
-        // Liste d'index des étoiles du triangle dans la liste detectedStars
-        int[] indexTriangle = {getIndex(triangle.getStars()[0]), getIndex(triangle.getStars()[1]), getIndex(triangle.getStars()[2])};
-
-        // On n'a pas besoin de retourner l'instance du triangle, on peut en créer un nouveau
-        // Cela permet de simplifier le code et de l'optimiser en évitant de parcourir la liste des triangles
-        return new Triangle(dataStars.getStars()[indexTriangle[0]], dataStars.getStars()[indexTriangle[1]], dataStars.getStars()[indexTriangle[2]]);
-    }
 }

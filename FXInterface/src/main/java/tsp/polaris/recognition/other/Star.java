@@ -6,7 +6,7 @@ package tsp.polaris.recognition.other;
  * @author Emma M.
  */
 
-public class Star extends Point implements Comparable<Star> {
+public class Star extends Point{
     private final double brightness; // Luminosité de l'étoile
 
     /**
@@ -48,15 +48,6 @@ public class Star extends Point implements Comparable<Star> {
      */
     public double getSize() { 
         return size;
-    }
-
-    /**
-     * Compare deux étoiles en fonction de leur luminosité
-     * @param secondStar Etoile dont on veut comparer la luminosité
-     * @return Un entier signé en fonction de si la luminosité de l'étoile est plus grande, plus petite ou identique que la 2e
-     */
-    public int compareTo(Star secondStar) {
-        return Double.compare(secondStar.brightness, brightness);
     }
 
 }

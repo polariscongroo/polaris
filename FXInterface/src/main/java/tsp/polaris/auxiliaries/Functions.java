@@ -64,6 +64,10 @@ public class Functions {
         return Math.min(a, b);
     }
 
+    
+    /** 
+     * @param contenu
+     */
     public static void write_in_namefile(String contenu) {
         try {
             FileWriter writer = new FileWriter("FXInterface/src/main/resources/transmission/name.txt");
