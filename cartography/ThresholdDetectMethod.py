@@ -3,7 +3,6 @@ import numpy as np
 from PIL import Image
 from astropy.stats import mad_std
 from collections import deque
-import matplotlib.pyplot as plt
 import sys
 import os
 
@@ -210,14 +209,12 @@ def main():
     try:
         # Vérifie l'existence de output.txt
         if not os.path.exists(file_path):
-            print("6. Lecture de output.txt non réalisée")
             raise(OutputNotFound("Le fichier output.txt n'existe pas encore..."))
         
         # Lecture de output.txt
         else:
             with open(file_path, "r") as f:
                 image_path = f.read().strip()  # Relit le fichier à chaque itération
-            print("6. Dans la boucle du python. Lecture de output.txt réalisée")
             sys.stdout.flush()
 
             # Vérifie que output.txt contient le chemin de l'image
@@ -230,9 +227,7 @@ def main():
 
             # Traitement de l'image
             else:
-                print(f"Traitement de l'image : {image_path}")
                 try:
-                    print("7. Image bien reçu par python, traitement en cours")
                     sys.stdout.flush()
 
                     # Chargement et normalisation de l'image
@@ -252,44 +247,21 @@ def main():
                     coordonnees_et_lum_des_etoiles = attribue_luminosite(coordonnees_des_etoiles, image_array)
                     etoiles_classees = classe_les_etoiles(coordonnees_et_lum_des_etoiles)
 
-                    print("8. Affichage lancé")
                     sys.stdout.flush()
-
-                    '''
-                    # Affichage de l'image seuillée avec les étoiles détectées
-                    plt.imshow(threshold_mask, cmap='gray', origin='lower')
-                    for star in coordonnees_des_etoiles:
-                        plt.plot(star[0][1], star[0][0], 'ro')  # Marque les étoiles en rouge
-                    plt.title('Thresholded Image With Stars')
-                    plt.show(block=True)  # Ne bloque pas l'exécution du script
-                    '''
 
                     # Sauvegarde des coordonnées des étoiles et réinitialisation des fichiers
                     enregistre_les_etoiles(etoiles_classees)
-                    print("9. fichier csv créé et rempli")
                     sys.stdout.flush()
-                    
-                    '''
-                    # Boucle pour maintenir la fenêtre ouverte
-                    while plt.get_fignums():
-                        plt.pause(0.1)  # Pause courte pour éviter de surcharger le CPU
-                    '''
-                    
-                    '''
-                    plt.close()  # Ferme la figure
-                    '''
 
                     sys.exit()  # Termine le script Python
-
                 except EmptyFile as e:
-                    print(str(e))
+                    print(str(e), file=sys.stderr)
                 except ImageNotFound as i:
-                    print(str(i))
+                    print(str(i), file=sys.stderr)
                 except Exception as e:
-                    print(f"Erreur lors du traitement de l'image {image_path}")
-                    print(e)
+                    print(str(e), file=sys.stderr)
     except OutputNotFound as o:
-        print(str(o))
+        print(str(o), file=sys.stderr)
 
 if __name__ == '__main__':
     main()
