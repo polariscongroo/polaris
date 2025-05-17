@@ -1,0 +1,55 @@
+\section{Communication \& Manuel}
+
+\subsection{Etape du programme \& Mode d'emploi utilisateur}
+
+\noindent Notre application fonctionne en 4 étapes :
+
+
+1- Sélection de l'image à traiter.
+
+2- Extraction des étoiles présentes sur l'image
+
+3- Reconnaissance de la constellation avec le set d'étoiles
+
+4- Affichage de la constellation et de son histoire
+
+\noindent Naturellement, il est nécessaire de faire communiquer tous les programmes responsables, surtout que notre projet est multilangage (Java et Python).
+
+\vspace{0.2cm}
+
+\noindent L'utilisateur lui, n'a que trois étape à suivre :
+
+1- Cliquer sur Recognition pour sélectionner l'image de son choix
+
+2 - Une fois le chargement fini (repéré par la disparition de la boussole centrale), il peut cliquer sur le bouton Constellation qui apparaît aussitôt
+
+3- La Constellation apparaît et un texte avec, il peut fermer le logiciel ou recliquer sur Constellation pour revenir à l'écran principal
+
+\subsection{Communications interprocessus}
+
+\subsubsection{Interface | Détecteur d'étoiles}
+
+\noindent \textbf{Java -> Python : Fichier txt}
+
+\vspace{0.2cm}
+
+\noindent La première étape de fonctionnement de l'application est la sélection de la photo du ciel étoilé.
+\noindent L'interface doit donc communiquer l'emplacement de l'image pour qu'elle soit traitée par le détecteur d'étoiles.
+\noindent Pour cela, on écrit le path de l'image choisi (via l'interface) dans un fichier txt nommé output.txt.
+
+
+\subsubsection{Détecteur d'étoiles | Reconnaissance}
+
+\noindent \textbf{Python -> Java : Fichier CSV}
+
+\vspace{0.2cm}
+
+\noindent La seconde étape est le traitement de l'image et l'extraction des étoiles. Pour fournir leur localisation à la partie reconnaissance, nous avons décider, après des tests infructueux avec le format json, d'utiliser le format \textbf{csv}.
+
+\subsubsection{Reconnaissance | Interface}
+
+\noindent \textbf{Java -> Java : Fichier txt}
+
+\vspace{0.2cm}
+
+\noindent Tout comme le passage de la première à la seconde étape, on peut facilement de communiquer le nom de la constellation reconnue. L'idée est encore une fois d'écrire le nom dans un \textbf{.txt}.
